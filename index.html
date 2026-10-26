@@ -65,6 +65,10 @@ a{color:inherit}
 .bar i{display:block;height:100%;background:var(--marker);border-radius:999px}
 .go{margin-top:auto;align-self:flex-end;font-weight:700;color:var(--ai);text-decoration:none;padding:4px 0}
 .de .go{color:var(--de)}
+.tc .pill{background:var(--marker);color:var(--marker-ink)}
+.tc .ic{background:var(--panel)}
+.tc .go{color:var(--ink)}
+.grid .tc{grid-column:1/-1}
 .go:hover{text-decoration:underline}
 
 .guide{border:2px solid var(--ink);flex-direction:row;align-items:center;gap:22px}
@@ -133,6 +137,17 @@ a{color:inherit}
       <div class="meta" data-key="design-stairs-v1" data-total="12"><span class="num">0/12 레슨 완료</span><span class="bar"><i style="width:0%"></i></span></div>
       <a class="go" href="design/">공부하러 가기 →</a>
     </article>
+
+    <article class="card tc">
+      <span class="pill">첨단 공학 · 분야 탐험</span>
+      <div class="t">
+        <span class="ic" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="m15.5 8.5-2 5-5 2 2-5z"/></svg></span>
+        <h2>첨단 공학 탐험관</h2>
+      </div>
+      <p class="desc">제조, 정보통신, 건설, 수송, 생명 다섯 영역의 첨단 공학 30가지를 사진과 영상, 원리 설명과 퀴즈로 탐험해요.</p>
+      <div class="meta" data-key="tech-explore-v1" data-total="30" data-kind="seen"><span class="num">0/30 분야 탐험</span><span class="bar"><i style="width:0%"></i></span></div>
+      <a class="go" href="tech/">탐험하러 가기 →</a>
+    </article>
   </div>
 
   <p class="foot">새 과목은 이 페이지에 카드로 하나씩 늘어나요.</p>
@@ -144,9 +159,10 @@ document.querySelectorAll(".meta[data-key]").forEach(m => {
   let done = 0;
   try {
     const s = JSON.parse(localStorage.getItem(m.dataset.key));
-    if (s && s.les) done = Object.values(s.les).filter(l => l && l.passed).length;
+    if (m.dataset.kind === "seen") { if (s && s.seen) done = Object.keys(s.seen).length; }
+    else if (s && s.les) done = Object.values(s.les).filter(l => l && l.passed).length;
   } catch (e) {}
-  m.querySelector(".num").textContent = `${done}/${total} 레슨 완료`;
+  m.querySelector(".num").textContent = `${done}/${total} ${m.dataset.kind === "seen" ? "분야 탐험" : "레슨 완료"}`;
   m.querySelector(".bar i").style.width = Math.round(done / total * 100) + "%";
 });
 

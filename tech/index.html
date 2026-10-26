@@ -1,0 +1,645 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>첨단 공학 탐험관</title>
+<meta name="description" content="제조, 정보통신, 건설, 수송, 생명 다섯 영역의 첨단 공학 기술 30가지를 사진, 영상, 퀴즈로 탐험하는 학습 사이트">
+<meta name="theme-color" content="#F6F6F2">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%23141A1F'/%3E%3Ccircle cx='16' cy='16' r='9' fill='none' stroke='%23F2C14E' stroke-width='2.5'/%3E%3Cpath d='M16 7v18M7 16h18' stroke='%23F2C14E' stroke-width='2'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;900&family=IBM+Plex+Mono:wght@500;600&display=swap">
+<style>
+/* Layout: 1120px column. Home = hero + five colour-coded category bands of photo cards. Field page = 760px reading column: photo, lead, numbered mechanism, tech cards, figures, videos, quiz */
+:root{
+  --bg:#F6F6F2; --surface:#FFFFFF; --ink:#12181D; --text:#232B31; --muted:#4E5962; --line:#E1E3DD; --soft:#EEEFEA;
+  --mfg:#C9561A; --mfg-s:#FBEBE1; --ict:#2563C9; --ict-s:#E4ECFA; --con:#8A6414; --con-s:#F4ECD9;
+  --trn:#0B7F73; --trn-s:#DDF2EF; --bio:#B7325F; --bio-s:#F8E3EA;
+  --ok:#17803D; --ok-s:#E2F3E7; --bad:#B9381A; --bad-s:#FBE6E0; --marker:#F2C14E; --marker-ink:#2B2104;
+  --f-body:"Noto Sans KR","Malgun Gothic","Apple SD Gothic Neo",sans-serif;
+  --f-mono:"IBM Plex Mono",ui-monospace,Consolas,monospace;
+  color-scheme:light;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#0E1114; --surface:#171B1F; --ink:#F1F3F4; --text:#DCE1E4; --muted:#A3ADB5; --line:#2A3036; --soft:#1F2429;
+  --mfg:#F08A50; --mfg-s:#3A2418; --ict:#79A8F5; --ict-s:#18263D; --con:#D9AE52; --con-s:#33291A;
+  --trn:#4CC9B9; --trn-s:#123430; --bio:#EE7FA3; --bio-s:#3A1C27;
+  --ok:#5BCB83; --ok-s:#173222; --bad:#F2876A; --bad-s:#3A2019; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#0E1114; --surface:#171B1F; --ink:#F1F3F4; --text:#DCE1E4; --muted:#A3ADB5; --line:#2A3036; --soft:#1F2429;
+  --mfg:#F08A50; --mfg-s:#3A2418; --ict:#79A8F5; --ict-s:#18263D; --con:#D9AE52; --con-s:#33291A;
+  --trn:#4CC9B9; --trn-s:#123430; --bio:#EE7FA3; --bio-s:#3A1C27;
+  --ok:#5BCB83; --ok-s:#173222; --bad:#F2876A; --bad-s:#3A2019; color-scheme:dark}
+:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--text);font-family:var(--f-body);font-size:17px;line-height:1.8;word-break:keep-all;overflow-wrap:break-word;-webkit-font-smoothing:antialiased}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:10;background:var(--surface)}
+h1,h2,h3,p{margin:0}
+h1,h2,h3{color:var(--ink);text-wrap:balance;line-height:1.3;letter-spacing:-.01em}
+a{color:inherit}
+img{max-width:100%;display:block}
+button{font:inherit;color:inherit;cursor:pointer}
+:focus-visible{outline:3px solid var(--ict);outline-offset:2px}
+[hidden]{display:none!important}
+.num{font-family:var(--f-mono);font-variant-numeric:tabular-nums}
+.wrap{max-width:1120px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+.c-mfg{--c:var(--mfg);--cs:var(--mfg-s)} .c-ict{--c:var(--ict);--cs:var(--ict-s)} .c-con{--c:var(--con);--cs:var(--con-s)} .c-trn{--c:var(--trn);--cs:var(--trn-s)} .c-bio{--c:var(--bio);--cs:var(--bio-s)}
+
+/* header */
+.top{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:var(--surface);border-bottom:1px solid var(--line)}
+.top .wrap{display:flex;align-items:center;gap:14px;min-height:60px;padding-block:8px}
+.brand{display:flex;align-items:center;gap:10px;background:none;border:0;padding:0;font-weight:900;font-size:19px;color:var(--ink);flex:none}
+.brand svg{width:28px;height:28px}
+.cats{display:flex;gap:6px;overflow-x:auto;scrollbar-width:none;flex:1;min-width:0}
+.cats::-webkit-scrollbar{display:none}
+.cats a{flex:none;text-decoration:none;font-size:15px;font-weight:700;padding:6px 12px;border-radius:999px;color:var(--muted);border:1px solid transparent}
+.cats a:hover{color:var(--c,var(--ink));background:var(--cs,var(--soft))}
+.cats a[aria-current="true"]{color:var(--c,var(--ink));background:var(--cs,var(--soft));border-color:var(--c,var(--line))}
+.tools{display:flex;gap:8px;align-items:center;flex:none}
+.home-link{font-size:14px;font-weight:700;text-decoration:none;color:var(--muted);padding:6px 10px;border:1px solid var(--line);border-radius:8px}
+.theme{width:36px;height:36px;border-radius:50%;border:1px solid var(--line);background:var(--surface);font-size:15px}
+
+main{padding-block:28px 72px}
+
+/* home */
+.hero{display:grid;grid-template-columns:1.2fr 1fr;gap:28px;align-items:end;padding-bottom:28px;border-bottom:1px solid var(--line)}
+.hero > *{min-width:0}
+.eyebrow{font-family:var(--f-mono);font-size:13px;letter-spacing:.14em;color:var(--muted);font-weight:600}
+.hero h1{font-size:clamp(34px,5.6vw,58px);font-weight:900;margin:8px 0 12px}
+.hero .lead{font-size:18px;color:var(--muted);max-width:46ch}
+.hero-side{display:grid;gap:12px}
+.meter{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:16px 18px;display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.meter div{min-width:0}
+.meter b{display:block;font-family:var(--f-mono);font-size:26px;color:var(--ink);line-height:1.2}
+.meter span{font-size:14px;color:var(--muted)}
+.bar{height:8px;border-radius:999px;background:var(--soft);overflow:hidden;margin-top:6px}
+.bar i{display:block;height:100%;background:var(--marker)}
+.search{width:100%;font:inherit;font-size:16px;padding:12px 16px;border-radius:12px;border:1px solid var(--line);background:var(--surface);color:var(--ink)}
+.legend{display:flex;flex-wrap:wrap;gap:8px;margin-top:18px}
+.legend a{display:flex;align-items:center;gap:8px;text-decoration:none;font-weight:700;font-size:15px;padding:8px 14px;border-radius:12px;background:var(--cs);color:var(--c)}
+.legend a small{font-family:var(--f-mono);font-weight:600;opacity:.8}
+
+.band{padding-top:40px}
+.band-h{display:grid;grid-template-columns:auto 1fr;gap:6px 16px;align-items:baseline;margin-bottom:18px}
+.band-h .k{grid-row:span 2;font-weight:900;font-size:40px;line-height:1;color:var(--c)}
+.band-h h2{font-size:26px;font-weight:900}
+.band-h h2 small{font-family:var(--f-mono);font-size:13px;font-weight:600;color:var(--muted);margin-left:10px;letter-spacing:.06em}
+.band-h p{color:var(--muted);max-width:70ch}
+.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+.fc{display:flex;flex-direction:column;background:var(--surface);border:1px solid var(--line);border-radius:14px;overflow:hidden;text-decoration:none;color:inherit;transition:transform .15s,border-color .15s;min-width:0}
+.fc:hover{transform:translateY(-2px);border-color:var(--c)}
+.fc .ph{aspect-ratio:16/10;background:var(--soft);position:relative;overflow:hidden;flex:none}
+.fc .ph img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.fc .seen{position:absolute;top:10px;right:10px;background:var(--surface);color:var(--ok);font-size:13px;font-weight:700;padding:2px 10px;border-radius:999px}
+.fc .bd{padding:14px 16px 18px;display:flex;flex-direction:column;gap:4px}
+.fc .tag{font-size:12.5px;font-weight:700;color:var(--c)}
+.fc h3{font-size:20px;font-weight:900}
+.fc p{font-size:15px;color:var(--muted);line-height:1.65;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
+.empty{padding:40px 0;color:var(--muted);text-align:center}
+
+/* field page */
+.field{max-width:820px;margin:0 auto;display:grid;gap:34px}
+.crumb{font-size:14px;color:var(--muted);display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+.crumb a{color:var(--c);font-weight:700;text-decoration:none}
+.f-head h1{font-size:clamp(32px,5vw,48px);font-weight:900;margin-top:6px}
+.f-head .en{font-family:var(--f-mono);font-size:14px;color:var(--muted);letter-spacing:.04em;margin-top:4px}
+.photo{margin:0;border-radius:16px;overflow:hidden;background:var(--soft)}
+.photo img{width:100%;aspect-ratio:16/9;object-fit:cover}
+.photo figcaption{font-size:12.5px;color:var(--muted);padding:8px 14px;background:var(--surface);border:1px solid var(--line);border-top:0;border-radius:0 0 16px 16px}
+.photo figcaption a{color:var(--muted)}
+.lead-box{font-size:21px;line-height:1.75;color:var(--ink);font-weight:500}
+.lead-box mark{background:var(--cs);color:inherit;padding:0 2px}
+.why{background:var(--cs);border-radius:14px;padding:18px 22px}
+.why b{color:var(--c);display:block;font-size:15px;margin-bottom:4px}
+.sec h2{font-size:24px;font-weight:900;margin-bottom:14px;display:flex;align-items:center;gap:10px}
+.sec h2 .dot{width:10px;height:10px;border-radius:3px;background:var(--c)}
+.steps{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(2,1fr);gap:12px;counter-reset:s}
+.steps li{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:16px 18px;counter-increment:s;min-width:0}
+.steps li::before{content:counter(s);display:inline-grid;place-items:center;width:28px;height:28px;border-radius:50%;background:var(--c);color:var(--surface);font-family:var(--f-mono);font-weight:600;font-size:14px;margin-right:8px}
+.steps b{color:var(--ink);font-size:18px}
+.steps p{margin-top:6px;font-size:16px}
+.tech{display:grid;gap:12px}
+.tech div{display:grid;grid-template-columns:200px 1fr;gap:16px;padding:16px 0;border-top:1px solid var(--line)}
+.tech div:last-child{border-bottom:1px solid var(--line)}
+.tech div > *{min-width:0}
+.tech b{color:var(--ink);font-size:18px}
+.figs{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+.figs div{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:16px;min-width:0}
+.figs b{display:block;font-size:22px;font-weight:900;color:var(--c);line-height:1.3}
+.figs span{font-size:14.5px;color:var(--muted);line-height:1.55;display:block;margin-top:6px}
+.chips{display:flex;flex-wrap:wrap;gap:8px}
+.chips span{background:var(--surface);border:1px solid var(--line);border-radius:999px;padding:6px 14px;font-size:15.5px;font-weight:500}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:24px}
+.two > *{min-width:0}
+.videos{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.vid{background:var(--surface);border:1px solid var(--line);border-radius:14px;overflow:hidden;min-width:0}
+.vid .frame{aspect-ratio:16/9;position:relative;background:#000}
+.vid .frame img{width:100%;height:100%;object-fit:cover;opacity:.92}
+.vid .frame iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
+.vid .play{position:absolute;inset:0;display:grid;place-items:center;background:none;border:0;width:100%}
+.vid .play span{width:68px;height:48px;border-radius:12px;background:#E3242B;display:grid;place-items:center;box-shadow:0 4px 18px rgba(0,0,0,.35)}
+.vid .play span::after{content:"";border-left:18px solid #fff;border-top:11px solid transparent;border-bottom:11px solid transparent;margin-left:4px}
+.vid .len{position:absolute;right:8px;bottom:8px;background:rgba(0,0,0,.78);color:#fff;font-family:var(--f-mono);font-size:12.5px;padding:1px 6px;border-radius:4px}
+.vid .info{padding:12px 14px 14px;display:grid;gap:4px}
+.vid .info b{font-size:15.5px;color:var(--ink);line-height:1.5;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.vid .info span{font-size:13.5px;color:var(--muted)}
+.vid .info a{font-size:13.5px;font-weight:700;color:var(--c);text-decoration:none}
+.quiz{display:grid;gap:18px}
+.q{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:18px 20px}
+.q p.qq{font-weight:700;color:var(--ink);font-size:18px;margin-bottom:12px}
+.opts{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.opt{text-align:left;background:var(--bg);border:1px solid var(--line);border-radius:10px;padding:10px 14px;font-size:16px}
+.opt:hover:not(:disabled){border-color:var(--c)}
+.opt.right{background:var(--ok-s);border-color:var(--ok);color:var(--ok);font-weight:700}
+.opt.wrong{background:var(--bad-s);border-color:var(--bad);color:var(--bad)}
+.opt:disabled{cursor:default}
+.fb{margin-top:10px;font-size:15.5px}
+.fb.ok{color:var(--ok);font-weight:500}
+.fb.no{color:var(--bad)}
+.more{display:flex;flex-wrap:wrap;gap:10px}
+.more a{font-weight:700;text-decoration:none;color:var(--c);border:1px solid var(--line);background:var(--surface);border-radius:10px;padding:10px 14px;font-size:15.5px}
+.pn{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;padding-top:8px;border-top:1px solid var(--line)}
+.pn a{text-decoration:none;display:flex;flex-direction:column;padding:12px 0;min-width:0}
+.pn a small{color:var(--muted);font-size:13px}
+.pn a b{color:var(--ink);font-size:18px}
+.pn .next{margin-left:auto;text-align:right}
+footer{color:var(--muted);font-size:13px;text-align:center;padding:24px 16px 40px;line-height:1.7}
+
+@media (max-width:900px){
+  .grid{grid-template-columns:1fr 1fr}
+  .hero{grid-template-columns:1fr}
+}
+@media (max-width:640px){
+  body{font-size:16.5px}
+  .grid,.steps,.figs,.videos,.two,.opts{grid-template-columns:1fr}
+  .tech div{grid-template-columns:1fr;gap:4px}
+  .top .wrap{flex-wrap:wrap;gap:8px}
+  .cats{order:3;flex-basis:100%}
+  .tools{margin-left:auto}
+  .home-link{display:none}
+  .lead-box{font-size:19px}
+  .band-h .k{font-size:32px}
+}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+</head>
+<body>
+<header class="top"><div class="wrap">
+  <button class="brand" data-go="#/" aria-label="첨단 공학 탐험관 처음으로"><svg viewBox="0 0 32 32" aria-hidden="true"><rect width="32" height="32" rx="8" fill="currentColor"/><circle cx="16" cy="16" r="9" fill="none" stroke="#F2C14E" stroke-width="2.5"/><path d="M16 7v18M7 16h18" stroke="#F2C14E" stroke-width="2"/></svg>첨단 공학 탐험관</button>
+  <nav class="cats" id="cats" aria-label="영역"></nav>
+  <div class="tools"><a class="home-link" href="../">← 교실 홈</a><button class="theme" id="theme" aria-label="밝게/어둡게 바꾸기">◐</button></div>
+</div></header>
+<main class="wrap" id="app"></main>
+<footer>사진: 위키미디어 공용(Wikimedia Commons)의 자유 이용 사진, 각 사진 아래에 작가와 라이선스 표시 · 영상: 각 채널의 YouTube 영상을 연결 · 설명 참고: 위키백과와 각 기관 자료<br><a href="../">← 우리 반 AI·공학 교실로 돌아가기</a></footer>
+
+<script>
+const CATS = [
+ {id:"mfg", name:"제조", en:"Manufacturing", tag:"만드는 방법이 바뀐다", desc:"공장이 스스로 판단하고, 재료를 깎는 대신 쌓아 만들고, 손톱보다 작은 칩에 수백억 개의 회로를 새기는 기술이에요."},
+ {id:"ict", name:"정보통신", en:"Information & Communication", tag:"모으고, 잇고, 생각한다", desc:"데이터를 모으고 빛의 속도로 주고받으며, 컴퓨터가 스스로 배우고 판단하게 만드는 기술이에요."},
+ {id:"con", name:"건설", en:"Construction", tag:"더 높이, 더 길게, 더 똑똑하게", desc:"하늘로 500m를 쌓고, 바다 위로 수십 km를 잇고, 땅속을 두더지처럼 뚫으며 도시 전체를 설계하는 기술이에요."},
+ {id:"trn", name:"수송", en:"Transportation", tag:"사람과 물건을 옮기는 새 방법", desc:"스스로 달리는 자동차, 전기와 수소로 움직이는 차, 하늘을 나는 택시, 우주로 가는 로켓까지 이동의 모든 것을 다뤄요."},
+ {id:"bio", name:"생명", en:"Bio & Medical", tag:"생명을 고치고 설계한다", desc:"유전자를 고치고, 몸속을 들여다보고, 세포로 조직을 만들며, 생명을 공학처럼 설계하는 기술이에요."}
+];
+
+const FIELDS = [
+// ---------------- 제조 ----------------
+{id:"smart-factory", cat:"mfg", name:"스마트 팩토리", en:"Smart Factory",
+ one:"공장 안의 기계, 설비, 제품이 인터넷으로 연결되어 데이터를 주고받고, 스스로 문제를 찾고 생산 방식을 조절하는 지능형 공장이에요.",
+ why:"사람이 일일이 확인하던 일을 센서와 인공지능이 실시간으로 하니까 불량이 줄고, 한 라인에서 서로 다른 제품을 섞어 만드는 ‘다품종 소량 생산’도 가능해져요.",
+ how:[["보기","기계마다 붙은 센서가 온도, 진동, 속도, 불량 여부를 1초에도 여러 번 측정해요."],["모으기","측정한 데이터가 산업용 사물인터넷(IIoT)으로 서버나 클라우드에 모여요."],["판단하기","인공지능이 데이터를 분석해 고장 징후나 불량 원인을 찾아내요."],["움직이기","판단 결과에 따라 로봇과 설비가 속도를 바꾸거나 멈추고, 작업자에게 알림을 보내요."]],
+ tech:[["디지털 트윈","실제 공장을 컴퓨터 속에 똑같이 복제해 놓고, 생산 계획을 미리 시뮬레이션해 봐요."],["예지 보전","고장이 난 뒤에 고치는 대신, 진동이나 온도 변화로 고장을 미리 예측해 부품을 갈아요."],["머신 비전","카메라와 인공지능이 사람 눈보다 빠르고 정확하게 제품의 흠집과 불량을 찾아내요."]],
+ uses:["자동차 차체 용접·도장 라인","반도체·디스플레이 생산 라인","식품·의약품 품질 관리","맞춤형 운동화·가구 생산"],
+ nums:[["4차 산업혁명","스마트 팩토리를 대표 사례로 꼽는 산업 변화"],["IIoT","Industrial IoT, 산업용 사물인터넷"],["CPS","가상과 현실을 잇는 사이버 물리 시스템"]],
+ jobs:["산업공학과","기계공학과","스마트팩토리 엔지니어","생산 자동화 설계자"],
+ quiz:[{q:"실제 공장을 컴퓨터 속에 똑같이 만들어 미리 시험해 보는 기술은?",o:["디지털 트윈","예지 보전","머신 비전","적층 제조"],a:0,why:"현실의 ‘쌍둥이(twin)’를 디지털로 만든다는 뜻이에요."},{q:"고장이 나기 전에 데이터로 미리 예측해 정비하는 방식은?",o:["사후 보전","예지 보전","수작업 점검","무정비 운전"],a:1,why:"예측(predictive) 보전, 즉 예지 보전이라고 해요."}]},
+
+{id:"robot", cat:"mfg", name:"산업용·협동 로봇", en:"Industrial & Collaborative Robots",
+ one:"사람 대신 용접, 조립, 운반 같은 일을 정확하고 끈기 있게 해내는 로봇이에요. 요즘은 안전장치 없이 사람 바로 옆에서 함께 일하는 ‘협동 로봇(코봇)’이 빠르게 늘고 있어요.",
+ why:"위험하고 힘든 일을 로봇이 맡으면 사람은 더 안전해지고, 생산 속도와 품질은 일정하게 유지돼요.",
+ how:[["관절","팔은 보통 6개의 회전 관절(6축)로 되어 있어 사람 팔처럼 거의 모든 방향으로 움직여요."],["모터와 감속기","각 관절의 서보 모터가 정밀하게 회전하고, 감속기가 힘을 키워 줘요."],["제어기","미리 입력한 경로나 센서 정보에 따라 각 관절을 얼마나 돌릴지 계산해요."],["센서","협동 로봇은 힘·토크 센서로 사람과 부딪히는 순간을 감지해 즉시 멈춰요."]],
+ tech:[["협동 로봇(Cobot)","가볍고 힘 감지 기능이 있어 울타리 없이 사람과 같은 공간에서 일해요."],["다이렉트 티칭","작업자가 로봇 팔을 손으로 잡고 움직여 보이면 그 동작을 그대로 배워요."],["AI 비전 피킹","카메라로 뒤섞인 물건을 알아보고 하나씩 집어 올려요."]],
+ uses:["자동차 차체 용접","전자 부품 조립","물류 창고 분류·포장","식당 서빙·조리"],
+ nums:[["6축","산업용 로봇 팔의 대표적인 관절 수"],["±0.05mm","정밀 로봇의 반복 정밀도 수준 (제품마다 다름)"],["협동","사람과 같은 공간에서 함께 일하는 로봇의 특징"]],
+ jobs:["로봇공학과","기계공학과","전자공학과","로봇 제어 엔지니어"],
+ quiz:[{q:"사람과 같은 공간에서 울타리 없이 함께 일하도록 만든 로봇은?",o:["협동 로봇","굴착 로봇","우주 로봇","청소 로봇"],a:0,why:"Collaborative robot, 줄여서 코봇(Cobot)이라고 해요."},{q:"협동 로봇이 사람과 부딪혔을 때 바로 멈출 수 있는 까닭은?",o:["힘·토크 센서로 충돌을 감지해서","속도가 항상 0이라서","사람이 리모컨으로 끄기 때문에","바퀴가 없어서"],a:0,why:"관절에 걸리는 힘의 변화를 감지해 즉시 정지해요."}]},
+
+{id:"am", cat:"mfg", name:"3D 프린팅(적층 제조)", en:"Additive Manufacturing",
+ one:"재료를 깎아 내는 대신, 얇은 층을 한 겹씩 쌓아 올려 입체 물건을 만드는 제조 방식이에요. 공식 이름은 ‘적층 제조’예요.",
+ why:"금형 없이 디지털 설계 파일만 있으면 바로 만들 수 있어서, 복잡한 모양이나 한 개뿐인 맞춤 제품을 빠르게 만들 수 있어요.",
+ how:[["설계","3D 모델링 프로그램으로 만들 물건을 설계해요."],["슬라이싱","설계를 얇은 층으로 잘라 층마다 움직일 경로를 만들어요."],["적층","노즐이나 레이저가 한 층씩 재료를 굳히거나 녹여 붙여요."],["후처리","지지대를 떼고 표면을 다듬거나 열처리해 완성해요."]],
+ tech:[["FDM","녹인 플라스틱 실을 노즐로 짜내 쌓아요. 학교에서 가장 흔한 방식이에요."],["SLA·DLP","액체 수지에 빛을 쏘아 굳혀요. 매우 정밀해요."],["금속 3D 프린팅(PBF)","금속 가루를 레이저로 녹여 붙여 로켓 엔진 부품까지 만들어요."]],
+ uses:["항공기·로켓 엔진 부품","치과 보철·맞춤 인공관절","시제품·자동차 부품","건축 모형과 3D 프린팅 주택"],
+ nums:[["1980년대","3D 프린팅 기술이 처음 개발된 시기"],["층 두께 0.1mm 안팎","일반 FDM 프린터의 흔한 층 높이"],["무금형","금형 없이 바로 생산 가능"]],
+ jobs:["기계공학과","신소재공학과","제품디자인학과","적층 제조 엔지니어"],
+ quiz:[{q:"3D 프린팅의 공식적인 이름은?",o:["적층 제조","절삭 가공","주조","단조"],a:0,why:"재료를 층층이 쌓아(적층) 만든다는 뜻이에요."},{q:"금속 가루를 레이저로 녹여 붙이는 방식으로 만들 수 있는 것은?",o:["로켓 엔진 부품","종이 인형","천 가방","유리컵만"],a:0,why:"높은 강도의 금속 부품도 만들 수 있어 항공우주에 많이 쓰여요."}]},
+
+{id:"semi", cat:"mfg", name:"반도체", en:"Semiconductor",
+ one:"전기가 통하는 정도를 조절할 수 있는 물질(주로 실리콘)로 만든 아주 작은 전자 부품이에요. 컴퓨터, 스마트폰, 자동차의 ‘두뇌’와 ‘기억’을 담당해요.",
+ why:"인공지능, 자율주행, 스마트폰처럼 오늘날 거의 모든 첨단 기술이 반도체 없이는 움직이지 못해요. 그래서 ‘산업의 쌀’이라고 불려요.",
+ how:[["웨이퍼","모래에서 얻은 실리콘을 둥근 기둥으로 키운 뒤 얇게 잘라 원판(웨이퍼)을 만들어요."],["회로 새기기","빛으로 회로 무늬를 찍고(포토), 필요 없는 부분을 깎고(식각), 얇은 막을 입히며(증착) 층층이 쌓아요."],["배선과 검사","금속 선으로 회로를 잇고, 칩 하나하나가 제대로 동작하는지 전기로 검사해요."],["패키징","잘라 낸 칩을 외부와 연결하고 보호하는 포장을 씌워요."]],
+ tech:[["극자외선(EUV) 노광","아주 짧은 파장의 빛으로 머리카락 굵기의 수천분의 1 수준인 회로를 그려요."],["3D 낸드","저장 공간을 아파트처럼 위로 수백 층 쌓아 용량을 늘려요."],["첨단 패키징·HBM","메모리 칩을 수직으로 쌓아 인공지능 계산에 필요한 엄청난 속도를 내요."]],
+ uses:["스마트폰 AP·메모리","인공지능 서버의 GPU·HBM","자동차 전장·자율주행 칩","가전과 사물인터넷 기기"],
+ nums:[["8대 공정","웨이퍼·산화·포토·식각·증착/이온주입·금속배선·EDS·패키징"],["클린룸","공기 중 먼지를 극도로 줄인 반도체 작업 공간"],["나노미터(nm)","10억분의 1m, 회로 크기를 나타내는 단위"]],
+ jobs:["전자공학과","반도체공학과","화학공학과","공정·설계 엔지니어"],
+ quiz:[{q:"반도체 공정에서 빛으로 회로 무늬를 찍는 단계는?",o:["포토 공정","패키징","EDS","산화"],a:0,why:"사진을 찍듯 빛으로 무늬를 옮기는 공정이라 포토(노광) 공정이라고 해요."},{q:"반도체를 만드는 원판의 이름은?",o:["웨이퍼","필라멘트","세그먼트","큐비트"],a:0,why:"얇은 과자 웨이퍼처럼 생겨서 붙은 이름이에요."}]},
+
+{id:"battery", cat:"mfg", name:"이차전지(배터리)", en:"Rechargeable Battery",
+ one:"충전해서 여러 번 다시 쓸 수 있는 전지예요. 그중 리튬 이온 전지는 가볍고 많은 에너지를 담을 수 있어 스마트폰부터 전기차까지 쓰여요.",
+ why:"전기차, 에너지 저장 장치(ESS), 드론, 로봇이 모두 배터리 성능에 따라 얼마나 오래, 멀리 움직일지가 결정돼요.",
+ how:[["4대 구성","양극, 음극, 분리막, 전해질로 이루어져 있어요."],["충전","리튬 이온이 양극에서 나와 전해질을 지나 음극에 저장돼요."],["방전","사용할 때는 리튬 이온이 다시 양극으로 돌아가고, 그 사이 전자가 바깥 회로로 흐르며 전기를 만들어요."],["안전","분리막이 양극과 음극이 직접 닿지 않게 막아 합선과 화재를 막아요."]],
+ tech:[["하이니켈 양극재","니켈 비율을 높여 같은 무게에 더 많은 에너지를 담아요."],["전고체 전지","불붙기 쉬운 액체 전해질 대신 고체 전해질을 써서 안전성을 높이려는 차세대 전지예요."],["배터리 관리 시스템(BMS)","전지 하나하나의 전압과 온도를 감시해 과충전과 과열을 막아요."]],
+ uses:["전기차·전기 버스","스마트폰·노트북","에너지 저장 장치(ESS)","드론·로봇·전동 공구"],
+ nums:[["2019년","리튬 이온 전지 개발자 3명이 노벨 화학상 수상"],["4대 소재","양극재·음극재·분리막·전해질"],["ESS","남는 전기를 저장했다 쓰는 대용량 배터리 설비"]],
+ jobs:["화학공학과","신소재공학과","전기공학과","배터리 셀 개발 연구원"],
+ quiz:[{q:"리튬 이온 전지에서 양극과 음극이 직접 닿지 않게 막는 부품은?",o:["분리막","전해질","집전체","케이스"],a:0,why:"분리막이 두 극을 나눠 합선을 막아요."},{q:"액체 대신 고체 전해질을 써서 안전성을 높이려는 차세대 전지는?",o:["전고체 전지","납축전지","건전지","연료 전지"],a:0,why:"전해질까지 모두 고체라 ‘전(全)고체’라고 해요."}]},
+
+{id:"material", cat:"mfg", name:"첨단 신소재", en:"Advanced Materials",
+ one:"기존 재료보다 훨씬 가볍거나, 단단하거나, 전기를 잘 통하는 등 특별한 성질을 갖도록 만든 재료예요. 대표적으로 탄소섬유, 그래핀, 초내열 합금이 있어요.",
+ why:"비행기와 자동차가 가벼워지면 연료가 덜 들고, 배터리와 반도체도 새로운 소재가 있어야 성능이 올라가요. 신소재는 모든 첨단 산업의 바탕이에요.",
+ how:[["원료","탄소섬유는 아크릴 섬유(PAN)를 원료로 써요."],["안정화·탄화","산소 속에서 천천히 가열한 뒤, 산소 없이 1,000℃ 이상으로 구워 탄소만 남겨요."],["복합재","탄소섬유를 수지로 굳혀 ‘탄소섬유 강화 플라스틱(CFRP)’으로 만들어요."],["성형","원하는 모양의 틀에 겹겹이 쌓고 열과 압력으로 굳혀 부품을 만들어요."]],
+ tech:[["탄소섬유 복합재","철보다 훨씬 가볍지만 매우 강해 항공기 동체와 수소 탱크에 쓰여요."],["그래핀","탄소 원자 한 층으로 된 2차원 물질로 전기와 열을 매우 잘 전달해요."],["형상 기억 합금","변형되어도 열을 받으면 원래 모양으로 돌아오는 금속이에요."]],
+ uses:["항공기 동체·날개","수소차 수소 탱크","자전거·스포츠 용품","풍력 발전기 날개"],
+ nums:[["약 1/4","탄소섬유 무게는 철의 약 4분의 1 수준"],["1,000℃ 이상","탄화 공정에서 섬유를 굽는 온도"],["2010년","그래핀 연구로 노벨 물리학상 수상"]],
+ jobs:["신소재공학과","재료공학과","고분자공학과","소재 연구원"],
+ quiz:[{q:"탄소 원자 한 층으로 이루어진 2차원 신소재는?",o:["그래핀","유리섬유","알루미늄","세라믹"],a:0,why:"흑연에서 한 층만 떼어 낸 물질이 그래핀이에요."},{q:"탄소섬유를 수지로 굳힌 복합재의 장점은?",o:["가벼우면서 강하다","녹이 잘 슨다","무겁고 약하다","전기가 전혀 안 통한다"],a:0,why:"가볍고 강해 항공기와 수소 탱크에 쓰여요."}]},
+
+// ---------------- 정보통신 ----------------
+{id:"ai", cat:"ict", name:"인공지능", en:"Artificial Intelligence",
+ one:"사람의 학습, 추론, 인식 능력을 컴퓨터로 구현한 기술이에요. 요즘은 데이터에서 스스로 규칙을 배우는 ‘기계학습’, 특히 ‘딥러닝’이 중심이에요.",
+ why:"번역, 의료 영상 판독, 자율주행, 신약 개발처럼 사람이 오래 걸리던 일을 빠르게 돕고, 글과 그림을 만들어 내는 생성형 인공지능까지 등장했어요.",
+ how:[["데이터","사진, 글, 소리 같은 많은 예시 데이터를 모아요."],["학습","인공 신경망이 예측과 정답의 차이(오차)를 줄이도록 수많은 가중치를 조금씩 고쳐요."],["추론","학습을 마친 모델이 처음 보는 데이터에 대해 답을 내놓아요."],["개선","결과를 평가하고 데이터를 보충해 다시 학습시켜요."]],
+ tech:[["딥러닝","층을 깊게 쌓은 인공 신경망으로 이미지, 음성, 언어를 학습해요."],["트랜스포머·거대 언어 모델","문장 속 단어들의 관계를 한꺼번에 보는 구조로, 대화형 인공지능의 바탕이에요."],["생성형 인공지능","학습한 패턴을 바탕으로 새로운 글, 그림, 음악, 영상을 만들어요."]],
+ uses:["번역·챗봇","의료 영상 판독","자율주행 인지","추천 시스템·신약 개발"],
+ nums:[["1956년","다트머스 회의에서 ‘인공지능’이라는 말이 처음 쓰임"],["2016년","알파고가 이세돌 9단과의 대국에서 4승 1패"],["GPU","딥러닝 계산에 주로 쓰는 병렬 처리 반도체"]],
+ jobs:["컴퓨터공학과","인공지능학과","데이터사이언스","머신러닝 엔지니어"],
+ quiz:[{q:"인공 신경망을 여러 층 깊게 쌓아 학습하는 방법은?",o:["딥러닝","블록체인","적층 제조","슬라이싱"],a:0,why:"층이 깊다(deep)는 뜻에서 딥러닝이에요."},{q:"새로운 글, 그림, 음악을 만들어 내는 인공지능은?",o:["생성형 인공지능","규칙 기반 계산기","전자 계산자","바코드 스캐너"],a:0,why:"학습한 패턴으로 새 콘텐츠를 생성(generate)해요."}]},
+
+{id:"mobile", cat:"ict", name:"5G·6G 이동통신", en:"5G / 6G Mobile Networks",
+ one:"전파를 이용해 움직이면서도 인터넷에 연결되게 해 주는 기술이에요. 5G는 빠른 속도, 짧은 지연 시간, 수많은 기기의 동시 연결이 특징이고, 6G는 하늘과 우주까지 연결하는 것을 목표로 해요.",
+ why:"자율주행차, 원격 수술, 스마트 팩토리처럼 순간의 지연도 허용되지 않는 서비스는 아주 빠르고 안정적인 통신이 있어야 가능해요.",
+ how:[["전파","휴대폰과 기지국이 특정 주파수의 전파로 신호를 주고받아요."],["기지국","곳곳의 기지국 안테나가 신호를 받아 유선망으로 전달해요."],["코어망","통신사의 중앙 네트워크가 데이터를 목적지까지 길 안내해요."],["빔포밍","여러 개의 안테나가 전파를 사용자 쪽으로 모아 보내 효율을 높여요."]],
+ tech:[["밀리미터파","높은 주파수(예: 28GHz)를 써서 아주 넓은 데이터 통로를 만들어요."],["네트워크 슬라이싱","하나의 망을 용도별로 나눠, 자율주행용은 지연 없이, 영상용은 넓게 쓰도록 해요."],["위성·비지상망(6G)","저궤도 위성과 연결해 바다, 사막, 하늘에서도 통신해요."]],
+ uses:["자율주행·차량 통신","원격 의료·수술","스마트 팩토리 전용망","가상·증강 현실 서비스"],
+ nums:[["2019년 4월","한국이 세계 최초로 5G 스마트폰 상용화"],["3.5GHz·28GHz","국내 5G에 할당된 대표 주파수 대역"],["1ms","5G가 목표로 한 최소 지연 시간 수준"]],
+ jobs:["전자공학과","정보통신공학과","전파공학","통신망 엔지니어"],
+ quiz:[{q:"여러 안테나로 전파를 사용자 쪽으로 모아 보내는 기술은?",o:["빔포밍","슬라이싱","렌더링","소결"],a:0,why:"전파를 빔(beam)처럼 모아 형성(forming)해요."},{q:"하나의 통신망을 용도별로 나누어 쓰는 기술은?",o:["네트워크 슬라이싱","밀리미터파","핸드오버","클라우드"],a:0,why:"망을 얇게 썰듯(slice) 나눠 써요."}]},
+
+{id:"iot", cat:"ict", name:"사물인터넷(IoT)", en:"Internet of Things",
+ one:"냉장고, 전등, 공장 기계, 도로 신호등처럼 주변의 사물에 센서와 통신 기능을 달아 서로 데이터를 주고받게 하는 기술이에요.",
+ why:"사물이 스스로 상태를 알리고 반응하니, 사람이 일일이 확인하지 않아도 집, 공장, 도시가 알아서 효율적으로 움직여요.",
+ how:[["감지","온도, 습도, 움직임, 위치 등을 센서가 측정해요."],["연결","와이파이, 블루투스, 5G, 저전력 통신(LPWA)으로 데이터를 보내요."],["처리","클라우드 플랫폼에서 데이터를 모아 분석해요."],["반응","스마트폰 알림을 보내거나 기기를 자동으로 켜고 꺼요."]],
+ tech:[["엣지 컴퓨팅","모든 데이터를 멀리 보내지 않고 기기 가까이에서 바로 처리해 반응 속도를 높여요."],["저전력 광역 통신(LPWA)","배터리 하나로 수년간 작동하며 먼 거리까지 적은 데이터를 보내요."],["매터(Matter) 표준","제조사가 달라도 스마트홈 기기끼리 서로 연결되게 하는 공통 규격이에요."]],
+ uses:["스마트홈(조명·온도 조절)","스마트 팜 온습도 관리","공장 설비 감시","스마트 시티 주차·가로등"],
+ nums:[["1999년","‘사물인터넷’이라는 용어가 처음 쓰인 해"],["센서","사물인터넷의 눈과 귀"],["LPWA","저전력 광역 통신망"]],
+ jobs:["전자공학과","컴퓨터공학과","임베디드 소프트웨어","IoT 플랫폼 개발자"],
+ quiz:[{q:"데이터를 멀리 보내지 않고 기기 가까이에서 바로 처리하는 방식은?",o:["엣지 컴퓨팅","메인프레임","천공 카드","수기 기록"],a:0,why:"네트워크의 가장자리(edge)에서 계산해요."},{q:"사물인터넷 시스템의 흐름으로 알맞은 것은?",o:["감지 → 연결 → 처리 → 반응","반응 → 감지 → 처리 → 연결","처리 → 반응 → 연결 → 감지","연결 → 반응 → 감지 → 처리"],a:0,why:"센서가 감지한 데이터를 보내고, 분석한 뒤 반응해요."}]},
+
+{id:"cloud", cat:"ict", name:"클라우드·데이터센터", en:"Cloud Computing",
+ one:"내 컴퓨터 대신 인터넷 너머의 거대한 데이터센터에 있는 서버, 저장 공간, 소프트웨어를 필요한 만큼 빌려 쓰는 기술이에요.",
+ why:"기업과 학교는 비싼 서버를 직접 사지 않고도 필요할 때만 컴퓨팅 자원을 쓸 수 있고, 우리는 어느 기기에서나 같은 사진과 문서를 볼 수 있어요.",
+ how:[["데이터센터","수만 대의 서버가 들어선 건물에서 전력, 냉각, 보안을 24시간 관리해요."],["가상화","서버 한 대를 여러 개의 가상 컴퓨터로 나눠 여러 사용자가 함께 써요."],["서비스","사용자는 인터넷으로 접속해 쓴 만큼만 요금을 내요."],["분산 저장","데이터를 여러 장소에 나눠 저장해 한 곳이 고장 나도 안전해요."]],
+ tech:[["IaaS·PaaS·SaaS","서버만 빌리기, 개발 환경까지 빌리기, 완성된 소프트웨어 빌리기로 나뉘어요."],["AI 데이터센터","GPU 수만 개를 연결해 거대한 인공지능을 학습시켜요."],["액체 냉각","뜨거워진 서버를 공기 대신 액체로 식혀 전력을 아껴요."]],
+ uses:["온라인 문서·사진 저장","동영상 스트리밍","온라인 게임 서버","인공지능 학습·서비스"],
+ nums:[["SaaS","웹으로 바로 쓰는 소프트웨어 (예: 온라인 문서)"],["PUE","데이터센터 전력 효율 지표, 1에 가까울수록 효율적"],["24시간","데이터센터의 무중단 운영"]],
+ jobs:["컴퓨터공학과","소프트웨어학과","클라우드 엔지니어","데이터센터 설비 엔지니어"],
+ quiz:[{q:"서버 한 대를 여러 개의 가상 컴퓨터로 나누는 기술은?",o:["가상화","적층","식각","빔포밍"],a:0,why:"실제 하드웨어 위에 가상의 컴퓨터를 여러 개 만들어요."},{q:"완성된 소프트웨어를 인터넷으로 빌려 쓰는 클라우드 서비스는?",o:["SaaS","IaaS","PaaS","USB"],a:0,why:"Software as a Service, 소프트웨어를 서비스로 쓴다는 뜻이에요."}]},
+
+{id:"security", cat:"ict", name:"사이버 보안", en:"Cybersecurity",
+ one:"컴퓨터, 네트워크, 데이터를 해킹, 악성코드, 정보 유출 같은 공격으로부터 지키는 기술과 활동이에요.",
+ why:"은행, 병원, 전력망, 자동차까지 모두 네트워크로 연결된 지금, 한 번의 공격이 사회 전체를 멈추게 할 수 있어요.",
+ how:[["3대 목표","기밀성(허락된 사람만 보기), 무결성(내용이 바뀌지 않기), 가용성(필요할 때 쓸 수 있기)을 지켜요."],["암호화","데이터를 수학적 방법으로 섞어 열쇠가 있는 사람만 읽게 해요."],["인증","비밀번호, 지문, 일회용 코드로 진짜 사용자인지 확인해요."],["탐지와 대응","보안관제센터가 이상한 접속을 24시간 감시하고 막아요."]],
+ tech:[["공개키 암호","잠그는 열쇠와 여는 열쇠를 따로 두어 처음 만난 사이에서도 안전하게 통신해요."],["다중 인증(MFA)","비밀번호에 휴대폰 확인 같은 수단을 더해 계정 탈취를 막아요."],["양자내성암호","미래의 양자컴퓨터로도 풀기 어렵게 설계한 새로운 암호예요."]],
+ uses:["인터넷 뱅킹·결제","병원 의료 기록 보호","발전소·교통망 보호","자동차·IoT 기기 보안"],
+ nums:[["CIA","기밀성·무결성·가용성, 보안의 3대 요소"],["HTTPS","주소창 자물쇠, 암호화된 웹 통신"],["랜섬웨어","파일을 잠그고 돈을 요구하는 악성코드"]],
+ jobs:["정보보호학과","컴퓨터공학과","화이트 해커","보안관제 전문가"],
+ quiz:[{q:"‘허락된 사람만 정보를 볼 수 있어야 한다’는 보안 목표는?",o:["기밀성","가용성","무결성","확장성"],a:0,why:"비밀을 지키는 성질이 기밀성이에요."},{q:"비밀번호에 휴대폰 인증을 더해 계정을 보호하는 방법은?",o:["다중 인증","공유 계정","비밀번호 재사용","자동 로그인"],a:0,why:"두 가지 이상의 수단으로 확인해 훨씬 안전해요."}]},
+
+{id:"quantum", cat:"ict", name:"양자 컴퓨터", en:"Quantum Computing",
+ one:"0과 1을 동시에 가질 수 있는 ‘큐비트’를 이용해, 특정 문제를 기존 컴퓨터보다 훨씬 빠르게 풀 수 있는 새로운 방식의 컴퓨터예요.",
+ why:"신약 분자 설계, 신소재 개발, 복잡한 최적화 문제처럼 지금의 슈퍼컴퓨터로도 너무 오래 걸리는 문제를 풀 가능성이 있어요.",
+ how:[["큐비트","일반 비트는 0 아니면 1이지만, 큐비트는 0과 1이 겹친 ‘중첩’ 상태가 될 수 있어요."],["얽힘","여러 큐비트를 ‘얽힘’ 상태로 묶으면 한꺼번에 많은 경우를 함께 다룰 수 있어요."],["극저온","초전도 방식은 절대영도에 가까운 아주 낮은 온도에서 큐비트를 안정시켜요."],["측정","계산 끝에 측정하면 정답일 확률이 높은 결과가 나오도록 알고리즘을 설계해요."]],
+ tech:[["초전도 큐비트","황금빛 샹들리에처럼 생긴 냉각 장치 안에서 작동해요."],["이온 트랩","전기장에 가둔 원자(이온)를 레이저로 조작해요."],["양자 오류 정정","쉽게 흐트러지는 큐비트의 오류를 여러 큐비트로 보완하는 핵심 과제예요."]],
+ uses:["신약·신소재 분자 시뮬레이션","물류·금융 최적화","암호 연구","인공지능 연구"],
+ nums:[["중첩·얽힘","양자 컴퓨터의 두 가지 핵심 원리"],["약 -273℃","초전도 큐비트가 작동하는 극저온 수준"],["큐비트","양자 정보의 기본 단위"]],
+ jobs:["물리학과","전자공학과","컴퓨터공학과","양자 소프트웨어 개발자"],
+ quiz:[{q:"0과 1이 겹쳐 있을 수 있는 양자 정보의 기본 단위는?",o:["큐비트","바이트","픽셀","헤르츠"],a:0,why:"Quantum bit, 줄여서 큐비트예요."},{q:"초전도 양자 컴퓨터를 아주 낮은 온도로 식히는 까닭은?",o:["큐비트 상태를 안정시키려고","전기 요금을 아끼려고","소리를 줄이려고","색을 바꾸려고"],a:0,why:"작은 열에도 양자 상태가 쉽게 깨지기 때문이에요."}]},
+
+// ---------------- 건설 ----------------
+{id:"smartcity", cat:"con", name:"스마트 시티", en:"Smart City",
+ one:"교통, 에너지, 안전, 환경 같은 도시의 정보를 실시간으로 모아 분석하고, 시민의 생활을 더 편리하고 안전하게 만드는 똑똑한 도시예요.",
+ why:"인구가 몰린 도시의 교통 체증, 에너지 낭비, 범죄와 재난 문제를 데이터로 미리 알고 대응할 수 있어요.",
+ how:[["수집","도로 CCTV, 환경 센서, 교통카드, 스마트 계량기에서 데이터가 모여요."],["통합","도시통합운영센터가 흩어진 데이터를 한 화면에 모아요."],["분석·예측","디지털 트윈으로 교통량이나 침수 피해를 미리 시뮬레이션해요."],["서비스","신호등 시간 조절, 빈 주차장 안내, 긴급 출동 같은 서비스로 돌려줘요."]],
+ tech:[["도시 디지털 트윈","도시 전체를 3D 가상 공간에 복제해 정책과 재난을 미리 시험해요."],["지능형 교통 체계(ITS)","실시간 교통량에 맞춰 신호와 버스 운행을 조절해요."],["스마트 그리드","전기를 쓰는 곳과 만드는 곳의 정보를 주고받아 에너지를 아껴요."]],
+ uses:["실시간 버스·주차 안내","침수·화재 조기 경보","스마트 가로등·쓰레기통","에너지 사용량 관리"],
+ nums:[["도시통합운영센터","방범·교통·재난 정보를 모아 관리하는 곳"],["세종·부산","국가 시범 스마트 도시가 조성되는 곳"],["디지털 트윈","도시를 똑같이 복제한 가상 공간"]],
+ jobs:["도시공학과","건설환경공학과","교통공학","스마트시티 기획자"],
+ quiz:[{q:"도시 전체를 3D 가상 공간에 복제해 미리 시험해 보는 기술은?",o:["도시 디지털 트윈","적층 제조","역공학","블록 쌓기"],a:0,why:"현실 도시의 쌍둥이를 디지털로 만들어요."},{q:"실시간 교통량에 맞춰 신호를 조절하는 시스템은?",o:["지능형 교통 체계(ITS)","배터리 관리 시스템","BIM","MRI"],a:0,why:"Intelligent Transport Systems의 줄임말이에요."}]},
+
+{id:"bim", cat:"con", name:"BIM·스마트 건설", en:"Building Information Modeling",
+ one:"건물을 3차원 모델로 설계하면서, 벽과 기둥 하나하나에 재료, 크기, 비용, 공사 순서 같은 정보를 함께 담는 설계·시공 방식이에요.",
+ why:"설계 단계에서 배관과 기둥이 부딪히는 문제를 미리 찾아내고, 필요한 자재와 비용을 정확히 계산할 수 있어 공사 중 실수와 낭비가 크게 줄어요.",
+ how:[["3D 모델","건축, 구조, 설비 설계자가 하나의 3차원 모델을 함께 만들어요."],["정보 입력","각 부재에 재료, 규격, 가격, 제조사 정보를 넣어요."],["충돌 검토","프로그램이 겹치거나 부딪히는 부분을 자동으로 찾아줘요."],["시공·관리","공사 일정(4D)과 비용(5D)을 연결하고, 완공 후 유지 관리에도 써요."]],
+ tech:[["4D·5D BIM","3D 모델에 시간과 비용 정보를 더해 공정을 시뮬레이션해요."],["탈현장 건설(OSC)","공장에서 부재를 미리 만들어 현장에서 조립해요."],["건설 드론·로봇","드론이 현장을 촬영해 진척도를 측정하고, 로봇이 위험 작업을 대신해요."]],
+ uses:["대형 건물·병원 설계","공항·지하철 역사 건설","설비 배관 충돌 검토","완공 후 시설 유지 관리"],
+ nums:[["3D + 정보","BIM의 핵심: 모양과 데이터를 함께"],["4D·5D","시간(공정)과 비용 정보를 더한 BIM"],["2030년","국내 공공 건설에 BIM 전면 도입 목표"]],
+ jobs:["건축공학과","토목공학과","BIM 코디네이터","스마트 건설 엔지니어"],
+ quiz:[{q:"BIM에서 3D 모델에 ‘시간(공사 일정)’ 정보를 더한 것은?",o:["4D BIM","2D 도면","청사진","3D 스캔"],a:0,why:"3차원에 시간 축을 더해 4D예요."},{q:"BIM으로 설계할 때 좋은 점은?",o:["배관과 기둥이 부딪히는 문제를 미리 찾는다","도면이 필요 없어진다","공사가 저절로 된다","재료가 필요 없다"],a:0,why:"충돌 검토로 현장의 재시공을 줄여요."}]},
+
+{id:"tall", cat:"con", name:"초고층 건축", en:"Supertall Buildings",
+ one:"보통 높이 300m 이상의 건물을 초고층(슈퍼톨)이라고 해요. 바람, 지진, 자체 무게를 견디기 위한 첨단 구조와 재료 기술이 모두 모여 있어요.",
+ why:"좁은 땅에 많은 사람이 생활하고 일할 공간을 만들고, 도시의 상징이 되며, 그 과정에서 개발된 기술이 다른 건설에도 쓰여요.",
+ how:[["기초","지하 깊은 암반까지 기초를 놓고, 거대한 콘크리트 매트로 무게를 넓게 나눠요."],["코어","건물 가운데 튼튼한 콘크리트 기둥(코어)이 척추 역할을 해요."],["아웃리거","코어와 바깥 기둥을 거대한 팔(아웃리거)로 묶어 바람에 덜 흔들리게 해요."],["감쇠 장치","꼭대기의 진동 감쇠 장치가 흔들림을 줄여요."]],
+ tech:[["고강도 콘크리트","일반 콘크리트보다 몇 배 강한 콘크리트를 수백 m 위까지 펌프로 쏘아 올려요."],["풍동 실험","축소 모형에 바람을 불어 건물 모양이 바람을 어떻게 받는지 확인해요."],["초고속 엘리베이터","분당 수백 m 속도로 움직이며 기압 변화까지 조절해요."]],
+ uses:["사무·호텔·주거 복합 공간","전망대·관광 명소","방송 통신 시설","도시의 상징 랜드마크"],
+ nums:[["555m","롯데월드타워 높이 (123층, 국내 최고)"],["828m","세계 최고층 부르즈 할리파의 높이"],["300m 이상","초고층(슈퍼톨) 건물의 기준"]],
+ jobs:["건축공학과","건축학과","구조 엔지니어","시공 관리자"],
+ quiz:[{q:"초고층 건물 가운데에서 척추처럼 버티는 튼튼한 구조는?",o:["코어","창호","커튼월","난간"],a:0,why:"건물의 중심(core)이라 코어라고 해요."},{q:"국내 최고층 건물인 롯데월드타워의 높이는?",o:["555m","323m","828m","1,000m"],a:0,why:"123층, 555m예요."}]},
+
+{id:"bridge", cat:"con", name:"장대 교량", en:"Long-span Bridges",
+ one:"강이나 바다를 건너 수백 m에서 수 km를 잇는 긴 다리예요. 케이블로 상판을 매다는 ‘사장교’와 ‘현수교’가 대표적이에요.",
+ why:"섬과 육지, 나라와 나라를 이어 이동 시간을 크게 줄이고, 경제와 생활권을 넓혀 줘요.",
+ how:[["주탑","높은 탑을 세워 케이블을 지탱해요."],["사장교","주탑에서 비스듬히 내린 케이블이 상판을 직접 잡아 줘요."],["현수교","두 주탑 사이에 굵은 주케이블을 걸고, 거기서 내린 행어로 상판을 매달아요."],["앵커리지","현수교는 양 끝의 거대한 콘크리트 덩어리(앵커리지)가 주케이블을 붙잡아요."]],
+ tech:[["풍동·공탄성 해석","바람에 다리가 춤추듯 흔들리지 않도록 상판 단면을 설계해요."],["케이블 모니터링","센서로 케이블의 장력과 진동을 실시간으로 확인해요."],["대형 블록 가설","공장에서 만든 거대한 상판 블록을 크레인선으로 들어 올려 연결해요."]],
+ uses:["바다를 건너는 연륙교","해협을 잇는 국제 교량","강을 건너는 도시 교량","철도 교량"],
+ nums:[["800m","인천대교 사장교 구간의 주경간(주탑 사이) 길이"],["21.38km","인천대교 전체 길이"],["2,023m","튀르키예 차나칼레 1915 대교의 주경간 (한국 기업 시공)"]],
+ jobs:["토목공학과","건설환경공학과","교량 구조 엔지니어","측량·시공 기술자"],
+ quiz:[{q:"주탑에서 비스듬히 내린 케이블이 상판을 직접 잡아 주는 다리는?",o:["사장교","현수교","아치교","거더교"],a:0,why:"케이블이 비스듬히(斜) 당긴다(張)는 뜻이에요."},{q:"현수교에서 주케이블 양 끝을 붙잡는 거대한 구조물은?",o:["앵커리지","교각","난간","신축 이음"],a:0,why:"닻(anchor)처럼 케이블을 고정해요."}]},
+
+{id:"tunnel", cat:"con", name:"터널·지하 공간", en:"Tunneling (TBM)",
+ one:"산이나 강, 도시 아래를 뚫어 길과 철도를 만드는 기술이에요. 거대한 원통형 굴착기 ‘TBM’은 두더지처럼 땅을 갈며 앞으로 나아가요.",
+ why:"지상 공간이 부족한 도시에서 지하철, 고속철도, 전력·통신 관로를 만들 수 있고, 산을 돌아가지 않고 곧게 지나갈 수 있어요.",
+ how:[["커터헤드","앞쪽의 회전하는 원판에 달린 날이 암반과 흙을 깎아요."],["추진","뒤쪽 유압 잭이 이미 설치한 벽을 밀며 기계를 앞으로 보내요."],["세그먼트","깎은 자리에 공장에서 만든 콘크리트 조각(세그먼트)을 둥글게 끼워 터널 벽을 만들어요."],["배토","깎아 낸 흙과 돌은 컨베이어나 관을 통해 밖으로 내보내요."]],
+ tech:[["쉴드 TBM","원통형 철판(쉴드)이 무른 땅이 무너지지 않게 막으며 굴착해요."],["NATM","발파 후 숏크리트와 록볼트로 주변 지반 자체를 지지대로 활용하는 공법이에요."],["대심도 터널","지하 40m보다 깊은 곳에 고속 도로와 철도를 만들어요."]],
+ uses:["지하철·광역급행철도","고속철도 산악 터널","해저 터널","전력·통신 공동구"],
+ nums:[["TBM","Tunnel Boring Machine, 터널 굴착기"],["세그먼트","터널 벽을 이루는 조립식 콘크리트 조각"],["40m 이상","대심도 지하 공간의 대략적 기준"]],
+ jobs:["토목공학과","지반공학","터널 설계 엔지니어","지하 공간 시공 관리자"],
+ quiz:[{q:"TBM 앞쪽에서 회전하며 땅을 깎는 부분은?",o:["커터헤드","세그먼트","앵커리지","주탑"],a:0,why:"자르는(cutter) 머리(head)라는 뜻이에요."},{q:"TBM이 깎은 자리에 끼워 터널 벽을 만드는 조립식 콘크리트는?",o:["세그먼트","벽돌","타일","슬레이트"],a:0,why:"여러 조각(segment)을 둥글게 이어 붙여요."}]},
+
+{id:"zeb", cat:"con", name:"제로 에너지 건축", en:"Zero Energy Building",
+ one:"단열을 아주 잘해 쓰는 에너지를 최소로 줄이고, 필요한 에너지는 태양광 같은 신재생 에너지로 스스로 만들어 에너지 사용량을 0에 가깝게 하는 건물이에요.",
+ why:"건물은 냉난방과 조명으로 많은 에너지를 써서 탄소 배출의 큰 몫을 차지해요. 건물을 바꾸는 것이 탄소 중립의 핵심이에요.",
+ how:[["줄이기(패시브)","두꺼운 단열재, 3중 유리창, 틈새 없는 기밀 시공으로 열이 새지 않게 해요."],["환기","열 회수 환기 장치가 나가는 공기의 열을 들어오는 공기에 넘겨줘요."],["만들기(액티브)","지붕과 벽의 태양광, 지열 히트펌프로 에너지를 생산해요."],["관리","건물 에너지 관리 시스템(BEMS)이 사용량을 감시하고 최적화해요."]],
+ tech:[["패시브 하우스","난방 장치에 거의 의존하지 않을 만큼 단열과 기밀을 높인 집이에요."],["건물 일체형 태양광(BIPV)","창호나 외벽 자체가 태양광 패널 역할을 해요."],["지열 히트펌프","땅속의 일정한 온도를 이용해 효율적으로 냉난방해요."]],
+ uses:["공공 청사·학교","공동 주택","사무 건물","에너지 자립 마을"],
+ nums:[["1~5등급","국내 제로에너지건축물 인증 등급 (1등급이 최고)"],["3중 유리","패시브 건축의 대표적인 창호"],["BEMS","건물 에너지 관리 시스템"]],
+ jobs:["건축공학과","건축설비공학","에너지공학과","그린 빌딩 컨설턴트"],
+ quiz:[{q:"단열과 기밀을 높여 난방 장치에 거의 의존하지 않는 집은?",o:["패시브 하우스","모듈러 하우스","트리 하우스","컨테이너 하우스"],a:0,why:"능동적인 장치보다 수동적인(passive) 설계로 에너지를 아껴요."},{q:"창호나 외벽 자체가 태양광 패널 역할을 하는 기술은?",o:["건물 일체형 태양광(BIPV)","풍동 실험","TBM","BIM"],a:0,why:"건물(Building)과 태양광(PV)을 하나로 합쳤어요."}]},
+
+// ---------------- 수송 ----------------
+{id:"autonomous", cat:"trn", name:"자율주행", en:"Autonomous Driving",
+ one:"자동차가 카메라, 레이더, 라이다 같은 센서로 주변을 알아보고, 인공지능으로 판단해 사람 대신 운전하는 기술이에요.",
+ why:"교통사고의 상당수가 사람의 실수에서 생겨요. 자율주행은 사고를 줄이고, 운전이 어려운 사람에게도 이동의 자유를 줄 수 있어요.",
+ how:[["인지","카메라는 색과 표지판을, 레이더는 거리와 속도를, 라이다는 레이저로 3차원 형태를 파악해요."],["측위","정밀 지도와 GPS로 차가 차선 어디에 있는지 cm 단위로 알아요."],["판단","인공지능이 주변 차와 보행자의 움직임을 예측하고 갈 길을 정해요."],["제어","핸들, 가속, 브레이크를 전자 신호로 움직여요."]],
+ tech:[["라이다(LiDAR)","레이저를 쏘아 반사되어 오는 시간으로 주변을 점구름(3D)으로 그려요."],["센서 퓨전","여러 센서의 장점을 합쳐 비, 안개, 밤에도 정확히 인지해요."],["V2X 통신","차와 차, 차와 신호등이 서로 정보를 주고받아요."]],
+ uses:["로보택시","자율주행 셔틀·버스","무인 배송 로봇","물류 트럭 군집 주행"],
+ nums:[["0~5단계","SAE 기준 자율주행 단계 (5단계가 완전 자율)"],["3단계","특정 조건에서 시스템이 운전하는 조건부 자율주행"],["라이다","Light Detection And Ranging"]],
+ jobs:["자동차공학과","전자공학과","컴퓨터공학과","자율주행 알고리즘 개발자"],
+ quiz:[{q:"레이저를 쏘아 주변을 3차원으로 그려 내는 센서는?",o:["라이다","초음파 마이크","온도계","나침반"],a:0,why:"빛(Light)으로 거리를 재는 장치예요."},{q:"SAE 기준으로 운전자가 전혀 필요 없는 완전 자율주행은 몇 단계인가요?",o:["5단계","1단계","2단계","3단계"],a:0,why:"0단계(자동화 없음)부터 5단계(완전 자율)까지 있어요."}]},
+
+{id:"ev", cat:"trn", name:"전기차", en:"Electric Vehicle",
+ one:"엔진 대신 배터리에 저장한 전기로 모터를 돌려 달리는 자동차예요. 달릴 때 배기가스가 나오지 않아요.",
+ why:"수송 부문은 온실가스 배출이 많은 분야예요. 전기차는 도심 공기를 깨끗하게 하고, 신재생 에너지와 만나면 탄소 배출을 크게 줄일 수 있어요.",
+ how:[["배터리 팩","차 바닥에 깔린 수천 개의 배터리 셀이 전기를 저장해요."],["인버터","배터리의 직류 전기를 모터가 쓰는 교류로 바꾸고 회전 속도를 조절해요."],["모터","전자기력으로 회전해 바퀴를 굴려요. 출발하자마자 큰 힘이 나요."],["회생 제동","감속할 때 모터를 발전기로 써서 전기를 다시 배터리에 채워요."]],
+ tech:[["전용 플랫폼","배터리를 바닥에 평평하게 깔아 실내를 넓히고 무게 중심을 낮춰요."],["초급속 충전","고전압 시스템으로 짧은 시간에 많은 전기를 충전해요."],["V2G","주차된 전기차의 배터리를 전력망에 연결해 남는 전기를 나눠 써요."]],
+ uses:["승용차·택시","전기 버스·트럭","전기 오토바이·킥보드","캠핑·비상 전원(V2L)"],
+ nums:[["0g","주행 중 배기가스 배출량"],["회생 제동","브레이크 에너지를 다시 전기로 바꾸는 기술"],["DC 급속 / AC 완속","전기차 충전의 두 가지 방식"]],
+ jobs:["자동차공학과","전기공학과","전력전자","배터리 시스템 엔지니어"],
+ quiz:[{q:"감속할 때 모터를 발전기로 써서 배터리를 다시 충전하는 기술은?",o:["회생 제동","엔진 브레이크","ABS","크루즈 컨트롤"],a:0,why:"버려지던 제동 에너지를 되살려(회생) 써요."},{q:"배터리의 직류를 모터용 교류로 바꿔 주는 장치는?",o:["인버터","변속기","라디에이터","배기관"],a:0,why:"전기의 형태를 바꿔(invert) 줘요."}]},
+
+{id:"hydrogen", cat:"trn", name:"수소 연료전지", en:"Hydrogen Fuel Cell",
+ one:"수소와 공기 중의 산소를 반응시켜 전기를 만들고, 그 전기로 모터를 돌려 달리는 자동차예요. 배기구에서는 물만 나와요.",
+ why:"충전 시간이 짧고 한 번에 멀리 갈 수 있어 버스, 트럭 같은 대형 수송에 특히 유리하고, 공기를 정화하는 효과도 있어요.",
+ how:[["수소 탱크","탄소섬유로 감싼 고압 탱크(약 700기압)에 수소를 저장해요."],["연료전지 스택","수소가 촉매에서 수소 이온과 전자로 나뉘고, 전자가 바깥으로 흐르며 전기가 생겨요."],["물 배출","수소 이온이 산소와 만나 물이 되어 밖으로 나와요."],["배터리 보조","작은 배터리가 출발과 가속을 돕고 회생 제동 전기를 저장해요."]],
+ tech:[["고분자 전해질 연료전지(PEMFC)","차량용으로 가장 많이 쓰이는 연료전지예요."],["그린 수소","태양광·풍력 전기로 물을 분해해 탄소 없이 만든 수소예요."],["수소 트럭·트램·선박","무겁고 먼 거리를 가는 수송 수단으로 넓어지고 있어요."]],
+ uses:["수소 승용차","수소 버스·트럭","수소 트램·기차","발전용 연료전지"],
+ nums:[["700기압","수소 승용차 탱크의 저장 압력 수준"],["물(H₂O)","연료전지차의 유일한 배출물"],["2H₂ + O₂ → 2H₂O","연료전지 속 전체 반응"]],
+ jobs:["화학공학과","기계공학과","에너지공학과","연료전지 연구원"],
+ quiz:[{q:"수소 연료전지차가 달릴 때 배기구로 나오는 것은?",o:["물","이산화탄소","매연","질소산화물"],a:0,why:"수소와 산소가 만나 물이 생겨요."},{q:"태양광·풍력 전기로 물을 분해해 만든 수소는?",o:["그린 수소","그레이 수소","블루 수소","브라운 수소"],a:0,why:"만드는 과정에서 탄소가 나오지 않아 ‘그린’이에요."}]},
+
+{id:"rail", cat:"trn", name:"고속철도", en:"High-speed Rail",
+ one:"시속 250km 이상으로 달리는 철도예요. 한국의 KTX는 시속 300km로 운행하며 서울과 부산을 2시간대로 이어요.",
+ why:"비행기보다 탄소 배출이 훨씬 적고, 도심에서 도심으로 바로 이어 주며, 한 번에 많은 사람을 빠르게 옮길 수 있어요.",
+ how:[["전기 공급","선로 위 전차선의 고압 전기를 지붕의 팬터그래프가 받아요."],["동력 방식","앞뒤 기관차가 끄는 동력 집중식(KTX-산천)과, 여러 객차 아래에 모터를 나눠 단 동력 분산식(KTX-이음)이 있어요."],["선로","이음매를 없앤 장대 레일과 콘크리트 궤도로 흔들림을 줄여요."],["신호·제어","열차 자동 제어 장치가 속도를 감시하고 위험하면 자동으로 제동해요."]],
+ tech:[["공기역학 설계","뾰족하고 매끈한 앞부분으로 공기 저항과 터널 진입 소음을 줄여요."],["해무(HEMU-430X)","한국이 개발한 시험 열차로 2013년 시속 421.4km를 기록했어요."],["자기부상열차","자석의 힘으로 떠서 달려 마찰 없이 아주 빠르게 이동해요."]],
+ uses:["도시 간 고속 여객","국제 철도 수출","공항 연결 철도","광역급행철도(GTX)"],
+ nums:[["300km/h","KTX 최고 운행 속도"],["2004년","KTX 개통"],["421.4km/h","해무(HEMU-430X)의 최고 시험 속도 (2013년)"]],
+ jobs:["철도공학과","기계공학과","전기공학과","철도 차량·신호 엔지니어"],
+ quiz:[{q:"고속열차가 전차선에서 전기를 받는 지붕 위 장치는?",o:["팬터그래프","안테나","라디에이터","프로펠러"],a:0,why:"마름모꼴로 접혔다 펴지는 집전 장치예요."},{q:"한국이 개발한 고속 시험 열차의 이름은?",o:["해무(HEMU-430X)","누리호","넥쏘","아리랑"],a:0,why:"2013년 시속 421.4km를 기록했어요."}]},
+
+{id:"uam", cat:"trn", name:"도심항공교통·드론", en:"Urban Air Mobility",
+ one:"전기로 움직이며 수직으로 뜨고 내리는 항공기(eVTOL)로 도시 안이나 가까운 도시 사이를 빠르게 오가는 새로운 교통이에요. ‘하늘을 나는 택시’라고도 불려요.",
+ why:"꽉 막힌 도로 대신 하늘길을 이용해 이동 시간을 크게 줄이고, 전기를 써서 소음과 배출가스도 적어요.",
+ how:[["수직 이착륙","여러 개의 프로펠러로 헬리콥터처럼 제자리에서 떠오르고 내려요."],["순항 전환","하늘에 오르면 프로펠러를 앞으로 기울이거나 날개로 비행기처럼 날아요."],["분산 전기 추진","여러 개의 모터를 나눠 달아 하나가 고장 나도 안전하게 비행해요."],["버티포트","빌딩 옥상이나 역 근처의 전용 이착륙장에서 타고 내려요."]],
+ tech:[["eVTOL","전기(e) 수직 이착륙(VTOL) 항공기예요."],["교통 관리 시스템","수많은 비행체의 하늘길을 자동으로 관리해 충돌을 막아요."],["물류·방제 드론","택배 배송, 농약 살포, 재난 수색에 이미 쓰이고 있어요."]],
+ uses:["도심 에어택시","공항 연결 항공 셔틀","드론 택배","응급 환자·장기 이송"],
+ nums:[["eVTOL","electric Vertical Take-Off and Landing"],["버티포트","UAM 전용 이착륙장"],["K-UAM","정부가 추진하는 한국형 도심항공교통 계획"]],
+ jobs:["항공우주공학과","기계공학과","전기공학과","무인기 시스템 엔지니어"],
+ quiz:[{q:"전기로 움직이며 수직으로 뜨고 내리는 항공기를 무엇이라 하나요?",o:["eVTOL","KTX","TBM","MRI"],a:0,why:"electric Vertical Take-Off and Landing의 줄임말이에요."},{q:"UAM 항공기가 타고 내리는 전용 이착륙장은?",o:["버티포트","플랫폼","정류장","선착장"],a:0,why:"수직(vertical)과 항구(port)를 합친 말이에요."}]},
+
+{id:"launch", cat:"trn", name:"우주 발사체", en:"Space Launch Vehicles",
+ one:"인공위성이나 우주선을 지구 궤도와 그 너머로 실어 나르는 로켓이에요. 한국은 순수 국내 기술로 누리호(KSLV-Ⅱ)를 개발했어요.",
+ why:"통신, 기상 관측, 내비게이션, 국토 감시 위성을 원하는 때에 스스로 쏘아 올릴 수 있는 것은 국가의 핵심 기술이에요.",
+ how:[["작용·반작용","연료와 산화제를 태워 뜨거운 가스를 아래로 세게 뿜으면, 그 반작용으로 로켓이 위로 올라가요."],["다단 분리","다 쓴 아래 단을 떼어 내 무게를 줄이며 단계적으로 속도를 높여요."],["궤도 속도","지구 저궤도에 머물려면 초속 약 7.8km까지 가속해야 해요."],["유도·제어","관성 항법 장치가 자세와 위치를 계산해 엔진 방향을 조절해요."]],
+ tech:[["액체 로켓 엔진","누리호 1단은 75톤급 엔진 4기를 묶은 클러스터링으로 300톤의 추력을 내요."],["재사용 발사체","1단이 되돌아와 착륙해 다시 쓰여 발사 비용을 낮춰요."],["극저온 추진제","영하 183℃의 액체 산소를 산화제로 써요."]],
+ uses:["통신·방송 위성 발사","기상·지구 관측 위성","달·행성 탐사선","우주 정거장 보급"],
+ nums:[["3단","누리호의 단 구성"],["75톤 × 4","누리호 1단 엔진 구성"],["약 7.8km/s","지구 저궤도 위성의 궤도 속도"]],
+ jobs:["항공우주공학과","기계공학과","재료공학과","추진 기관 엔지니어"],
+ quiz:[{q:"로켓이 위로 올라가는 원리는?",o:["가스를 아래로 뿜은 반작용","공기 부력","자석의 반발력","원심력"],a:0,why:"뉴턴의 작용·반작용 법칙이에요."},{q:"다 쓴 아래 단을 떼어 내는 까닭은?",o:["무게를 줄여 더 빨리 가속하려고","소리를 줄이려고","색을 바꾸려고","연료를 더 싣으려고"],a:0,why:"빈 연료 탱크 무게를 버려 효율을 높여요."}]},
+
+// ---------------- 생명 ----------------
+{id:"crispr", cat:"bio", name:"유전자 가위", en:"CRISPR Gene Editing",
+ one:"DNA의 원하는 위치를 찾아가 정확히 자르고 고칠 수 있는 분자 도구예요. 가장 널리 쓰이는 것은 크리스퍼-카스9(CRISPR-Cas9)이에요.",
+ why:"유전 질환 치료, 병에 강한 작물 개발, 질병 연구용 모델 제작을 이전보다 훨씬 빠르고 싸고 정확하게 할 수 있게 되었어요.",
+ how:[["안내 RNA","고치고 싶은 DNA 서열과 짝이 맞는 RNA를 설계해요."],["찾아가기","안내 RNA가 카스9 단백질을 목표 위치까지 데려가요."],["자르기","카스9이 DNA 두 가닥을 정확히 잘라요."],["고치기","세포가 잘린 곳을 수선하는 과정에서 유전자를 끄거나 새 서열로 바꿔 넣어요."]],
+ tech:[["염기 편집","DNA를 자르지 않고 글자(염기) 하나만 바꿔요."],["프라임 편집","더 다양한 종류의 교정을 정밀하게 해요."],["유전자 치료제","겸상 적혈구 빈혈증 등에 대한 크리스퍼 치료제가 승인되었어요."]],
+ uses:["유전 질환 치료","병충해에 강한 작물","질병 연구용 세포·동물 모델","진단 키트"],
+ nums:[["2020년","유전자 가위 개발자 2명이 노벨 화학상 수상"],["Cas9","DNA를 자르는 단백질"],["3세대","크리스퍼는 3세대 유전자 가위로 불림"]],
+ jobs:["생명공학과","분자생물학","유전공학","유전자 치료 연구원"],
+ quiz:[{q:"크리스퍼에서 카스9을 목표 DNA로 안내하는 것은?",o:["안내 RNA","리보솜","미토콘드리아","세포벽"],a:0,why:"짝이 맞는 서열을 가진 RNA가 길잡이 역할을 해요."},{q:"유전자 가위 개발자들이 노벨 화학상을 받은 해는?",o:["2020년","2000년","1953년","2010년"],a:0,why:"제니퍼 다우드나와 에마뉘엘 샤르팡티에가 수상했어요."}]},
+
+{id:"mrna", cat:"bio", name:"바이오 의약품·mRNA", en:"Biopharmaceuticals & mRNA",
+ one:"살아 있는 세포나 생체 물질을 이용해 만드는 약이에요. mRNA 백신은 우리 몸의 세포가 직접 ‘가짜 바이러스 조각’을 만들어 면역을 훈련하게 해요.",
+ why:"새로운 감염병이 나타났을 때 설계도(mRNA)만 바꾸면 되어 빠르게 백신을 만들 수 있고, 암 백신 같은 새로운 치료에도 도전하고 있어요.",
+ how:[["설계","바이러스 표면 단백질을 만드는 mRNA 서열을 설계해요."],["포장","쉽게 부서지는 mRNA를 지질 나노입자(LNP)라는 기름 방울로 감싸요."],["생산","주사하면 세포가 mRNA를 읽어 해당 단백질을 잠깐 만들어요."],["면역","면역 체계가 그 단백질을 기억해 진짜 바이러스가 오면 빠르게 막아요."]],
+ tech:[["지질 나노입자(LNP)","mRNA를 보호하고 세포 안으로 전달하는 운반체예요."],["항체 의약품","특정 표적에만 붙는 항체로 암과 자가면역 질환을 치료해요."],["바이오시밀러","특허가 끝난 바이오 의약품과 효능이 같은 복제약으로, 한국이 강한 분야예요."]],
+ uses:["감염병 백신","항암 항체 치료제","맞춤형 암 백신 연구","희귀 질환 치료제"],
+ nums:[["2023년","mRNA 백신 기반 기술 개발자들이 노벨 생리의학상 수상"],["LNP","mRNA를 감싸는 지질 나노입자"],["mRNA","단백질 설계도를 전달하는 RNA"]],
+ jobs:["생명공학과","약학과","화학공학과","바이오 공정 엔지니어"],
+ quiz:[{q:"mRNA를 감싸서 세포 안으로 전달하는 기름 방울은?",o:["지질 나노입자","적혈구","세포핵","항생제"],a:0,why:"Lipid NanoParticle, LNP라고 해요."},{q:"mRNA 백신이 몸속에서 하는 일은?",o:["세포가 바이러스 단백질 조각을 만들어 면역을 훈련시킨다","바이러스를 직접 넣는다","DNA를 영구히 바꾼다","혈액형을 바꾼다"],a:0,why:"단백질 설계도만 잠깐 전달하고 mRNA는 곧 분해돼요."}]},
+
+{id:"mri", cat:"bio", name:"의료 영상·의료기기", en:"Medical Imaging",
+ one:"몸을 열지 않고 속을 들여다보는 기술이에요. 엑스선, CT, 초음파, MRI가 대표적이고, MRI는 강한 자기장과 전파로 몸속 수소 원자의 신호를 읽어 영상을 만들어요.",
+ why:"질병을 일찍 정확하게 찾아내면 치료 성공률이 크게 올라가요. 의료 영상은 진단과 수술 계획의 출발점이에요.",
+ how:[["자기장","MRI 통 안의 강한 자기장(1.5~3테슬라)이 몸속 수소 원자핵의 방향을 가지런히 맞춰요."],["전파","짧은 전파를 쏘면 수소 원자핵이 에너지를 받았다가 되돌려 내요."],["신호","조직마다 신호가 돌아오는 속도가 달라요."],["영상화","컴퓨터가 신호를 계산해 단면 영상으로 바꿔요."]],
+ tech:[["CT","엑스선을 여러 방향에서 찍어 단면 영상을 만들어요. 뼈와 출혈을 빠르게 봐요."],["AI 영상 판독","인공지능이 영상에서 의심 부위를 표시해 의사를 도와요."],["수술 로봇","의사가 조종하는 로봇 팔로 작은 구멍만 내고 정밀하게 수술해요."]],
+ uses:["뇌·척추·관절 진단","암 조기 발견","심장 혈관 검사","수술 계획·로봇 수술"],
+ nums:[["1.5~3T","병원 MRI의 대표적인 자기장 세기 (테슬라)"],["방사선 없음","MRI는 엑스선을 쓰지 않음"],["1895년","뢴트겐이 엑스선을 발견한 해"]],
+ jobs:["의공학과","전자공학과","방사선학과","의료기기 개발자"],
+ quiz:[{q:"MRI가 영상을 만들 때 신호를 읽는 대상은?",o:["몸속 수소 원자핵","뼈 속 칼슘 결정","혈액형","피부색"],a:0,why:"몸의 대부분인 물속 수소 원자핵의 신호를 이용해요."},{q:"엑스선을 여러 방향에서 찍어 단면 영상을 만드는 장비는?",o:["CT","MRI","초음파","청진기"],a:0,why:"Computed Tomography, 컴퓨터 단층 촬영이에요."}]},
+
+{id:"tissue", cat:"bio", name:"조직공학·재생의학", en:"Tissue Engineering",
+ one:"세포와 생체 재료를 이용해 손상된 피부, 뼈, 연골, 장기를 되살리거나 새로 만드는 기술이에요. 3D 바이오프린터로 세포를 층층이 쌓아 조직을 만들기도 해요.",
+ why:"장기 이식을 기다리는 환자는 많지만 기증 장기는 부족해요. 내 세포로 만든 조직은 거부 반응도 줄일 수 있어요.",
+ how:[["세포","환자 자신의 세포나 줄기세포를 얻어 배양해요."],["지지체","세포가 붙어 자랄 수 있는 3차원 뼈대(스캐폴드)를 만들어요."],["바이오프린팅","세포를 섞은 ‘바이오 잉크’를 3D 프린터로 원하는 모양으로 쌓아요."],["성숙·이식","생물 반응기에서 키운 조직을 몸에 이식해요."]],
+ tech:[["오가노이드","줄기세포로 만든 작은 장기 유사체로, 신약 시험과 질병 연구에 써요."],["줄기세포 치료","여러 세포로 자랄 수 있는 줄기세포로 손상 조직을 재생해요."],["인공 피부·연골","화상 환자 피부나 관절 연골 재생에 쓰여요."]],
+ uses:["화상 피부 재생","연골·뼈 재건","신약 독성 시험용 미니 장기","장기 이식 대안 연구"],
+ nums:[["스캐폴드","세포가 자라는 3차원 지지체"],["바이오 잉크","세포가 들어간 3D 프린팅 재료"],["오가노이드","줄기세포로 만든 미니 장기"]],
+ jobs:["의공학과","생명공학과","재생의학 연구원","바이오 소재 개발자"],
+ quiz:[{q:"세포가 붙어 자랄 수 있도록 만든 3차원 뼈대는?",o:["스캐폴드","세그먼트","커터헤드","웨이퍼"],a:0,why:"건물의 비계(scaffold)처럼 세포를 받쳐 줘요."},{q:"줄기세포로 만든 작은 장기 유사체는?",o:["오가노이드","플랑크톤","박테리오파지","미토콘드리아"],a:0,why:"장기(organ)와 비슷하다(-oid)는 뜻이에요."}]},
+
+{id:"synbio", cat:"bio", name:"합성생물학", en:"Synthetic Biology",
+ one:"생명체를 이루는 DNA와 유전자 회로를 공학처럼 설계하고 조립해, 자연에 없던 기능을 가진 세포나 생물을 만드는 학문이에요.",
+ why:"미생물을 ‘살아 있는 공장’으로 바꿔 석유 대신 바이오 연료, 플라스틱, 의약품, 대체 식품을 친환경적으로 만들 수 있어요.",
+ how:[["설계(Design)","원하는 물질을 만드는 유전자 회로를 컴퓨터로 설계해요."],["제작(Build)","DNA를 합성하고 조립해 미생물 세포에 넣어요."],["시험(Test)","만든 세포가 목표 물질을 얼마나 만드는지 측정해요."],["학습(Learn)","결과를 분석해 설계를 고치고 다시 반복해요."]],
+ tech:[["바이오파운드리","로봇과 인공지능이 설계-제작-시험-학습 과정을 자동으로 빠르게 반복하는 시설이에요."],["표준 생물 부품","전자 부품처럼 기능이 정해진 DNA 조각을 조합해요."],["미세조류·미생물 공장","미세조류나 효모로 바이오 연료와 의약품 원료를 생산해요."]],
+ uses:["바이오 연료","생분해 플라스틱","의약품 원료 생산","대체 단백질·식품"],
+ nums:[["DBTL","설계-제작-시험-학습 순환"],["바이오파운드리","자동화된 합성생물학 실험 시설"],["iGEM","대학생 합성생물학 국제 대회"]],
+ jobs:["생명공학과","화학생물공학과","생물정보학","바이오 공정 연구원"],
+ quiz:[{q:"합성생물학의 반복 과정 ‘DBTL’ 순서로 알맞은 것은?",o:["설계 → 제작 → 시험 → 학습","학습 → 시험 → 제작 → 설계","제작 → 설계 → 학습 → 시험","시험 → 학습 → 설계 → 제작"],a:0,why:"Design, Build, Test, Learn이에요."},{q:"로봇과 인공지능으로 합성생물학 실험을 자동화한 시설은?",o:["바이오파운드리","데이터센터","클린룸","버티포트"],a:0,why:"반도체 파운드리처럼 생명 부품을 찍어 내는 공장이라는 뜻이에요."}]},
+
+{id:"bci", cat:"bio", name:"뇌-컴퓨터 인터페이스", en:"Brain-Computer Interface",
+ one:"뇌의 신호를 읽어 컴퓨터나 로봇 팔을 생각만으로 움직이게 하는 기술이에요. 줄여서 BCI라고 해요.",
+ why:"사고나 질병으로 몸을 움직이지 못하는 사람이 다시 글을 쓰고, 말하고, 물건을 잡을 수 있게 도울 수 있어요.",
+ how:[["신호 측정","뇌세포가 활동할 때 생기는 전기 신호를 전극으로 측정해요."],["신호 처리","잡음을 걸러 내고 의미 있는 패턴만 뽑아요."],["해독","인공지능이 ‘오른손을 움직이려는 생각’ 같은 의도를 알아내요."],["출력","커서, 로봇 팔, 휠체어, 음성 합성기로 명령을 보내요."]],
+ tech:[["비침습형(EEG)","머리에 쓰는 전극 모자로 뇌파를 측정해요. 안전하지만 신호가 약해요."],["침습형","뇌에 작은 전극을 심어 정밀한 신호를 얻어요. 수술이 필요해요."],["뇌 신호로 말 만들기","말하려는 뇌 신호를 해독해 문장이나 음성으로 바꾸는 연구가 진행 중이에요."]],
+ uses:["마비 환자의 의사소통","생각으로 움직이는 로봇 팔·의수","재활 훈련","집중도 측정·게임"],
+ nums:[["EEG","두피에서 측정하는 뇌파"],["BCI","Brain-Computer Interface"],["침습·비침습","전극을 몸 안에 넣는지에 따른 구분"]],
+ jobs:["의공학과","뇌인지과학","전자공학과","신경공학 연구원"],
+ quiz:[{q:"머리에 쓰는 전극 모자로 뇌파를 재는 방식은?",o:["비침습형(EEG)","침습형","CT","MRI 조영제"],a:0,why:"몸 안에 넣지 않으니 비침습형이에요."},{q:"BCI의 처리 순서로 알맞은 것은?",o:["측정 → 신호 처리 → 해독 → 출력","출력 → 해독 → 측정 → 신호 처리","해독 → 측정 → 출력 → 신호 처리","신호 처리 → 출력 → 측정 → 해독"],a:0,why:"뇌 신호를 재고, 다듬고, 뜻을 풀어, 기계를 움직여요."}]}
+];
+
+const MEDIA = {"smart-factory": {"img": {"card": "https://thumb.wikimedia.org/wikipedia/commons/thumb/6/67/BMW_Leipzig_MEDIA_050719_Download_Karosseriebau_max.jpg/500px-BMW_Leipzig_MEDIA_050719_Download_Karosseriebau_max.jpg", "big": "https://thumb.wikimedia.org/wikipedia/commons/thumb/6/67/BMW_Leipzig_MEDIA_050719_Download_Karosseriebau_max.jpg/960px-BMW_Leipzig_MEDIA_050719_Download_Karosseriebau_max.jpg", "page": "https://commons.wikimedia.org/wiki/File:BMW_Leipzig_MEDIA_050719_Download_Karosseriebau_max.jpg", "lic": "CC BY-SA 2.0 de", "artist": "BMW Werk Leipzig"}, "videos": [{"id": "FmVZOEHVkr0", "title": "변화하는 제조업, 스마트 팩토리  / YTN 사이언스", "ch": "YTN 사이언스", "len": "3:36"}, {"id": "Tv16LzOTUSM", "title": "제조업의 미래, 스마트 팩토리 [다큐S프라임] / YTN 사이언스", "ch": "YTN 사이언스", "len": "43:13"}], "wiki": "https://ko.wikipedia.org/wiki/%EC%8A%A4%EB%A7%88%ED%8A%B8%ED%8C%A9%ED%86%A0%EB%A6%AC"}, "robot": {"img": {"card": "https://thumb.wikimedia.org/wikipedia/commons/thumb/1/16/UR16e_robot_arm.png/500px-UR16e_robot_arm.png", "big": "https://thumb.wikimedia.org/wikipedia/commons/thumb/1/16/UR16e_robot_arm.png/960px-UR16e_robot_arm.png", "page": "https://commons.wikimedia.org/wiki/File:UR16e_robot_arm.png", "lic": "CC BY-SA 4.0", "artist": "Auledas"}, "videos": [{"id": "F0lJLvuO_WM", "title": "[ENG SUB] 산업용 로봇과 다릅니다! 사람을 돕는  🦾🤖  코봇(cobot)입니다! | 하이디어 (주)한화 로보틱스 협동로봇 편", "ch": "한화TV (Hanwha TV)", "len": "7:50"}, {"id": "_4XIpv0S_ts", "title": "로봇 탐구 생활 2화, 구조편", "ch": "HD현대로보틱스", "len": "6:43"}], "wiki": "https://ko.wikipedia.org/wiki/%EC%82%B0%EC%97%85%EC%9A%A9_%EB%A1%9C%EB%B4%87"}, "am": {"img": {"card": "https://thumb.wikimedia.org/wikipedia/commons/thumb/f/f4/3D_Printing.jpg/500px-3D_Printing.jpg", "big": "https://thumb.wikimedia.org/wikipedia/commons/thumb/f/f4/3D_Printing.jpg/960px-3D_Printing.jpg", "page": "https://commons.wikimedia.org/wiki/File:3D_Printing.jpg", "lic": "CC0", "artist": "MukhtaromST"}, "videos": [{"id": "Yw7fMjVBwgA", "title": "적층제조란 무엇일까? - What is additive manufacturing", "ch": "GE코리아", "len": "1:19"}, {"id": "xLb3Soawrrc", "title": "알기쉬운 3D프린터 종류별 구동원리, 장단점: FDM, DLP, SLS, SLA, PolyJet [ 세미남327@토크아이티, 스트라타시스]", "ch": "토크아이티(Talk IT)", "len": "22:14"}], "wiki": "https://ko.wikipedia.org/wiki/3%EC%B0%A8%EC%9B%90_%EC%9D%B8%EC%87%84"}, "semi": {"img": {"card": "https://thumb.wikimedia.org/wikipedia/commons/thumb/f/f5/FMN_Lab_team_%282%29.jpg/500px-FMN_Lab_team_%282%29.jpg", "big": "https://thumb.wikimedia.org/wikipedia/commons/thumb/f/f5/FMN_Lab_team_%282%29.jpg/960px-FMN_Lab_team_%282%29.jpg", "page": "https://commons.wikimedia.org/wiki/File:FMN_Lab_team_(2).jpg", "lic": "CC BY 4.0", "artist": "FMNLab"}, "videos": [{"id": "M2b2kpJRHmM", "title": "'삼성전자'가 참 쉽게 알려주는 '반도체 8대공정' | 반도체 백과사전 EP.6 반도체 공정 편", "ch": "삼성전자 반도체 뉴스룸", "len": "6:06"}, {"id": "gld0IHfbyF8", "title": "(ENG) 반도체 8대 공정 어려우셨나요?  장난감 브릭으로 설명하는 삼성전자 클라쓰", "ch": "삼성전자 반도체 뉴스룸", "len": "4:36"}], "wiki": "https://ko.wikipedia.org/wiki/%EB%B0%98%EB%8F%84%EC%B2%B4_%EC%A0%9C%EC%A1%B0"}, "battery": {"img": {"card": "https://thumb.wikimedia.org/wikipedia/commons/thumb/5/56/18650_and_21700_lithium_ion_battery_cell.jpg/500px-18650_and_21700_lithium_ion_battery_cell.jpg", "big": "https://thumb.wikimedia.org/wikipedia/commons/thumb/5/56/18650_and_21700_lithium_ion_battery_cell.jpg/960px-18650_and_21700_lithium_ion_battery_cell.jpg", "page": "https://commons.wikimedia.org/wiki/File:18650_and_21700_lithium_ion_battery_cell.jpg", "lic": "CC0", "artist": "Sevenethics"}, "videos": [{"id": "Ntb0zDLrM9A", "title": "(배터리 기초) 배터리의 동작원리를 낱낱이 파헤쳐 보자!!", "ch": "삼성SDI", "len": "2:35"}, {"id": "q5d_HXag3II", "title": "🔋 리튬이온배터리, 안에는 어떻게 생겼을까요?", "ch": "한국소방안전원", "len": "1:36"}], "wiki": "https://ko.wikipedia.org/wiki/%EB%A6%AC%ED%8A%AC_%EC%9D%B4%EC%98%A8_%EC%A0%84%EC%A7%80"}, "material": {"img": {"card": "https://upload.wikimedia.org/wikipedia/commons/2/20/Carbon_fiber_material.jpg", "big": "https://upload.wikimedia.org/wikipedia/commons/2/20/Carbon_fiber_material.jpg", "page": "https://commons.wikimedia.org/wiki/File:Carbon_fiber_material.jpg", "lic": "CC BY-SA 4.0", "artist": "texdata.com"}, "videos": [{"id": "FdIqBg-azFU", "title": "효성첨단소재, 초고강도 탄소섬유 개발 l HBS", "ch": "효성TV", "len": "1:22"}, {"id": "P8mKOjRP1SA", "title": "가볍지만 철보다 강한 미래의 신소재 탄소섬유(Carbon Fiber) 입니다. 과학 채널 다빈치노트", "ch": "다빈치노트", "len": "3:17"}], "wiki": "https://ko.wikipedia.org/wiki/%ED%83%84%EC%86%8C%EC%84%AC%EC%9C%A0"}, "ai": {"img": {"card": "https://upload.wikimedia.org/wikipedia/commons/2/27/Artificial_Neural_Network_with_Chip.png", "big": "https://upload.wikimedia.org/wikipedia/commons/2/27/Artificial_Neural_Network_with_Chip.png", "page": "https://commons.wikimedia.org/wiki/File:Artificial_Neural_Network_with_Chip.png", "lic": "CC BY 2.0", "artist": "mikemacmarketing"}, "videos": [{"id": "5bS_a2UwF9Q", "title": "북돋움_인공지능(초등편)_머신러닝과 딥러닝 이해하기", "ch": "서울특별시교육청교육연구정보원", "len": "3:26"}, {"id": "wrguEHxk_EI", "title": "뉴럴네트워크라는걸 들어 보셨다면 보셔야 할 영상. - DL1", "ch": "3Blue1Brown 한국어", "len": "18:33"}], "wiki": "https://ko.wikipedia.org/wiki/%EC%9D%B8%EA%B3%B5%EC%A7%80%EB%8A%A5"}, "mobile": {"img": {"card": "https://thumb.wikimedia.org/wikipedia/commons/thumb/a/a8/Antennes_5G_o2_Munich.jpg/500px-Antennes_5G_o2_Munich.jpg", "big": "https://thumb.wikimedia.org/wikipedia/commons/thumb/a/a8/Antennes_5G_o2_Munich.jpg/960px-Antennes_5G_o2_Munich.jpg", "page": "https://commons.wikimedia.org/wiki/File:Antennes_5G_o2_Munich.jpg", "lic": "CC BY-SA 4.0", "artist": "Yumikember"}, "videos": [{"id": "hrTDglivVR4", "title": "무선 통신은 어디까지 진화해 왔는가! #5G #밀리미터파 [안될과학-긴급과학]", "ch": "안될과학 Unrealscience", "len": "11:10"}, {"id": "AzdTrGmgHhQ", "title": "자율주행·원격수술·UAM까지! 6G가 바꿀 세상 🌍", "ch": "국가과학기술연구회(nst)", "len": "4:14"}], "wiki": "https://ko.wikipedia.org/wiki/5%EC%84%B8%EB%8C%80_%EC%9D%B4%EB%8F%99_%ED%86%B5%EC%8B%A0"}, "iot": {"img": {"card": "https://thumb.wikimedia.org/wikipedia/commons/thumb/0/01/Internet_of_things_signed_by_the_author.jpg/500px-Internet_of_things_signed_by_the_author.jpg", "big": "https://thumb.wikimedia.org/wikipedia/commons/thumb/0/01/Internet_of_things_signed_by_the_author.jpg/960px-Internet_of_things_signed_by_the_author.jpg", "page": "https://commons.wikimedia.org/wiki/File:Internet_of_things_signed_by_the_author.jpg", "lic": "CC BY 2.0", "artist": "Wilgengebroed on Flickr"}, "videos": [{"id": "3WNZOmXzFdI", "title": "집안의 모든 사물을 스마트폰으로  원격 제어할 수 있는 홈 사물인터넷이란? / YTN 사이언스", "ch": "YTN 사이언스", "len": "5:04"}, {"id": "Q6tgKSedf94", "title": "[엠클래스/정보] 사물과 사물이 대화하는 사물 인터넷(IoT)", "ch": "엠클래스", "len": "1:46"}], "wiki": "https://ko.wikipedia.org/wiki/%EC%82%AC%EB%AC%BC%EC%9D%B8%ED%84%B0%EB%84%B7"}, "cloud": {"img": {"card": "https://thumb.wikimedia.org/wikipedia/commons/thumb/b/b3/Datacenter_Server_Racks_%2822370909788%29.jpg/500px-Datacenter_Server_Racks_%2822370909788%29.jpg", "big": "https://thumb.wikimedia.org/wikipedia/commons/thumb/b/b3/Datacenter_Server_Racks_%2822370909788%29.jpg/960px-Datacenter_Server_Racks_%2822370909788%29.jpg", "page": "https://commons.wikimedia.org/wiki/File:Datacenter_Server_Racks_(22370909788).jpg", "lic": "CC BY 2.0", "artist": "Carl Lender from Sunrise, USA"}, "videos": [{"id": "q6PEOxn39Pc", "title": "클라우드 컴퓨팅이란 무엇이길래 구글, 아마존, MS 같은 기업들이 투자하는 걸까?", "ch": "국가과학기술연구회(nst)", "len": "7:55"}, {"id": "exewHoMNjsQ", "title": "클라우드 컴퓨팅 한 방 정리 [안될과학-긴급과학 X AWS]", "ch": "안될과학 Unrealscience", "len": "8:58"}], "wiki": "https://ko.wikipedia.org/wiki/%ED%81%B4%EB%9D%BC%EC%9A%B0%EB%93%9C_%EC%BB%B4%ED%93%A8%ED%8C%85"}, "security": {"img": {"card": "https://thumb.wikimedia.org/wikipedia/commons/thumb/9/9c/Cyber_Security_Incident_with_Panama_Aeronaval_and_Missouri_National_Guard_%289042405%29.jpg/500px-Cyber_Security_Incident_with_Panama_Aeronaval_and_Missouri_National_Guard_%289042405%29.jpg", "big": "https://thumb.wikimedia.org/wikipedia/commons/thumb/9/9c/Cyber_Security_Incident_with_Panama_Aeronaval_and_Missouri_National_Guard_%289042405%29.jpg/960px-Cyber_Security_Incident_with_Panama_Aeronaval_and_Missouri_National_Guard_%289042405%29.jpg", "page": "https://commons.wikimedia.org/wiki/File:Cyber_Security_Incident_with_Panama_Aeronaval_and_Missouri_National_Guard_(9042405).jpg", "lic": "Public domain", "artist": "U.S. Navy"}, "videos": [{"id": "a-PWX1pH6GU", "title": "해킹과 보안기술의 발전 (해커, 암호, 공개키, 랜섬웨어)  [안될과학-긴급과학 X 삼성SDS ]", "ch": "안될과학 Unrealscience", "len": "12:14"}, {"id": "Ak18sWvFBMU", "title": "보안 전문가도 사용하는 안전한 비밀번호 만드는 방법✨ | 차이나는 클라스 방구석 특강 1회 | JTBC 250531 방송", "ch": "교양 Voyage", "len": "1:59"}], "wiki": "https://ko.wikipedia.org/wiki/%EC%BB%B4%ED%93%A8%ED%84%B0_%EB%B3%B4%EC%95%88"}, "quantum": {"img": {"card": "https://thumb.wikimedia.org/wikipedia/commons/thumb/9/91/IBM_Quantum_System_One.jpg/500px-IBM_Quantum_System_One.jpg", "big": "https://thumb.wikimedia.org/wikipedia/commons/thumb/9/91/IBM_Quantum_System_One.jpg/960px-IBM_Quantum_System_One.jpg", "page": "https://commons.wikimedia.org/wiki/File:IBM_Quantum_System_One.jpg", "lic": "CC BY 4.0", "artist": "OJB Quantum"}, "videos": [{"id": "nR5yviFSA4k", "title": "하버드 물리학 박사가 양자 컴퓨터 원리 쉽게 알려드립니다 | 10분 만에 이해하는 양자 컴퓨터 기본 원리 | 클래스e", "ch": "EBS 컬렉션 - 사이언스", "len": "12:40"}, {"id": "cJR7JyloFcI", "title": "'양자컴퓨터' 이게 진짜 가능하다니! 양자컴퓨터 완벽 정리 | KBS 20250302 방송", "ch": "KBS 다큐", "len": "24:00"}], "wiki": "https://ko.wikipedia.org/wiki/%EC%96%91%EC%9E%90_%EC%BB%B4%ED%93%A8%ED%84%B0"}, "smartcity": {"img": {"card": "https://thumb.wikimedia.org/wikipedia/commons/thumb/d/d7/Songdo_International_Business_District_08.JPG/500px-Songdo_International_Business_District_08.JPG", "big": "https://thumb.wikimedia.org/wikipedia/commons/thumb/d/d7/Songdo_International_Business_District_08.JPG/960px-Songdo_International_Business_District_08.JPG", "page": "https://commons.wikimedia.org/wiki/File:Songdo_International_Business_District_08.JPG", "lic": "CC BY-SA 3.0", "artist": "User:Piotrus"}, "videos": [{"id": "KvpfUnxvEmI", "title": "[Special] 스마트시티의 성공열쇠, 디지털트윈에 대해 알아본다!", "ch": "LX한국국토정보공사 Official", "len": "10:39"}, {"id": "jascf_wXPpk", "title": "[KDI 경제정보센터] e-경제정보리뷰: 디지털 트윈 개념사례편", "ch": "KDI 경제교육·정보센터", "len": "4:23"}], "wiki": "https://ko.wikipedia.org/wiki/%EC%8A%A4%EB%A7%88%ED%8A%B8_%EC%8B%9C%ED%8B%B0"}, "bim": {"img": {"card": "https://thumb.wikimedia.org/wikipedia/commons/thumb/d/d0/Architectural_BIM_3D_Modeling.jpg/500px-Architectural_BIM_3D_Modeling.jpg", "big": "https://thumb.wikimedia.org/wikipedia/commons/thumb/d/d0/Architectural_BIM_3D_Modeling.jpg/960px-Architectural_BIM_3D_Modeling.jpg", "page": "https://commons.wikimedia.org/wiki/File:Architectural_BIM_3D_Modeling.jpg", "lic": "CC BY-SA 4.0", "artist": "Archdraw"}, "videos": [{"id": "O6Lmlf2hPY4", "title": "BIM 기술을 손쉽게 이해하는 방법", "ch": "스마트건설사업단", "len": "3:57"}, {"id": "DlR1lZ9h7F8", "title": "(알기 쉬운 스마트 건설) BIM 기반 탈현장 건설 기술", "ch": "스마트건설사업단", "len": "4:25"}], "wiki": "https://ko.wikipedia.org/wiki/%EB%B9%8C%EB%94%A9_%EC%A0%95%EB%B3%B4_%EB%AA%A8%EB%8D%B8%EB%A7%81"}, "tall": {"img": {"card": "https://thumb.wikimedia.org/wikipedia/commons/thumb/5/57/Lotte_World_morning_view_8.jpg/500px-Lotte_World_morning_view_8.jpg", "big": "https://thumb.wikimedia.org/wikipedia/commons/thumb/5/57/Lotte_World_morning_view_8.jpg/960px-Lotte_World_morning_view_8.jpg", "page": "https://commons.wikimedia.org/wiki/File:Lotte_World_morning_view_8.jpg", "lic": "CC BY-SA 4.0", "artist": "kallerna"}, "videos": [{"id": "f8GPs4Pmlvo", "title": "LOTTE WORLD TOWER 기술영상", "ch": "롯데월드몰", "len": "9:56"}, {"id": "RH2BYHPwfBo", "title": "‘세계 6위, 한국 1위’ 높이 555m 초고층 빌딩 L타워 어떻게 지었을까?｜꼭대기층 건설 현장부터 엘리베이터 수리 작업까지 한 번에 몰아보기｜극한직업｜한국기행｜#골라듄다큐", "ch": "EBSDocumentary (EBS 다큐)", "len": "48:13"}], "wiki": "https://ko.wikipedia.org/wiki/%EB%A7%88%EC%B2%9C%EB%A3%A8"}, "bridge": {"img": {"card": "https://thumb.wikimedia.org/wikipedia/commons/thumb/6/6a/Incheon_bridge_%2812%29.jpg/500px-Incheon_bridge_%2812%29.jpg", "big": "https://thumb.wikimedia.org/wikipedia/commons/thumb/6/6a/Incheon_bridge_%2812%29.jpg/960px-Incheon_bridge_%2812%29.jpg", "page": "https://commons.wikimedia.org/wiki/File:Incheon_bridge_(12).jpg", "lic": "Public domain", "artist": "Jinho Jung on Flickr"}, "videos": [{"id": "bBd0iImFXug", "title": "사장교, 그 견고함의 비밀", "ch": "대한토목학회", "len": "1:45"}, {"id": "QJpLKJ2PT7M", "title": "현수교의 숨겨진 과학적, 수학적 원리 (ft.세계최초 경사형 주탑 노량대교 건설 과정)", "ch": "GS건설", "len": "7:29"}], "wiki": "https://ko.wikipedia.org/wiki/%EC%82%AC%EC%9E%A5%EA%B5%90"}, "tunnel": {"img": {"card": "https://thumb.wikimedia.org/wikipedia/commons/thumb/7/7d/Continued_demolition_and_removal_of_a_tunnel_boring_machine_cutterhead_that_was_used_during_a_previous_contract_to_bore_the_Queens_tunnels._%28CH058A%2C_10-08-19%29_%2848919623078%29.jpg/500px-thumbnail.jpg", "big": "https://thumb.wikimedia.org/wikipedia/commons/thumb/7/7d/Continued_demolition_and_removal_of_a_tunnel_boring_machine_cutterhead_that_was_used_during_a_previous_contract_to_bore_the_Queens_tunnels._%28CH058A%2C_10-08-19%29_%2848919623078%29.jpg/960px-thumbnail.jpg", "page": "https://commons.wikimedia.org/wiki/File:Continued_demolition_and_removal_of_a_tunnel_boring_machine_cutterhead_that_was_used_during_a_previous_contract_to_bore_the_Queens_tunnels._(CH058A,_10-08-19)_(48919623078).jpg", "lic": "CC BY 2.0", "artist": "MTA Capital Construction Mega Projects"}, "videos": [{"id": "RztvrWyuwX0", "title": "[알려줄레일] Ep.1 더 안전한 터널 굴착 공법 TBM", "ch": "국가철도공단", "len": "2:04"}, {"id": "RRSK1ofIVww", "title": "소음, 진동 없이 빠르고 안전하다🚇 | 터널 뚫는 자이언트 두더지 | TBM의 모든 것⚙", "ch": "현대건설", "len": "5:37"}], "wiki": "https://ko.wikipedia.org/wiki/%ED%84%B0%EB%84%90%EA%B5%B4%EC%B0%A9%EA%B8%B0"}, "zeb": {"img": {"card": "https://thumb.wikimedia.org/wikipedia/commons/thumb/1/19/FRONT_VIEW_OF_THE_SOLAR_PATRIOT_HOUSE.jpg/500px-FRONT_VIEW_OF_THE_SOLAR_PATRIOT_HOUSE.jpg", "big": "https://thumb.wikimedia.org/wikipedia/commons/thumb/1/19/FRONT_VIEW_OF_THE_SOLAR_PATRIOT_HOUSE.jpg/960px-FRONT_VIEW_OF_THE_SOLAR_PATRIOT_HOUSE.jpg", "page": "https://commons.wikimedia.org/wiki/File:FRONT_VIEW_OF_THE_SOLAR_PATRIOT_HOUSE.jpg", "lic": "Public domain", "artist": "ENERGY.GOV"}, "videos": [{"id": "W1zgJNDL0eU", "title": "에너지 손실의 최소화 패시브 하우스 / YTN 사이언스", "ch": "YTN 사이언스", "len": "2:34"}, {"id": "BIGKyUPoRKY", "title": "날씨 상관 없이 전기세 0원, 냉난방 0원이라는 집 찾아가봤더니｜에어컨도 없는데 바깥은 33℃ 집 안은 20℃?｜온도가 유지되는 보온병 같은 집｜건축탐구집｜골라듄다큐", "ch": "EBSDocumentary (EBS 다큐)", "len": "22:07"}], "wiki": "https://ko.wikipedia.org/wiki/%EC%A0%9C%EB%A1%9C_%EC%97%90%EB%84%88%EC%A7%80_%EB%B9%8C%EB%94%A9"}, "autonomous": {"img": {"card": "https://thumb.wikimedia.org/wikipedia/commons/thumb/c/cf/Waymo_self-driving_car_front_view.gk.jpg/500px-Waymo_self-driving_car_front_view.gk.jpg", "big": "https://thumb.wikimedia.org/wikipedia/commons/thumb/c/cf/Waymo_self-driving_car_front_view.gk.jpg/960px-Waymo_self-driving_car_front_view.gk.jpg", "page": "https://commons.wikimedia.org/wiki/File:Waymo_self-driving_car_front_view.gk.jpg", "lic": "CC BY-SA 4.0", "artist": "Grendelkhan"}, "videos": [{"id": "AlvSe-7L9lg", "title": "라이다와 레이더, 무엇이 다를까? [#핫클립] / YTN 사이언스", "ch": "YTN 사이언스", "len": "2:58"}, {"id": "virEwYee_Bk", "title": "완전 자율주행, LG이노텍의 '이 기술' 없으면 안 된다? | 3분순삭 그림읽기", "ch": "LG그룹", "len": "3:42"}], "wiki": "https://ko.wikipedia.org/wiki/%EB%AC%B4%EC%9D%B8_%EC%9E%90%EB%8F%99%EC%B0%A8"}, "ev": {"img": {"card": "https://thumb.wikimedia.org/wikipedia/commons/thumb/6/6b/Electric_Car_recharging.jpg/500px-Electric_Car_recharging.jpg", "big": "https://thumb.wikimedia.org/wikipedia/commons/thumb/6/6b/Electric_Car_recharging.jpg/960px-Electric_Car_recharging.jpg", "page": "https://commons.wikimedia.org/wiki/File:Electric_Car_recharging.jpg", "lic": "CC BY-SA 3.0", "artist": "Michael Movchin 외"}, "videos": [{"id": "S5jdDoeL3Gs", "title": "전기차의 구조와 종류 [핫클립] / YTN 사이언스", "ch": "YTN 사이언스", "len": "4:11"}, {"id": "OcYdo3-Tx_o", "title": "전기자동차 모터는 어떻게 작동할까?", "ch": "bRd 3D", "len": "14:07"}], "wiki": "https://ko.wikipedia.org/wiki/%EC%A0%84%EA%B8%B0_%EC%9E%90%EB%8F%99%EC%B0%A8"}, "hydrogen": {"img": {"card": "https://thumb.wikimedia.org/wikipedia/commons/thumb/9/9c/Hyundai_Nexo_Genf_2018.jpg/500px-Hyundai_Nexo_Genf_2018.jpg", "big": "https://thumb.wikimedia.org/wikipedia/commons/thumb/9/9c/Hyundai_Nexo_Genf_2018.jpg/960px-Hyundai_Nexo_Genf_2018.jpg", "page": "https://commons.wikimedia.org/wiki/File:Hyundai_Nexo_Genf_2018.jpg", "lic": "CC BY-SA 4.0", "artist": "Alexander Migl"}, "videos": [{"id": "pUQkBOIt0KM", "title": "수소전기차는 어떻게 도로를 달리는 것일까?  / YTN 사이언스", "ch": "YTN 사이언스", "len": "3:19"}, {"id": "sEX_sFXco4E", "title": "수소전기차의 구조와 핵심부품 [핫클립] / YTN 사이언스", "ch": "YTN 사이언스", "len": "3:45"}], "wiki": "https://ko.wikipedia.org/wiki/%EC%97%B0%EB%A3%8C%EC%A0%84%EC%A7%80_%EC%9E%90%EB%8F%99%EC%B0%A8"}, "rail": {"img": {"card": "https://thumb.wikimedia.org/wikipedia/commons/thumb/0/08/KTX-Sancheon.jpg/500px-KTX-Sancheon.jpg", "big": "https://thumb.wikimedia.org/wikipedia/commons/thumb/0/08/KTX-Sancheon.jpg/960px-KTX-Sancheon.jpg", "page": "https://commons.wikimedia.org/wiki/File:KTX-Sancheon.jpg", "lic": "CC BY-SA 4.0", "artist": "Minseong Kim"}, "videos": [{"id": "KFzTj2owD8o", "title": "KTX가 시속300km로 달려도 안전한 이유는? / YTN 사이언스", "ch": "YTN 사이언스", "len": "4:39"}, {"id": "xpSyhpb1eEM", "title": "속도에 진심인 대한민국이 만들어낸 고속철도 KTX산천의 위엄｜메이드인 코리아 SRT, GTX｜다큐프라임｜#골라듄다큐", "ch": "EBSDocumentary (EBS 다큐)", "len": "44:13"}], "wiki": "https://ko.wikipedia.org/wiki/%EA%B3%A0%EC%86%8D%EC%B2%A0%EB%8F%84"}, "uam": {"img": {"card": "https://thumb.wikimedia.org/wikipedia/commons/thumb/9/93/Joby_Aviation_S4_experimental_eVTOL_aircraft_at_Edwards_AFB.jpg/500px-Joby_Aviation_S4_experimental_eVTOL_aircraft_at_Edwards_AFB.jpg", "big": "https://thumb.wikimedia.org/wikipedia/commons/thumb/9/93/Joby_Aviation_S4_experimental_eVTOL_aircraft_at_Edwards_AFB.jpg/960px-Joby_Aviation_S4_experimental_eVTOL_aircraft_at_Edwards_AFB.jpg", "page": "https://commons.wikimedia.org/wiki/File:Joby_Aviation_S4_experimental_eVTOL_aircraft_at_Edwards_AFB.jpg", "lic": "Public domain", "artist": "Harlan Huntington"}, "videos": [{"id": "47uFDYQzrlk", "title": "🛬차세대 교통 변화의 핵심,  UAM(도심 항공 모빌리티) ! 한국항공우주연구원이 개발하고 있는 유무인개인항공기, OPPAV 소개", "ch": "한국항공우주연구원 KARI TV", "len": "2:40"}, {"id": "WMaIet6LD9A", "title": "[핫클립] UAM 서비스를 가능하게 하는 eVTOL의 형태 / YTN 사이언스", "ch": "YTN 사이언스", "len": "3:30"}], "wiki": "https://ko.wikipedia.org/wiki/%EB%8F%84%EC%8B%AC%ED%95%AD%EA%B3%B5%EA%B5%90%ED%86%B5"}, "launch": {"img": {"card": "https://thumb.wikimedia.org/wikipedia/commons/thumb/6/6c/P_R_KSLV-2_211021_0113.jpg/500px-P_R_KSLV-2_211021_0113.jpg", "big": "https://thumb.wikimedia.org/wikipedia/commons/thumb/6/6c/P_R_KSLV-2_211021_0113.jpg/960px-P_R_KSLV-2_211021_0113.jpg", "page": "https://commons.wikimedia.org/wiki/File:P_R_KSLV-2_211021_0113.jpg", "lic": "KOGL Type 1", "artist": "Korea Aerospace Research Institute"}, "videos": [{"id": "fJtgncwSWUE", "title": "🚀물리학 법칙으로 보는 누리호 발사 #누리호 #우주발사체", "ch": "한국항공우주연구원 KARI TV", "len": "2:58"}, {"id": "h1fSaiIpI6U", "title": "[핫클립] 쉽게 알아보는 누리호의 모든 것  / YTN 사이언스", "ch": "YTN 사이언스", "len": "2:46"}], "wiki": "https://ko.wikipedia.org/wiki/%EB%88%84%EB%A6%AC%ED%98%B8"}, "crispr": {"img": {"card": "https://upload.wikimedia.org/wikipedia/commons/f/f0/Streptococcus_pyogenes_Cas9-DNA-RNA_complex_PDB_4OO8.png", "big": "https://upload.wikimedia.org/wikipedia/commons/f/f0/Streptococcus_pyogenes_Cas9-DNA-RNA_complex_PDB_4OO8.png", "page": "https://commons.wikimedia.org/wiki/File:Streptococcus_pyogenes_Cas9-DNA-RNA_complex_PDB_4OO8.png", "lic": "CC0", "artist": "Nishimasu, H. 외 (PDB 4OO8)"}, "videos": [{"id": "vcfIYw-ULUs", "title": "[핫클립] 생명공학계의 화두, 유전자 가위란 무엇일까? / YTN 사이언스", "ch": "YTN 사이언스", "len": "4:35"}, {"id": "4yxdYaVSBNE", "title": "노벨화학상을 받은 크리스퍼 유전자가위는 무엇인지 아는 척 해보자", "ch": "국가과학기술연구회(nst)", "len": "6:19"}], "wiki": "https://ko.wikipedia.org/wiki/CRISPR"}, "mrna": {"img": {"card": "https://thumb.wikimedia.org/wikipedia/commons/thumb/4/4a/Solo-mrna-vaccine-5.jpg/500px-Solo-mrna-vaccine-5.jpg", "big": "https://thumb.wikimedia.org/wikipedia/commons/thumb/4/4a/Solo-mrna-vaccine-5.jpg/960px-Solo-mrna-vaccine-5.jpg", "page": "https://commons.wikimedia.org/wiki/File:Solo-mrna-vaccine-5.jpg", "lic": "CC BY 4.0", "artist": "Spencerbdavis"}, "videos": [{"id": "GbPy238r5qM", "title": "[핫클립] mRNA 백신의 원리  / YTN 사이언스", "ch": "YTN 사이언스", "len": "3:01"}, {"id": "sf0UvpJjXHU", "title": "과연 RNA 백신은 코로나를 종식시킬 수 있을까?｜RNA 백신의 원리", "ch": "과학드림 [Science Dream]", "len": "6:22"}], "wiki": "https://ko.wikipedia.org/wiki/RNA_%EB%B0%B1%EC%8B%A0"}, "mri": {"img": {"card": "https://thumb.wikimedia.org/wikipedia/commons/thumb/e/ee/MRI-Philips.JPG/500px-MRI-Philips.JPG", "big": "https://thumb.wikimedia.org/wikipedia/commons/thumb/e/ee/MRI-Philips.JPG/960px-MRI-Philips.JPG", "page": "https://commons.wikimedia.org/wiki/File:MRI-Philips.JPG", "lic": "CC BY 3.0", "artist": "Jan Ainali"}, "videos": [{"id": "P_ZD9epgwfU", "title": "[KBSI 사이언스 스토리] 자기공명영상(MRI)", "ch": "크브씨네", "len": "4:44"}, {"id": "9xm2sK7og-4", "title": "MRI [영상으로 보는 검사]", "ch": "서울아산병원", "len": "3:52"}], "wiki": "https://ko.wikipedia.org/wiki/%EC%9E%90%EA%B8%B0%EA%B3%B5%EB%AA%85%EC%98%81%EC%83%81"}, "tissue": {"img": {"card": "https://thumb.wikimedia.org/wikipedia/commons/thumb/3/38/Astronaut_Frank_Rubio_works_on_a_3D_bioprinter_%28iss069e008406%29.jpg/500px-Astronaut_Frank_Rubio_works_on_a_3D_bioprinter_%28iss069e008406%29.jpg", "big": "https://thumb.wikimedia.org/wikipedia/commons/thumb/3/38/Astronaut_Frank_Rubio_works_on_a_3D_bioprinter_%28iss069e008406%29.jpg/960px-Astronaut_Frank_Rubio_works_on_a_3D_bioprinter_%28iss069e008406%29.jpg", "page": "https://commons.wikimedia.org/wiki/File:Astronaut_Frank_Rubio_works_on_a_3D_bioprinter_(iss069e008406).jpg", "lic": "Public domain", "artist": "NASA Johnson Space Center"}, "videos": [{"id": "WTeNsaPmzUY", "title": "3D 바이오프린터로 인체 조직을 만든다 [핫클립] / YTN 사이언스", "ch": "YTN 사이언스", "len": "2:25"}, {"id": "UJcL8coetOE", "title": "3D 프린터로 인공장기를 만들 수 있다? / YTN 사이언스", "ch": "YTN 사이언스", "len": "3:48"}], "wiki": "https://ko.wikipedia.org/wiki/%EC%A1%B0%EC%A7%81%EA%B3%B5%ED%95%99"}, "synbio": {"img": {"card": "https://thumb.wikimedia.org/wikipedia/commons/thumb/9/9f/Algae_for_biofuels_%2816156156931%29.jpg/500px-Algae_for_biofuels_%2816156156931%29.jpg", "big": "https://thumb.wikimedia.org/wikipedia/commons/thumb/9/9f/Algae_for_biofuels_%2816156156931%29.jpg/960px-Algae_for_biofuels_%2816156156931%29.jpg", "page": "https://commons.wikimedia.org/wiki/File:Algae_for_biofuels_(16156156931).jpg", "lic": "CC BY 2.0", "artist": "Oak Ridge National Laboratory"}, "videos": [{"id": "UtNVjzez8go", "title": "자연계에 존재하지 않는 DNA를 설계하는 합성생물학에 대해 아는 척 해보자", "ch": "국가과학기술연구회(nst)", "len": "7:09"}, {"id": "PyMLEvzuQPk", "title": "세상에 없던 생명체를 만들다😱 합성생물학, 이 기술을 써도 되나요? (feat. 송기원 교수) [취미는 과학/41화 확장판]", "ch": "EBS 컬렉션 - 사이언스", "len": "49:37"}], "wiki": "https://ko.wikipedia.org/wiki/%ED%95%A9%EC%84%B1%EC%83%9D%EB%AC%BC%ED%95%99"}, "bci": {"img": {"card": "https://thumb.wikimedia.org/wikipedia/commons/thumb/4/41/EEG_Recording_Cap.jpg/500px-EEG_Recording_Cap.jpg", "big": "https://thumb.wikimedia.org/wikipedia/commons/thumb/4/41/EEG_Recording_Cap.jpg/960px-EEG_Recording_Cap.jpg", "page": "https://commons.wikimedia.org/wiki/File:EEG_Recording_Cap.jpg", "lic": "CC BY 2.0", "artist": "Chris Hope"}, "videos": [{"id": "UUQHvnDduQM", "title": "뇌와 컴퓨터를 연결해서 로봇을 조종하는 기술. 뇌-컴퓨터 인터페이스, BCI(Brain-Computer Interface)기술에 대해 아는척 해보자.", "ch": "국가과학기술연구회(nst)", "len": "5:03"}, {"id": "ZmFMA0axeoY", "title": "생각만으로 컴퓨터 조작? 뇌와 컴퓨터를 잇는 BCI의 세계 (feat. 임창환 교수) [취미는 과학/ 106화]", "ch": "EBS 컬렉션 - 사이언스", "len": "40:19"}], "wiki": "https://ko.wikipedia.org/wiki/%EB%87%8C-%EC%BB%B4%ED%93%A8%ED%84%B0_%EC%9D%B8%ED%84%B0%ED%8E%98%EC%9D%B4%EC%8A%A4"}};
+
+
+const KEY = "tech-explore-v1";
+let S = { seen:{}, quiz:{} };
+try { const s = JSON.parse(localStorage.getItem(KEY)); if (s && s.seen) S = s; } catch (e) {}
+const save = () => { try { localStorage.setItem(KEY, JSON.stringify(S)); } catch (e) {} };
+const cat = id => CATS.find(c => c.id === id);
+const esc = s => String(s).replace(/[&<>"]/g, m => ({"&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;"}[m]));
+const app = document.getElementById("app");
+const picked = {};
+
+function nav(route){
+  document.getElementById("cats").innerHTML = `<a href="#/" aria-current="${route.v==="home"}">전체</a>` +
+    CATS.map(c => `<a class="c-${c.id}" href="#/c/${c.id}" aria-current="${route.cat===c.id}">${c.name}</a>`).join("");
+}
+
+function card(f){
+  const m = MEDIA[f.id];
+  return `<a class="fc c-${f.cat}" href="#/f/${f.id}">
+    <div class="ph"><img src="${m.img.card}" alt="${esc(f.name)} 사진" loading="lazy">${S.seen[f.id] ? '<span class="seen">✓ 탐험 완료</span>' : ""}</div>
+    <div class="bd"><span class="tag">${cat(f.cat).name}</span><h3>${esc(f.name)}</h3><p>${esc(f.one)}</p></div></a>`;
+}
+
+function band(c, list){
+  const fs = list || FIELDS.filter(f => f.cat === c.id);
+  if (!fs.length) return "";
+  return `<section class="band c-${c.id}" id="band-${c.id}">
+    <div class="band-h"><span class="k" aria-hidden="true">${String(CATS.indexOf(c)+1).padStart(2,"0")}</span>
+      <h2>${c.name}<small>${c.en.toUpperCase()}</small></h2><p>${c.tag}. ${c.desc}</p></div>
+    <div class="grid">${fs.map(card).join("")}</div></section>`;
+}
+
+function home(q){
+  const seen = Object.keys(S.seen).length, solved = Object.keys(S.quiz).length, qTotal = FIELDS.length * 2;
+  const term = (q || "").trim().toLowerCase();
+  const match = f => !term || [f.name, f.en, f.one, ...f.tech.map(t => t[0]), ...f.uses].join(" ").toLowerCase().includes(term);
+  const bands = CATS.map(c => band(c, FIELDS.filter(f => f.cat === c.id && match(f)))).join("");
+  return `<section class="hero">
+    <div><p class="eyebrow">ADVANCED ENGINEERING · 5 AREAS · 30 FIELDS</p>
+      <h1>첨단 공학 탐험관</h1>
+      <p class="lead">제조, 정보통신, 건설, 수송, 생명. 다섯 영역에서 지금 가장 활발한 공학 분야 30가지를 사진과 영상, 원리 설명과 퀴즈로 탐험해요.</p>
+      <div class="legend">${CATS.map(c => `<a class="c-${c.id}" href="#/c/${c.id}">${c.name}<small>${FIELDS.filter(f => f.cat===c.id).length}</small></a>`).join("")}</div></div>
+    <div class="hero-side">
+      <div class="meter"><div><b>${seen}<small style="font-size:16px;color:var(--muted)">/${FIELDS.length}</small></b><span>탐험한 분야</span><div class="bar"><i style="width:${seen/FIELDS.length*100}%"></i></div></div>
+        <div><b>${solved}<small style="font-size:16px;color:var(--muted)">/${qTotal}</small></b><span>맞힌 퀴즈</span><div class="bar"><i style="width:${solved/qTotal*100}%"></i></div></div></div>
+      <label for="q" class="eyebrow" style="letter-spacing:.06em">분야·기술 찾기</label>
+      <input class="search" id="q" type="search" placeholder="예: 배터리, 라이다, 유전자" value="${esc(q || "")}">
+    </div></section>
+    <div id="bands">${bands || '<p class="empty">찾는 분야가 없어요. 다른 낱말로 찾아보세요.</p>'}</div>`;
+}
+
+function fieldPage(f){
+  const c = cat(f.cat), m = MEDIA[f.id], list = FIELDS.filter(x => x.cat === f.cat), i = list.indexOf(f);
+  const prev = list[i-1], next = list[i+1];
+  const vids = m.videos.map(v => `<div class="vid">
+      <div class="frame" id="v-${v.id}"><img src="https://i.ytimg.com/vi/${v.id}/hqdefault.jpg" alt="" loading="lazy">
+        <button class="play" data-play="${v.id}" aria-label="${esc(v.title)} 재생"><span></span></button>${v.len ? `<span class="len">${v.len}</span>` : ""}</div>
+      <div class="info"><b>${esc(v.title)}</b><span>${esc(v.ch)}</span><a href="https://www.youtube.com/watch?v=${v.id}" target="_blank" rel="noopener">YouTube에서 보기 ↗</a></div></div>`).join("");
+  const quiz = f.quiz.map((q, qi) => {
+    const k = f.id + ":" + qi, wrong = picked[k] || [], solved = !!S.quiz[k];
+    return `<div class="q"><p class="qq">Q${qi+1}. ${esc(q.q)}</p><div class="opts">${q.o.map((o, oi) => {
+      const cls = solved && oi === q.a ? "right" : wrong.includes(oi) ? "wrong" : "";
+      return `<button class="opt ${cls}" data-q="${k}" data-i="${oi}" ${solved || wrong.includes(oi) ? "disabled" : ""}>${esc(o)}</button>`;
+    }).join("")}</div>${solved ? `<p class="fb ok">정답이에요. ${esc(q.why)}</p>` : wrong.length ? `<p class="fb no">다시 골라 보세요. 위의 설명에 힌트가 있어요.</p>` : ""}</div>`;
+  }).join("");
+  return `<article class="field c-${f.cat}">
+    <div class="f-head"><div class="crumb"><a href="#/">탐험관</a><span>›</span><a href="#/c/${c.id}">${c.name}</a><span>›</span><span>${i+1} / ${list.length}</span></div>
+      <h1>${esc(f.name)}</h1><p class="en">${esc(f.en)}</p></div>
+    <figure class="photo"><img src="${m.img.big}" alt="${esc(f.name)} 관련 사진"><figcaption>사진: ${esc(m.img.artist || "작가 미상")} · ${esc(m.img.lic)} · <a href="${m.img.page}" target="_blank" rel="noopener">위키미디어 공용</a></figcaption></figure>
+    <p class="lead-box">${esc(f.one)}</p>
+    <div class="why"><b>왜 중요할까?</b>${esc(f.why)}</div>
+    <section class="sec"><h2><span class="dot"></span>어떻게 작동할까</h2><ol class="steps">${f.how.map(h => `<li><b>${esc(h[0])}</b><p>${esc(h[1])}</p></li>`).join("")}</ol></section>
+    <section class="sec"><h2><span class="dot"></span>첨단 기술 포인트</h2><div class="tech">${f.tech.map(t => `<div><b>${esc(t[0])}</b><p>${esc(t[1])}</p></div>`).join("")}</div></section>
+    <section class="sec"><h2><span class="dot"></span>숫자와 낱말로 보기</h2><div class="figs">${f.nums.map(n => `<div><b>${esc(n[0])}</b><span>${esc(n[1])}</span></div>`).join("")}</div></section>
+    <div class="two"><section class="sec"><h2><span class="dot"></span>어디에 쓰일까</h2><div class="chips">${f.uses.map(u => `<span>${esc(u)}</span>`).join("")}</div></section>
+      <section class="sec"><h2><span class="dot"></span>관련 학과·직업</h2><div class="chips">${f.jobs.map(u => `<span>${esc(u)}</span>`).join("")}</div></section></div>
+    <section class="sec"><h2><span class="dot"></span>참고 영상</h2><div class="videos">${vids}</div></section>
+    <section class="sec"><h2><span class="dot"></span>확인 퀴즈</h2><div class="quiz">${quiz}</div></section>
+    <section class="sec"><h2><span class="dot"></span>더 알아보기</h2><div class="more">${m.wiki ? `<a href="${m.wiki}" target="_blank" rel="noopener">위키백과에서 더 읽기 ↗</a>` : ""}<a href="https://www.youtube.com/results?search_query=${encodeURIComponent(f.name + " 원리")}" target="_blank" rel="noopener">관련 영상 더 찾기 ↗</a></div></section>
+    <nav class="pn">${prev ? `<a href="#/f/${prev.id}"><small>← 이전 분야</small><b>${esc(prev.name)}</b></a>` : `<a href="#/c/${c.id}"><small>←</small><b>${c.name} 전체 보기</b></a>`}
+      ${next ? `<a class="next" href="#/f/${next.id}"><small>다음 분야 →</small><b>${esc(next.name)}</b></a>` : `<a class="next" href="#/"><small>→</small><b>다른 영역 탐험하기</b></a>`}</nav>
+  </article>`;
+}
+
+function route(){
+  const h = location.hash.replace(/^#\/?/, "");
+  const [kind, id] = h.split("/");
+  if (kind === "f" && FIELDS.find(f => f.id === id)) {
+    const f = FIELDS.find(x => x.id === id);
+    if (!S.seen[f.id]) { S.seen[f.id] = 1; save(); }
+    nav({v:"field", cat:f.cat}); app.innerHTML = fieldPage(f); document.title = f.name + " · 첨단 공학 탐험관";
+  } else if (kind === "c" && cat(id)) {
+    nav({v:"cat", cat:id}); app.innerHTML = band(cat(id)); document.title = cat(id).name + " · 첨단 공학 탐험관";
+  } else {
+    nav({v:"home"}); app.innerHTML = home(""); document.title = "첨단 공학 탐험관";
+  }
+  window.scrollTo(0, 0);
+}
+
+document.addEventListener("click", e => {
+  const go = e.target.closest("[data-go]"); if (go) { location.hash = go.dataset.go; return; }
+  const p = e.target.closest("[data-play]");
+  if (p) {
+    const id = p.dataset.play, fr = document.getElementById("v-" + id);
+    fr.innerHTML = `<iframe src="https://www.youtube-nocookie.com/embed/${id}?autoplay=1&rel=0" title="참고 영상" allow="autoplay; encrypted-media; picture-in-picture; fullscreen" allowfullscreen></iframe>`;
+    return;
+  }
+  const o = e.target.closest(".opt");
+  if (o) {
+    const k = o.dataset.q, i = +o.dataset.i, [fid, qi] = k.split(":"), f = FIELDS.find(x => x.id === fid), q = f.quiz[+qi];
+    if (i === q.a) { S.quiz[k] = 1; save(); } else { (picked[k] = picked[k] || []).push(i); }
+    const y = window.scrollY; app.innerHTML = fieldPage(f); window.scrollTo(0, y);
+  }
+});
+document.addEventListener("input", e => {
+  if (e.target.id !== "q") return;
+  const term = e.target.value.trim().toLowerCase();
+  const match = f => !term || [f.name, f.en, f.one, ...f.tech.map(t => t[0]), ...f.uses].join(" ").toLowerCase().includes(term);
+  const html = CATS.map(c => band(c, FIELDS.filter(f => f.cat === c.id && match(f)))).join("");
+  document.getElementById("bands").innerHTML = html || '<p class="empty">찾는 분야가 없어요. 다른 낱말로 찾아보세요.</p>';
+});
+window.addEventListener("hashchange", route);
+
+const THEME_KEY = "ai-stairs-v1-theme";
+try { const th = localStorage.getItem(THEME_KEY); if (th) document.documentElement.dataset.theme = th; } catch (e) {}
+document.getElementById("theme").addEventListener("click", () => {
+  const r = document.documentElement, dark = r.dataset.theme ? r.dataset.theme === "dark" : matchMedia("(prefers-color-scheme: dark)").matches;
+  r.dataset.theme = dark ? "light" : "dark"; try { localStorage.setItem(THEME_KEY, r.dataset.theme); } catch (e) {}
+});
+route();
+</script>
+</body>
+</html>
