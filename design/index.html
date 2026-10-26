@@ -1,0 +1,917 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="description" content="고등학교 창의 공학 설계를 이야기, 계단식 확인문제, 용어 카드, 10문제 시험으로 배우는 학습 사이트">
+<meta name="theme-color" content="#15201B">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%2315201B'/%3E%3Crect x='6' y='18' width='6' height='8' rx='1' fill='%233BC19C'/%3E%3Crect x='13' y='12' width='6' height='14' rx='1' fill='%233BC19C'/%3E%3Crect x='20' y='6' width='6' height='20' rx='1' fill='%23F2C14E'/%3E%3C/svg%3E">
+<style>
+:root{color-scheme:light;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+body{margin:0}
+img{max-width:100%}
+[hidden]{display:none!important}
+</style>
+<title>공학 설계 계단 교실</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Black+Han+Sans&family=IBM+Plex+Sans+KR:wght@400;500;700&family=IBM+Plex+Mono:wght@500;600&display=swap">
+<style>
+/* Layout: one 960px reading column; dark graph-paper hero with a stair chart of lessons; lesson page = notebook story + stacked stair cards */
+:root{
+  --bg:#F4F6F2; --surface:#FFFFFF; --ink:#17201C; --muted:#5A6761; --line:#DCE3DD;
+  --accent:#0E7A62; --accent-ink:#FFFFFF; --accent-soft:#E1F1EB;
+  --marker:#F2C14E; --marker-ink:#2B2104; --marker-soft:#FCF1D2;
+  --ok:#1D8549; --ok-soft:#E2F3E8; --bad:#BF4719; --bad-soft:#FBE8DF;
+  --panel:#15201B; --panel-ink:#E8F1EC; --panel-muted:#9DB0A7; --panel-line:rgba(232,241,236,.09);
+  --f-display:"Black Han Sans","IBM Plex Sans KR","Malgun Gothic",sans-serif;
+  --f-body:"IBM Plex Sans KR","Malgun Gothic","Apple SD Gothic Neo",sans-serif;
+  --f-mono:"IBM Plex Mono",ui-monospace,Consolas,monospace;
+  --r:12px;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#0F1412; --surface:#171F1C; --ink:#E5ECE8; --muted:#98A69F; --line:#2A3530;
+  --accent:#3BC19C; --accent-ink:#062219; --accent-soft:#163329;
+  --marker:#F2C14E; --marker-ink:#2B2104; --marker-soft:#3A311C;
+  --ok:#4CC27F; --ok-soft:#163124; --bad:#F08A60; --bad-soft:#3A2118;
+  --panel:#0A0F0D; --panel-ink:#E8F1EC; --panel-muted:#8FA29A; --panel-line:rgba(232,241,236,.07);
+  color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#0F1412; --surface:#171F1C; --ink:#E5ECE8; --muted:#98A69F; --line:#2A3530;
+  --accent:#3BC19C; --accent-ink:#062219; --accent-soft:#163329;
+  --marker:#F2C14E; --marker-ink:#2B2104; --marker-soft:#3A311C;
+  --ok:#4CC27F; --ok-soft:#163124; --bad:#F08A60; --bad-soft:#3A2118;
+  --panel:#0A0F0D; --panel-ink:#E8F1EC; --panel-muted:#8FA29A; --panel-line:rgba(232,241,236,.07);
+  color-scheme:dark}
+
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--ink);font-family:var(--f-body);font-size:16px;line-height:1.7;word-break:keep-all;overflow-wrap:break-word}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:10;background:var(--surface)}
+h1,h2,h3{text-wrap:balance;margin:0;line-height:1.3}
+p{margin:0}
+button{font:inherit;color:inherit;cursor:pointer}
+:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.num{font-family:var(--f-mono);font-variant-numeric:tabular-nums}
+
+/* header */
+.top{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:var(--surface);border-bottom:1px solid var(--line)}
+.top-in,.wrap{max-width:960px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+.top-in{display:flex;align-items:center;gap:12px;min-height:56px;flex-wrap:wrap;padding-block:6px}
+.brand{display:flex;align-items:center;gap:8px;background:none;border:0;padding:0;font-family:var(--f-display);font-size:19px;letter-spacing:.01em}
+.logo{display:flex;align-items:flex-end;gap:2px;width:22px;height:20px}
+.logo i{display:block;flex:1;background:var(--accent);border-radius:2px}
+.logo i:nth-child(1){height:35%}.logo i:nth-child(2){height:65%}.logo i:nth-child(3){height:100%;background:var(--marker)}
+.nav{display:flex;gap:4px;margin-left:8px}
+.nav button{background:none;border:0;padding:6px 10px;border-radius:8px;color:var(--muted);font-weight:500;font-size:14px}
+.nav .sw{padding:6px 10px;border-radius:8px;color:var(--accent);font-weight:700;font-size:14px;text-decoration:none;border:1px solid var(--line)}
+.nav .sw:hover{border-color:var(--accent)}
+.nav button[aria-current="true"]{color:var(--ink);background:var(--accent-soft)}
+.me{margin-left:auto;display:flex;align-items:center;gap:10px;font-size:14px}
+.lv{background:var(--marker);color:var(--marker-ink);font-weight:700;padding:2px 9px;border-radius:999px;font-size:13px}
+.theme{width:34px;height:34px;border-radius:50%;border:1px solid var(--line);background:var(--surface);font-size:15px;line-height:1}
+
+main.wrap{padding-block:28px 64px;display:grid;gap:28px}
+
+/* hero */
+.hero{background:var(--panel);color:var(--panel-ink);border-radius:18px;padding:32px;display:grid;grid-template-columns:1.25fr 1fr;gap:28px;align-items:end;
+  background-image:linear-gradient(var(--panel-line) 1px,transparent 1px),linear-gradient(90deg,var(--panel-line) 1px,transparent 1px);background-size:24px 24px}
+.hero > *{min-width:0}
+.eyebrow{font-size:13px;letter-spacing:.06em;color:var(--marker);font-weight:700}
+.hero h1{font-family:var(--f-display);font-weight:400;font-size:clamp(30px,5vw,46px);margin:10px 0 14px;letter-spacing:.01em}
+.hero p.lead{color:var(--panel-muted);max-width:40ch}
+.hero-cta{display:flex;align-items:center;gap:14px;flex-wrap:wrap;margin-top:22px}
+.hero-meta{color:var(--panel-muted);font-size:14px}
+.stairs{display:flex;align-items:flex-end;gap:6px;height:190px}
+.stair{flex:1;height:calc(var(--h) * 16.6%);border:1.5px solid var(--panel-muted);border-bottom:0;border-radius:6px 6px 0 0;display:flex;align-items:flex-start;justify-content:center;padding-top:6px;font-family:var(--f-mono);font-size:12px;color:var(--panel-muted);background:none;transition:background .3s}
+.stair.on{background:var(--marker);border-color:var(--marker);color:var(--marker-ink)}
+.stair.cur{border-color:var(--panel-ink);color:var(--panel-ink)}
+.stairs-cap{font-size:12px;color:var(--panel-muted);margin-top:8px;border-top:1.5px solid var(--panel-muted);padding-top:6px}
+
+.btn{border:0;border-radius:10px;padding:11px 18px;font-weight:700;font-size:15px}
+.btn.primary{background:var(--accent);color:var(--accent-ink)}
+.hero .btn.primary{background:var(--marker);color:var(--marker-ink)}
+.btn.ghost{background:none;border:1px solid var(--line);color:var(--ink)}
+.btn:disabled{opacity:.45;cursor:not-allowed}
+
+/* flow */
+.flow{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
+.flow li{border-top:3px solid var(--accent);padding-top:10px;min-width:0}
+.flow b{font-family:var(--f-mono);color:var(--accent);font-size:13px;display:block}
+.flow strong{display:block;font-size:15px}
+.flow span{color:var(--muted);font-size:14px}
+
+/* record */
+.sec-h{display:flex;align-items:baseline;justify-content:space-between;gap:12px;margin-bottom:12px;flex-wrap:wrap}
+.sec-h h2{font-size:20px}
+.sec-h small{color:var(--muted);font-size:14px}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:22px}
+.rec{display:grid;grid-template-columns:240px 1fr;gap:28px;align-items:start}
+.rec > *{min-width:0}
+.rec-lv{font-family:var(--f-display);font-size:28px;color:var(--accent)}
+.rec-sub{color:var(--muted);font-size:14px}
+.bar{height:10px;border-radius:999px;background:var(--line);overflow:hidden;margin:12px 0 6px}
+.bar i{display:block;height:100%;background:var(--marker);border-radius:999px;transition:width .4s}
+.badges{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
+.badge{display:flex;align-items:center;gap:10px;padding:8px;border-radius:10px;min-width:0}
+.badge .m{flex:none;width:38px;height:38px;border-radius:50%;display:grid;place-items:center;font-family:var(--f-mono);font-weight:600;font-size:13px;border:1.5px dashed var(--line);color:var(--muted)}
+.badge.on .m{border:0;background:var(--marker);color:var(--marker-ink)}
+.badge div{min-width:0;line-height:1.35}
+.badge strong{display:block;font-size:13px}
+.badge span{font-size:11.5px;color:var(--muted)}
+.badge:not(.on) strong{color:var(--muted)}
+
+/* units */
+.units{display:grid;gap:18px}
+.unit{display:grid;grid-template-columns:64px 1fr;gap:18px}
+.unit > *{min-width:0}
+.unit-no{font-family:var(--f-display);font-size:34px;color:var(--accent);line-height:1}
+.unit h3{font-size:18px}
+.unit p{color:var(--muted);font-size:14.5px;margin:4px 0 10px}
+.les{display:flex;align-items:center;gap:12px;width:100%;text-align:left;background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:12px 14px;margin-top:8px}
+.les:hover{border-color:var(--accent)}
+.les .code{font-family:var(--f-mono);font-size:12.5px;color:var(--muted);flex:none}
+.les .t{flex:1;min-width:0;font-weight:500}
+.les .t small{display:block;color:var(--muted);font-weight:400;font-size:13px}
+.chip{flex:none;font-size:12px;padding:2px 9px;border-radius:999px;background:var(--line);color:var(--muted);font-weight:500}
+.chip.go{background:var(--marker-soft);color:var(--ink)}
+.chip.done{background:var(--ok-soft);color:var(--ok)}
+.reset{display:flex;gap:8px;align-items:center;justify-content:flex-end;font-size:13px;color:var(--muted);flex-wrap:wrap}
+.linkish{background:none;border:0;color:var(--muted);text-decoration:underline;padding:4px;font-size:13px}
+
+/* lesson */
+.crumb{font-size:13.5px;color:var(--muted);display:flex;gap:6px;align-items:center;flex-wrap:wrap}
+.crumb button{background:none;border:0;padding:0;color:var(--accent);font-weight:500}
+.l-head h1{font-family:var(--f-display);font-weight:400;font-size:clamp(28px,4.5vw,40px);margin:8px 0 4px}
+.l-head .sub{color:var(--muted);font-size:16px}
+.goals{list-style:none;padding:0;margin:10px 0 0;display:grid;gap:6px}
+.goals li{padding-left:24px;position:relative}
+.goals li::before{content:"";position:absolute;left:2px;top:.55em;width:12px;height:12px;border:2px solid var(--accent);border-radius:3px}
+.tag{font-size:12px;font-weight:700;letter-spacing:.06em;color:var(--accent);display:block;margin-bottom:6px}
+.story{background:var(--marker-soft);border:0;border-radius:var(--r);padding:26px 28px;
+  background-image:repeating-linear-gradient(transparent 0 31px,rgba(127,110,60,.16) 31px 32px)}
+.story h2{font-size:20px;margin-bottom:10px}
+.story p{line-height:2;max-width:62ch}
+.story p + p{margin-top:8px}
+.story .q{margin-top:14px;font-weight:700}
+
+.pips{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:14px}
+.pip{font-size:13px;padding:4px 10px;border-radius:999px;border:1px solid var(--line);color:var(--muted);background:var(--surface)}
+.pip.done{background:var(--accent);border-color:var(--accent);color:var(--accent-ink)}
+.pip.cur{border-color:var(--accent);color:var(--accent);font-weight:700}
+.steps{display:grid;gap:12px}
+.step{scroll-margin-top:90px}
+.step-h{display:flex;align-items:baseline;gap:10px}
+.step-h b{font-family:var(--f-mono);font-size:13px;color:var(--accent);flex:none}
+.step-h h3{font-size:18px}
+.step.locked{background:none;border-style:dashed;padding:14px 22px}
+.step.locked h3{color:var(--muted);font-size:16px}
+.step.locked .note{color:var(--muted);font-size:13.5px}
+.step ul{margin:10px 0 0;padding-left:20px;display:grid;gap:4px}
+.step .intro{margin-top:8px}
+.key{margin-top:14px;padding:10px 14px;border-radius:8px;background:var(--accent-soft);font-weight:500}
+.key b{color:var(--accent);margin-right:6px}
+
+.quiz{margin-top:18px;border-top:1px solid var(--line);padding-top:16px}
+.quiz .qq{font-weight:700;margin-bottom:10px}
+.opts{display:grid;gap:8px}
+.opt{display:flex;gap:10px;align-items:flex-start;text-align:left;width:100%;background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:10px 12px;font-size:15px}
+.opt:hover:not(:disabled){border-color:var(--accent)}
+.opt .n{font-family:var(--f-mono);color:var(--muted);flex:none;font-size:13px;padding-top:2px}
+.opt.sel{border-color:var(--accent);background:var(--accent-soft)}
+.opt.right{border-color:var(--ok);background:var(--ok-soft)}
+.opt.wrong{border-color:var(--bad);background:var(--bad-soft)}
+.opt:disabled{cursor:default}
+.fb{margin-top:10px;font-size:14.5px}
+.fb.ok{color:var(--ok);font-weight:500}
+.fb.no{color:var(--bad)}
+
+.sumlist{margin:0;padding-left:20px;display:grid;gap:6px}
+.lock{color:var(--muted);font-size:14px}
+
+.match{display:grid;grid-template-columns:1fr 1.6fr;gap:10px}
+.match > div{display:grid;gap:8px;align-content:start;min-width:0}
+.mc{text-align:left;background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:10px 12px;font-size:14.5px;min-height:48px}
+.mc.term{font-weight:700}
+.mc.sel{border-color:var(--accent);background:var(--accent-soft)}
+.mc.got{border-color:var(--ok);background:var(--ok-soft);color:var(--ok);cursor:default}
+.mc.bad{border-color:var(--bad);background:var(--bad-soft);animation:shake .3s}
+@keyframes shake{25%{transform:translateX(-4px)}75%{transform:translateX(4px)}}
+
+.tq{padding:16px 0;border-top:1px solid var(--line)}
+.tq:first-of-type{border-top:0;padding-top:4px}
+.tq .qq{font-weight:500;margin-bottom:10px}
+.tq .qq .num{color:var(--accent);margin-right:6px}
+.result{display:flex;align-items:center;gap:18px;flex-wrap:wrap;padding:16px;border-radius:10px;margin-bottom:8px}
+.result.pass{background:var(--ok-soft)}
+.result.fail{background:var(--bad-soft)}
+.result .score{font-family:var(--f-mono);font-size:34px;font-weight:600}
+.result.pass .score{color:var(--ok)} .result.fail .score{color:var(--bad)}
+.foot-nav{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
+.foot-nav .btn{display:flex;flex-direction:column;align-items:flex-start;text-align:left;font-weight:500}
+.foot-nav .btn small{color:var(--muted);font-size:12px;font-weight:400}
+.foot-nav .next{margin-left:auto;align-items:flex-end;text-align:right}
+
+/* perceptron widget */
+.pc{margin-top:14px;border:1px solid var(--line);border-radius:10px;padding:14px}
+.pc .tag{margin-bottom:10px}
+.pc-in{display:flex;gap:8px;flex-wrap:wrap}
+.tog{border:1px solid var(--line);background:var(--surface);border-radius:999px;padding:6px 12px;font-size:14px}
+.tog[aria-pressed="true"]{background:var(--accent);border-color:var(--accent);color:var(--accent-ink)}
+.tog .num{opacity:.75;margin-left:4px;font-size:12px}
+.pc-out{margin-top:12px;font-size:14px;overflow-x:auto}
+.pc-out .res{font-weight:700}
+
+/* glossary */
+.search{width:100%;padding:12px 14px;border-radius:10px;border:1px solid var(--line);background:var(--surface);color:var(--ink);font:inherit}
+.gl{display:grid;gap:0}
+.gl-row{display:grid;grid-template-columns:180px 1fr auto;gap:16px;padding:14px 4px;border-bottom:1px solid var(--line);align-items:baseline}
+.gl-row > *{min-width:0}
+.gl-row strong{font-size:16px}
+.gl-row button{background:none;border:0;color:var(--accent);font-size:13px;padding:0}
+
+#toasts{position:fixed;left:50%;transform:translateX(-50%);bottom:calc(20px + env(safe-area-inset-bottom,0px));display:grid;gap:8px;z-index:20;width:max-content;max-width:calc(100% - 32px)}
+.toast{background:var(--panel);color:var(--panel-ink);padding:10px 16px;border-radius:10px;font-size:14px;box-shadow:0 6px 20px rgba(0,0,0,.2);animation:up .25s}
+.toast b{color:var(--marker)}
+@keyframes up{from{transform:translateY(8px);opacity:0}}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important;scroll-behavior:auto!important}}
+
+@media (max-width:760px){
+  .hero{grid-template-columns:1fr;padding:24px}
+  .stairs{height:120px}
+  .flow{grid-template-columns:1fr 1fr}
+  .rec{grid-template-columns:1fr}
+  .badges{grid-template-columns:1fr 1fr}
+  .unit{grid-template-columns:1fr;gap:6px}
+  .match{grid-template-columns:1fr}
+  .gl-row{grid-template-columns:1fr;gap:2px}
+  .me .xp-txt{display:none}
+  .story{padding:20px}
+  .card{padding:18px}
+}
+
+/* Blueprint palette for the engineering-design subject */
+:root{--bg:#F3F5F8;--surface:#FFFFFF;--ink:#172030;--muted:#586373;--line:#D8DFE8;--accent:#1D5FA6;--accent-ink:#FFFFFF;--accent-soft:#E2ECF8;--panel:#0F2238;--panel-ink:#E7EEF7;--panel-muted:#9FB3CC;--panel-line:rgba(231,238,247,.10)}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){--bg:#0D1219;--surface:#151C26;--ink:#E3E9F1;--muted:#96A2B3;--line:#273140;--accent:#6AA8F0;--accent-ink:#071729;--accent-soft:#172A40;--panel:#07101B;--panel-ink:#E7EEF7;--panel-muted:#8EA2BC;--panel-line:rgba(231,238,247,.07)}}
+:root[data-theme="dark"]{--bg:#0D1219;--surface:#151C26;--ink:#E3E9F1;--muted:#96A2B3;--line:#273140;--accent:#6AA8F0;--accent-ink:#071729;--accent-soft:#172A40;--panel:#07101B;--panel-ink:#E7EEF7;--panel-muted:#8EA2BC;--panel-line:rgba(231,238,247,.07)}
+.mx{border-collapse:collapse;font-size:14px;width:100%}
+.mx th,.mx td{padding:6px 8px;border-bottom:1px solid var(--line);text-align:left;white-space:nowrap}
+.mx tr.best th{color:var(--accent)}
+.mx .tog .num{margin-left:6px}
+.pc-res{margin-top:10px;font-size:14px}
+</style>
+</head>
+<body>
+<header class="top"><div class="top-in" id="top"></div></header>
+<main class="wrap" id="app"></main>
+<div id="toasts" aria-live="polite"></div>
+
+<script>
+const UNITS = [
+  {id:"1", no:"Ⅰ", title:"창의 공학 설계로의 초대", desc:"공학이 무엇이고 어떻게 세상을 바꿔 왔는지, 앞으로 어떤 공학이 필요한지 알아봐요."},
+  {id:"2", no:"Ⅱ", title:"창의 공학 설계와 문제 해결 과정", desc:"문제를 찾고 정의해 해결책을 만드는 9단계 설계 과정과 그 가치를 배워요."},
+  {id:"3", no:"Ⅲ", title:"창의성으로 살아남는 공학", desc:"공학에서 말하는 창의성과, 아이디어를 넓히고 고르는 사고 기법을 익혀요."},
+  {id:"4", no:"Ⅳ", title:"공학 혁신을 위한 팀워크와 의사소통", desc:"좋은 팀이 자라는 과정, 갈등을 다루고 서로 잘 듣는 방법을 배워요."},
+  {id:"5", no:"Ⅴ", title:"창의 공학 설계가 이끈 공학 걸작품", desc:"기존 제품을 분석하고, 실제 제품이 개발되는 과정과 공학 윤리를 살펴봐요."},
+  {id:"6", no:"Ⅵ", title:"창의 공학 설계 프로젝트 기초", desc:"아이디어를 도면으로 그리고, 레이저 절단기와 3D 프린터로 만드는 기초를 다져요."}
+];
+
+const LESSONS = [
+{id:"1-1", unit:"1", title:"세상을 바꾼 공학", sub:"문제를 푸는 기술, 공학이란 무엇일까",
+ goals:["공학의 의미와 특징을 설명할 수 있다.","공학 분야를 기초 분야와 응용 분야로 나눌 수 있다.","공학 산출물의 종류와 트레이드오프를 설명할 수 있다."],
+ story:{title:"물병 서른 개 옮기기", p:["체육 대회 날, 하준이네 반은 물병 서른 개를 운동장까지 옮겨야 했다. 손으로 들자니 팔이 빠질 것 같았다. 하준이는 고장 난 의자에서 떼어 낸 바퀴와 상자를 테이프로 묶어 작은 수레를 만들었다.","수레 덕분에 한 번에 옮길 수 있었지만, 계단 앞에서는 다시 멈춰야 했다. 선생님이 웃으며 말했다. “방금 너희가 한 게 바로 공학이야. 계단은 다음 설계 과제고.”"], q:"공학자는 어떤 방식으로 문제를 해결할까요?"},
+ steps:[
+  {t:"공학이란 무엇일까", p:"공학은 과학, 수학, 기술 지식과 도구를 활용해 문제를 해결하고 제품이나 서비스를 만들어 내는 활동이에요.", li:["영어 Engineering은 라틴어 ‘영리함’, ‘만들다’라는 말에서 왔어요","<b>과학</b>은 자연 현상을 탐구하고, <b>수학</b>은 수·공간·양의 규칙을 찾고, <b>기술</b>은 사람의 필요를 채우려고 자연을 바꾸는 방법이에요","공학은 이 셋을 응용해 주어진 조건 안에서 가장 알맞은 해결책을 찾아요","문제 확인 → 아이디어 → 제작 → 평가를 해결될 때까지 되풀이하는 것을 <b>공학 설계</b>라고 해요"], key:"공학은 제한된 조건 속 문제를 푸는 활동이고, 정답은 하나가 아니에요",
+   q:{q:"공학에 대한 설명으로 알맞은 것은?", o:["정답이 하나뿐인 문제만 다룬다","과학 지식은 쓰지 않는다","제한된 조건에서 가장 알맞은 해결책을 찾는다","예술 작품을 만드는 활동이다"], a:2, why:"공학은 시간, 비용, 재료 같은 조건 안에서 가장 알맞은 해결책을 찾아요."}},
+  {t:"공학의 종류", li:["지식과 기술이 <b>고도화</b>·<b>전문화</b>되면서 공학 분야가 여러 갈래로 나뉘었어요","<b>기초 분야</b>: 토목, 기계, 전기, 화학 공학 (20세기 이전에 주로 발달)","<b>응용 분야</b>: 항공 우주, 컴퓨터, 반도체, 생명, 에너지 공학 (20세기 이후 융합하거나 갈라져 나옴)","예: 기계 공학에서 자동차, 선박, 항공 우주, 로봇 공학이 갈라져 나왔어요"],
+   q:{q:"다음 중 ‘응용 분야’ 공학에 해당하는 것은?", o:["토목 공학","기계 공학","항공 우주 공학","화학 공학"], a:2, why:"항공 우주 공학은 20세기 이후 기계 공학 등에서 갈라져 나온 응용 분야예요."}},
+  {t:"공학 산출물과 트레이드오프", li:["<b>공학 산출물</b>: 공학의 결과물. 눈에 보이는 제품뿐 아니라 지식, 방법, 시스템도 포함돼요","예: 튼튼한 다리를 만드는 구조 지식, 택배를 빠르게 나누는 방법, 도로와 신호 체계","산출물은 개인, 사회, 환경에 영향을 주고, 예상하지 못한 결과를 낳기도 해요","<b>트레이드오프</b>: 한 요구를 채우면 다른 쪽 만족이 줄어드는 관계 (노트북 화면을 키우면 무거워져요)"], key:"좋은 공학자는 트레이드오프 사이에서 균형점을 찾아요",
+   q:{q:"휴대 전화 배터리를 키웠더니 오래 쓰지만 무거워졌다. 이 관계를 무엇이라 하나요?", o:["트레이드오프","역공학","브레인스토밍","융통성"], a:0, why:"하나를 얻으면 다른 하나를 내줘야 하는 관계가 트레이드오프예요."}}
+ ],
+ summary:["공학은 과학, 수학, 기술 지식으로 제한된 조건 속 문제를 해결하는 활동이에요.","공학 설계는 문제 확인부터 평가까지를 해결될 때까지 되풀이해요.","공학은 토목·기계 같은 기초 분야와 항공 우주·컴퓨터 같은 응용 분야로 나뉘어요.","공학 산출물에는 제품, 지식, 방법, 시스템이 있고, 설계에는 늘 트레이드오프가 따라요."],
+ cards:[["공학","지식과 도구로 제한된 조건 속 문제를 해결하는 활동"],["공학 설계","문제 확인부터 평가까지를 되풀이해 해결책을 찾는 과정"],["공학 산출물","제품, 지식, 방법, 시스템 등 공학의 결과물"],["트레이드오프","한 요구를 채우면 다른 쪽 만족이 줄어드는 관계"]],
+ test:[
+  {q:"공학과 관련된 네 학문 가운데 ‘자연 현상을 탐구하는 학문’은?", o:["과학","수학","기술","공학"], a:0},
+  {q:"공학 산출물에 해당하지 않는 것은?", o:["다리를 튼튼하게 만드는 구조 지식","택배를 빠르게 나누는 방법","도로와 신호 체계","비 온 뒤 생긴 무지개"], a:3},
+  {q:"20세기 이전에 주로 발달한 공학 분야는?", o:["토목 공학","컴퓨터 공학","반도체 공학","생명 공학"], a:0},
+  {q:"공학 분야가 여러 갈래로 나뉜 까닭으로 알맞은 것은?", o:["필요한 지식과 기술이 고도화·전문화되어서","공학자가 줄어들어서","과학이 사라져서","제품이 단순해져서"], a:0},
+  {q:"공학 설계 과정의 특징은?", o:["원하는 해결책을 찾을 때까지 되풀이한다","한 번에 끝낸다","평가 단계가 없다","아이디어 없이 제작부터 한다"], a:0},
+  {q:"컴퓨터, 인터넷, 네트워크에 관심이 많은 학생에게 어울리는 공학 분야는?", o:["컴퓨터 공학","토목 공학","생명 공학","재료 공학"], a:0},
+  {q:"공학 산출물이 끼치는 영향에 대한 설명으로 옳은 것은?", o:["개인·사회·환경에 영향을 주며 예상 못 한 결과도 생긴다","개인에게만 영향을 준다","언제나 좋은 결과만 낳는다","환경과는 관계가 없다"], a:0}
+ ]},
+
+{id:"1-2", unit:"1", title:"공학의 발달과 지속 가능한 미래", sub:"피라미드에서 스마트폰, 그리고 지구를 지키는 공학까지",
+ goals:["시대별 공학의 발달 과정을 설명할 수 있다.","20세기 이후 공학 발달의 특징을 말할 수 있다.","지속 가능한 공학의 필요성과 실천 방법을 설명할 수 있다."],
+ story:{title:"박물관의 나무 바퀴", p:["역사 체험 학습에서 서진이는 수천 년 전 메소포타미아의 나무 바퀴 모형 앞에 섰다. 바로 옆 전시실에는 전기차 배터리가 놓여 있었다.","“바퀴에서 전기차까지 얼마나 걸린 걸까?” 해설사가 답했다. “수천 년이요. 그런데 이제는 얼마나 빨리 만드느냐보다, 지구를 덜 아프게 만드는 게 더 큰 숙제랍니다.”"], q:"공학은 어떻게 발달해 왔고, 앞으로는 어디로 가야 할까요?"},
+ steps:[
+  {t:"고대에서 근대까지", li:["고대: 홍수를 막는 <b>치수</b>, 농사에 물을 대는 <b>관개</b>, 메소포타미아의 바퀴, 이집트 피라미드, 파로스 등대","로마 시대: 도로, 수로, 원형 경기장처럼 실용적인 공학이 발달했어요","르네상스(14세기 이후): 과학과 예술이 만난 공학, 금속 활자, 다빈치의 발명 스케치","17~19세기: 과학과 공학이 서로 도우며 진공 펌프, 와트의 증기 기관, 증기 기관차, 증기선이 나왔어요"],
+   q:{q:"홍수를 막으려고 물을 관리하는 고대의 공학 기술은?", o:["관개","치수","측량","제련"], a:1, why:"치수는 물을 다스리는 것, 관개는 농사에 물을 대는 거예요."}},
+  {t:"20세기 이후의 공학", li:["과학과 기술이 융합하면서 공학 분야가 크게 늘어났어요","건축·토목: 철강, 구조 역학, 엘리베이터로 초고층 건물과 긴 다리를 지어요","전자·컴퓨터: 최초의 전자식 컴퓨터 → 트랜지스터 → 개인용 컴퓨터 → 인터넷 → 스마트폰 → 인공 지능","화학: 석유 화학에서 신소재와 의약품으로 넓어졌어요","<b>로봇 공학</b>: 기계, 전기·전자, 컴퓨터 공학이 융합한 분야예요"], key:"20세기 공학의 핵심어는 ‘융합’이에요",
+   q:{q:"로봇 공학에 대한 설명으로 알맞은 것은?", o:["기계·전자·컴퓨터 공학이 융합한 분야다","19세기 이전에 완성되었다","컴퓨터와는 관련이 없다","건물만 설계한다"], a:0, why:"로봇은 몸(기계), 신경(전자), 두뇌(컴퓨터)가 모두 필요해요."}},
+  {t:"지속 가능한 미래 공학", li:["공학은 삶을 편리하게 했지만 자원 고갈과 환경 오염도 함께 가져왔어요","<b>지속 가능한 공학</b>: 에너지와 자원을 적게 쓰고 환경을 해치지 않도록 설계하고 운영하는 공학","실천 방법: <b>제품 사이클 분석</b>(원료 → 생산 → 사용 → 폐기 전 과정 살피기), 환경 친화적 설계, 자연 분해와 재활용을 고려한 설계","‘국경 없는 공학자’처럼 낙후 지역의 문제를 그 지역 실정에 맞게 푸는 공학도 있어요"],
+   q:{q:"제품의 원료 채취부터 폐기까지 전 과정을 살펴 환경 영향을 줄이는 방법은?", o:["제품 사이클 분석","역공학","브레인라이팅","쌍비교 분석"], a:0, why:"제품의 한살이 전체를 따져 보는 방법이에요."}}
+ ],
+ summary:["고대에는 치수, 관개, 바퀴, 피라미드처럼 자연을 이겨 내는 공학이 발달했어요.","로마는 실용 공학, 르네상스는 과학과 예술의 결합, 17세기 이후는 과학과 공학의 협력이 특징이에요.","20세기 이후 공학은 융합을 통해 컴퓨터, 로봇, 신소재 등으로 넓어졌어요.","앞으로의 공학은 자원과 환경을 지키는 지속 가능한 공학이어야 해요."],
+ cards:[["치수","홍수를 막으려고 물을 관리하는 일"],["관개","농사에 필요한 물을 인공적으로 대는 일"],["지속 가능한 공학","자원과 에너지를 아끼고 환경을 해치지 않는 공학"],["제품 사이클 분석","원료부터 폐기까지 제품의 전 과정을 살피는 방법"]],
+ test:[
+  {q:"메소포타미아 문명에서 처음 발견된 것으로 알려진 공학 산출물은?", o:["바퀴","증기 기관","금속 활자","엘리베이터"], a:0},
+  {q:"로마 시대 공학의 특징으로 알맞은 것은?", o:["도로, 수로 같은 실용적인 공학이 발달했다","컴퓨터가 등장했다","인공 지능이 발달했다","공학이 전혀 없었다"], a:0},
+  {q:"증기 기관을 개량해 산업 발전에 큰 영향을 준 사람은?", o:["제임스 와트","구텐베르크","로버트 보일","레오나르도 다빈치"], a:0},
+  {q:"17세기 이후 공학과 과학의 관계로 옳은 것은?", o:["서로 도우며 함께 발전했다","완전히 분리되었다","과학만 발달했다","공학이 과학을 막았다"], a:0},
+  {q:"초고층 건물을 지을 수 있게 된 바탕이 아닌 것은?", o:["철강 재료","구조 역학","엘리베이터","관개 수로"], a:3},
+  {q:"지속 가능한 공학의 실천으로 알맞지 않은 것은?", o:["재활용을 고려한 설계","자연 분해를 고려한 설계","자원을 마음껏 쓰는 대량 생산","에너지를 적게 쓰는 운영"], a:2},
+  {q:"전기가 없는 지역에 태양광 가로등을 설치한 활동이 보여 주는 공학의 모습은?", o:["지역 실정에 맞게 사회 문제를 해결하는 공학","돈만 버는 공학","환경을 해치는 공학","과거로 돌아가는 공학"], a:0}
+ ]},
+
+{id:"2-1", unit:"2", title:"창의 공학 설계와 문제 해결 과정", sub:"막연한 불편을 해결책으로 바꾸는 9단계",
+ goals:["창의 공학 설계의 의미를 설명할 수 있다.","형태 설계와 기능 설계를 구분할 수 있다.","공학 설계 과정 9단계를 문제 해결에 적용할 수 있다."],
+ story:{title:"식어 버린 핫초코", p:["겨울 아침, 예린이는 매점에서 산 핫초코를 들고 교실에 들어왔다. 1교시가 끝나고 한 모금 마시자 이미 미지근했다. 짝꿍이 말했다. “더 두꺼운 컵을 사면 되잖아.”","예린이는 고개를 저었다. 두꺼운 컵은 가방에 안 들어가고 무거웠다. 정말 필요한 게 무엇인지부터 다시 따져 봐야 했다."], q:"진짜 문제를 찾고 해결책을 만드는 체계적인 방법은 무엇일까요?"},
+ steps:[
+  {t:"창의 공학 설계란", li:["문제를 창의적으로 해결하려고 체계적이고 과학적인 방법으로 설계하는 것이에요","<b>설계</b>는 아이디어를 구체화한 것으로, 도면뿐 아니라 과정, 계획, 방법을 모두 포함해요","공학 설계는 해결할 문제가 중심이고, <b>예술적 설계</b>는 아름다움을 바라는 마음이 중심이에요","<b>형태 설계</b>는 생김새와 모양을, <b>기능 설계</b>는 어떻게 작동하는지를 정해요. 요즘은 형태의 가치도 커지고 있어요"],
+   q:{q:"제품이 어떻게 작동할지를 정하는 설계는?", o:["형태 설계","기능 설계","예술적 설계","도면 복사"], a:1, why:"작동 방식은 기능 설계, 생김새는 형태 설계예요."}},
+  {t:"창의 공학 설계의 특징", li:["문제가 겉으로 잘 드러나지 않는 경우가 많아요","그래서 사용자의 처지에서 문제를 정확히 이해하는 일이 먼저예요","해결책은 하나가 아니라 여러 가지일 수 있어요","문제가 해결될 때까지 과정을 <b>되풀이</b>하고, 상황에 따라 앞 단계로 돌아가거나 건너뛸 수도 있어요"], key:"문제를 잘못 이해하면 엉뚱한 해결책이 나와요",
+   q:{q:"창의 공학 설계의 특징으로 옳지 않은 것은?", o:["해결책이 여러 가지일 수 있다","문제가 해결될 때까지 되풀이한다","정해진 순서를 절대 바꿀 수 없다","사용자 처지에서 문제를 이해한다"], a:2, why:"상황에 따라 앞 단계로 돌아가거나 단계를 건너뛸 수 있어요."}},
+  {t:"공학 설계 과정 9단계", li:["<b>1 문제 상황</b> 확인 → <b>2 사용자 공감</b>(직접 체험, 관찰, 인터뷰) → <b>3 문제 정의</b>","<b>4 관련 정보 수집</b> → <b>5 해결 방법 탐색</b>(브레인스토밍, 마인드맵) → <b>6 대안 선정</b>(평가 행렬법 같은 수렴적 사고)","<b>7 설계</b>(도면, 컴퓨터 설계) → <b>8 시제품 제작</b>(모형, 3D 프린팅) → <b>9 평가 및 성찰</b>","문제 정의 문장 틀: “우리가 만약 (조건) 속에서 (당사자)를 위해 (해결책)을 하게 된다면 (결과)하게 될 것이다.”"],
+   q:{q:"사용자의 처지에서 직접 체험하거나 관찰·인터뷰하는 단계는?", o:["사용자 공감","시제품 제작","대안 선정","관련 정보 수집"], a:0, why:"사용자 공감 단계에서 문제를 쓰는 사람의 눈으로 다시 봐요."}}
+ ],
+ summary:["창의 공학 설계는 문제를 창의적으로 풀려고 체계적·과학적으로 설계하는 과정이에요.","설계에는 도면뿐 아니라 과정, 계획, 방법이 모두 들어가요.","형태 설계는 모양을, 기능 설계는 작동 방식을 정해요.","문제 상황부터 평가 및 성찰까지 9단계를 해결될 때까지 되풀이해요."],
+ cards:[["설계","아이디어를 구체화한 것으로 과정, 계획, 방법을 포함함"],["형태 설계","제품의 생김새와 모양을 정하는 설계"],["기능 설계","제품이 어떻게 작동할지를 정하는 설계"],["사용자 공감","사용자의 처지에서 체험·관찰·인터뷰로 문제를 이해하기"],["시제품","해결책을 시험하려고 먼저 만들어 보는 제품"]],
+ test:[
+  {q:"‘설계’에 대한 설명으로 옳은 것은?", o:["아이디어를 구체화한 것으로 과정·계획·방법을 포함한다","도면만을 뜻한다","완성된 제품만을 뜻한다","예술 작품만을 뜻한다"], a:0},
+  {q:"공학 설계와 예술적 설계의 차이로 알맞은 것은?", o:["공학 설계는 해결할 문제가 중심이다","예술적 설계는 기능이 중심이다","둘은 완전히 같다","공학 설계는 모양을 전혀 고려하지 않는다"], a:0},
+  {q:"여러 아이디어 가운데 가장 알맞은 해결책을 고르는 단계는?", o:["대안 선정","문제 상황","사용자 공감","관련 정보 수집"], a:0},
+  {q:"해결책을 시험하려고 간단한 모형이나 3D 출력물을 만드는 단계는?", o:["시제품 제작","문제 정의","해결 방법 탐색","사용자 공감"], a:0},
+  {q:"‘해결 방법 탐색’ 단계에서 주로 쓰는 기법은?", o:["브레인스토밍","제품 출시","도면 인쇄","가격 책정"], a:0},
+  {q:"평가 결과 문제가 해결되지 않았다면?", o:["앞 단계로 돌아가 과정을 되풀이한다","그대로 완성한다","해결책을 숨긴다","사용자 탓으로 돌린다"], a:0},
+  {q:"공학 설계 과정 9단계의 첫 단계는?", o:["문제 상황 확인","설계","시제품 제작","평가 및 성찰"], a:0}
+ ]},
+
+{id:"2-2", unit:"2", title:"창의 공학 설계의 가치와 영향", sub:"더 나은 해결책이 세상을 바꾸는 방식",
+ goals:["창의 공학 설계가 중요한 까닭을 설명할 수 있다.","창의 공학 설계가 쓰이는 여러 분야를 말할 수 있다.","창의적 문제 해결에 필요한 태도를 기를 수 있다."],
+ story:{title:"반응 없는 터치 버튼", p:["할머니 댁 아파트에 새 엘리베이터가 생겼다. 버튼이 매끈한 터치 화면으로 바뀌어 멋져 보였다. 그런데 할머니는 장갑 낀 손으로 몇 번을 눌러도 반응이 없어 결국 계단으로 걸어 올라가셨다.","지우는 생각했다. “멋진 것만으로는 부족하구나. 쓰는 사람의 처지가 되어 봐야 진짜 좋은 설계가 나오겠어.”"], q:"창의 공학 설계는 왜 중요하고, 어떤 태도가 필요할까요?"},
+ steps:[
+  {t:"창의 공학 설계가 중요한 까닭", li:["공학은 수학, 과학, 기술 지식을 바탕으로 문제를 풀어요","창의 공학 설계는 이 전문성에 창의적인 발상을 더해 문제를 해결하는 과정이에요","일상 문제에도 쓸모가 있어요. 문제 확인, 사용자 공감, 문제 정의로 문제의 핵심을 찾아 줘요","교육, 업무, 예술, 과학 등 여러 분야에서 <b>융합</b>적 문제 해결에 쓰여요"],
+   q:{q:"창의 공학 설계에 대한 설명으로 옳은 것은?", o:["공학 분야에서만 쓰인다","일상생활과 여러 분야의 문제 해결에도 쓰인다","창의성은 필요 없다","정보 수집 단계가 없다"], a:1, why:"교육, 업무, 예술, 과학 등 다양한 분야에서 쓰여요."}},
+  {t:"새로운 기술과 설계", li:["<b>인공 지능</b>: 수많은 구조를 분석해 안전하고 효율적인 설계안을 자동으로 만들고, 되풀이 작업을 줄여 줘요","다만 규범과 안전 요건을 완벽히 따지기에는 아직 한계가 있어서 사람을 돕는 수준으로 쓰여요","<b>블록체인</b>: 암호화한 정보를 사슬처럼 이어 여러 서버에 나눠 기록해 위조와 변조를 어렵게 해요","활용: 스마트 계약, 신원 인증, 금융"],
+   q:{q:"블록체인이 정보 위조에 강한 까닭은?", o:["정보를 여러 서버에 나눠 기록하기 때문","중앙 서버 하나에만 저장하기 때문","정보를 암호화하지 않기 때문","인터넷을 쓰지 않기 때문"], a:0, why:"모든 서버를 한꺼번에 바꾸기는 사실상 불가능해요."}},
+  {t:"창의적 문제 해결의 가치와 태도", li:["소비자는 같은 종류라도 더 편리하고 보기 좋은 제품을 골라요. 그래서 창의적인 해결책은 더 큰 가치를 지녀요","필요한 태도: <b>협업</b>, <b>의사소통 능력</b>, <b>실천 의지</b>, 실패를 이겨 내는 <b>긍정적 사고</b>, <b>윤리 의식</b>","디자이너 패트리샤 무어는 직접 노인 분장을 하고 생활하며 불편을 체험했고, 그 경험을 누구나 쓰기 쉬운 제품 설계로 이어 갔어요"], key:"공감에서 시작한 설계가 오래 사랑받아요",
+   q:{q:"창의적 문제 해결에 필요한 태도로 알맞지 않은 것은?", o:["실패를 이겨 내는 긍정적 사고","다른 사람과의 협업","윤리 의식","남의 의견을 듣지 않는 고집"], a:3, why:"창의적 문제 해결은 대부분 함께하는 일이라 열린 태도가 필요해요."}}
+ ],
+ summary:["창의 공학 설계는 전문 지식에 창의적 발상을 더해 문제를 푸는 과정이에요.","공학뿐 아니라 교육, 업무, 예술, 과학에서도 융합적으로 쓰여요.","인공 지능과 블록체인 같은 새 기술이 설계를 돕지만 아직 사람의 판단이 필요해요.","협업, 소통, 실천 의지, 긍정적 사고, 윤리 의식이 창의적 문제 해결의 바탕이에요."],
+ cards:[["융합","둘 이상의 요소를 합쳐 새로운 것을 만드는 것"],["심미적 욕구","아름다운 것을 얻고자 하는 마음"],["윤리 의식","사람으로서 마땅히 지켜야 할 도리를 지키려는 의지"],["블록체인","암호화한 정보 사슬을 여러 서버에 나눠 기록하는 기술"]],
+ test:[
+  {q:"창의 공학 설계의 중요성이 커지는 까닭으로 알맞은 것은?", o:["창의적이고 혁신적인 해결책이 점점 중요해져서","공학이 쓸모없어져서","혼자 일하는 것이 좋아서","제품이 모두 똑같아져서"], a:0},
+  {q:"인공 지능을 이용한 설계의 장점은?", o:["되풀이 작업을 자동화하고 새로운 아이디어를 낼 수 있다","모든 안전 요건을 완벽하게 판단한다","사람이 전혀 필요 없다","설계 비용이 항상 0원이다"], a:0},
+  {q:"아름다운 것을 얻고자 하는 마음을 무엇이라 하나요?", o:["심미적 욕구","심리적 관성","윤리 의식","트레이드오프"], a:0},
+  {q:"흔들어 만든 전기로 초음파를 내 모기를 쫓는 장치처럼, 화학 성분 없이 문제를 푼 사례가 보여 주는 가치는?", o:["환경과 안전을 함께 고려한 창의적 해결","무조건 값싼 제품","예술 작품의 아름다움","기존 방식의 되풀이"], a:0},
+  {q:"창의적 문제 해결은 주로 어떻게 이루어지나요?", o:["팀원과 협업하고 소통하며 이루어진다","언제나 혼자서만 한다","정답을 외워서 한다","운에 맡긴다"], a:0},
+  {q:"둘 이상의 요소를 합쳐 새로운 것을 만드는 것은?", o:["융합","분할","제거","소결"], a:0},
+  {q:"패트리샤 무어가 노인 분장을 하고 생활한 까닭은?", o:["사용자의 불편을 직접 체험해 공감하려고","연극 공연을 하려고","제품 가격을 올리려고","광고를 찍으려고"], a:0}
+ ]},
+
+{id:"3-1", unit:"3", title:"공학자의 눈으로 본 창의성", sub:"새롭기만 해서는 안 되는 공학의 창의성",
+ goals:["창의성의 네 요소를 설명할 수 있다.","공학 제품의 창의성을 평가하고 그 가치를 말할 수 있다.","창의적인 공학자에게 필요한 역량을 설명할 수 있다."],
+ story:{title:"구멍 뚫린 장화", p:["디자인 공모전에 발가락 쪽이 뚫린 ‘통풍 장화’가 나왔다. 모양은 정말 새로웠다. 심사 위원 한 명이 웃으며 물었다. “그런데 비 오는 날 신으면 어떻게 되죠?”","참가자는 대답하지 못했다. 그 장화는 결국 상을 받지 못했다. 새롭다는 것만으로는 공학에서 창의적이라고 부르기 어려웠다."], q:"공학에서 말하는 ‘창의성’은 무엇이 다를까요?"},
+ steps:[
+  {t:"창의성의 네 요소", li:["<b>창의성</b>: 새로운 생각을 찾거나 기존 생각을 조합해 새롭게 만들어 내는 특성","<b>유창성</b>: 아이디어를 최대한 많이, 빠르게 떠올리기","<b>융통성</b>: 기존과 다른 용도로 생각하기 (휴대 전화를 음악 재생기로)","<b>독창성</b>: 새롭고 독특한 아이디어 내기","<b>정교성</b>: 거친 아이디어를 섬세하게 다듬기"],
+   q:{q:"‘휴대 전화로 할 수 있는 일을 1분 동안 30가지 적기’와 가장 관련 있는 요소는?", o:["유창성","정교성","독창성","융통성"], a:0, why:"많이, 빠르게 떠올리는 힘이 유창성이에요."}},
+  {t:"공학의 창의성과 평가", li:["공학의 창의성은 <b>독창성과 실용성</b>을 함께 갖춰야 해요. 물을 뿌릴 수 없는 물뿌리개는 새로워도 창의적인 공학 제품이 아니에요","평가 요소: 독특성, 매력성, 기능성, 변화 가능성, 발전성, 만족성","창의적인 공학 제품의 가치: 사회 문제 해결, 새로운 시장 개척, 제품 차별화와 경쟁력, 산업 성장과 일자리 창출"], key:"공학의 창의성은 새로움에 쓸모가 더해져야 해요",
+   q:{q:"공학 제품의 창의성 평가에서 ‘소비자의 요구를 충족하는가’를 보는 요소는?", o:["만족성","독특성","매력성","발전성"], a:0, why:"사용자가 만족하는지를 보는 것이 만족성이에요."}},
+  {t:"창의적인 공학자의 역량", li:["공학 지식 능력, 문제 발견력, 관찰력, 탐구력","융합적 사고력, 독창적 사고력, 분석적 사고력, 문제 해결력, 협업 능력. 특히 융합과 협업이 더 중요해지고 있어요","<b>심리적 관성</b>: 익숙한 방식만 이어 가고 새로운 생각을 피하려는 성질, 고정 관념과 비슷해요","이겨 내려면 다른 시각으로 보고, 실패를 두려워하지 않고, 사회 문제에 관심을 가져요"],
+   q:{q:"‘늘 하던 방식이 편해서 새 방법을 시도하지 않는 것’을 무엇이라 하나요?", o:["심리적 관성","융통성","협업 능력","정교성"], a:0, why:"익숙한 쪽으로 계속 가려는 성질이라 ‘관성’이라고 불러요."}}
+ ],
+ summary:["창의성은 유창성, 융통성, 독창성, 정교성의 조합이에요.","공학의 창의성은 독창성과 실용성을 함께 갖춰야 해요.","창의적인 공학 제품은 사회 문제를 풀고, 새 시장과 일자리를 만들어요.","창의적인 공학자는 융합적 사고와 협업으로 심리적 관성을 이겨 내요."],
+ cards:[["유창성","아이디어를 많이, 빠르게 떠올리는 특성"],["융통성","기존과 다른 용도로 생각하는 특성"],["독창성","새롭고 독특한 아이디어를 내는 특성"],["정교성","거친 아이디어를 섬세하게 다듬는 특성"],["심리적 관성","익숙한 방식만 고집하고 새로운 생각을 피하려는 성질"]],
+ test:[
+  {q:"다듬어지지 않은 아이디어를 섬세하게 가공하는 특성은?", o:["정교성","유창성","융통성","독창성"], a:0},
+  {q:"휴대 전화를 어린이 장난감으로 쓰자는 아이디어처럼 다른 용도를 떠올리는 특성은?", o:["융통성","정교성","유창성","만족성"], a:0},
+  {q:"공학에서의 창의성으로 보기 어려운 것은?", o:["모양은 새롭지만 물을 뿌릴 수 없는 물뿌리개","달걀 껍질을 쉽게 까는 도구","충전이 빠른 배터리","접히는 휴대용 카트"], a:0},
+  {q:"‘이전에 본 적이 없는 새로운 제품인가’를 평가하는 요소는?", o:["독특성","기능성","만족성","발전성"], a:0},
+  {q:"창의적인 공학 제품의 가치로 알맞지 않은 것은?", o:["새로운 시장 개척","일자리 창출","사회 문제 해결","경쟁력 약화"], a:3},
+  {q:"‘여러 분야의 지식과 기술을 함께 활용하는 역량’은?", o:["융합적 사고력","관찰력","탐구력","공학 지식 능력"], a:0},
+  {q:"공학에서 창의성이 중요한 까닭은?", o:["혁신적인 기술을 만드는 바탕이기 때문","예술에만 필요하기 때문","실용성이 필요 없기 때문","혼자 일하기 위해서"], a:0}
+ ]},
+
+{id:"3-2", unit:"3", title:"공학 문제 해결을 돕는 사고 기법", sub:"아이디어를 넓히는 생각, 좁히는 생각",
+ goals:["확산적 사고 기법으로 아이디어를 많이 만들 수 있다.","수렴적 사고 기법으로 아이디어를 평가하고 고를 수 있다.","상황에 맞는 사고 기법을 고를 수 있다."],
+ story:{title:"축제 부스 회의", p:["학교 축제 부스를 정하는 회의. 첫 의견이 나오자마자 누군가 “그건 별로야”라고 말했다. 그 뒤로 아무도 입을 열지 않았다.","다음 날 반장은 규칙을 바꿨다. 30분 동안은 어떤 의견도 비판 금지, 대신 많이 내기. 칠판이 아이디어로 가득 찼다. 이제 남은 문제는 그중 하나를 어떻게 고르느냐였다."], q:"아이디어를 많이 내는 방법과 잘 고르는 방법은 어떻게 다를까요?"},
+ steps:[
+  {t:"브레인스토밍과 브레인라이팅", li:["<b>확산적 사고</b>: 아이디어를 넓게, 많이 펼치는 생각","<b>브레인스토밍</b>의 4원칙: 비판 보류, 어떤 아이디어도 환영, 질보다 양, 아이디어 결합·개선","<b>브레인라이팅</b>: 같은 원칙을 따르되 아이디어를 종이에 적고 돌려 가며 덧붙여요","<b>마인드맵</b>: 핵심 아이디어에서 가지를 뻗어 연관 아이디어를 만들어요"],
+   q:{q:"브레인스토밍의 원칙이 아닌 것은?", o:["비판 보류","질보다 양","아이디어 결합·개선","좋은 의견만 골라 말하기"], a:3, why:"고르는 일은 나중에 하고, 우선 많이 내는 것이 원칙이에요."}},
+  {t:"아시트, 스캠퍼, 기회의 원", li:["<b>아시트(ASIT)</b>: 트리즈를 쉽게 만든 기법. 용도 변경, 대칭 파괴, 제거, 분할, 복제의 5가지 방법 (줄을 없앤 무선 이어폰은 ‘제거’)","<b>스캠퍼(SCAMPER)</b>: 대체, 결합, 응용, 변형·확대·축소, 다른 용도, 제거, 뒤집기·재배열의 7가지 질문","<b>기회의 원</b>: 원에 1~12번 속성을 적고 주사위로 두 속성을 골라 억지로 이어 보며 아이디어를 얻어요"],
+   q:{q:"이어폰 줄을 없애 무선 이어폰을 만든 것은 아시트의 어떤 방법인가요?", o:["제거","복제","분할","대칭 파괴"], a:0, why:"불필요한 부분을 없애 문제를 푸는 방법이 제거예요."}},
+  {t:"아이디어 고르기: 수렴적 사고", li:["<b>수렴적 사고</b>: 펼친 아이디어 가운데 가장 알맞은 것을 고르는 생각","<b>PMI</b>: 좋은 점(Plus), 나쁜 점(Minus), 흥미로운 점(Interesting)으로 평가","<b>평가 행렬법</b>: 시간, 비용, 재료 같은 기준표로 아이디어를 점수화","<b>스크리닝 매트릭스</b>: 두 기준(예: 심미성, 기능성)의 상·중·하 칸에 나눠 우선순위 정하기","<b>쌍비교 분석법</b>: 아이디어를 둘씩 비교해 더 중요한 쪽에 1~3점을 주고 총점으로 순위 매기기"], widget:"matrix", key:"넓히고(확산) 나서 좁혀요(수렴)",
+   q:{q:"아이디어를 좋은 점, 나쁜 점, 흥미로운 점으로 나누어 평가하는 기법은?", o:["PMI 기법","스캠퍼","기회의 원","브레인라이팅"], a:0, why:"Plus, Minus, Interesting의 머리글자예요."}}
+ ],
+ summary:["확산적 사고는 아이디어를 넓게, 수렴적 사고는 알맞은 것을 고르는 생각이에요.","브레인스토밍은 비판 보류, 어떤 아이디어도 환영, 질보다 양, 결합·개선을 지켜요.","아시트는 5가지, 스캠퍼는 7가지 방법으로 아이디어를 체계적으로 만들어요.","PMI, 평가 행렬법, 스크리닝 매트릭스, 쌍비교 분석법으로 아이디어를 평가해요."],
+ cards:[["브레인스토밍","비판 없이 자유롭게 많은 아이디어를 내는 기법"],["아시트(ASIT)","용도 변경, 대칭 파괴, 제거, 분할, 복제로 문제를 푸는 기법"],["스캠퍼","7가지 질문으로 기존 제품을 바꿔 보는 기법"],["PMI 기법","좋은 점, 나쁜 점, 흥미로운 점으로 아이디어를 평가하는 기법"],["쌍비교 분석법","아이디어를 둘씩 비교해 점수로 우선순위를 정하는 기법"]],
+ test:[
+  {q:"확산적 사고 기법이 아닌 것은?", o:["평가 행렬법","브레인스토밍","스캠퍼","기회의 원"], a:0},
+  {q:"아시트(ASIT) 기법의 바탕이 된, 40개 원리를 쓰는 문제 해결 기법은?", o:["트리즈(TRIZ)","PMI","마인드맵","가치 엔지니어링"], a:0},
+  {q:"스캠퍼의 ‘결합하기’에 해당하는 아이디어는?", o:["자동차에 로봇 팔을 붙여 물건을 옮긴다","자동차 지붕을 없앤다","자동차를 뒤집어 배처럼 쓴다","바퀴 대신 날개를 단다"], a:0},
+  {q:"아이디어를 둘씩 짝지어 비교하고 점수를 더해 우선순위를 정하는 기법은?", o:["쌍비교 분석법","브레인스토밍","스캠퍼","기회의 원"], a:0},
+  {q:"쌍비교 분석에서 A가 B보다 ‘매우 중요’하면 기록하는 것은?", o:["A3","B3","A1","B1"], a:0},
+  {q:"두 평가 기준의 상·중·하 칸에 아이디어를 배치해 나누는 기법은?", o:["스크리닝 매트릭스","브레인라이팅","아시트","마인드맵"], a:0},
+  {q:"브레인스토밍에 대한 설명으로 옳은 것은?", o:["아이디어의 질보다 양을 중시한다","나온 의견을 바로 비판한다","혼자서만 한다","가장 좋은 하나만 말한다"], a:0}
+ ]},
+
+{id:"4-1", unit:"4", title:"공학과 팀워크 리더십", sub:"뛰어난 개인보다 강한 팀",
+ goals:["팀과 팀워크의 의미를 설명할 수 있다.","팀 운영 계획을 만들 수 있다.","팀 발달 4단계의 특징을 설명할 수 있다."],
+ story:{title:"에이스만 모은 로봇 팀", p:["로봇 대회에 우리 학교는 학년 1등들만 모아 팀을 만들었다. 다들 실력이 뛰어났지만 첫 회의부터 서로 자기 설계가 맞다며 세 시간을 다퉜다.","결국 시간 안에 로봇을 완성하지 못했다. 우승은 평범한 학생들이 모인 옆 학교 팀이었다. 그 팀의 비결은 ‘역할 나누기 표’ 한 장이었다."], q:"좋은 팀은 무엇이 다를까요?"},
+ steps:[
+  {t:"팀과 팀워크", li:["<b>팀</b>: 공동의 목표를 이루려고 서로 다른 개성과 능력을 가진 사람이 모여 협력하는 집단","<b>팀워크</b>: 팀원이 각자 역할을 하며 협력해 공동 목표를 이루는 것","핵심 요소: 협업, 책임 공유, 성과 창출, 역량의 조화","팀으로 일하면 품질과 생산성이 오르고, 여러 요소를 고려한 의사 결정과 빠른 변화 적응이 가능해요"],
+   q:{q:"팀에 대한 설명으로 알맞은 것은?", o:["공동의 목표를 위해 협력하는 집단","같은 능력의 사람만 모인 집단","각자 다른 목표를 가진 모임","리더 혼자 일하는 집단"], a:0, why:"서로 다른 사람이 같은 목표를 위해 협력하는 것이 팀이에요."}},
+  {t:"팀 운영 계획", li:["팀을 꾸리면 가장 먼저 방향과 목표를 정해요","팀 운영 계획에 담을 것: <b>임무 진술</b>(왜 이 팀이 있는가, 한 문장), <b>팀 목표</b>(구체적으로 이룰 것), <b>과제 할당</b>(누가 무엇을), <b>수행 일정</b>(언제까지)","계획은 팀원 모두가 토의해 함께 만들고 합의해요","리더십은 타고나는 것만이 아니라 길러질 수 있어요"],
+   q:{q:"팀 운영 계획에 꼭 담을 정보가 아닌 것은?", o:["팀의 임무 진술","과제 할당","수행 일정","팀원의 시험 성적"], a:3, why:"임무, 목표, 과제 할당, 일정이 팀 운영 계획의 네 기둥이에요."}},
+  {t:"팀은 이렇게 자라요", li:["<b>형성기</b>: 서로 알아 가며 역할을 궁금해하고 리더에게 많이 기대요","<b>격동기</b>: 의견과 이해관계가 부딪혀 갈등이 생겨요","<b>규범기</b>: 서로 믿고 공동 목표로 뭉치며 의견 차이를 존중해요","<b>성취기</b>: 지시 없이도 각자 역할을 해내며 성과가 가장 커져요","<b>아폴로 신드롬</b>: 뛰어난 인재만 모인 팀이 서로 주장만 하다 오히려 성과가 낮아지는 현상"], key:"형성기 → 격동기 → 규범기 → 성취기",
+   q:{q:"팀원들이 지시 없이도 역할을 스스로 해내며 성과가 가장 커지는 단계는?", o:["형성기","격동기","규범기","성취기"], a:3, why:"신뢰와 자율이 자리 잡은 마지막 단계가 성취기예요."}}
+ ],
+ summary:["팀은 공동 목표를 위해 서로 다른 사람이 협력하는 집단이에요.","팀 운영 계획에는 임무 진술, 목표, 과제 할당, 수행 일정이 들어가요.","팀은 형성기, 격동기, 규범기, 성취기를 거쳐 자라요.","뛰어난 사람만 모여도 협력하지 않으면 아폴로 신드롬이 생겨요."],
+ cards:[["팀워크","각자 역할을 하며 협력해 공동 목표를 이루는 것"],["팀 운영 계획","임무, 목표, 과제 할당, 일정을 담은 팀의 계획"],["격동기","의견과 이해관계가 부딪혀 갈등이 생기는 단계"],["아폴로 신드롬","인재만 모인 팀이 다투다 성과가 낮아지는 현상"]],
+ test:[
+  {q:"팀 발달 단계를 순서대로 나열한 것은?", o:["형성기 → 격동기 → 규범기 → 성취기","격동기 → 형성기 → 성취기 → 규범기","규범기 → 형성기 → 격동기 → 성취기","성취기 → 규범기 → 격동기 → 형성기"], a:0},
+  {q:"의견과 이해관계가 충돌해 갈등이 생기기 쉬운 단계는?", o:["격동기","형성기","규범기","성취기"], a:0},
+  {q:"팀원들이 리더에게 많이 기대고 자기 역할을 궁금해하는 단계는?", o:["형성기","격동기","규범기","성취기"], a:0},
+  {q:"잘 쓴 팀 임무 진술의 특징은?", o:["왜 팀이 존재하는지 한 문장으로 간략히 밝힌다","방법을 길고 자세히 적는다","팀원 이름만 적는다","일정만 적는다"], a:0},
+  {q:"아폴로 신드롬과 가장 가까운 속담은?", o:["사공이 많으면 배가 산으로 간다","티끌 모아 태산","가는 말이 고와야 오는 말이 곱다","원숭이도 나무에서 떨어진다"], a:0},
+  {q:"팀 운영 계획은 어떻게 만드는 것이 바람직한가요?", o:["팀원 모두가 토의해 함께 만들고 합의한다","리더 혼자 정해 알린다","만들지 않는다","선생님이 대신 쓴다"], a:0},
+  {q:"팀으로 일할 때의 장점이 아닌 것은?", o:["품질과 생산성 향상","여러 요소를 고려한 의사 결정","변화에 빠른 적응","책임이 한 사람에게만 몰림"], a:3}
+ ]},
+
+{id:"4-2", unit:"4", title:"갈등 관리와 팀 의사소통", sub:"다툼을 성장으로 바꾸는 대화법",
+ goals:["팀 갈등의 원인과 커지는 과정을 설명할 수 있다.","갈등 관리의 다섯 유형을 구분할 수 있다.","경청의 중요성과 사회적 태만을 설명할 수 있다."],
+ story:{title:"아무도 안 만든 발표 자료", p:["모둠 과제 마감 하루 전, 발표 자료는 반도 채워지지 않았다. 다들 “누군가 하겠지”라고 생각했던 것이다. 단톡방에는 서로를 탓하는 말만 올라왔다.","그때 한 친구가 말했다. “누구 잘못인지 따지기 전에, 각자 뭐가 힘들었는지 먼저 들어 보자.” 이야기를 나누다 보니 문제는 사람이 아니라 정하지 않은 역할이었다."], q:"팀 안의 갈등은 왜 생기고, 어떻게 풀 수 있을까요?"},
+ steps:[
+  {t:"팀 갈등은 왜 생길까", li:["팀원의 요구와 팀의 요구가 다를 때","문제 해결에 필요한 자원이 부족할 때","신념, 가치, 개인 사정이 서로 다를 때","의사소통이 원활하지 않을 때, 리더가 역할을 못 하거나 의견을 존중하지 않을 때","갈등은 <b>차이점</b> → <b>부조화</b> → <b>갈등</b> 순서로 커져요"], key:"갈등은 자연스러운 것, 문제는 내버려 두는 것",
+   q:{q:"팀 갈등이 커지는 과정을 순서대로 나열한 것은?", o:["차이점 → 부조화 → 갈등","갈등 → 차이점 → 부조화","부조화 → 갈등 → 차이점","갈등 → 부조화 → 차이점"], a:0, why:"작은 차이가 마찰(부조화)을 거쳐 갈등으로 커져요."}},
+  {t:"갈등 관리의 다섯 유형", li:["두 기준: 내 주장을 얼마나 내세우나(자기 중심), 상대를 얼마나 배려하나(상대방 중심)","<b>강요형</b>: 내 주장만 강해요 / <b>회피형</b>: 둘 다 낮아 피해요 / <b>양보형</b>: 상대에게 맞춰요","<b>타협형</b>: 서로 조금씩 물러나요 / <b>협력형</b>: 둘 다 높아 모두 만족하는 해결을 찾아요","부정적인 생각을 긍정적인 ‘선언문’으로 바꾸는 <b>생각의 전환</b>도 도움이 돼요"],
+   q:{q:"자기 주장과 상대 배려가 모두 높아 함께 최선의 해결책을 찾는 유형은?", o:["강요형","회피형","협력형","양보형"], a:2, why:"나도 너도 중요하게 여기는 유형이 협력형이에요."}},
+  {t:"의사소통과 경청", li:["소통을 강화하는 원칙: 명확하고 간결한 메시지, 다양한 소통 도구, 피드백 주고받기, 효과적인 경청","<b>경청</b>은 신뢰와 존중을 보여 주고, 갈등을 막고, 창의성을 높여요","<b>공감적 경청</b>: 상대 중심으로, 단어가 아니라 맥락까지 듣기","<b>링겔만 효과(사회적 태만)</b>: 사람이 많아질수록 한 사람의 노력이 줄어드는 현상, 무임승차의 원인이에요"],
+   q:{q:"줄다리기 인원이 늘수록 한 사람이 쓰는 힘이 줄어드는 현상은?", o:["링겔만 효과","아폴로 신드롬","심리적 관성","트레이드오프"], a:0, why:"책임이 흩어지면 ‘나 하나쯤이야’ 하는 마음이 생겨요."}}
+ ],
+ summary:["팀 갈등은 요구 차이, 자원 부족, 신념 차이, 소통 부족, 리더십 문제에서 생겨요.","갈등은 차이점, 부조화, 갈등 순서로 커지니 일찍 다루는 것이 좋아요.","갈등 관리 유형에는 강요형, 회피형, 양보형, 타협형, 협력형이 있어요.","공감적 경청과 분명한 역할 나누기로 사회적 태만을 줄여요."],
+ cards:[["부조화","팀원 사이 마찰로 시간이 낭비되고 목표를 벗어나는 단계"],["협력형","자기 주장과 상대 배려가 모두 높은 갈등 관리 유형"],["공감적 경청","상대 중심으로 맥락까지 이해하며 듣기"],["링겔만 효과","인원이 늘수록 개인의 노력이 줄어드는 현상"]],
+ test:[
+  {q:"팀 갈등의 원인으로 보기 어려운 것은?", o:["팀원 모두가 같은 목표를 분명히 공유할 때","자원이 부족할 때","의사소통이 원활하지 않을 때","팀원과 팀의 요구가 다를 때"], a:0},
+  {q:"팀 갈등에 대한 생각으로 옳은 것은?", o:["갈등은 팀 활동에서 자연스럽게 생길 수 있다","갈등이 없으면 무조건 훌륭한 팀이다","갈등은 무시하는 것이 최선이다","갈등은 항상 모두가 만족하게 끝난다"], a:0},
+  {q:"자기 주장과 상대 배려가 모두 낮아 갈등 자체를 피하는 유형은?", o:["회피형","협력형","강요형","타협형"], a:0},
+  {q:"의사소통을 강화하는 원칙이 아닌 것은?", o:["명확하고 간결한 메시지","서로 피드백 주고받기","효과적인 경청","내 말만 길게 하기"], a:3},
+  {q:"경청의 효과로 알맞지 않은 것은?", o:["갈등 예방","신뢰와 존중 표현","창의성 촉진","팀원의 의견 무시"], a:3},
+  {q:"사회적 태만이 생기는 까닭은?", o:["여럿이 하면 책임이 흩어져 개인 노력이 드러나지 않아서","사람이 적어서","과제가 너무 쉬워서","리더가 너무 많아서"], a:0},
+  {q:"부정적인 생각을 현재형 긍정 문장으로 바꿔 되뇌는 방법은?", o:["선언문을 이용한 생각의 전환","브레인라이팅","역공학","평가 행렬법"], a:0}
+ ]},
+
+{id:"5-1", unit:"5", title:"공학적 산출물의 비교·분석", sub:"이미 있는 제품 속에 다음 아이디어가 숨어 있어요",
+ goals:["공학 산출물의 물리적 속성과 기능적 속성을 구분할 수 있다.","비교·분석과 역공학이 필요한 까닭을 설명할 수 있다.","평가 행렬법, 기능 트리, 가치 엔지니어링을 활용할 수 있다."],
+ story:{title:"분해된 손 선풍기", p:["여름 방학 과제로 고장 난 손 선풍기를 분해한 민혁이. 책상 위에 날개, 작은 모터, 배터리, 버튼 기판이 줄지어 놓였다.","“바람이 약했던 건 날개가 작아서였네. 그리고 이 배터리 덮개는 왜 이렇게 열기 힘들게 만들었지?” 망가진 제품 하나가 새 제품 아이디어 노트가 되어 가고 있었다."], q:"기존 제품을 뜯어보고 비교하는 일은 설계에 어떻게 도움이 될까요?"},
+ steps:[
+  {t:"물리적 속성과 기능적 속성", li:["<b>물리적 속성</b>: 재질과 구조 (가벼운 나무 의자, 천과 스펀지 쿠션)","<b>기능적 속성</b>: 용도와 기능. 등받이에 기대기는 의도한 기능, 등받이에 가방 걸기는 의도하지 않은 기능이에요","비교·분석이 필요한 까닭: 기존 제품에서 새 해결 방법을 얻고, 자연과 기존 산출물을 본떠 아이디어를 쉽게 얻으며, 확산적·수렴적 사고 모두에 쓸 수 있어요"],
+   q:{q:"의자 등받이에 가방을 걸어 두는 것은 무엇에 해당하나요?", o:["물리적 속성","의도한 기능적 속성","의도하지 않은 기능적 속성","제품 사이클"], a:2, why:"설계자가 생각하지 않았던 쓰임새라 의도하지 않은 기능이에요."}},
+  {t:"역공학", li:["보통은 설계 → 생산 순서지만, <b>역공학</b>은 제품을 분해해 그 속에서 아이디어를 찾아 설계에 반영해요","부품을 비교·분석하면 적용된 기술과 문제점을 찾기 쉬워요","주의: 특허 기술 유출이나 저작권 침해 문제가 생길 수 있어요","3D 스캐너로 문화재의 3차원 도면을 만들어 복원할 때도 쓰여요"],
+   q:{q:"역공학에 대한 설명으로 옳은 것은?", o:["완성된 제품을 분해해 구조와 기술을 분석한다","도면 없이 바로 판매한다","새 재료를 발명하는 일이다","팀을 나누는 방법이다"], a:0, why:"만드는 순서를 거꾸로 따라가 보는 것이 역공학이에요."}},
+  {t:"분석 도구 세 가지", li:["<b>평가 행렬법</b>: 구성 요소(세로) × 평가 기준(가로: 비용, 사용 편의성, 고장 빈도 등)으로 점수를 매겨 낮은 점수부터 개선해요","<b>기능 트리</b>: 상위 기능(휴대 전화의 통화·메시지)에서 세부 기능(전화 걸기, 문자 보내기)으로 가지를 뻗어 정리해요","<b>가치 엔지니어링</b>: 핵심 가치(예: 전기차의 안전, 주행 거리)를 정하고 필요 없는 기능은 빼서 비용을 줄이고 핵심 기능을 높여요"], key:"분해하고, 점수 매기고, 핵심에 집중해요",
+   q:{q:"제품의 핵심 가치에 집중하고 불필요한 기능을 없애 비용을 줄이는 기법은?", o:["가치 엔지니어링","기능 트리","브레인스토밍","스캠퍼"], a:0, why:"가치는 높이고 군더더기는 줄이는 기법이에요."}}
+ ],
+ summary:["공학 산출물은 재질·구조인 물리적 속성과 용도인 기능적 속성을 가져요.","기존 제품을 비교·분석하면 새 아이디어를 쉽게 얻을 수 있어요.","역공학은 제품을 분해해 기술과 문제점을 찾지만, 지식 재산권을 지켜야 해요.","평가 행렬법, 기능 트리, 가치 엔지니어링으로 개선점을 찾아요."],
+ cards:[["물리적 속성","제품을 이루는 재질과 구조"],["기능적 속성","제품이 쓰이는 용도와 기능"],["역공학","제품을 분해해 구조와 기술을 분석하는 방법"],["기능 트리","상위 기능에서 세부 기능으로 가지를 뻗어 정리하는 기법"],["가치 엔지니어링","핵심 가치에 집중하고 불필요한 기능을 줄이는 기법"]],
+ test:[
+  {q:"의자를 가볍게 하려고 나무로 만든 것은 어떤 속성인가요?", o:["물리적 속성","의도하지 않은 기능적 속성","심미적 욕구","트레이드오프"], a:0},
+  {q:"역공학의 문제점으로 알맞은 것은?", o:["특허 기술 유출, 저작권 침해가 생길 수 있다","제품을 분해할 수 없다","문화재 복원에 쓸 수 없다","부품을 볼 수 없다"], a:0},
+  {q:"내비게이션의 ‘길 안내’는 기능 트리에서 무엇에 해당하나요?", o:["상위 기능","세부 기능","물리적 속성","불필요한 기능"], a:0},
+  {q:"평가 행렬법으로 구성 요소를 점수화한 뒤 가장 먼저 개선할 요소는?", o:["총점이 가장 낮은 요소","총점이 가장 높은 요소","가장 비싼 요소","가장 가벼운 요소"], a:0},
+  {q:"비교·분석 방법을 쓸 수 있는 사고 과정은?", o:["확산적 사고와 수렴적 사고 모두","확산적 사고만","수렴적 사고만","어느 쪽도 아님"], a:0},
+  {q:"새가 나는 모습을 본떠 공기 저항이 적은 비행기 모양을 만든 것은 무엇의 예인가요?", o:["자연을 본뜬 아이디어","역공학","가치 엔지니어링","사회적 태만"], a:0},
+  {q:"휴대 전화, 자동차 같은 공학 산출물은 여러 부품과 기능이 모인 무엇인가요?", o:["시스템","단일 부품","예술 작품","원료"], a:0}
+ ]},
+
+{id:"5-2", unit:"5", title:"제품 개발 연구의 실제", sub:"아이디어가 진짜 제품이 되기까지",
+ goals:["제품 개발에서 따질 여섯 가지 기준을 설명할 수 있다.","실제 제품 개발 과정을 설명할 수 있다.","공학자가 지켜야 할 윤리 규범을 말할 수 있다."],
+ story:{title:"끝까지 안 나오는 샴푸", p:["한 달 쓴 샴푸 통을 아무리 눌러도 더는 나오지 않았다. 통을 잘라 보니 바닥에 아직 꽤 많이 남아 있었다. 유나는 남은 샴푸를 손가락으로 긁어 내며 생각했다.","“통 모양을 바꾸면 될까? 아니면 안쪽을 미끄럽게 할까? 그런데 값이 너무 비싸지면 아무도 안 사겠지.” 좋은 아이디어 하나가 제품이 되려면 따져 볼 것이 많았다."], q:"제품을 개발할 때는 무엇을 따지고, 어떤 순서로 만들까요?"},
+ steps:[
+  {t:"제품 개발에서 따질 여섯 기준", li:["<b>안전</b>: 사용자를 위협하지 않고 법규를 지키는가","<b>환경</b>: 지속 가능하고 재활용이 되는가","<b>기능</b>: 설계 목표대로 성능이 나오는가","<b>비용</b>: 제작비를 줄이고, 개선과 확장이 가능한가","<b>시간</b>: 공정이 단순하고 개발 기간을 줄일 수 있는가","<b>사용자</b>: 요구를 반영하고, 보기 좋고, 쓰기 쉬운가"],
+   q:{q:"‘어린이가 써도 다칠 위험이 없는가?’는 어떤 기준인가요?", o:["안전 기준","비용적 기준","시간적 기준","환경 기준"], a:0, why:"사용자가 다치지 않는지를 따지는 것이 안전 기준이에요."}},
+  {t:"실제 개발 과정", li:["1 문제점 파악(사용자 면담, 설문) → 2 문제 정의(해결 목표 정하기) → 3 관련 정보 수집(뉴스, 특허 검색, 시험)","4 해결 방안 탐색 → 5 대안 선정 → 6 설계(스케치, 3D 모델링)","7 시제품 제작과 성능 시험 → 8 평가 및 개선 후 출시","예: 소스 용기 안쪽의 미세한 틈을 코팅해 마찰을 줄이자 적은 힘으로도 끝까지 짜낼 수 있게 되었어요"],
+   q:{q:"제품을 정식으로 만들기 전에 성능을 시험하려고 만드는 것은?", o:["시제품","완제품","설계도","특허"], a:0, why:"시제품으로 시험하고 고친 뒤에 출시해요."}},
+  {t:"공학 윤리", li:["공정성과 공정한 대우","개인 정보 보호","지식 재산권 보호: 남의 특허와 저작권을 침해하지 않기","환경 보호와 지속 가능한 기술","윤리적인 의사 결정과 사회적 가치 고려","진실성과 투명성: 연구 결과를 조작하거나 거짓으로 보고하지 않기"], key:"좋은 공학은 잘 작동하는 것을 넘어 옳아야 해요",
+   q:{q:"시험 결과가 기대에 못 미치자 수치를 조금 높여 보고했다. 어긋난 윤리 규범은?", o:["진실성과 투명성","개인 정보 보호","환경 보호","지식 재산권 보호"], a:0, why:"결과를 정직하게 보고하는 것이 진실성과 투명성이에요."}}
+ ],
+ summary:["제품 개발에서는 안전, 환경, 기능, 비용, 시간, 사용자 기준을 함께 따져요.","개발은 문제점 파악부터 평가·개선까지 단계를 밟아 진행해요.","시제품으로 성능을 시험하고, 목표에 못 미치면 되풀이해 고쳐요.","공학자는 정직, 공정, 개인 정보·지식 재산권·환경 보호를 지켜야 해요."],
+ cards:[["안전 기준","제품이 사용자를 위협하지 않고 법규를 지키는지 따지는 기준"],["사용자 고려 기준","요구 반영, 디자인, 쉬운 사용법을 따지는 기준"],["시제품","정식 생산 전에 성능을 시험하려고 만든 제품"],["지식 재산권","발명이나 창작물에 대해 만든 사람이 갖는 권리"]],
+ test:[
+  {q:"‘재활용이 가능한 재질인가?’는 어떤 기준인가요?", o:["환경 기준","기능적 기준","시간적 기준","안전 기준"], a:0},
+  {q:"‘대량 생산으로 빠르게 만들 수 있는 구조인가?’는 어떤 기준인가요?", o:["시간적 기준","사용자 고려 기준","환경 기준","안전 기준"], a:0},
+  {q:"제품 개발 과정의 첫 단계로 알맞은 것은?", o:["사용자 면담·설문으로 문제점 파악","시제품 제작","제품 출시","3D 모델링"], a:0},
+  {q:"관련 정보 수집 단계에서 하는 일로 알맞은 것은?", o:["관련 뉴스와 특허 기술 검색","제품 판매","광고 촬영","팀 해체"], a:0},
+  {q:"공학자의 윤리적 태도로 알맞지 않은 것은?", o:["다른 사람의 지식 재산권 존중","환경 영향 줄이기","개인 정보 보호","목표 달성을 위해 결과 조작"], a:3},
+  {q:"평가 결과 목표에 못 미치면 어떻게 해야 하나요?", o:["구조와 재료를 고쳐 개선 과정을 되풀이한다","그대로 출시한다","평가 기준을 없앤다","시험을 그만둔다"], a:0},
+  {q:"증강 현실(AR)을 건설 현장에 쓰면 좋은 점은?", o:["완공 후 모습을 미리 보고 설계 오류를 찾을 수 있다","도면이 필요 없어진다","공사비가 0원이 된다","건물이 저절로 지어진다"], a:0}
+ ]},
+
+{id:"6-1", unit:"6", title:"아이디어의 시각화", sub:"머릿속 생각을 누구나 읽는 그림으로",
+ goals:["스케치와 제도의 차이를 설명할 수 있다.","도면에 쓰는 선의 종류와 용도를 구분할 수 있다.","투상법 네 가지의 특징을 설명할 수 있다."],
+ story:{title:"말로만 설명한 책꽂이", p:["목공 동아리 시간, 도현이는 만들고 싶은 책꽂이를 친구에게 말로 설명했다. “아래는 넓고, 위로 갈수록 좁아지고, 옆에 작은 칸이…” 친구가 만든 책꽂이는 전혀 다른 모양이었다.","선생님이 연필과 모눈종이를 건넸다. “공학자는 말 대신 약속된 그림으로 대화해. 그래야 누가 봐도 같은 물건을 떠올리지.”"], q:"아이디어를 정확하게 전달하는 그림은 어떻게 그릴까요?"},
+ steps:[
+  {t:"스케치와 제도", li:["설계는 선, 문자, 기호로 아이디어를 구체화하고 소통하는 과정이에요. 스케치, 제도, 컴퓨터 기반 설계로 나뉘어요","<b>스케치</b>: 형태와 특징을 빠르게 대략 그리기, 주로 연필로 해요","<b>프리핸드 스케치</b>: 자 같은 제도 도구 없이 손과 연필만으로 그리기","선 긋기: 가로선은 왼쪽에서 오른쪽, 세로선은 위에서 아래로, 짧은 선을 가볍게 겹쳐 윤곽을 잡아요"],
+   q:{q:"제도 도구 없이 종이, 연필, 지우개만으로 그리는 스케치는?", o:["프리핸드 스케치","등각 투상도","청사진","정투상도"], a:0, why:"‘프리핸드’는 자유로운 손이라는 뜻이에요."}},
+  {t:"선의 종류와 용도", li:["도면은 설계자와 작업자 사이의 약속이라 <b>KS 제도 통칙</b>을 따라요","<b>외형선</b>(굵은 실선): 보이는 부분","<b>숨은선</b>(파선): 보이지 않는 부분","<b>중심선</b>(가는 1점 쇄선): 도형의 중심","<b>치수선·치수 보조선</b>(가는 실선): 치수 기입 / <b>해칭선</b>(빗금): 단면 등 특정 부분 구별"], key:"같은 굵기라도 모양이 다르면 뜻이 달라요",
+   q:{q:"물체에서 보이지 않는 부분의 모양을 나타내는 선은?", o:["숨은선","외형선","중심선","치수선"], a:0, why:"점선처럼 끊긴 파선으로 숨은 부분을 나타내요."}},
+  {t:"투상법", li:["<b>정투상법</b>: 물체를 유리 상자에 넣고 각 면에 비친 모습을 그려요. 제도에서는 주로 <b>제3각법</b>(정면도, 평면도, 우측면도)을 써요","<b>사투상법</b>: 정면을 그린 뒤 30°, 45°, 60°로 비스듬히 안쪽을 그려요","<b>등각 투상법</b>: 세 축을 120° 간격으로 두고 높이, 너비, 안쪽 길이를 그대로 옮겨요","<b>투시 투상법</b>: 소점을 향해 원근감을 주어 눈에 보이는 모습과 가장 비슷하게 그려요 (건축, 인테리어)"],
+   q:{q:"세 개의 기본 축을 120° 간격으로 두고 그리는 입체 투상법은?", o:["등각 투상법","정투상법","사투상법","투시 투상법"], a:0, why:"세 축 사이 각이 모두 같아서 ‘등각’이에요."}}
+ ],
+ summary:["설계는 스케치, 제도, 컴퓨터 기반 설계로 아이디어를 구체화하고 소통하는 과정이에요.","프리핸드 스케치는 제도 도구 없이 손과 연필만으로 빠르게 그려요.","도면은 KS 제도 통칙의 선(외형선, 숨은선, 중심선, 치수선, 해칭선)을 지켜요.","정투상법은 제작 도면에, 사투상·등각·투시 투상법은 입체 표현에 써요."],
+ cards:[["프리핸드 스케치","제도 도구 없이 손과 연필만으로 그리는 스케치"],["외형선","물체의 보이는 부분을 나타내는 굵은 실선"],["정투상법","유리 상자에 비친 각 면의 모습을 그리는 투상법"],["투시 투상법","소점을 향해 원근감을 주어 그리는 투상법"]],
+ test:[
+  {q:"도면을 KS 제도 통칙에 따라 그려야 하는 까닭은?", o:["설계자와 작업자가 같은 뜻으로 읽기 위해","그림을 예쁘게 하려고","시간을 늘리려고","색을 넣으려고"], a:0},
+  {q:"물체의 보이는 부분을 나타내는 굵은 실선은?", o:["외형선","숨은선","해칭선","중심선"], a:0},
+  {q:"도형의 중심을 나타낼 때 쓰는 선은?", o:["가는 1점 쇄선","굵은 실선","빗금","지그재그 선"], a:0},
+  {q:"제도에서 주로 쓰는 정투상법의 방식은?", o:["제3각법","제1각법","제5각법","등각법"], a:0},
+  {q:"정면을 그린 뒤 45° 같은 기울기로 안쪽 길이를 그리는 투상법은?", o:["사투상법","정투상법","투시 투상법","등각 투상법"], a:0},
+  {q:"원근감을 주어 사람이 눈으로 보는 것과 가장 비슷하게 그리는 투상법은?", o:["투시 투상법","정투상법","사투상법","등각 투상법"], a:0},
+  {q:"스케치에서 가로선을 긋는 기본 방향은?", o:["왼쪽에서 오른쪽","오른쪽에서 왼쪽","아래에서 위","정해진 방향 없음"], a:0}
+ ]},
+
+{id:"6-2", unit:"6", title:"2D·3D 설계와 가공", sub:"레이저로 자르고, 층층이 쌓아 만들기",
+ goals:["레이저 절단기의 원리와 가공 방식을 설명할 수 있다.","3D 프린터의 세 가지 방식을 구분할 수 있다.","3D 모델링부터 출력까지의 과정을 설명할 수 있다."],
+ story:{title:"동아리 이름표와 마스코트", p:["발명 동아리는 축제 부스에 걸 나무 이름표와 작은 마스코트 인형을 직접 만들기로 했다. 이름표는 얇은 MDF 판으로, 마스코트는 둥글고 입체적인 모양이었다.","“이름표는 레이저 절단기로 자르면 되겠는데, 마스코트는 어떻게 하지?” 선생님은 교실 구석의 3D 프린터를 가리켰다. 평면과 입체는 만드는 방법부터 달랐다."], q:"평면 설계와 입체 설계는 각각 어떻게 실제 물건이 될까요?"},
+ steps:[
+  {t:"2D 설계와 레이저 절단기", li:["<b>2D 평면 설계</b>: 가로·세로 치수로 평면에 표현하는 설계 (평면도, 회로도, 조립도 등)","<b>레이저 절단기</b>: 거울과 렌즈로 레이저를 한 점에 모아 그 열로 재료를 녹이거나 증발시켜요","<b>커팅(CUT)</b>: 세고 느리게 움직여 재료를 관통해 잘라요. 주로 <b>벡터</b> 도안을 써요","<b>각인(SCAN)</b>: 약하고 빠르게 움직여 표면에 새겨요. 벡터와 비트맵 도안 모두 쓸 수 있어요","안전: 보호 장비를 쓰고, 알맞은 재료(MDF, 아크릴 등)인지 확인하고, 사용 후 렌즈와 기계를 청소해요"],
+   q:{q:"레이저 세기를 약하게 하고 빠르게 움직이면 할 수 있는 작업은?", o:["각인","커팅","용접","주조"], a:0, why:"열이 닿는 시간이 짧아 표면만 태워 새겨요."}},
+  {t:"3D 프린터의 세 방식", li:["3D 프린터는 3차원 모델을 <b>층층이 쌓아</b> 실제 물체로 만들어요","<b>FDM(압출 적층)</b>: 열을 가하면 녹는 재료를 노즐로 짜내 한 줄씩 쌓아요. 쓰기 쉽고 재료가 다양해요","<b>SLA(광경화 적층)</b>: 액체 수지에 자외선을 쏘아 굳혀요. 정밀하고 빨라요","<b>SLS(분말 소결)</b>: 플라스틱·금속·세라믹 분말을 레이저로 녹여 붙여요. 튼튼하고 오래가요"],
+   q:{q:"열로 녹인 재료를 노즐로 짜내 한 줄씩 쌓는 방식은?", o:["FDM","SLA","SLS","CNC"], a:0, why:"교실에서 가장 흔히 보는 방식이 FDM이에요."}},
+  {t:"모델링에서 출력까지", li:["모델링 방식: <b>폴리곤</b>(삼각형 면의 모음, 게임), <b>넙스</b>(수학적 곡선으로 매끄러운 곡면, 제품·건축), <b>서브디비전</b>(둘의 장점, 애니메이션)","출력 과정: 3D 모델링 → <b>STL 변환</b> → <b>슬라이싱</b>(층으로 자르기) → 프린팅 → <b>후처리</b>(사포질, 칠하기)","STL로 바꾼 뒤에는 고치기 어려우니 원본 모델 파일을 잘 보관해요"], key:"모델링 → STL → 슬라이싱 → 프린팅 → 후처리",
+   q:{q:"모델을 한 층씩 잘라 프린터가 출력할 수 있게 바꾸는 과정은?", o:["슬라이싱","후처리","각인","렌더링"], a:0, why:"얇게 썰어(slice) 층마다 경로를 만드는 과정이에요."}}
+ ],
+ summary:["2D 평면 설계는 가로·세로 치수로 표현하고, 레이저 절단기로 자르거나 새길 수 있어요.","레이저는 세고 느리면 커팅, 약하고 빠르면 각인이에요.","3D 프린터는 FDM, SLA, SLS 방식으로 재료를 층층이 쌓아요.","출력은 모델링, STL 변환, 슬라이싱, 프린팅, 후처리 순서로 진행해요."],
+ cards:[["레이저 커팅","레이저로 재료를 관통해 도안대로 자르는 가공"],["벡터 방식","점·선·면으로 이루어져 확대해도 깨지지 않는 이미지"],["FDM","녹인 재료를 노즐로 짜내 한 줄씩 쌓는 3D 프린팅"],["슬라이싱","3D 모델을 층으로 잘라 출력 경로로 바꾸는 과정"],["STL","3D 프린팅용 표준 파일 형식"]],
+ test:[
+  {q:"레이저 절단기에서 레이저를 한 점에 모아 높은 열을 내게 하는 부품은?", o:["렌즈","제작단","필라멘트","슬라이서"], a:0},
+  {q:"확대해도 화질이 떨어지지 않는 점·선·면 기반 이미지 방식은?", o:["벡터 방식","비트맵 방식","STL 방식","폴리곤 방식"], a:0},
+  {q:"액체 수지에 자외선을 쏘아 굳히는 3D 프린팅 방식은?", o:["SLA","FDM","SLS","레이저 각인"], a:0},
+  {q:"금속·세라믹 분말을 레이저로 녹여 튼튼한 제품을 만드는 방식은?", o:["SLS","FDM","SLA","프리핸드"], a:0},
+  {q:"3D 프린터로 출력하려고 만든 표준 파일 형식은?", o:["STL","JPG","MP3","TXT"], a:0},
+  {q:"FDM 출력물의 거친 표면을 사포질하거나 칠하는 과정은?", o:["후처리","슬라이싱","모델링","STL 변환"], a:0},
+  {q:"매끄러운 곡면을 수학적으로 표현해 제품 디자인에 주로 쓰는 모델링 방식은?", o:["넙스","폴리곤","비트맵","스캔"], a:0}
+ ]}
+];
+
+const LEVELS = [[0,"새싹"],[200,"관찰자"],[500,"탐구자"],[900,"설계자"],[1300,"엔지니어"]];
+const BADGES = [
+  {id:"first", m:"1", name:"첫걸음", how:"첫 계단 통과"},
+  {id:"oneshot", m:"✓", name:"한 번에 통과", how:"시험 첫 도전에 80점 이상"},
+  {id:"perfect", m:"100", name:"만점왕", how:"시험 100점"},
+  {id:"cards", m:"가", name:"용어 박사", how:"카드를 실수 없이 완성"},
+  {id:"lab", m:"표", name:"실험가", how:"평가 행렬 직접 채점"},
+  {id:"unit", m:"▲", name:"단원 정복", how:"한 대단원 모두 완료"},
+  {id:"streak", m:"3일", name:"3일 연속", how:"3일 연속 학습"},
+  {id:"grad", m:"★", name:"졸업", how:"모든 레슨 완료"}
+];
+const XP = {step:10, cards:20, pass:50, perfect:20};
+
+/* ---------- state ---------- */
+const KEY = "design-stairs-v1";
+const fresh = () => ({v:1, xp:0, les:{}, badges:[], streak:{last:null, n:0}});
+let S = (() => { try { const s = JSON.parse(localStorage.getItem(KEY)); if (s && s.v === 1) return s; } catch(e){} return fresh(); })();
+const save = () => { try { localStorage.setItem(KEY, JSON.stringify(S)); } catch(e){} };
+const L = id => S.les[id] || (S.les[id] = {steps:0, cards:false, best:null, passed:false, tries:0});
+const lessonById = id => LESSONS.find(l => l.id === id);
+const unitById = id => UNITS.find(u => u.id === id);
+const isPassed = id => !!(S.les[id] && S.les[id].passed);
+
+const dayStr = d => d.getFullYear()+"-"+String(d.getMonth()+1).padStart(2,"0")+"-"+String(d.getDate()).padStart(2,"0");
+(function streak(){
+  const today = dayStr(new Date()), y = new Date(); y.setDate(y.getDate()-1);
+  if (S.streak.last === today) return;
+  S.streak.n = S.streak.last === dayStr(y) ? S.streak.n + 1 : 1;
+  S.streak.last = today;
+  if (S.streak.n >= 3 && !S.badges.includes("streak")) S.badges.push("streak");
+  save();
+})();
+
+/* ---------- transient UI ---------- */
+let view = {name:"home"};
+const ui = {wrong:{}, cards:{}, test:{}, mx:[[3,3,2],[3,2,2],[2,3,1]], confirmReset:false};
+const orders = new Map();
+function order(key, n){
+  if (!orders.has(key)) { const a = [...Array(n).keys()]; for (let i=n-1;i>0;i--){const j=Math.floor(Math.random()*(i+1)); [a[i],a[j]]=[a[j],a[i]];} orders.set(key,a); }
+  return orders.get(key);
+}
+
+/* ---------- rewards ---------- */
+function toast(html){
+  const t = document.createElement("div"); t.className = "toast"; t.innerHTML = html;
+  document.getElementById("toasts").appendChild(t); setTimeout(() => t.remove(), 2600);
+}
+function addXP(n, why){ const before = lvl(S.xp); S.xp += n; toast(`<b>+${n} XP</b> ${why}`); if (lvl(S.xp) > before) toast(`레벨 업! <b>Lv.${lvl(S.xp)+1} ${LEVELS[lvl(S.xp)][1]}</b>`); }
+function badge(id){ if (S.badges.includes(id)) return; S.badges.push(id); const b = BADGES.find(x=>x.id===id); toast(`배지 획득 <b>${b.name}</b>`); }
+function lvl(xp){ let i = 0; LEVELS.forEach((l,k) => { if (xp >= l[0]) i = k; }); return i; }
+function checkCompletion(){
+  UNITS.forEach(u => { const ls = LESSONS.filter(l => l.unit === u.id); if (ls.every(l => isPassed(l.id))) badge("unit"); });
+  if (LESSONS.every(l => isPassed(l.id))) badge("grad");
+}
+
+/* ---------- views ---------- */
+const OPTN = ["①","②","③","④"];
+
+function header(){
+  const i = lvl(S.xp);
+  return `<button class="brand" data-act="home" aria-label="홈으로"><span class="logo"><i></i><i></i><i></i></span>공학 설계 계단 교실</button>
+  <nav class="nav"><button data-act="home" aria-current="${view.name!=="glossary"}">레슨</button><button data-act="glossary" aria-current="${view.name==="glossary"}">용어 사전</button><a class="sw" href="../">← 인공지능 기초</a></nav>
+  <div class="me"><span class="lv">Lv.${i+1} ${LEVELS[i][1]}</span><span class="num xp-txt">${S.xp} XP</span>
+  <button class="theme" data-act="theme" aria-label="밝게/어둡게 바꾸기">◐</button></div>`;
+}
+
+function nextLesson(){ return LESSONS.find(l => !isPassed(l.id)) || LESSONS[0]; }
+
+function home(){
+  const done = LESSONS.filter(l => isPassed(l.id)).length;
+  const started = Object.keys(S.les).length > 0;
+  const nx = nextLesson();
+  const i = lvl(S.xp), nextLv = LEVELS[i+1];
+  const pct = nextLv ? Math.round((S.xp - LEVELS[i][0]) / (nextLv[0] - LEVELS[i][0]) * 100) : 100;
+  return `
+  <section class="hero">
+    <div>
+      <p class="eyebrow">고등학교 창의 공학 설계 · 레슨 ${LESSONS.length}개</p>
+      <h1>한 계단씩 오르는<br>창의 공학 설계</h1>
+      <p class="lead">짧은 이야기로 궁금증을 만들고, 계단마다 확인문제를 풀며 올라가요. 레슨을 마칠 때마다 XP와 배지를 모아요.</p>
+      <div class="hero-cta">
+        <button class="btn primary" data-act="open" data-id="${nx.id}">${started ? "이어서 하기" : "첫 레슨 시작하기"} →</button>
+        <span class="hero-meta num">${done}/${LESSONS.length} 레슨 완료</span>
+      </div>
+    </div>
+    <div>
+      <div class="stairs" role="img" aria-label="레슨 ${LESSONS.length}개 중 ${done}개 완료">
+        ${LESSONS.map((l,k) => `<span class="stair ${isPassed(l.id)?"on":""} ${l.id===nx.id && done<LESSONS.length?"cur":""}" style="--h:${(k+1)*6/LESSONS.length}">${k+1}</span>`).join("")}
+      </div>
+      <p class="stairs-cap">레슨을 하나 마칠 때마다 계단이 한 칸씩 채워져요</p>
+    </div>
+  </section>
+
+  <ol class="flow">
+    <li><b>1</b><strong>짧은 이야기</strong><span>일상 속 장면으로 궁금증 만들기</span></li>
+    <li><b>2</b><strong>계단 오르기</strong><span>확인문제를 맞히면 다음 칸이 열려요</span></li>
+    <li><b>3</b><strong>용어 카드</strong><span>용어와 뜻을 짝지어요</span></li>
+    <li><b>4</b><strong>10문제 시험</strong><span>80점 이상이면 레슨 통과</span></li>
+  </ol>
+
+  <section>
+    <div class="sec-h"><h2>내 기록</h2><small class="num">🔥 ${S.streak.n}일 연속 학습</small></div>
+    <div class="card rec">
+      <div>
+        <div class="rec-lv">Lv.${i+1} ${LEVELS[i][1]}</div>
+        <div class="rec-sub num">${S.xp} XP</div>
+        <div class="bar"><i style="width:${pct}%"></i></div>
+        <div class="rec-sub">${nextLv ? `다음 레벨(${nextLv[1]})까지 <span class="num">${nextLv[0]-S.xp}</span> XP` : "최고 레벨이에요"}</div>
+      </div>
+      <div class="badges">
+        ${BADGES.map(b => `<div class="badge ${S.badges.includes(b.id)?"on":""}"><span class="m">${b.m}</span><div><strong>${b.name}</strong><span>${b.how}</span></div></div>`).join("")}
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="sec-h"><h2>대단원</h2><small>레슨을 눌러 시작해요</small></div>
+    <div class="units">
+    ${UNITS.map(u => `
+      <div class="unit">
+        <div class="unit-no">${u.no}</div>
+        <div>
+          <h3>${u.title}</h3><p>${u.desc}</p>
+          ${LESSONS.filter(l => l.unit === u.id).map(l => {
+            const s = S.les[l.id];
+            const chip = s && s.passed ? `<span class="chip done">완료 · ${s.best}점</span>` : s && s.steps > 0 ? `<span class="chip go">계단 ${s.steps}/3</span>` : `<span class="chip">시작 전</span>`;
+            return `<button class="les" data-act="open" data-id="${l.id}"><span class="code">${l.id}</span><span class="t">${l.title}<small>${l.sub}</small></span>${chip}</button>`;
+          }).join("")}
+        </div>
+      </div>`).join("")}
+    </div>
+  </section>
+
+  <div class="reset">${ui.confirmReset
+    ? `기록을 모두 지울까요? 되돌릴 수 없어요. <button class="btn ghost" data-act="reset-yes">모두 지우기</button><button class="linkish" data-act="reset-no">취소</button>`
+    : `<button class="linkish" data-act="reset">기록 모두 지우기</button>`}</div>`;
+}
+
+function quizBlock(key, q, opts){
+  // opts: {solved, wrong:Set, act, data}
+  const ord = order(key, q.o.length);
+  return `<div class="opts">${ord.map((oi,k) => {
+    const cls = opts.solved && oi === q.a ? "right" : opts.wrong.has(oi) ? "wrong" : "";
+    return `<button class="opt ${cls}" data-act="${opts.act}" ${opts.data} data-i="${oi}" ${opts.solved || opts.wrong.has(oi) ? "disabled" : ""}><span class="n">${OPTN[k]}</span><span>${q.o[oi]}</span></button>`;
+  }).join("")}</div>`;
+}
+
+function matrix(){
+  const ideas = ["A 접이식 카트","B 큰 바퀴 카트","C 바구니 분리 카트"], crit = ["시간","비용","재료"], lab = ["","미흡","보통","우수"];
+  const tot = ui.mx.map(r => r.reduce((a,b) => a+b, 0)), best = Math.max(...tot);
+  return `<div class="pc"><span class="tag">직접 채점해 봐요 · 칸을 누르면 점수가 바뀌어요</span>
+    <div class="pc-out"><table class="mx"><thead><tr><th>아이디어</th>${crit.map(c => `<th>${c}</th>`).join("")}<th>총점</th></tr></thead><tbody>
+    ${ui.mx.map((r,i) => `<tr class="${tot[i]===best?"best":""}"><th>${ideas[i]}</th>${r.map((v,j) => `<td><button class="tog" data-act="mx" data-i="${i}" data-j="${j}">${lab[v]}<span class="num">${v}</span></button></td>`).join("")}<td class="num">${tot[i]}</td></tr>`).join("")}
+    </tbody></table></div>
+    <p class="pc-res">평가 행렬 결과, 가장 알맞은 아이디어: <b>${ideas[tot.indexOf(best)]}</b></p></div>`;
+}
+
+function lesson(id){
+  const l = lessonById(id), s = L(id), u = unitById(l.unit);
+  const idx = LESSONS.indexOf(l), prev = LESSONS[idx-1], next = LESSONS[idx+1];
+  const stairsDone = s.steps >= l.steps.length;
+
+  const steps = l.steps.map((st, k) => {
+    const n = `${k+1}계단`;
+    if (k > s.steps) return `<div class="card step locked" id="step-${k}"><div class="step-h"><b>${n}</b><h3>${st.t}</h3></div><p class="note">앞 계단의 확인문제를 맞히면 열려요.</p></div>`;
+    const solved = s.steps > k, wk = id+"-s"+k, wrong = ui.wrong[wk] || new Set();
+    return `<div class="card step" id="step-${k}">
+      <div class="step-h"><b>${n}</b><h3>${st.t}</h3></div>
+      ${st.p ? `<p class="intro">${st.p}</p>` : ""}
+      <ul>${st.li.map(x => `<li>${x}</li>`).join("")}</ul>
+      ${st.widget === "matrix" ? matrix() : ""}
+      ${st.key ? `<div class="key"><b>꼭 기억해요</b>${st.key}</div>` : ""}
+      <div class="quiz"><span class="tag">확인문제 · 맞히면 다음 계단이 열려요</span>
+        <p class="qq">${st.q.q}</p>
+        ${quizBlock(wk, st.q, {solved, wrong, act:"step", data:`data-id="${id}" data-k="${k}"`})}
+        ${solved ? `<p class="fb ok">정답이에요! ${st.q.why}</p>` : wrong.size ? `<p class="fb no">아쉬워요. 위 설명을 다시 읽고 골라 봐요.</p>` : ""}
+      </div></div>`;
+  }).join("");
+
+  const pips = l.steps.map((st,k) => `<span class="pip ${s.steps>k?"done":s.steps===k?"cur":""}">${s.steps>k?"✓ ":""}${k+1}계단</span>`).join("");
+
+  return `
+  <div class="l-head">
+    <div class="crumb"><button data-act="home">공학 설계 계단 교실</button><span>›</span><span>${u.no}. ${u.title}</span><span>›</span><span class="num">${l.id}</span></div>
+    <h1>${l.title}</h1><p class="sub">${l.sub}</p>
+  </div>
+
+  <section class="card"><span class="tag">이번 레슨의 목표</span><ul class="goals">${l.goals.map(g => `<li>${g}</li>`).join("")}</ul></section>
+
+  <section class="story"><span class="tag">이야기 · 먼저 읽어 봐요</span><h2>${l.story.title}</h2>
+    ${l.story.p.map(p => `<p>${p}</p>`).join("")}<p class="q">${l.story.q}</p></section>
+
+  <section><div class="sec-h"><h2>계단 오르기</h2><small>${l.steps.length}칸을 한 칸씩</small></div>
+    <div class="pips">${pips}</div><div class="steps">${steps}</div></section>
+
+  <section class="card"><span class="tag">정리 · 한 줄씩 다시 보기</span>
+    ${stairsDone ? `<ul class="sumlist">${l.summary.map(x => `<li>${x}</li>`).join("")}</ul>` : `<p class="lock">계단을 모두 오르면 열려요.</p>`}</section>
+
+  <section class="card" id="cards"><span class="tag">게임 · 용어 카드 짝 맞추기</span>
+    ${stairsDone ? cardGame(l) : `<p class="lock">계단을 모두 오르면 열려요.</p>`}</section>
+
+  <section class="card" id="test"><span class="tag">시험 · 10문제, 80점 이상이면 통과</span>
+    ${stairsDone ? testBlock(l) : `<p class="lock">계단을 모두 오르면 열려요. 시험에서 80점 이상을 받으면 이 레슨이 완료돼요.</p>`}</section>
+
+  <nav class="foot-nav">
+    ${prev ? `<button class="btn ghost" data-act="open" data-id="${prev.id}"><small>← 이전 레슨</small>${prev.title}</button>` : ""}
+    ${next ? `<button class="btn ghost next" data-act="open" data-id="${next.id}"><small>다음 레슨 →</small>${next.title}</button>` : `<button class="btn ghost next" data-act="home"><small>마지막 레슨이에요</small>홈으로</button>`}
+  </nav>`;
+}
+
+function cardGame(l){
+  const s = L(l.id);
+  const g = ui.cards[l.id] || (ui.cards[l.id] = {sel:null, got:s.cards ? l.cards.map((_,i)=>i) : [], bad:null, miss:0});
+  const n = l.cards.length, to = order("ct"+l.id, n), dor = order("cd"+l.id, n);
+  const cls = (side, i) => g.got.includes(i) ? "got" : g.bad && g.bad[side] === i ? "bad" : g.sel && g.sel.side === side && g.sel.i === i ? "sel" : "";
+  const all = g.got.length === n;
+  return `<p style="margin-bottom:12px;color:var(--muted);font-size:14px">왼쪽 용어를 누르고, 알맞은 뜻을 눌러 짝을 지어요.</p>
+  <div class="match">
+    <div>${to.map(i => `<button class="mc term ${cls("t",i)}" data-act="card" data-id="${l.id}" data-side="t" data-i="${i}" ${g.got.includes(i)?"disabled":""}>${l.cards[i][0]}</button>`).join("")}</div>
+    <div>${dor.map(i => `<button class="mc ${cls("d",i)}" data-act="card" data-id="${l.id}" data-side="d" data-i="${i}" ${g.got.includes(i)?"disabled":""}>${l.cards[i][1]}</button>`).join("")}</div>
+  </div>
+  ${all ? `<p class="fb ok">모든 짝을 맞혔어요! <button class="linkish" data-act="card-again" data-id="${l.id}">다시 하기</button></p>` : `<p class="fb num" style="color:var(--muted)">${g.got.length}/${n} 짝 완성</p>`}`;
+}
+
+function testQs(l){ return [...l.steps.map(s => s.q), ...l.test]; }
+
+function testBlock(l){
+  const s = L(l.id);
+  const t = ui.test[l.id] || (ui.test[l.id] = {seed:0, ans:{}, done:false, score:0});
+  const qs = testQs(l), qo = order("tq"+l.id+"-"+t.seed, qs.length);
+  const answered = Object.keys(t.ans).length;
+  let head = "";
+  if (t.done) {
+    const pass = t.score >= 80;
+    head = `<div class="result ${pass?"pass":"fail"}"><span class="score">${t.score}점</span>
+      <div><strong>${pass ? "통과했어요! 레슨 완료" : "아쉬워요. 80점부터 통과예요"}</strong><br>
+      <span style="font-size:14px;color:var(--muted)">틀린 문제의 정답을 아래에서 확인하고 다시 도전해 봐요.</span></div>
+      <button class="btn ghost" data-act="retest" data-id="${l.id}">다시 풀기</button></div>`;
+  } else if (s.passed) {
+    head = `<p class="fb ok" style="margin:0 0 8px">이미 통과한 레슨이에요 (최고 ${s.best}점). 다시 풀어도 좋아요.</p>`;
+  }
+  const body = qo.map((qi, k) => {
+    const q = qs[qi], key = `t${l.id}-${t.seed}-${qi}`, ord = order(key, q.o.length), pick = t.ans[qi];
+    return `<div class="tq"><p class="qq"><span class="num">${String(k+1).padStart(2,"0")}</span>${q.q}</p><div class="opts">
+      ${ord.map((oi, j) => {
+        let c = "";
+        if (t.done) c = oi === q.a ? "right" : oi === pick ? "wrong" : "";
+        else if (pick === oi) c = "sel";
+        return `<button class="opt ${c}" data-act="tpick" data-id="${l.id}" data-q="${qi}" data-i="${oi}" ${t.done?"disabled":""}><span class="n">${OPTN[j]}</span><span>${q.o[oi]}</span></button>`;
+      }).join("")}</div></div>`;
+  }).join("");
+  const submit = t.done ? "" : `<div style="display:flex;align-items:center;gap:12px;margin-top:16px;flex-wrap:wrap">
+    <button class="btn primary" data-act="submit" data-id="${l.id}" ${answered < qs.length ? "disabled" : ""}>채점하기</button>
+    <span class="num" style="color:var(--muted);font-size:14px">${answered}/${qs.length} 답함</span></div>`;
+  return head + body + submit;
+}
+
+function glossary(){
+  const rows = LESSONS.flatMap(l => l.cards.map(c => ({t:c[0], d:c[1], l})))
+    .sort((a,b) => a.t.localeCompare(b.t, "ko"));
+  return `<div class="l-head"><h1>용어 사전</h1><p class="sub">모든 레슨의 용어 ${rows.length}개를 가나다순으로 모았어요.</p></div>
+  <input class="search" id="gl-search" type="search" placeholder="용어나 뜻으로 찾기" aria-label="용어 찾기">
+  <div class="gl">${rows.map(r => `<div class="gl-row" data-s="${(r.t+" "+r.d).toLowerCase()}"><strong>${r.t}</strong><span>${r.d}</span><button data-act="open" data-id="${r.l.id}">${r.l.id} ${r.l.title} →</button></div>`).join("")}</div>`;
+}
+
+function render(){
+  document.getElementById("top").innerHTML = header();
+  const app = document.getElementById("app");
+  app.innerHTML = view.name === "lesson" ? lesson(view.id) : view.name === "glossary" ? glossary() : home();
+}
+function go(v){ view = v; ui.confirmReset = false; render(); window.scrollTo(0,0); }
+
+/* ---------- events ---------- */
+document.addEventListener("input", e => {
+  if (e.target.id !== "gl-search") return;
+  const q = e.target.value.trim().toLowerCase();
+  document.querySelectorAll(".gl-row").forEach(r => { r.hidden = q && !r.dataset.s.includes(q); });
+});
+
+document.addEventListener("click", e => {
+  const el = e.target.closest("[data-act]"); if (!el) return;
+  const a = el.dataset.act, id = el.dataset.id;
+  if (a === "home") return go({name:"home"});
+  if (a === "glossary") return go({name:"glossary"});
+  if (a === "open") return go({name:"lesson", id});
+  if (a === "theme") {
+    const root = document.documentElement;
+    const dark = root.dataset.theme ? root.dataset.theme === "dark" : matchMedia("(prefers-color-scheme: dark)").matches;
+    root.dataset.theme = dark ? "light" : "dark";
+    try { localStorage.setItem(KEY+"-theme", root.dataset.theme); } catch(e){}
+    return;
+  }
+  if (a === "reset") { ui.confirmReset = true; return render(); }
+  if (a === "reset-no") { ui.confirmReset = false; return render(); }
+  if (a === "reset-yes") {
+    S = fresh(); S.streak = {last:dayStr(new Date()), n:1}; save();
+    ui.wrong = {}; ui.cards = {}; ui.test = {}; ui.confirmReset = false; orders.clear();
+    toast("기록을 모두 지웠어요"); return render();
+  }
+
+  if (a === "step") {
+    const k = +el.dataset.k, i = +el.dataset.i, l = lessonById(id), q = l.steps[k].q, s = L(id), wk = id+"-s"+k;
+    if (i === q.a) {
+      if (s.steps === k) { s.steps++; addXP(XP.step, `${k+1}계단 통과`); badge("first"); save(); }
+      render();
+      const nx = document.getElementById("step-"+(k+1)) || document.getElementById("cards");
+      if (nx && s.steps === k+1) setTimeout(() => nx.scrollIntoView({behavior:"smooth", block:"start"}), 350);
+    } else { (ui.wrong[wk] || (ui.wrong[wk] = new Set())).add(i); render(); }
+    return;
+  }
+
+  if (a === "mx") {
+    const i = +el.dataset.i, j = +el.dataset.j; ui.mx[i][j] = ui.mx[i][j] % 3 + 1;
+    if (!S.badges.includes("lab")) { badge("lab"); save(); }
+    return render();
+  }
+
+  if (a === "card") {
+    const l = lessonById(id), g = ui.cards[id], side = el.dataset.side, i = +el.dataset.i;
+    if (g.bad) return;
+    if (!g.sel || g.sel.side === side) { g.sel = {side, i}; return render(); }
+    const t = side === "t" ? i : g.sel.i, d = side === "d" ? i : g.sel.i;
+    g.sel = null;
+    if (t === d) {
+      g.got.push(t);
+      if (g.got.length === l.cards.length) {
+        const s = L(id);
+        if (!s.cards) { s.cards = true; addXP(XP.cards, "용어 카드 완성"); }
+        if (g.miss === 0) badge("cards");
+        save();
+      }
+      return render();
+    }
+    g.miss++; g.bad = {t, d}; render();
+    setTimeout(() => { g.bad = null; render(); }, 650);
+    return;
+  }
+  if (a === "card-again") { ui.cards[id] = {sel:null, got:[], bad:null, miss:0}; orders.delete("ct"+id); orders.delete("cd"+id); return render(); }
+
+  if (a === "tpick") { ui.test[id].ans[+el.dataset.q] = +el.dataset.i; return render(); }
+  if (a === "submit") {
+    const l = lessonById(id), t = ui.test[id], s = L(id), qs = testQs(l);
+    const right = qs.filter((q, qi) => t.ans[qi] === q.a).length;
+    t.score = right * 10; t.done = true; s.tries++;
+    if (t.score >= 80) {
+      if (!s.passed) { s.passed = true; addXP(XP.pass, "레슨 통과"); if (s.tries === 1) badge("oneshot"); }
+      if (t.score === 100 && (s.best || 0) < 100) { addXP(XP.perfect, "만점 보너스"); badge("perfect"); }
+    }
+    s.best = Math.max(s.best || 0, t.score);
+    checkCompletion(); save(); render();
+    document.getElementById("test").scrollIntoView({behavior:"smooth", block:"start"});
+    return;
+  }
+  if (a === "retest") { const t = ui.test[id]; t.seed++; t.ans = {}; t.done = false; render(); document.getElementById("test").scrollIntoView({block:"start"}); }
+});
+
+try { const th = localStorage.getItem(KEY+"-theme"); if (th) document.documentElement.dataset.theme = th; } catch(e){}
+render();
+</script>
+</body>
+</html>

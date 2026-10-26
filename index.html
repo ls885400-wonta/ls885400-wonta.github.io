@@ -64,6 +64,8 @@ button{font:inherit;color:inherit;cursor:pointer}
 .logo i:nth-child(1){height:35%}.logo i:nth-child(2){height:65%}.logo i:nth-child(3){height:100%;background:var(--marker)}
 .nav{display:flex;gap:4px;margin-left:8px}
 .nav button{background:none;border:0;padding:6px 10px;border-radius:8px;color:var(--muted);font-weight:500;font-size:14px}
+.nav .sw{padding:6px 10px;border-radius:8px;color:var(--accent);font-weight:700;font-size:14px;text-decoration:none;border:1px solid var(--line)}
+.nav .sw:hover{border-color:var(--accent)}
 .nav button[aria-current="true"]{color:var(--ink);background:var(--accent-soft)}
 .me{margin-left:auto;display:flex;align-items:center;gap:10px;font-size:14px}
 .lv{background:var(--marker);color:var(--marker-ink);font-weight:700;padding:2px 9px;border-radius:999px;font-size:13px}
@@ -463,7 +465,7 @@ const OPTN = ["①","②","③","④"];
 function header(){
   const i = lvl(S.xp);
   return `<button class="brand" data-act="home" aria-label="홈으로"><span class="logo"><i></i><i></i><i></i></span>AI 계단 교실</button>
-  <nav class="nav"><button data-act="home" aria-current="${view.name!=="glossary"}">레슨</button><button data-act="glossary" aria-current="${view.name==="glossary"}">용어 사전</button></nav>
+  <nav class="nav"><button data-act="home" aria-current="${view.name!=="glossary"}">레슨</button><button data-act="glossary" aria-current="${view.name==="glossary"}">용어 사전</button><a class="sw" href="design/">창의 공학 설계 →</a></nav>
   <div class="me"><span class="lv">Lv.${i+1} ${LEVELS[i][1]}</span><span class="num xp-txt">${S.xp} XP</span>
   <button class="theme" data-act="theme" aria-label="밝게/어둡게 바꾸기">◐</button></div>`;
 }
