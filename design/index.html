@@ -615,7 +615,7 @@ const OPTN = ["①","②","③","④"];
 function header(){
   const i = lvl(S.xp);
   return `<button class="brand" data-act="home" aria-label="홈으로"><span class="logo"><i></i><i></i><i></i></span>공학 설계 계단 교실</button>
-  <nav class="nav"><button data-act="home" aria-current="${view.name!=="glossary"}">레슨</button><button data-act="glossary" aria-current="${view.name==="glossary"}">용어 사전</button><a class="sw" href="../">← 인공지능 기초</a></nav>
+  <nav class="nav"><button data-act="home" aria-current="${view.name!=="glossary"}">레슨</button><button data-act="glossary" aria-current="${view.name==="glossary"}">용어 사전</button><a class="sw" href="../">← 교실 홈</a></nav>
   <div class="me"><span class="lv">Lv.${i+1} ${LEVELS[i][1]}</span><span class="num xp-txt">${S.xp} XP</span>
   <button class="theme" data-act="theme" aria-label="밝게/어둡게 바꾸기">◐</button></div>`;
 }
