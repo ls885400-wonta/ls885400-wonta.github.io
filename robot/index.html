@@ -17,7 +17,7 @@
 :root{
   --bg:#F3F8FC; --surface:#FFFFFF; --ink:#0A1D2B; --text:#1B2E3C; --muted:#465A6A; --line:#D3E0EA; --soft:#E8F1F8;
   --accent:#7048E8; --accent-soft:#F0ECFE; --accent-ink:#FFFFFF; --accent-deep:#5F3DC4;
-  --sun:#FFC93C; --sun-ink:#3A2A00; --sun-soft:#FFF4D1; --ok:#2B9348; --ok-soft:#E3F5E8; --bad:#E8590C; --bad-soft:#FFEDE3;
+  --sun:#FFC93C; --sun-ink:#3A2A00; --sun-soft:#FFF4D1; --ok:#12A150; --ok-soft:#DFF6E7; --bad:#E8590C; --bad-soft:#FFEDE3;
   --shadow:0 1px 2px rgba(14,36,51,.05),0 6px 20px rgba(14,36,51,.06);
   --f-body:"Pretendard Variable",Pretendard,"Malgun Gothic","Apple SD Gothic Neo",sans-serif;
   --f-mono:"JetBrains Mono",ui-monospace,Consolas,monospace;
@@ -87,17 +87,19 @@ button{font:inherit;color:inherit;cursor:pointer}
 .side-home.on,.side-les.on,.side-tool.on{background:var(--accent-soft)!important;color:var(--accent-deep)!important}
 .su-h{display:flex;align-items:center;gap:8px;margin:14px 10px 4px;font-size:.85rem;font-weight:800;color:var(--muted);letter-spacing:.01em}
 .su-h span{flex:none;min-width:26px;height:22px;padding:0 6px;border-radius:7px;background:var(--accent);color:var(--accent-ink);display:grid;place-items:center;font-size:.78rem;font-family:"Times New Roman",serif}
-.side-les i{flex:none;width:22px;height:22px;margin-top:1px;border-radius:50%;border:2px solid var(--line);display:grid;place-items:center;font-style:normal;font-size:.75rem;font-weight:900;color:#fff}
-.side-les.go i{border-color:var(--accent);color:var(--accent)}
-.side-les.done i{background:var(--ok);border-color:var(--ok)}
+.side-les i{flex:none;width:15px;height:15px;margin-top:5px;border-radius:50%;border:2.5px solid color-mix(in srgb,var(--accent) 55%,var(--line));display:grid;place-items:center;font-style:normal;font-size:.58rem;font-weight:900;color:#fff;line-height:1}
+.side-les.go i{border-color:var(--accent);background:var(--accent);box-shadow:0 0 0 3px var(--accent-soft)}
+.side-les.done i{background:var(--ok);border-color:var(--ok);box-shadow:0 0 0 3px var(--ok-soft)}
 .side-les small{display:block;font-family:var(--f-mono);font-size:.8rem;color:var(--muted);line-height:1.2}
 .side-les.on small{color:var(--accent-deep)}
 .side-les span{min-width:0;font-weight:700}
 .side-sec{margin:2px 0 8px 22px;padding-left:12px;border-left:2px solid var(--accent-soft);display:grid;gap:1px}
 .side-sec a{display:flex;align-items:center;gap:8px;text-decoration:none;font-size:.9rem;font-weight:600;color:var(--text);padding:6px 8px;border-radius:9px;line-height:1.4}
 .side-sec a:hover{background:var(--soft)}
-.side-sec a i{flex:none;width:17px;height:17px;border-radius:50%;border:2px solid var(--line);display:grid;place-items:center;font-style:normal;font-size:.62rem;color:#fff}
-.side-sec a.done i{background:var(--ok);border-color:var(--ok)}
+.side-sec a i{flex:none;width:14px;display:grid;place-items:center;font-style:normal;font-size:.85rem;font-weight:900;line-height:1;color:var(--ok)}
+.side-sec a i:empty::before{content:"";width:7px;height:7px;border-radius:50%;background:var(--accent)}
+.side-sec a.lock i:empty::before{background:var(--line)}
+.side-sec a.done{color:var(--ink)}
 .side-sec a.lock{color:var(--muted)}
 .side-foot{border-top:1px solid var(--line);margin-top:12px;padding-top:8px;display:grid;gap:2px}
 .side-tool{font-weight:700}
@@ -1421,7 +1423,7 @@ function sidebar(){
     ${UNITS.map(u => `<p class="su-h"><span>${u.no}</span>${esc(u.title)}</p>
       ${LESSONS.filter(l => l.unit === u.id).map(l => {
         const s = S.les[l.id] || {}, st = s.passed ? "done" : (s.steps > 0 ? "go" : "");
-        return `<button class="side-les ${st} ${cur===l.id?"on":""}" data-act="open" data-id="${l.id}" ${cur===l.id?'aria-current="page"':""}><i>${s.passed?"✓":s.steps>0?"●":""}</i><span><small>${l.id}</small>${esc(l.title)}</span></button>${cur===l.id ? sectionList(l) : ""}`;
+        return `<button class="side-les ${st} ${cur===l.id?"on":""}" data-act="open" data-id="${l.id}" ${cur===l.id?'aria-current="page"':""}><i>${s.passed?"✓":""}</i><span><small>${l.id}</small>${esc(l.title)}</span></button>${cur===l.id ? sectionList(l) : ""}`;
       }).join("")}`).join("")}
     <div class="side-foot"><button class="side-tool ${view.name==="glossary"?"on":""}" data-act="glossary">📖 용어 사전</button>
       <button class="side-tool ${view.name==="review"?"on":""}" data-act="review">📝 오답 노트${wc?`<span class="cnt">${wc}</span>`:""}</button></div>`;

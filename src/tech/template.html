@@ -16,7 +16,7 @@
   --bg:#F3F8FC; --surface:#FFFFFF; --ink:#0A1D2B; --text:#1B2E3C; --muted:#465A6A; --line:#D3E0EA; --soft:#E8F1F8;
   --mfg:#C9561A; --mfg-s:#FBEBE1; --ict:#2563C9; --ict-s:#E4ECFA; --con:#8A6414; --con-s:#F4ECD9;
   --trn:#0B7F73; --trn-s:#DDF2EF; --bio:#B7325F; --bio-s:#F8E3EA;
-  --ok:#17803D; --ok-s:#E2F3E7; --bad:#B9381A; --bad-s:#FBE6E0; --marker:#F2C14E; --marker-ink:#2B2104;
+  --ok:#12A150; --ok-s:#DFF6E7; --bad:#B9381A; --bad-s:#FBE6E0; --marker:#F2C14E; --marker-ink:#2B2104;
   --f-body:"Pretendard Variable",Pretendard,"Malgun Gothic","Apple SD Gothic Neo",sans-serif;
   --f-mono:"IBM Plex Mono",ui-monospace,Consolas,monospace;
   color-scheme:light;
@@ -70,8 +70,8 @@ button{font:inherit;color:inherit;cursor:pointer}
 .side .s-home{font-weight:800;color:var(--ink);font-size:1rem}
 .side .s-cat{margin:14px 10px 4px;font-size:.85rem;font-weight:900;color:var(--c);display:flex;align-items:center;gap:8px}
 .side .s-cat i{width:10px;height:10px;border-radius:3px;background:var(--c)}
-.side a b{flex:none;width:20px;height:20px;border-radius:50%;border:2px solid var(--line);display:grid;place-items:center;font-size:.7rem;color:#fff}
-.side a.seen b{background:var(--ok);border-color:var(--ok)}
+.side a b{flex:none;width:15px;height:15px;border-radius:50%;border:2.5px solid color-mix(in srgb,var(--c,var(--muted)) 55%,var(--line));display:grid;place-items:center;font-size:.58rem;color:#fff;line-height:1}
+.side a.seen b{background:var(--ok);border-color:var(--ok);box-shadow:0 0 0 3px var(--ok-s)}
 .scrim{position:fixed;inset:0;background:rgba(8,20,30,.45);z-index:29}
 .menu-btn{display:none}
 @media (max-width:1000px){
