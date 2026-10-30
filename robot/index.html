@@ -1,0 +1,972 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="description" content="고등학교 로봇과 공학세계를 이야기, 계단식 확인문제, 용어 카드, 10문제 시험으로 배우는 학습 사이트">
+<meta name="theme-color" content="#15201B">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%2315201B'/%3E%3Crect x='6' y='18' width='6' height='8' rx='1' fill='%233BC19C'/%3E%3Crect x='13' y='12' width='6' height='14' rx='1' fill='%233BC19C'/%3E%3Crect x='20' y='6' width='6' height='20' rx='1' fill='%23F2C14E'/%3E%3C/svg%3E">
+<style>
+:root{color-scheme:light;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+body{margin:0}
+img{max-width:100%}
+[hidden]{display:none!important}
+</style>
+<title>로봇 공학 계단 교실</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Black+Han+Sans&family=IBM+Plex+Sans+KR:wght@400;500;700&family=IBM+Plex+Mono:wght@500;600&display=swap">
+<style>
+/* Layout: one 960px reading column; dark graph-paper hero with a stair chart of lessons; lesson page = notebook story + stacked stair cards */
+:root{
+  --bg:#F4F6F2; --surface:#FFFFFF; --ink:#17201C; --muted:#5A6761; --line:#DCE3DD;
+  --accent:#0E7A62; --accent-ink:#FFFFFF; --accent-soft:#E1F1EB;
+  --marker:#F2C14E; --marker-ink:#2B2104; --marker-soft:#FCF1D2;
+  --ok:#1D8549; --ok-soft:#E2F3E8; --bad:#BF4719; --bad-soft:#FBE8DF;
+  --panel:#15201B; --panel-ink:#E8F1EC; --panel-muted:#9DB0A7; --panel-line:rgba(232,241,236,.09);
+  --f-display:"Black Han Sans","IBM Plex Sans KR","Malgun Gothic",sans-serif;
+  --f-body:"IBM Plex Sans KR","Malgun Gothic","Apple SD Gothic Neo",sans-serif;
+  --f-mono:"IBM Plex Mono",ui-monospace,Consolas,monospace;
+  --r:12px;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#0F1412; --surface:#171F1C; --ink:#E5ECE8; --muted:#98A69F; --line:#2A3530;
+  --accent:#3BC19C; --accent-ink:#062219; --accent-soft:#163329;
+  --marker:#F2C14E; --marker-ink:#2B2104; --marker-soft:#3A311C;
+  --ok:#4CC27F; --ok-soft:#163124; --bad:#F08A60; --bad-soft:#3A2118;
+  --panel:#0A0F0D; --panel-ink:#E8F1EC; --panel-muted:#8FA29A; --panel-line:rgba(232,241,236,.07);
+  color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#0F1412; --surface:#171F1C; --ink:#E5ECE8; --muted:#98A69F; --line:#2A3530;
+  --accent:#3BC19C; --accent-ink:#062219; --accent-soft:#163329;
+  --marker:#F2C14E; --marker-ink:#2B2104; --marker-soft:#3A311C;
+  --ok:#4CC27F; --ok-soft:#163124; --bad:#F08A60; --bad-soft:#3A2118;
+  --panel:#0A0F0D; --panel-ink:#E8F1EC; --panel-muted:#8FA29A; --panel-line:rgba(232,241,236,.07);
+  color-scheme:dark}
+
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--ink);font-family:var(--f-body);font-size:16px;line-height:1.7;word-break:keep-all;overflow-wrap:break-word}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:10;background:var(--surface)}
+h1,h2,h3{text-wrap:balance;margin:0;line-height:1.3}
+p{margin:0}
+button{font:inherit;color:inherit;cursor:pointer}
+:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.num{font-family:var(--f-mono);font-variant-numeric:tabular-nums}
+
+/* header */
+.top{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:var(--surface);border-bottom:1px solid var(--line)}
+.top-in,.wrap{max-width:960px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+.top-in{display:flex;align-items:center;gap:12px;min-height:56px;flex-wrap:wrap;padding-block:6px}
+.brand{display:flex;align-items:center;gap:8px;background:none;border:0;padding:0;font-family:var(--f-display);font-size:19px;letter-spacing:.01em}
+.logo{display:flex;align-items:flex-end;gap:2px;width:22px;height:20px}
+.logo i{display:block;flex:1;background:var(--accent);border-radius:2px}
+.logo i:nth-child(1){height:35%}.logo i:nth-child(2){height:65%}.logo i:nth-child(3){height:100%;background:var(--marker)}
+.nav{display:flex;gap:4px;margin-left:8px}
+.nav button{background:none;border:0;padding:6px 10px;border-radius:8px;color:var(--muted);font-weight:500;font-size:14px}
+.nav .sw{padding:6px 10px;border-radius:8px;color:var(--accent);font-weight:700;font-size:14px;text-decoration:none;border:1px solid var(--line)}
+.nav .sw:hover{border-color:var(--accent)}
+.nav button[aria-current="true"]{color:var(--ink);background:var(--accent-soft)}
+.me{margin-left:auto;display:flex;align-items:center;gap:10px;font-size:14px}
+.lv{background:var(--marker);color:var(--marker-ink);font-weight:700;padding:2px 9px;border-radius:999px;font-size:13px}
+.theme{width:34px;height:34px;border-radius:50%;border:1px solid var(--line);background:var(--surface);font-size:15px;line-height:1}
+
+main.wrap{padding-block:28px 64px;display:grid;gap:28px}
+
+/* hero */
+.hero{background:var(--panel);color:var(--panel-ink);border-radius:18px;padding:32px;display:grid;grid-template-columns:1.25fr 1fr;gap:28px;align-items:end;
+  background-image:linear-gradient(var(--panel-line) 1px,transparent 1px),linear-gradient(90deg,var(--panel-line) 1px,transparent 1px);background-size:24px 24px}
+.hero > *{min-width:0}
+.eyebrow{font-size:13px;letter-spacing:.06em;color:var(--marker);font-weight:700}
+.hero h1{font-family:var(--f-display);font-weight:400;font-size:clamp(30px,5vw,46px);margin:10px 0 14px;letter-spacing:.01em}
+.hero p.lead{color:var(--panel-muted);max-width:40ch}
+.hero-cta{display:flex;align-items:center;gap:14px;flex-wrap:wrap;margin-top:22px}
+.hero-meta{color:var(--panel-muted);font-size:14px}
+.stairs{display:flex;align-items:flex-end;gap:6px;height:190px}
+.stair{flex:1;height:calc(var(--h) * 16.6%);border:1.5px solid var(--panel-muted);border-bottom:0;border-radius:6px 6px 0 0;display:flex;align-items:flex-start;justify-content:center;padding-top:6px;font-family:var(--f-mono);font-size:12px;color:var(--panel-muted);background:none;transition:background .3s}
+.stair.on{background:var(--marker);border-color:var(--marker);color:var(--marker-ink)}
+.stair.cur{border-color:var(--panel-ink);color:var(--panel-ink)}
+.stairs-cap{font-size:12px;color:var(--panel-muted);margin-top:8px;border-top:1.5px solid var(--panel-muted);padding-top:6px}
+
+.btn{border:0;border-radius:10px;padding:11px 18px;font-weight:700;font-size:15px}
+.btn.primary{background:var(--accent);color:var(--accent-ink)}
+.hero .btn.primary{background:var(--marker);color:var(--marker-ink)}
+.btn.ghost{background:none;border:1px solid var(--line);color:var(--ink)}
+.btn:disabled{opacity:.45;cursor:not-allowed}
+
+/* flow */
+.flow{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
+.flow li{border-top:3px solid var(--accent);padding-top:10px;min-width:0}
+.flow b{font-family:var(--f-mono);color:var(--accent);font-size:13px;display:block}
+.flow strong{display:block;font-size:15px}
+.flow span{color:var(--muted);font-size:14px}
+
+/* record */
+.sec-h{display:flex;align-items:baseline;justify-content:space-between;gap:12px;margin-bottom:12px;flex-wrap:wrap}
+.sec-h h2{font-size:20px}
+.sec-h small{color:var(--muted);font-size:14px}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:22px}
+.rec{display:grid;grid-template-columns:240px 1fr;gap:28px;align-items:start}
+.rec > *{min-width:0}
+.rec-lv{font-family:var(--f-display);font-size:28px;color:var(--accent)}
+.rec-sub{color:var(--muted);font-size:14px}
+.bar{height:10px;border-radius:999px;background:var(--line);overflow:hidden;margin:12px 0 6px}
+.bar i{display:block;height:100%;background:var(--marker);border-radius:999px;transition:width .4s}
+.badges{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
+.badge{display:flex;align-items:center;gap:10px;padding:8px;border-radius:10px;min-width:0}
+.badge .m{flex:none;width:38px;height:38px;border-radius:50%;display:grid;place-items:center;font-family:var(--f-mono);font-weight:600;font-size:13px;border:1.5px dashed var(--line);color:var(--muted)}
+.badge.on .m{border:0;background:var(--marker);color:var(--marker-ink)}
+.badge div{min-width:0;line-height:1.35}
+.badge strong{display:block;font-size:13px}
+.badge span{font-size:11.5px;color:var(--muted)}
+.badge:not(.on) strong{color:var(--muted)}
+
+/* units */
+.units{display:grid;gap:18px}
+.unit{display:grid;grid-template-columns:64px 1fr;gap:18px}
+.unit > *{min-width:0}
+.unit-no{font-family:var(--f-display);font-size:34px;color:var(--accent);line-height:1}
+.unit h3{font-size:18px}
+.unit p{color:var(--muted);font-size:14.5px;margin:4px 0 10px}
+.les{display:flex;align-items:center;gap:12px;width:100%;text-align:left;background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:12px 14px;margin-top:8px}
+.les:hover{border-color:var(--accent)}
+.les .code{font-family:var(--f-mono);font-size:12.5px;color:var(--muted);flex:none}
+.les .t{flex:1;min-width:0;font-weight:500}
+.les .t small{display:block;color:var(--muted);font-weight:400;font-size:13px}
+.chip{flex:none;font-size:12px;padding:2px 9px;border-radius:999px;background:var(--line);color:var(--muted);font-weight:500}
+.chip.go{background:var(--marker-soft);color:var(--ink)}
+.chip.done{background:var(--ok-soft);color:var(--ok)}
+.reset{display:flex;gap:8px;align-items:center;justify-content:flex-end;font-size:13px;color:var(--muted);flex-wrap:wrap}
+.linkish{background:none;border:0;color:var(--muted);text-decoration:underline;padding:4px;font-size:13px}
+
+/* lesson */
+.crumb{font-size:13.5px;color:var(--muted);display:flex;gap:6px;align-items:center;flex-wrap:wrap}
+.crumb button{background:none;border:0;padding:0;color:var(--accent);font-weight:500}
+.l-head h1{font-family:var(--f-display);font-weight:400;font-size:clamp(28px,4.5vw,40px);margin:8px 0 4px}
+.l-head .sub{color:var(--muted);font-size:16px}
+.goals{list-style:none;padding:0;margin:10px 0 0;display:grid;gap:6px}
+.goals li{padding-left:24px;position:relative}
+.goals li::before{content:"";position:absolute;left:2px;top:.55em;width:12px;height:12px;border:2px solid var(--accent);border-radius:3px}
+.tag{font-size:12px;font-weight:700;letter-spacing:.06em;color:var(--accent);display:block;margin-bottom:6px}
+.story{background:var(--marker-soft);border:0;border-radius:var(--r);padding:26px 28px;
+  background-image:repeating-linear-gradient(transparent 0 31px,rgba(127,110,60,.16) 31px 32px)}
+.story h2{font-size:20px;margin-bottom:10px}
+.story p{line-height:2;max-width:62ch}
+.story p + p{margin-top:8px}
+.story .q{margin-top:14px;font-weight:700}
+
+.pips{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:14px}
+.pip{font-size:13px;padding:4px 10px;border-radius:999px;border:1px solid var(--line);color:var(--muted);background:var(--surface)}
+.pip.done{background:var(--accent);border-color:var(--accent);color:var(--accent-ink)}
+.pip.cur{border-color:var(--accent);color:var(--accent);font-weight:700}
+.steps{display:grid;gap:12px}
+.step{scroll-margin-top:90px}
+.step-h{display:flex;align-items:baseline;gap:10px}
+.step-h b{font-family:var(--f-mono);font-size:13px;color:var(--accent);flex:none}
+.step-h h3{font-size:18px}
+.step.locked{background:none;border-style:dashed;padding:14px 22px}
+.step.locked h3{color:var(--muted);font-size:16px}
+.step.locked .note{color:var(--muted);font-size:13.5px}
+.step ul{margin:10px 0 0;padding-left:20px;display:grid;gap:4px}
+.step .intro{margin-top:8px}
+.key{margin-top:14px;padding:10px 14px;border-radius:8px;background:var(--accent-soft);font-weight:500}
+.key b{color:var(--accent);margin-right:6px}
+
+.quiz{margin-top:18px;border-top:1px solid var(--line);padding-top:16px}
+.quiz .qq{font-weight:700;margin-bottom:10px}
+.opts{display:grid;gap:8px}
+.opt{display:flex;gap:10px;align-items:flex-start;text-align:left;width:100%;background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:10px 12px;font-size:15px}
+.opt:hover:not(:disabled){border-color:var(--accent)}
+.opt .n{font-family:var(--f-mono);color:var(--muted);flex:none;font-size:13px;padding-top:2px}
+.opt.sel{border-color:var(--accent);background:var(--accent-soft)}
+.opt.right{border-color:var(--ok);background:var(--ok-soft)}
+.opt.wrong{border-color:var(--bad);background:var(--bad-soft)}
+.opt:disabled{cursor:default}
+.fb{margin-top:10px;font-size:14.5px}
+.fb.ok{color:var(--ok);font-weight:500}
+.fb.no{color:var(--bad)}
+
+.sumlist{margin:0;padding-left:20px;display:grid;gap:6px}
+.lock{color:var(--muted);font-size:14px}
+
+.match{display:grid;grid-template-columns:1fr 1.6fr;gap:10px}
+.match > div{display:grid;gap:8px;align-content:start;min-width:0}
+.mc{text-align:left;background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:10px 12px;font-size:14.5px;min-height:48px}
+.mc.term{font-weight:700}
+.mc.sel{border-color:var(--accent);background:var(--accent-soft)}
+.mc.got{border-color:var(--ok);background:var(--ok-soft);color:var(--ok);cursor:default}
+.mc.bad{border-color:var(--bad);background:var(--bad-soft);animation:shake .3s}
+@keyframes shake{25%{transform:translateX(-4px)}75%{transform:translateX(4px)}}
+
+.tq{padding:16px 0;border-top:1px solid var(--line)}
+.tq:first-of-type{border-top:0;padding-top:4px}
+.tq .qq{font-weight:500;margin-bottom:10px}
+.tq .qq .num{color:var(--accent);margin-right:6px}
+.result{display:flex;align-items:center;gap:18px;flex-wrap:wrap;padding:16px;border-radius:10px;margin-bottom:8px}
+.result.pass{background:var(--ok-soft)}
+.result.fail{background:var(--bad-soft)}
+.result .score{font-family:var(--f-mono);font-size:34px;font-weight:600}
+.result.pass .score{color:var(--ok)} .result.fail .score{color:var(--bad)}
+.foot-nav{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
+.foot-nav .btn{display:flex;flex-direction:column;align-items:flex-start;text-align:left;font-weight:500}
+.foot-nav .btn small{color:var(--muted);font-size:12px;font-weight:400}
+.foot-nav .next{margin-left:auto;align-items:flex-end;text-align:right}
+
+/* perceptron widget */
+.pc{margin-top:14px;border:1px solid var(--line);border-radius:10px;padding:14px}
+.pc .tag{margin-bottom:10px}
+.pc-in{display:flex;gap:8px;flex-wrap:wrap}
+.tog{border:1px solid var(--line);background:var(--surface);border-radius:999px;padding:6px 12px;font-size:14px}
+.tog[aria-pressed="true"]{background:var(--accent);border-color:var(--accent);color:var(--accent-ink)}
+.tog .num{opacity:.75;margin-left:4px;font-size:12px}
+.pc-out{margin-top:12px;font-size:14px;overflow-x:auto}
+.pc-out .res{font-weight:700}
+
+/* glossary */
+.search{width:100%;padding:12px 14px;border-radius:10px;border:1px solid var(--line);background:var(--surface);color:var(--ink);font:inherit}
+.gl{display:grid;gap:0}
+.gl-row{display:grid;grid-template-columns:180px 1fr auto;gap:16px;padding:14px 4px;border-bottom:1px solid var(--line);align-items:baseline}
+.gl-row > *{min-width:0}
+.gl-row strong{font-size:16px}
+.gl-row button{background:none;border:0;color:var(--accent);font-size:13px;padding:0}
+
+#toasts{position:fixed;left:50%;transform:translateX(-50%);bottom:calc(20px + env(safe-area-inset-bottom,0px));display:grid;gap:8px;z-index:20;width:max-content;max-width:calc(100% - 32px)}
+.toast{background:var(--panel);color:var(--panel-ink);padding:10px 16px;border-radius:10px;font-size:14px;box-shadow:0 6px 20px rgba(0,0,0,.2);animation:up .25s}
+.toast b{color:var(--marker)}
+@keyframes up{from{transform:translateY(8px);opacity:0}}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important;scroll-behavior:auto!important}}
+
+@media (max-width:760px){
+  .hero{grid-template-columns:1fr;padding:24px}
+  .stairs{height:120px}
+  .flow{grid-template-columns:1fr 1fr}
+  .rec{grid-template-columns:1fr}
+  .badges{grid-template-columns:1fr 1fr}
+  .unit{grid-template-columns:1fr;gap:6px}
+  .match{grid-template-columns:1fr}
+  .gl-row{grid-template-columns:1fr;gap:2px}
+  .me .xp-txt{display:none}
+  .story{padding:20px}
+  .card{padding:18px}
+}
+
+/* Graphite + signal-orange palette for the robotics subject */
+:root{--bg:#F5F5F3;--surface:#FFFFFF;--ink:#1B1D21;--muted:#5B5F66;--line:#DEDFDB;--accent:#C2541B;--accent-ink:#FFFFFF;--accent-soft:#FBEADF;--panel:#1E2127;--panel-ink:#EEF0F2;--panel-muted:#A3A9B1;--panel-line:rgba(238,240,242,.09)}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){--bg:#111214;--surface:#1A1C1F;--ink:#ECEDEF;--muted:#A0A4AA;--line:#2C2F33;--accent:#F08A50;--accent-ink:#2A1205;--accent-soft:#3A2418;--panel:#0B0C0E;--panel-ink:#EEF0F2;--panel-muted:#8E949C;--panel-line:rgba(238,240,242,.07)}}
+:root[data-theme="dark"]{--bg:#111214;--surface:#1A1C1F;--ink:#ECEDEF;--muted:#A0A4AA;--line:#2C2F33;--accent:#F08A50;--accent-ink:#2A1205;--accent-soft:#3A2418;--panel:#0B0C0E;--panel-ink:#EEF0F2;--panel-muted:#8E949C;--panel-line:rgba(238,240,242,.07)}
+.mx{border-collapse:collapse;font-size:14px;width:100%}
+.mx th,.mx td{padding:6px 8px;border-bottom:1px solid var(--line);text-align:left;white-space:nowrap}
+.mx tr.best th{color:var(--accent)}
+.mx .tog .num{margin-left:6px}
+.pc-res{margin-top:10px;font-size:14px}
+</style>
+</head>
+<body>
+<header class="top"><div class="top-in" id="top"></div></header>
+<main class="wrap" id="app"></main>
+<div id="toasts" aria-live="polite"></div>
+
+<script>
+const UNITS = [
+  {id:"1", no:"Ⅰ", title:"로봇의 이해", desc:"로봇이 무엇이고 어떤 부품과 원리로 움직이는지, 생활 속 어디에 쓰이며 어떤 윤리가 필요한지 알아봐요."},
+  {id:"2", no:"Ⅱ", title:"공학세계와 로봇의 활용", desc:"제조, 건설, 생명·환경, 에너지·수송, 정보통신·인공지능, 인간·감성 공학에서 로봇이 어떻게 쓰이는지 탐구해요."},
+  {id:"3", no:"Ⅲ", title:"로봇공학 프로젝트", desc:"문제를 찾고, 알고리즘을 짜고, 로봇 팔을 직접 만들어 평가하고 발표하는 프로젝트 과정을 따라가 봐요."}
+];
+
+const LESSONS = [
+{id:"1-1", unit:"1", title:"로봇의 개념", sub:"스스로 느끼고 판단하고 움직이는 기계",
+ goals:["로봇의 의미와 발달 과정을 설명할 수 있다.","로봇이 여러 공학이 합쳐진 융합 공학임을 설명할 수 있다.","로봇을 이루는 다섯 가지 구성 요소를 말할 수 있다."],
+ story:{title:"급식실의 새 직원", p:["월요일 점심, 급식실에 낯선 직원이 등장했다. 허리 높이의 하얀 몸통에 쟁반을 싣고 학생들 사이를 요리조리 피해 다니는 서빙 로봇이었다. 누군가 앞을 막자 로봇은 멈춰 섰다가 옆으로 돌아갔다.","“저건 그냥 리모컨 자동차랑 뭐가 달라?” 지훈이의 질문에 친구가 답했다. “리모컨 차는 사람이 조종하잖아. 저건 혼자 알아서 피하던데?”"], q:"어떤 기계를 ‘로봇’이라고 부를 수 있을까요?"},
+ steps:[
+  {t:"로봇의 의미와 역사", li:["<b>로봇</b>: 외부 환경을 인식하고, 프로그램에 따라 판단해, 사람의 도움 없이 스스로 움직이며 일하는 기계 장치","‘로봇’이라는 말은 1920년 체코 작가 카렐 차페크의 희곡 「R.U.R.」에서 처음 쓰였어요","1950년대 최초의 산업용 로봇 ‘유니메이트’ 등장 → 2족 보행 로봇 아시모, 휴보(2015년 국제 재난 로봇 대회 우승), 4족 보행 로봇으로 발전","정해진 일만 반복하던 산업용 로봇에서, 스스로 판단하는 지능형 서비스 로봇으로 넓어지고 있어요"], key:"로봇 = 인식 + 판단 + 스스로 움직임",
+   q:{q:"‘로봇’이라는 낱말이 처음 등장한 작품은?", o:["희곡 「R.U.R.」","소설 「아이, 로봇」","영화 「터미네이터」","만화 「아톰」"], a:0, why:"1920년 카렐 차페크의 희곡에서 처음 쓰였어요."}},
+  {t:"융합 공학으로서의 로봇", li:["로봇은 기계 공학과 전자 공학을 합친 <b>메카트로닉스</b>를 바탕으로 해요","전통 3대 분야: <b>기계 공학</b>(몸과 움직임), <b>전자 공학</b>(센서와 회로), <b>컴퓨터 공학</b>(소프트웨어와 제어)","요즘은 신소재, 인간 공학, 뇌 공학, 바이오·나노 공학, 5G·6G 통신, 인공지능과도 융합해요","예: 사람 손을 닮은 소프트 로봇(신소재), 생각으로 움직이는 로봇 팔(뇌 공학), 헤엄치는 생체 모방 로봇(바이오)"],
+   q:{q:"기계 공학(Mechanics)과 전자 공학(Electronics)을 합친 말은?", o:["메카트로닉스","바이오닉스","로보틱스","나노닉스"], a:0, why:"두 낱말을 합쳐 메카트로닉스, 우리말로는 기전 공학이라고도 해요."}},
+  {t:"로봇의 다섯 가지 구성 요소", li:["<b>기구부</b>: 로봇의 몸체, 뼈대와 관절","<b>센서부</b>: 로봇의 감각 기관 (이미지·압력·라이다 센서 등)","<b>제어부</b>: 로봇의 두뇌, 마이크로컨트롤러가 정보를 처리하고 명령을 내려요","<b>구동부(액추에이터)</b>: 모터나 공압·유압 장치로 실제 움직임을 만들어요","<b>전원부</b>: 배터리와 배선으로 에너지를 공급해요"], key:"센서부 → 제어부 → 구동부 순서로 정보가 흘러요",
+   q:{q:"로봇의 ‘두뇌’ 역할을 하는 구성 요소는?", o:["제어부","기구부","전원부","구동부"], a:0, why:"제어부가 센서 정보를 받아 판단하고 구동부에 명령을 내려요."}}
+ ],
+ summary:["로봇은 외부 환경을 인식하고 판단해 스스로 움직이며 일하는 기계예요.","로봇은 산업용에서 사람과 함께하는 지능형 서비스 로봇으로 발전하고 있어요.","로봇은 기계·전자·컴퓨터 공학에 여러 첨단 공학이 더해진 융합 공학의 결과물이에요.","로봇은 기구부, 센서부, 제어부, 구동부, 전원부로 이루어져요."],
+ cards:[["로봇","환경을 인식하고 판단해 스스로 움직이며 일하는 기계"],["메카트로닉스","기계 공학과 전자 공학을 합친 융합 학문"],["센서부","외부 정보를 모으는 로봇의 감각 기관"],["구동부(액추에이터)","모터 등으로 실제 움직임을 만드는 부분"]],
+ test:[
+  {q:"로봇의 정의에 가장 가까운 것은?", o:["환경을 인식하고 판단해 스스로 움직이는 기계","사람이 리모컨으로만 움직이는 장난감","전기로 움직이는 모든 가전제품","컴퓨터 화면 속 캐릭터"], a:0},
+  {q:"최초의 산업용 로봇으로 알려진 것은?", o:["유니메이트","아시모","스팟","휴보"], a:0},
+  {q:"로봇 개발에 참여하는 전통적인 3대 공학 분야가 아닌 것은?", o:["기계 공학","전자 공학","컴퓨터 공학","토목 공학"], a:3},
+  {q:"로봇의 몸체와 관절을 이루는 부분은?", o:["기구부","센서부","전원부","제어부"], a:0},
+  {q:"뇌 공학과 융합한 로봇의 예로 알맞은 것은?", o:["생각만으로 움직이는 로봇 팔","용접 로봇","청소 로봇","컨베이어 벨트"], a:0},
+  {q:"우리나라 2족 보행 로봇으로 2015년 국제 재난 로봇 대회에서 우승한 로봇은?", o:["휴보","아틀라스","페퍼","쉐이키"], a:0},
+  {q:"로봇 안에서 정보가 흐르는 순서로 알맞은 것은?", o:["센서부 → 제어부 → 구동부","구동부 → 센서부 → 제어부","제어부 → 구동부 → 센서부","전원부 → 센서부 → 기구부"], a:0}
+ ]},
+
+{id:"1-2", unit:"1", title:"로봇의 작동 원리", sub:"뼈, 근육, 감각, 두뇌를 닮은 부품들",
+ goals:["사람과 로봇의 구성 요소를 비교할 수 있다.","로봇 하드웨어 각 부분의 원리를 설명할 수 있다.","로봇 소프트웨어의 역할과 간단한 로봇 팔의 제작 과정을 말할 수 있다."],
+ story:{title:"집게 하나로 시작한 로봇", p:["로봇 동아리 첫 시간, 선생님이 서보 모터 두 개와 작은 보드 하나를 나눠 주셨다. “오늘은 물건을 집는 로봇 팔을 만들 거야.” 수아는 고개를 갸웃했다. “모터 두 개로 팔이 돼요?”","코드를 한 줄 올리자 모터가 90도로 돌았다. 한 줄 더 고치자 집게가 오므라들었다. 수아는 그제야 알았다. 움직임 하나하나가 숫자와 명령으로 만들어진다는 것을."], q:"로봇의 부품은 각각 어떤 일을 하고, 어떻게 서로 맞물려 움직일까요?"},
+ steps:[
+  {t:"사람과 로봇 비교하기", li:["뼈와 관절 ↔ <b>기구부</b>(링크와 관절)","근육 ↔ <b>구동부</b>(모터, 실린더)","눈·귀·피부 ↔ <b>센서부</b>","뇌와 신경계 ↔ <b>제어부와 소프트웨어</b>","로봇 팔 끝에 다는 집게나 공구를 <b>말단 효과 장치(엔드 이펙터)</b>라고 해요","기계 요소(볼트·너트, 베어링, 기어, 벨트, 스프링 등)를 조합해 회전·직선 같은 다양한 움직임을 만들어요"],
+   q:{q:"로봇 팔 끝에 달아 물건을 잡거나 작업하는 장치는?", o:["말단 효과 장치","전원부","마이크로프로세서","솔레노이드"], a:0, why:"팔 끝(end)에서 효과를 내는 장치라 엔드 이펙터라고도 해요."}},
+  {t:"구동부, 제어부, 전원부, 센서부", li:["<b>전기 방식</b>: 모터는 회전 운동, 솔레노이드는 직선 운동을 만들어요. <b>서보 모터</b>는 지정한 각도만큼 정확히 움직여요","<b>공압·유압 방식</b>: 파스칼의 원리를 이용해요. 공압은 빠르고 작게, 유압은 오일로 큰 힘을 내요(건설 기계)","<b>제어부</b>: 마이크로컨트롤러가 센서 입력을 처리해 출력 신호를 내요 (예: 아두이노 보드)","<b>전원부</b>: 이동 로봇은 충전 배터리, 큰 산업용 로봇은 전력망에 직접 연결해요","<b>센서부</b>: 조도, 압력, 소리, 레이저 거리 센서 등이 환경을 전기 신호로 바꿔요"], key:"마이크로컨트롤러 = CPU·메모리·입출력을 칩 하나에 담은 작은 컴퓨터",
+   q:{q:"지정한 각도만큼 정확하게 회전하도록 만든 모터는?", o:["서보 모터","DC 모터","솔레노이드","유압 실린더"], a:0, why:"제어 회로로 위치를 맞춰 정확한 각도로 움직여요."}},
+  {t:"소프트웨어와 로봇 팔 만들기", li:["<b>로봇 운영체제</b>: 하드웨어를 관리하고 여러 프로그램이 함께 돌도록 돕는 기반 소프트웨어","<b>로봇 제어 프로그램</b>: 블록 코딩(스크래치 등)이나 C++, 파이썬으로 동작을 명령해요","실내 서빙 로봇과 로봇 청소기는 <b>SLAM</b>(지도 만들기와 내 위치 찾기를 동시에 하는 기술)으로 길을 찾아요","로봇 팔 제작 순서: 문제 확인 → 아이디어 내기 → 아이디어 선정 → 시제품 제작 → 평가 및 개선"], widget:"servo",
+   q:{q:"센서로 주변 지도를 만들면서 동시에 자기 위치를 추정하는 기술은?", o:["SLAM","GPS","RFID","PID"], a:0, why:"Simultaneous Localization And Mapping의 줄임말이에요."}}
+ ],
+ summary:["로봇의 기구부·구동부·센서부·제어부는 사람의 뼈·근육·감각·뇌와 비슷한 역할을 해요.","구동부는 전기(모터·솔레노이드)나 공압·유압 방식으로 움직임을 만들어요.","제어부의 마이크로컨트롤러가 센서 신호를 처리해 구동부에 명령을 보내요.","소프트웨어는 운영체제와 제어 프로그램으로 나뉘고, 코드로 로봇의 동작을 정해요."],
+ cards:[["말단 효과 장치","로봇 팔 끝에 달린 집게나 공구"],["서보 모터","지정한 각도만큼 정확히 회전하는 모터"],["마이크로컨트롤러","CPU, 메모리, 입출력을 칩 하나에 담은 제어 장치"],["SLAM","지도 작성과 위치 추정을 동시에 하는 기술"],["유압 방식","오일의 압력으로 큰 힘을 내는 구동 방식"]],
+ test:[
+  {q:"사람의 ‘근육’에 해당하는 로봇의 구성 요소는?", o:["구동부","센서부","기구부","전원부"], a:0},
+  {q:"전류로 자기장을 만들어 직선 운동을 일으키는 부품은?", o:["솔레노이드","베어링","조도 센서","기어"], a:0},
+  {q:"유압 방식의 특징으로 알맞은 것은?", o:["오일을 써서 큰 힘을 낸다","공기를 써서 가장 가볍다","빛으로 움직인다","소리로 움직인다"], a:0},
+  {q:"빛의 밝기에 따라 저항값이 바뀌는 센서는?", o:["조도 센서","압력 센서","가스 센서","소리 센서"], a:0},
+  {q:"마이크로컨트롤러와 마이크로프로세서의 차이로 옳은 것은?", o:["마이크로컨트롤러는 주변 장치까지 한 칩에 있어 혼자 동작할 수 있다","마이크로프로세서는 혼자서 모든 입출력을 한다","둘은 완전히 같다","마이크로컨트롤러는 연산을 못 한다"], a:0},
+  {q:"넓은 공장의 고정형 산업용 로봇이 전기를 얻는 방법으로 알맞은 것은?", o:["전력망에 직접 연결","건전지 교체","태양광만 사용","손으로 태엽 감기"], a:0},
+  {q:"로봇 팔 제작 과정의 마지막 단계는?", o:["평가 및 개선","문제 확인","아이디어 내기","아이디어 선정"], a:0}
+ ]},
+
+{id:"1-3", unit:"1", title:"생활 속 로봇의 활용", sub:"공장에서 병원, 교실, 재난 현장까지",
+ goals:["로봇을 산업용과 서비스용으로 구분할 수 있다.","분야별 로봇 활용 사례를 설명할 수 있다.","로봇 활용의 가치를 개인·사회·국가 측면에서 말할 수 있다."],
+ story:{title:"할머니의 말동무", p:["주말에 시골 할머니 댁에 갔더니 거실에 작은 인형 모양 로봇이 있었다. 로봇은 약 먹을 시간이 되자 “할머니, 혈압약 드실 시간이에요.” 하고 말을 걸었다.","할머니는 웃으며 말씀하셨다. “이 녀석 덕분에 하루가 덜 심심해.” 서연이는 공장에서 용접만 하던 로봇이 어떻게 할머니의 말동무가 되었는지 궁금해졌다."], q:"로봇은 우리 생활의 어디에서, 어떤 모습으로 일하고 있을까요?"},
+ steps:[
+  {t:"산업용 로봇과 협동 로봇", li:["<b>산업용 로봇</b>: 공장에서 용접, 도장, 조립, 운반 같은 일을 정확하고 끈기 있게 해요","전통적인 산업용 로봇은 위험해서 안전 울타리 안에서만 일했어요","<b>협동 로봇</b>: 센서로 사람을 감지해 동작을 조절하므로 사람 바로 옆에서 함께 일해요","크기가 작고 설치가 쉬워 중소 규모 사업장에서도 많이 쓰여요"],
+   q:{q:"사람과 같은 공간에서 안전하게 함께 일하도록 만든 로봇은?", o:["협동 로봇","전통적인 산업용 로봇","우주 탐사 로봇","장난감 로봇"], a:0, why:"사람을 감지해 동작을 조절하기 때문에 울타리가 필요 없어요."}},
+  {t:"서비스용 로봇", li:["<b>개인 서비스용 로봇</b>: 일상생활을 돕는 로봇 (청소, 돌봄, 교육, 반려 로봇)","<b>전문 서비스용 로봇</b>: 전문적이고 특수한 일을 하는 로봇 (수술, 재난 구호, 우주 탐사, 농업 로봇)","인공지능과 결합해 상황을 스스로 판단하는 <b>지능형 로봇</b>으로 발전하고 있어요","수술 로봇에는 사람을 대신하기보다 사람의 능력을 키워 주는 <b>증강 지능</b>이 쓰여요"], key:"서비스용 로봇 = 개인 서비스용 + 전문 서비스용",
+   q:{q:"재난 현장에서 사람을 구조하는 로봇은 어디에 속할까요?", o:["전문 서비스용 로봇","개인 서비스용 로봇","전통적인 산업용 로봇","장난감 로봇"], a:0, why:"특수하고 전문적인 일을 하는 로봇이에요."}},
+  {t:"로봇 활용의 가치와 제도", li:["로봇은 사람의 한계를 넘어 빠르고 정확하게, 시간과 장소에 구애받지 않고 일해요","<b>개인</b>: 편리하고 안전한 생활 / <b>사회</b>: 돌봄·노동력 부족 해결, 효율적인 재난 대응 / <b>국가</b>: 산업 경쟁력","「지능형 로봇 개발 및 보급 촉진법」 개정으로 안전 인증을 받은 실외 이동 로봇이 보도를 다닐 수 있게 되었어요","그래서 배송, 순찰, 방역, 안내 로봇이 거리로 나오고 있어요"],
+   q:{q:"실외 이동 로봇이 보도를 다닐 수 있도록 길을 연 법은?", o:["지능형 로봇 개발 및 보급 촉진법","도로교통법 폐지","전파법","건축법"], a:0, why:"안전 인증과 보험 등을 갖추면 실외 이동을 허용하도록 바뀌었어요."}}
+ ],
+ summary:["로봇은 활용 분야에 따라 산업용 로봇과 서비스용 로봇으로 나뉘어요.","협동 로봇은 사람을 감지해 사람 옆에서 안전하게 일해요.","서비스용 로봇은 개인 서비스용과 전문 서비스용으로 나뉘어요.","로봇은 개인, 사회, 국가 모두에 큰 가치를 주며, 제도도 함께 바뀌고 있어요."],
+ cards:[["산업용 로봇","공장에서 용접, 조립, 운반을 하는 로봇"],["협동 로봇","사람과 같은 공간에서 함께 일하는 로봇"],["전문 서비스용 로봇","수술, 재난 구호처럼 전문적인 일을 하는 로봇"],["증강 지능","사람을 대신하기보다 사람의 능력을 키워 주는 기술"]],
+ test:[
+  {q:"다음 중 개인 서비스용 로봇은?", o:["로봇 청소기","수술 로봇","재난 구조 로봇","용접 로봇"], a:0},
+  {q:"전통적인 산업용 로봇이 울타리 안에서만 일한 까닭은?", o:["사람을 감지하지 못해 위험했기 때문","너무 작아서","소리가 커서","전기를 못 써서"], a:0},
+  {q:"수술 로봇에 대한 설명으로 알맞은 것은?", o:["의사를 도와 더 정밀한 수술을 가능하게 한다","의사 없이 혼자 모든 수술을 한다","청소만 한다","공장에서만 쓴다"], a:0},
+  {q:"교육용 로봇의 쓰임으로 알맞은 것은?", o:["핸즈온 활동과 맞춤형 학습 지원","용접","굴착","방사능 처리"], a:0},
+  {q:"로봇 활용의 ‘사회적’ 가치로 알맞은 것은?", o:["돌봄 인력 부족 문제 해결","개인 취미 생활만 도움","로봇 회사의 이익만 증가","전기 사용량 증가"], a:0},
+  {q:"인공지능과 결합해 상황을 스스로 판단하는 로봇은?", o:["지능형 로봇","단순 반복 로봇","태엽 로봇","수동 기계"], a:0},
+  {q:"협동 로봇이 중소 규모 사업장에 많이 쓰이는 까닭은?", o:["안전하고 설치가 쉬워서","가장 크고 무거워서","사람이 필요 없어서","전기를 안 써서"], a:0}
+ ]},
+
+{id:"1-4", unit:"1", title:"인공지능과 로봇 윤리", sub:"똑똑한 로봇일수록 더 중요한 약속",
+ goals:["인공지능 기술의 특징과 학습 방법을 설명할 수 있다.","인공지능 로봇의 긍정적·부정적 측면을 분석할 수 있다.","인공지능 로봇에 필요한 윤리 원칙을 말할 수 있다."],
+ story:{title:"체스 로봇의 실수", p:["뉴스에서 체스 대회 영상이 나왔다. 로봇 팔이 말을 옮기던 중, 서둘러 손을 뻗은 아이의 손가락을 꽉 잡아 버렸다. 개발자는 ‘소프트웨어 오류’라고 했다.","같은 날 다른 뉴스에서는 홀로 사는 어르신의 말동무가 된 인공지능 로봇이 소개되었다. 민재는 생각했다. “똑같은 로봇 기술인데, 왜 이렇게 다를까?”"], q:"인공지능 로봇이 사람에게 해를 끼치지 않으려면 무엇이 필요할까요?"},
+ steps:[
+  {t:"인공지능 기술 이해하기", li:["<b>인공지능</b>: 인식, 학습, 추론, 판단 같은 사람의 지적 능력을 컴퓨터로 구현한 기술","<b>기계학습</b>: 데이터에서 스스로 배워 분류하고 예측해요. 지도 학습(정답 함께), 비지도 학습(정답 없이), 강화 학습(보상으로)","<b>딥러닝</b>: 인공 신경망을 깊게 쌓아 스스로 특징을 찾아 배우는 기계학습의 한 방법","인공지능의 진화: 인식형 → 생성형 → 에이전틱(스스로 일하는 비서) → <b>피지컬 AI</b>(로봇처럼 현실에서 움직임)"],
+   q:{q:"보상은 키우고 벌은 줄이는 방향으로 행동을 배우는 학습은?", o:["강화 학습","지도 학습","비지도 학습","암기 학습"], a:0, why:"게임처럼 보상을 받으며 배워요."}},
+  {t:"인공지능 로봇의 두 얼굴", li:["<b>긍정적인 면</b>: 환경 변화에 유연한 대응, 생산성과 효율성 향상, 개인 맞춤 서비스, 새로운 산업과 일자리","<b>부정적인 면</b>: 일자리 위협, 사생활 침해, 신뢰성과 안정성 저하, 책임 소재 문제","얼굴 인식 로봇이 사진에 속아 문을 열어 준다면? 보안과 신뢰성이 큰 문제가 돼요","데이터가 치우치면 인공지능도 차별적인 판단을 할 수 있어요"],
+   q:{q:"인공지능 로봇의 부정적인 면이 아닌 것은?", o:["개인 맞춤 서비스 제공","사생활 침해","책임 소재 문제","일자리 위협"], a:0, why:"개인 맞춤 서비스는 긍정적인 면이에요."}},
+  {t:"로봇 윤리 원칙", li:["<b>아시모프의 로봇 3원칙</b>(1942년 소설): ① 인간에게 해를 끼치지 않는다 ② 인간의 명령에 따른다 ③ 자신을 보호한다 (앞 원칙이 우선)","<b>5대 윤리 강령</b>(2011년, 영국): 책임은 로봇이 아니라 사람에게 있고, 로봇은 안전하게 설계해야 하며, 사람을 해치는 것을 주목적으로 만들면 안 돼요","<b>우리나라 인공지능 윤리 기준</b>(2020년): 3대 원칙(인간의 존엄성, 사회의 공공선, 기술의 합목적성)과 10대 요건(인권 보장, 사생활 보호, 다양성 존중, 책임성, 안전성, 투명성 등)","개발자, 관리자, 사용자가 모두 윤리적 책임을 나눠요"], key:"인공지능 로봇의 윤리 문제는 결국 사람의 윤리 문제예요",
+   q:{q:"아시모프의 로봇 3원칙 가운데 가장 우선하는 원칙은?", o:["인간에게 해를 끼치지 않는다","인간의 명령에 따른다","자신을 보호한다","빠르게 일한다"], a:0, why:"2원칙과 3원칙은 모두 1원칙을 어기지 않는 범위에서만 지켜요."}}
+ ],
+ summary:["인공지능은 인식, 학습, 추론, 판단 능력을 컴퓨터로 구현한 기술이에요.","기계학습에는 지도·비지도·강화 학습이 있고, 딥러닝은 인공 신경망을 깊게 쌓아 배워요.","인공지능 로봇은 편리함과 함께 일자리, 사생활, 책임 문제도 가져와요.","로봇 3원칙, 5대 윤리 강령, 인공지능 윤리 기준처럼 사람이 지켜야 할 약속이 필요해요."],
+ cards:[["기계학습","데이터에서 스스로 배워 분류하고 예측하는 기술"],["강화 학습","보상을 받으며 행동을 개선하는 학습"],["피지컬 AI","로봇처럼 현실 세계에서 직접 움직이는 인공지능"],["로봇 3원칙","아시모프가 소설에서 제안한 로봇의 행동 원칙"]],
+ test:[
+  {q:"문제와 정답을 함께 주고 학습시키는 방법은?", o:["지도 학습","비지도 학습","강화 학습","전이 학습"], a:0},
+  {q:"딥러닝에 대한 설명으로 옳은 것은?", o:["인공 신경망을 깊게 쌓아 학습하는 기계학습 방법","인공지능과 관계없는 기술","데이터 없이 배우는 방법","사람이 모든 규칙을 직접 쓰는 방법"], a:0},
+  {q:"인공지능 진화 단계 가운데 로봇이나 자율주행차처럼 현실에서 움직이는 단계는?", o:["피지컬 AI","인식형 AI","생성형 AI","에이전틱 AI"], a:0},
+  {q:"5대 윤리 강령에 따르면 로봇 사고의 책임은 누구에게 있나요?", o:["사람","로봇","아무도 없음","인공지능"], a:0},
+  {q:"우리나라 인공지능 윤리 기준의 3대 원칙이 아닌 것은?", o:["기술의 무제한 개발","인간의 존엄성","사회의 공공선","기술의 합목적성"], a:0},
+  {q:"얼굴 인식 로봇이 사진에 속지 않게 하려면 무엇을 높여야 하나요?", o:["인식 기술의 신뢰성과 보안","로봇의 속도","로봇의 색깔","화면 크기"], a:0},
+  {q:"인공지능이 성별이나 인종에 따라 차별적으로 판단하는 주된 원인은?", o:["치우친 학습 데이터","전기 부족","모터 고장","너무 빠른 인터넷"], a:0}
+ ]},
+
+{id:"2-1", unit:"2", title:"제조 분야 공학과 로봇", sub:"재료를 만들고, 기계를 만들고, 공장을 똑똑하게",
+ goals:["신소재, 기계, 메카트로닉스 공학의 특징을 설명할 수 있다.","제조 분야 공학 로봇의 활용 사례를 말할 수 있다.","제조 분야의 진로를 탐색할 수 있다."],
+ story:{title:"무거운 상자를 드는 조끼", p:["택배 물류 센터에서 아르바이트를 하는 사촌 형은 늘 허리가 아프다고 했다. 그런데 어느 날 형이 조끼처럼 생긴 장치를 입고 상자를 번쩍 들어 올리는 사진을 보내왔다.","“이거 입으니까 허리에 힘이 덜 들어가.” 사진 아래에는 ‘웨어러블 로봇’이라고 적혀 있었다. 로봇이 사람 몸에 입는 옷이 될 수도 있다니, 준호는 놀랐다."], q:"제조 분야 공학은 로봇을 어떻게 바꾸고 있을까요?"},
+ steps:[
+  {t:"제조 분야 공학이란", li:["제품과 시스템을 설계, 개발, 생산하는 공학이에요","<b>스마트 팩토리</b>: 빅데이터, 사물인터넷, 인공지능, 로봇으로 생산을 자동화해 품질과 생산성을 높인 공장","증강·가상·혼합 현실로 작업 교육과 설비 점검을 돕기도 해요","대표 분야: 신소재 공학, 기계 공학, 메카트로닉스 공학"],
+   q:{q:"빅데이터, 사물인터넷, 인공지능, 로봇으로 생산을 자동화한 공장은?", o:["스마트 팩토리","수공업 공방","가내 수공업","전통 시장"], a:0, why:"공장 전체가 데이터로 연결되어 스스로 판단하는 똑똑한 공장이에요."}},
+  {t:"신소재·기계·메카트로닉스 공학", li:["<b>신소재 공학</b>: 금속, 세라믹, 고분자, 복합 재료를 연구해요. 탄소 섬유는 가볍고 강해 자동차 차체와 항공기에 쓰여요","<b>기계 공학</b>: 힘과 에너지, 운동을 다루는 가장 기본적인 공학이에요","<b>메카트로닉스 공학</b>: 기계, 전자, 컴퓨터, 제어를 융합해 로봇과 자동화 장비를 만들어요","신소재 덕분에 모양을 바꾸는 로봇, 몸속에서 진단·치료하는 로봇, 몸에 입는 로봇이 가능해졌어요"],
+   q:{q:"힘과 에너지, 운동을 다루는 가장 기본적인 공학 분야는?", o:["기계 공학","생명 공학","환경 공학","감성 공학"], a:0, why:"기계와 로봇의 움직임을 다루는 바탕이에요."}},
+  {t:"제조 분야의 로봇들", li:["<b>산업용 로봇</b>: 용접, 도장, 자재 취급을 하는 대형 다관절 로봇","<b>협동 로봇</b>: 예를 들어 수제화 작업자가 허리를 숙이지 않도록 작업물의 위치와 각도를 맞춰 줘요","<b>스마트팜 로봇</b>: 씨 심기, 물 주기, 잡초 제거, 생장 분석까지 해요","<b>웨어러블 로봇</b>: 몸에 입어 무거운 물건을 들 때 부상을 줄이고, 장애를 극복하도록 도와요"], key:"제조 로봇의 목표: 부상은 줄이고 효율은 높이기",
+   q:{q:"사람 몸에 착용해 무거운 물건을 들 때 부상을 줄여 주는 로봇은?", o:["웨어러블 로봇","청소 로봇","서빙 로봇","드론"], a:0, why:"입는(wearable) 로봇이에요."}}
+ ],
+ summary:["제조 분야 공학은 제품과 시스템의 설계, 개발, 생산을 다뤄요.","신소재, 기계, 메카트로닉스 공학이 대표적인 제조 분야예요.","신소재 발전으로 모양을 바꾸는 로봇, 몸속 로봇, 웨어러블 로봇이 가능해졌어요.","산업용·협동·스마트팜·웨어러블 로봇이 부상을 줄이고 효율을 높여요."],
+ cards:[["스마트 팩토리","데이터와 로봇으로 자동화한 지능형 공장"],["메카트로닉스 공학","기계·전자·컴퓨터·제어를 융합한 공학"],["탄소 섬유","가볍고 강해 차체와 항공기에 쓰는 신소재"],["웨어러블 로봇","몸에 입어 힘을 보태 주는 로봇"]],
+ test:[
+  {q:"신소재 공학에서 다루는 재료가 아닌 것은?", o:["감정","금속","세라믹","고분자"], a:0},
+  {q:"항공기 몸체와 날개에 쓰이는 가볍고 강한 알루미늄 합금은?", o:["두랄루민","납","구리","유리"], a:0},
+  {q:"스마트팜 로봇이 하는 일이 아닌 것은?", o:["자동차 용접","잡초 제거","물 주기","생장 분석"], a:0},
+  {q:"메카트로닉스 공학이 만들어 내는 대표적인 결과물은?", o:["로봇과 자동화 장비","그림","시","노래"], a:0},
+  {q:"협동 로봇이 수제화 작업에서 하는 일은?", o:["작업물 위치와 각도를 조절해 작업자의 자세를 편하게 한다","신발을 대신 판매한다","가죽을 키운다","가게를 청소만 한다"], a:0},
+  {q:"원자력 사고 현장 같은 곳에 쓰는 재난 구조 로봇에 필요한 특징은?", o:["방사선에 견디는 구조와 원격 조종","화려한 색","큰 스피커","무거운 장식"], a:0},
+  {q:"제조 분야 공학 로봇의 공통 목표로 알맞은 것은?", o:["부상 방지와 작업 효율 향상","일자리 없애기만","에너지 낭비","품질 저하"], a:0}
+ ]},
+
+{id:"2-2", unit:"2", title:"건설 분야 공학과 로봇", sub:"벽돌을 쌓고, 다리를 프린트하고, 달에 기지를 짓는 로봇",
+ goals:["건축 공학과 토목 공학의 차이를 설명할 수 있다.","건설 분야 로봇의 활용 사례를 말할 수 있다.","미래 건설 로봇을 구상할 수 있다."],
+ story:{title:"3D 프린터로 만든 다리", p:["사회 시간에 선생님이 사진 한 장을 띄우셨다. 운하 위에 놓인 은빛 금속 다리였다. “이 다리는 사람이 용접한 게 아니라, 로봇이 금속을 녹여 한 층씩 쌓아 만든 거예요.”","교실이 웅성거렸다. “그럼 나중에는 달에도 로봇이 집을 지어요?” 선생님이 웃으셨다. “그게 바로 지금 공학자들이 연구하는 일이죠.”"], q:"건설 현장에서 로봇은 어떤 일을 맡고 있을까요?"},
+ steps:[
+  {t:"건설 분야 공학이란", li:["사람이 생활하는 데 필요한 공간, 쾌적한 환경, 각종 시설과 구조물을 만드는 공학이에요","<b>건축 공학</b>: 집, 학교, 빌딩처럼 사람이 머무는 건축물을 설계하고 짓는 분야 (구조, 설비, 환경, 시공)","<b>토목 공학</b>: 도로, 다리, 터널, 댐, 항만처럼 사회 기반 시설을 만드는 분야","<b>디지털 트윈</b>: 실제 건물과 도시를 가상 공간에 똑같이 만들어 미리 시험하고 관리해요"],
+   q:{q:"도로, 다리, 터널, 댐 같은 사회 기반 시설을 만드는 분야는?", o:["토목 공학","건축 공학","감성 공학","생명 공학"], a:0, why:"건축 공학은 건축물, 토목 공학은 기반 시설을 주로 다뤄요."}},
+  {t:"건축 분야의 로봇", li:["<b>벽돌 쌓기 로봇</b>: 정해진 설계대로 벽돌을 빠르고 정확하게 쌓아요","<b>벽면 순찰 로봇</b>: 높은 건물 외벽을 다니며 균열을 점검해요","<b>건설용 3D 프린팅</b>: 콘크리트를 층층이 쌓아 건물을 지어요","<b>텐세그리티 구조</b>: 당기는 줄과 버티는 막대가 균형을 이루는 구조로, 가볍고 튼튼해 건축물과 로봇 설계에 쓰여요"],
+   q:{q:"당기는 줄과 버티는 막대가 균형을 이루는 구조는?", o:["텐세그리티 구조","아치 구조","돔 구조","벽돌 구조"], a:0, why:"Tension(인장)과 Integrity(일체성)를 합친 말이에요."}},
+  {t:"토목 분야의 로봇과 우주 건설", li:["<b>철도 건설 로봇</b>: 철로 교체와 배치 조정을 자동화해 인력 부족과 안전 문제를 줄여요","<b>터널 건설 로봇</b>: 터널 벽과 천장 작업을 자동으로 해요","<b>배관 검사 로봇</b>: 사람이 들어가기 어려운 가스·상하수도 배관을 점검해요","<b>금속 3D 프린팅 교각</b>: 로봇이 스테인리스강을 녹여 쌓아 만든 세계 최초의 금속 프린팅 다리","달 기지 건설: 중력은 지구의 1/6, 대기가 거의 없고 온도 차가 매우 커서 로봇이 핵심 역할을 해요"], key:"건설 로봇 = 노동력 절감 + 작업 효율 + 안전",
+   q:{q:"사람이 들어가기 어려운 도시가스·상하수도 관을 점검하는 로봇은?", o:["배관 검사 로봇","서빙 로봇","청소 로봇","웨어러블 로봇"], a:0, why:"좁고 위험한 관 속을 대신 들어가 살펴요."}}
+ ],
+ summary:["건설 분야 공학은 건축 공학과 토목 공학을 모두 포함해요.","건축 공학은 건축물을, 토목 공학은 도로·다리·터널 같은 기반 시설을 다뤄요.","벽돌 쌓기, 벽면 순찰, 철도·터널 건설, 배관 검사 로봇이 현장을 돕고 있어요.","금속 3D 프린팅 교각과 달 기지 건설처럼 로봇이 건설의 미래를 바꾸고 있어요."],
+ cards:[["건축 공학","사람이 머무는 건축물을 설계하고 짓는 분야"],["토목 공학","도로·다리·터널 등 기반 시설을 만드는 분야"],["디지털 트윈","현실을 가상 공간에 똑같이 만든 쌍둥이 모델"],["텐세그리티","당기는 줄과 버티는 막대가 균형을 이룬 구조"]],
+ test:[
+  {q:"건축 공학이 주로 다루는 대상은?", o:["집, 학교, 빌딩","댐과 항만","철도 노선","하천 정비"], a:0},
+  {q:"세계 최초 금속 3D 프린팅 교각을 만든 방법은?", o:["로봇이 금속을 녹여 층층이 쌓았다","나무를 깎았다","벽돌을 쌓았다","풍선을 부풀렸다"], a:0},
+  {q:"건설 로봇이 주는 이점으로 알맞지 않은 것은?", o:["작업 위험 증가","노동력 절감","작업 효율 향상","정밀도 향상"], a:0},
+  {q:"달 기지 건설에서 고려해야 할 환경으로 옳은 것은?", o:["중력이 지구의 약 1/6이고 온도 차가 크다","대기가 지구보다 두껍다","항상 영상 20℃다","중력이 지구의 2배다"], a:0},
+  {q:"높은 건물 외벽을 다니며 균열을 점검하는 로봇은?", o:["벽면 순찰 로봇","해양 쓰레기 로봇","수확 로봇","서빙 로봇"], a:0},
+  {q:"실제 도시를 가상 공간에 복제해 미리 시험하는 기술은?", o:["디지털 트윈","블록체인","크리스퍼","SLAM"], a:0},
+  {q:"철도 건설 로봇이 해결하려는 문제는?", o:["인력 부족과 작업 안전","음악 감상","패션 디자인","요리"], a:0}
+ ]},
+
+{id:"2-3", unit:"2", title:"생명 및 환경 분야 공학과 로봇", sub:"생명을 닮은 로봇, 지구를 지키는 로봇",
+ goals:["생명 분야 공학과 환경 분야 공학의 특징을 설명할 수 있다.","생체 모방·의료·재활·농업 로봇을 설명할 수 있다.","환경 감시·처리 로봇의 역할을 말할 수 있다."],
+ story:{title:"바다 위의 청소부", p:["여름 바닷가에서 태하는 이상한 배를 보았다. 사람은 타지 않았는데, 혼자 물 위를 오가며 떠다니는 플라스틱 병과 그물을 건져 올리고 있었다. 배 위에는 태양 전지판이 반짝였다.","안내판에는 ‘해양 쓰레기 처리 로봇 시험 운행 중’이라고 적혀 있었다. 태하는 휴대폰으로 사진을 찍으며 생각했다. 로봇이 지구도 청소할 수 있구나."], q:"로봇은 생명과 환경을 위해 어떤 일을 할 수 있을까요?"},
+ steps:[
+  {t:"생명 분야 공학", li:["생명체의 생명 현상, 물질, 정보를 이용해 유용한 제품과 서비스를 만드는 공학이에요","생명 공학 기술: 유전자 재조합, 세포 융합, 조직 배양, 발효 등","바이오 산업: 의약품, 농업·식품, 에너지, 환경 등으로 넓어지고 있어요","유전자 재조합 작물은 유전자 분리 → 재조합 → 형질 전환 과정을 거쳐 만들어요"],
+   q:{q:"생명체의 생명 현상과 물질, 정보를 이용해 제품과 서비스를 만드는 공학은?", o:["생명 분야 공학","토목 공학","정보 통신 공학","인간 공학"], a:0, why:"바이오 기술을 이용하는 공학이에요."}},
+  {t:"생명 분야의 로봇", li:["<b>생체 모방 로봇</b>: 동물의 움직임을 본떠요. 심장 근육 세포로 헤엄치는 가오리 로봇, 개구리 세포로 만든 ‘제노봇’도 있어요","<b>의료 로봇</b>: 수술 로봇, 혈관 속을 다니는 나노 로봇","<b>재활 로봇</b>: 걷기와 팔 운동 재활을 도와요","<b>농업 로봇</b>: 잡초 제거 로봇, 작물 수확 로봇, 자율 주행 트랙터, 농업 데이터 수집 로봇"],
+   q:{q:"살아 있는 세포로 만든 아주 작은 생체 로봇으로 알려진 것은?", o:["제노봇","휴보","아시모","페퍼"], a:0, why:"개구리 세포를 이용해 만든 생체 로봇이에요."}},
+  {t:"환경 분야 공학과 로봇", li:["대기, 수질, 토양, 폐기물 오염을 막고 소음·진동 공해를 줄이는 기술을 연구해요","<b>탄소 중립</b>: 배출하는 온실가스를 최대한 줄이고 남은 것은 흡수·제거해 실질 배출량을 0으로 만드는 것","<b>환경 감시 로봇</b>: 대기 미세먼지 관측, 토양 오염 감시","<b>환경 처리 로봇</b>: 태양 전지로 움직이는 해양 쓰레기 수거 로봇, 컴퓨터 비전과 기계학습으로 재활용품을 분류하는 로봇"], key:"환경 로봇 = 감시 로봇 + 처리 로봇",
+   q:{q:"온실가스 배출을 줄이고 남은 것을 제거해 실질 배출량을 0으로 만드는 것은?", o:["탄소 중립","탄소 증가","온실 효과","산성비"], a:0, why:"배출과 제거가 균형을 이뤄 ‘중립’이 돼요."}}
+ ],
+ summary:["생명 분야 공학은 생명 현상과 물질, 정보를 이용해 제품과 서비스를 만들어요.","환경 분야 공학은 대기, 수질, 토양, 폐기물 오염 문제를 해결해요.","생체 모방, 의료, 재활, 농업 로봇이 생명 분야에서 활약해요.","환경 감시 로봇과 환경 처리 로봇이 지구를 깨끗하게 지켜요."],
+ cards:[["생체 모방 로봇","동물이나 사람의 움직임을 본떠 만든 로봇"],["재활 로봇","걷기나 팔 운동 같은 재활 훈련을 돕는 로봇"],["탄소 중립","온실가스 실질 배출량을 0으로 만드는 것"],["재활용품 분류 로봇","비전과 기계학습으로 재활용품을 나누는 로봇"]],
+ test:[
+  {q:"농장에서 카메라로 잡초를 알아보고 로봇 팔로 제거하는 로봇의 장점은?", o:["화학 농약 사용을 줄인다","물을 낭비한다","작물을 모두 뽑는다","소음을 늘린다"], a:0},
+  {q:"해양 쓰레기 처리 로봇이 오래 일할 수 있는 까닭은?", o:["태양 전지로 에너지를 얻어서","사람이 계속 밀어 줘서","석탄을 때서","파도가 밀어 줘서"], a:0},
+  {q:"환경 분야 공학이 다루는 문제가 아닌 것은?", o:["건물 인테리어 색상","대기 오염","수질 오염","소음 공해"], a:0},
+  {q:"재활용품 분류 로봇이 재료를 알아보는 방법은?", o:["컴퓨터 비전과 기계학습","냄새 맡기","무게만 재기","사람에게 물어보기"], a:0},
+  {q:"혈관 속을 다니며 약물을 전달하는 아주 작은 로봇은?", o:["나노 로봇","산업용 로봇","트랙터","드론"], a:0},
+  {q:"자율 주행 트랙터가 위치를 파악하는 데 쓰는 것은?", o:["GPS와 센서","나침반만","별자리","소리"], a:0},
+  {q:"유전자 재조합 작물 개발 과정으로 알맞은 것은?", o:["유전자 분리 → 재조합 → 형질 전환","형질 전환 → 분리 → 수확","재조합 → 수확 → 분리","분리 → 수확 → 판매"], a:0}
+ ]},
+
+{id:"2-4", unit:"2", title:"에너지 및 수송 분야 공학과 로봇", sub:"에너지를 만들고, 사람과 물건을 스스로 옮기는 로봇",
+ goals:["에너지 분야 공학과 신재생 에너지를 설명할 수 있다.","수송 분야 공학과 모빌리티를 설명할 수 있다.","에너지·수송 분야 로봇의 활용 사례를 말할 수 있다."],
+ story:{title:"아파트 앞까지 온 배달 로봇", p:["주말 오후, 휴대폰에 ‘배달 로봇이 1층 현관에 도착했습니다’라는 알림이 왔다. 내려가 보니 아이스박스만 한 로봇이 뚜껑을 열고 기다리고 있었다.","로봇은 물건을 꺼내자 혼자 돌아서 횡단보도 쪽으로 갔다. 하늘이는 궁금해졌다. 이 로봇은 길을 어떻게 알고, 전기는 어디서 충전할까?"], q:"에너지와 수송 분야에서 로봇은 어떤 역할을 할까요?"},
+ steps:[
+  {t:"에너지 분야 공학", li:["에너지의 생산, 변환, 이용 기술을 연구하는 공학이에요","<b>신재생 에너지</b>: 태양광, 풍력, 수력, 지열, 바이오 에너지, 수소·연료 전지 등","<b>에너지 저장 장치(ESS)</b>: 날씨에 따라 들쭉날쭉한 전기를 저장했다가 필요할 때 보내요","바이오 에탄올은 곡물을 갈고(제분) → 액화 → 당화 → 발효 → 증류 → 탈수 과정으로 만들어요"],
+   q:{q:"태양광·풍력 전기를 저장했다가 필요할 때 보내는 시스템은?", o:["에너지 저장 장치(ESS)","내연 기관","변속기","라디에이터"], a:0, why:"Energy Storage System의 줄임말이에요."}},
+  {t:"수송 분야 공학과 모빌리티", li:["자동차 공학, 항공우주 공학, 조선해양 공학이 대표적이에요","온실가스 감축(전기차·수소차)과 자율 주행 기술 개발이 가장 큰 과제예요","<b>모빌리티</b>: 자율 주행 자동차, 차량 공유, 도심 항공 모빌리티처럼 더 편리한 이동 서비스와 수단","자율 주행 센서: 카메라(색·표지판), 레이더(거리·속도), 라이다(레이저로 3D 지형)"],
+   q:{q:"레이저를 쏘아 주변을 3차원으로 측정하는 자율 주행 센서는?", o:["라이다","카메라","마이크","온도계"], a:0, why:"Light Detection And Ranging의 줄임말이에요."}},
+  {t:"에너지·수송 분야의 로봇", li:["에너지 현장 로봇: 태양광 패널 청소, 발전 설비 점검처럼 위험하고 반복적인 일을 맡아요","<b>자율 주행 배달 로봇</b>: 라이다로 주변을 보고 GPS로 위치를 파악해 배달해요","<b>자율 주행 무인 선박</b>: 날씨, 다른 배, 암초를 파악해 스스로 운항해요","<b>자율 주행 전기 수직 이착륙기(eVTOL)</b>와 <b>무인 우주 비행 로봇</b>도 개발되고 있어요","수송 로봇의 배터리: 납축, 니켈-카드뮴, 니켈-수소, 리튬 이온 전지 / 충전: 유선, 무선, 배터리 교환"], key:"자율 이동 로봇이 교통, 물류, 레저를 바꿔요",
+   q:{q:"배달 로봇이 자기 위치를 파악하는 데 주로 쓰는 것은?", o:["GPS 센서","온도 센서","가스 센서","소리 센서"], a:0, why:"위성 신호로 위치를 알아내요."}}
+ ],
+ summary:["에너지 분야 공학은 에너지의 생산, 변환, 이용을 연구해요.","수송 분야 공학은 자동차, 항공우주, 조선해양 공학을 포함해요.","온실가스 감축과 자율 주행이 수송 분야의 큰 과제예요.","배달 로봇, 무인 선박, eVTOL, 무인 우주 비행 로봇이 이동을 바꾸고 있어요."],
+ cards:[["신재생 에너지","태양광, 풍력처럼 다시 쓸 수 있고 깨끗한 에너지"],["ESS","전기를 저장했다가 필요할 때 보내는 장치"],["모빌리티","더 편리한 이동 서비스와 새로운 이동 수단"],["eVTOL","전기로 수직 이착륙하는 항공기"]],
+ test:[
+  {q:"신재생 에너지가 아닌 것은?", o:["석탄 화력","태양광","풍력","지열"], a:0},
+  {q:"수송 분야 공학에 해당하지 않는 것은?", o:["감성 공학","자동차 공학","항공우주 공학","조선해양 공학"], a:0},
+  {q:"자율 주행 무인 선박이 스스로 파악하는 것이 아닌 것은?", o:["승객의 기분","기상 상황","주변 선박","암초"], a:0},
+  {q:"리튬 이온 전지의 특징으로 옳은 것은?", o:["작고 가볍고 에너지가 많지만 보호 회로가 필요하다","무겁고 충전이 매우 느리다","충전이 불가능하다","전기를 저장하지 못한다"], a:0},
+  {q:"여러 개의 작은 프로펠러로 소음을 줄이고 도심 수송에 쓰일 항공기는?", o:["eVTOL","증기 기관차","범선","열기구"], a:0},
+  {q:"자율 주행 센서 가운데 색과 표지판을 알아보는 데 강한 것은?", o:["카메라","레이더","라이다","GPS"], a:0},
+  {q:"수송 로봇에 에너지를 공급하는 방식이 아닌 것은?", o:["손으로 페달 밟기만","유선 충전","무선 충전","배터리 교환"], a:0}
+ ]},
+
+{id:"2-5", unit:"2", title:"정보 통신 및 인공지능 기술 분야 공학과 로봇", sub:"연결하고, 배우고, 보고, 말하는 로봇",
+ goals:["정보 통신 공학과 초연결 사회를 설명할 수 있다.","인공지능과 멀티 모달 기술을 설명할 수 있다.","정보 통신·인공지능이 로봇에 활용되는 사례를 말할 수 있다."],
+ story:{title:"사과를 고르는 로봇 팔", p:["과수원 체험 학습에서 연우는 바퀴 달린 로봇이 사과나무 사이를 지나가는 모습을 보았다. 로봇 팔 끝의 카메라가 사과를 하나씩 비추더니, 빨갛게 잘 익은 것만 골라 조심스럽게 땄다.","농장 주인이 말했다. “이 녀석은 수천 장의 사과 사진으로 공부했어요. 잎에 가려진 사과도 찾아내요.” 연우는 로봇이 ‘본다’는 게 어떤 뜻인지 궁금해졌다."], q:"정보 통신과 인공지능은 로봇을 어떻게 더 똑똑하게 만들까요?"},
+ steps:[
+  {t:"정보 통신 공학과 초연결", li:["정보를 주고받는 기술을 연구해 세상의 모든 사물을 연결해요(초연결 사회)","<b>TCP</b>: 받았는지 확인(ACK)하며 순서대로 정확하게 보내요 / <b>UDP</b>: 확인 없이 빠르게 보내요(영상 스트리밍)","<b>블루투스</b>: 가까운 기기끼리 무선 연결 / <b>RFID</b>: 전파로 태그 정보를 읽어요 / <b>NFC</b>: 약 4cm 이내에서 정보를 주고받아요(교통 카드)","연결로 모인 데이터는 인공지능의 학습 재료가 돼요"],
+   q:{q:"받았는지 확인하며 순서대로 정확하게 데이터를 보내는 통신 방식은?", o:["TCP","UDP","NFC","RFID"], a:0, why:"정확성이 중요한 웹페이지, 파일 전송에 쓰여요."}},
+  {t:"컴퓨터와 인공지능 기술", li:["인공지능과 빅데이터는 추천, 번역, 의료, 금융 등 삶의 여러 부분에 쓰여요","<b>멀티 모달</b>: 음성, 몸짓, 시선, 표정 등 여러 소통 방식을 함께 이해하는 인공지능","<b>자연어 처리</b>: 사람의 언어를 컴퓨터가 이해하고 만들어 내는 기술 (GPT 같은 모델)","<b>생성형 인공지능</b>: 이미지를 만드는 확산 모델, 진짜와 가짜를 겨루며 배우는 GAN 등"],
+   q:{q:"음성, 몸짓, 표정 등 여러 소통 방식을 함께 이해하는 인공지능은?", o:["멀티 모달","싱글 태스크","단순 계산기","바코드"], a:0, why:"여러(multi) 방식(modal)을 함께 써요."}},
+  {t:"정보 통신·인공지능 로봇", li:["<b>컴퓨터 비전</b>: 카메라 영상에서 물체를 알아보는 기술. 빈 피킹 로봇은 상자 속 뒤섞인 물건을 집어요","<b>수확 로봇</b>: 익은 과일만 알아보고 따요","<b>3D 카메라 로봇</b>: 물체의 깊이와 모양을 입체로 파악해요","로봇 구동 시스템은 와이어 하네스(전선 묶음)로 센서, 제어기, 모터를 연결하고 통신으로 원격 제어돼요","인공지능 예술 로봇처럼 창작 영역까지 넓어지고 있어요"], key:"고도화된 연결 + 인공지능 = 로봇 성능의 극대화",
+   q:{q:"카메라 영상에서 물체를 알아보는 인공지능 기술은?", o:["컴퓨터 비전","자연어 처리","음성 합성","블록체인"], a:0, why:"컴퓨터가 ‘보는’ 기술이에요."}}
+ ],
+ summary:["정보 통신 공학은 모든 사물을 연결해 데이터를 주고받게 해요.","TCP는 정확하게, UDP는 빠르게 보내고, 블루투스·RFID·NFC는 가까운 기기를 이어요.","인공지능은 멀티 모달, 자연어 처리, 생성형 기술로 발전하고 있어요.","컴퓨터 비전과 통신 덕분에 로봇이 보고, 판단하고, 원격으로 움직여요."],
+ cards:[["TCP","확인하며 순서대로 정확하게 보내는 통신"],["NFC","약 4cm 이내에서 정보를 주고받는 근거리 통신"],["멀티 모달","여러 소통 방식을 함께 이해하는 인공지능"],["컴퓨터 비전","영상에서 물체를 알아보는 인공지능 기술"]],
+ test:[
+  {q:"영상 스트리밍처럼 속도가 중요할 때 주로 쓰는 통신 방식은?", o:["UDP","TCP","우편","팩스"], a:0},
+  {q:"교통 카드처럼 아주 가까이 대야 작동하는 통신은?", o:["NFC","5G","위성 통신","라디오"], a:0},
+  {q:"사람의 언어를 컴퓨터가 이해하고 처리하는 기술은?", o:["자연어 처리","컴퓨터 비전","SLAM","라이다"], a:0},
+  {q:"상자 속에 뒤섞인 물건을 알아보고 집어 올리는 로봇은?", o:["빈 피킹 로봇","벽돌 쌓기 로봇","잡초 제거 로봇","배관 검사 로봇"], a:0},
+  {q:"로봇 안에서 센서, 제어기, 모터를 잇는 전선 묶음은?", o:["와이어 하네스","베어링","기어","스프링"], a:0},
+  {q:"정보 통신으로 모인 데이터가 인공지능에서 하는 역할은?", o:["학습 재료","전원 공급","소음 제거","장식"], a:0},
+  {q:"진짜와 가짜를 구별하는 경쟁으로 이미지를 만들어 내는 인공지능 구조는?", o:["GAN","TCP","RFID","PID"], a:0}
+ ]},
+
+{id:"2-6", unit:"2", title:"기타 공학 분야와 로봇", sub:"사람의 몸과 마음을 이해하는 로봇",
+ goals:["인간 공학의 의미와 적용을 설명할 수 있다.","감성 공학의 의미와 적용을 설명할 수 있다.","인간 공학과 감성 공학을 로봇에 적용한 사례를 말할 수 있다."],
+ story:{title:"키 작은 아이를 위한 안내 로봇", p:["공항 안내 로봇 앞에서 초등학생 동생이 발꿈치를 들고 화면을 누르려 애쓰고 있었다. 그때 로봇이 몸을 살짝 숙이며 화면을 아래로 내리고 말했다. “어디로 가고 싶어요?”","동생은 활짝 웃었다. 소윤이는 감탄했다. 로봇이 똑똑한 것도 좋지만, 쓰는 사람의 몸과 마음을 배려하는 로봇이 더 멋져 보였다."], q:"사람에게 편하고 친근한 로봇은 어떻게 설계할까요?"},
+ steps:[
+  {t:"인간 공학", li:["<b>인간 공학</b>: 사람의 능력과 한계를 이해하고 그에 맞게 작업 환경, 제품, 시스템을 설계하는 학문","신체 치수, 손이 닿는 작업 영역, 시각·청각 같은 감각 특성을 고려해요","<b>인간-시스템 인터페이스</b>: 사람이 기계에 명령하고 결과를 받는 과정을 편하게 설계해요","<b>UX</b>(사용자 경험)와 <b>UI</b>(버튼, 메뉴, 아이콘 같은 매개체) 디자인이 중요해요"],
+   q:{q:"사람의 능력과 한계를 이해하고 그에 맞게 제품과 환경을 설계하는 학문은?", o:["인간 공학","토목 공학","재료 공학","화학 공학"], a:0, why:"사람에게 기계를 맞추는 학문이에요."}},
+  {t:"감성 공학", li:["<b>감성 공학</b>: 사용자의 감정, 기분, 선호를 제품과 서비스 설계에 담는 접근법","버튼을 누르는 느낌, 자동차 실내 분위기처럼 오감으로 느끼는 만족을 측정하고 설계해요","<b>감성 컴퓨팅</b>: 사람의 감성을 인식, 해석하는 인공지능을 연구하는 분야","표정을 읽어 메타버스 아바타에 그대로 옮기는 기술도 감성 공학의 예예요"],
+   q:{q:"사람의 감정을 인식하고 해석하는 인공지능을 연구하는 분야는?", o:["감성 컴퓨팅","양자 컴퓨팅","클라우드 컴퓨팅","에지 컴퓨팅"], a:0, why:"감성(affect)을 다루는 컴퓨팅이에요."}},
+  {t:"인간·감성 공학 로봇", li:["공항 안내 로봇: 아이부터 어른까지 편하게 쓰도록 높이와 화면을 조절해요","자세 교정·부상 방지 로봇: 작업자의 자세를 분석해 몸에 무리가 덜 가게 도와요","<b>위해도 평가</b>: 로봇이 사람에게 줄 수 있는 위험을 찾아 크기를 평가하고 줄이는 과정","감정 표현 로봇(예: 페퍼): 표정과 목소리로 교감하며 호텔, 매장에서 서비스해요"], key:"좋은 로봇 = 똑똑함 + 사람에 대한 배려",
+   q:{q:"로봇이 사람에게 줄 수 있는 위험을 찾아 평가하고 줄이는 과정은?", o:["위해도 평가","성능 평가","가격 평가","디자인 평가"], a:0, why:"위험(위해)의 정도를 평가해 안전 대책을 세워요."}}
+ ],
+ summary:["인간 공학은 사람의 능력과 한계에 맞춰 제품과 환경을 설계해요.","감성 공학은 사용자의 감정과 선호를 설계에 담아요.","UX·UI 디자인과 감성 컴퓨팅이 사람 친화적인 로봇을 만들어요.","인간·감성 공학을 적용하면 신체적, 인지적, 감정적 요구를 채우는 로봇이 돼요."],
+ cards:[["인간 공학","사람의 능력과 한계에 맞춰 설계하는 학문"],["감성 공학","사용자의 감정과 선호를 설계에 담는 접근법"],["UI","버튼, 메뉴, 아이콘처럼 사용자가 기기와 만나는 매개체"],["위해도 평가","로봇의 위험을 찾아 평가하고 줄이는 과정"]],
+ test:[
+  {q:"인간 공학에서 고려하는 것이 아닌 것은?", o:["주식 가격","신체 치수","손이 닿는 작업 영역","감각 특성"], a:0},
+  {q:"감성 공학의 예로 알맞은 것은?", o:["버튼을 누를 때의 좋은 느낌 설계","철근 강도 계산","수질 검사","도로 포장"], a:0},
+  {q:"사용자가 제품을 쓰면서 느끼는 전체 경험은?", o:["UX","UI","CPU","GPS"], a:0},
+  {q:"표정을 읽어 아바타에 그대로 옮기는 기술과 관련 깊은 분야는?", o:["감성 공학","토목 공학","광업","조선 공학"], a:0},
+  {q:"공항 안내 로봇이 아이의 키에 맞춰 화면을 내리는 것은 무엇을 적용한 것인가요?", o:["인간 공학","탄소 중립","양자 역학","유전 공학"], a:0},
+  {q:"인간·감성 공학을 로봇에 적용했을 때의 효과는?", o:["더 사용자 친화적인 로봇이 된다","로봇이 더 위험해진다","사용이 더 어려워진다","가격이 무조건 0원이 된다"], a:0},
+  {q:"작업자의 자세를 분석해 부상을 막도록 돕는 로봇과 관련 깊은 분야는?", o:["인간 공학","천문학","지질학","회계학"], a:0}
+ ]},
+
+{id:"2-7", unit:"2", title:"공학 기술과 로봇의 발전", sub:"더 똑똑하고, 더 지속 가능하고, 더 책임 있게",
+ goals:["공학 기술과 로봇의 발전 방향을 설명할 수 있다.","로봇 발전에 따른 윤리 문제를 분석할 수 있다.","개발자, 관리자, 사용자의 역할을 제안할 수 있다."],
+ story:{title:"화면 속 할아버지", p:["명절에 해외 출장 중인 삼촌이 집에 ‘왔다’. 바퀴 달린 막대 위에 태블릿이 붙은 로봇이 거실을 돌아다니며 가족들과 인사를 나눴다. 화면 속 삼촌이 로봇을 움직여 할아버지 옆으로 갔다.","할아버지가 웃으시며 말씀하셨다. “세상 참 좋아졌다. 그런데 이러다 다들 로봇한테 일자리 뺏기는 거 아니냐?” 식탁에 잠깐 조용한 침묵이 흘렀다."], q:"로봇 기술은 어디로 가고 있고, 우리는 무엇을 준비해야 할까요?"},
+ steps:[
+  {t:"로봇의 발전 방향", li:["인공지능과 함께 스스로 판단하는 <b>지능형 로봇</b>으로 성능이 높아지고 있어요","<b>텔레프레즌스</b>: 멀리 떨어진 곳을 영상과 음성으로 연결해 마치 그 자리에 있는 듯 대화하는 기술","좁은 곳을 지나가는 변형 로봇, 드론 소화 작업처럼 위험한 일을 대신하는 로봇이 늘어요","에너지 효율과 재활용을 고려한 <b>지속 가능한</b> 로봇 개발이 중요해지고 있어요"],
+   q:{q:"멀리 떨어진 곳을 영상과 음성으로 연결해 마치 그 자리에 있는 듯 대화하는 기술은?", o:["텔레프레즌스","텔레비전","텔레파시","텔레마케팅"], a:0, why:"멀리(tele) 있으면서 그곳에 있는(presence) 느낌을 줘요."}},
+  {t:"로봇 발전과 윤리 문제", li:["<b>자동화 불안</b>: 기계가 일자리를 대신할지 모른다는 걱정","사고가 나면 누가 책임지는지(개발자, 제조사, 사용자) 정해야 해요","자율 주행차가 피할 수 없는 사고에서 누구를 보호할지 같은 도덕적 딜레마가 있어요 (모럴 머신 실험)","사람과 닮은 로봇에게 감정적으로 의존하게 만드는 문제도 생각해야 해요"],
+   q:{q:"로봇이 일자리를 대신할지 모른다는 걱정을 무엇이라 하나요?", o:["자동화 불안","로봇 공포증","기술 낙관","디지털 격차"], a:0, why:"자동화로 생기는 불안이에요."}},
+  {t:"올바른 로봇 윤리를 위한 노력", li:["<b>개발자</b>: 안전하고 편향 없는 알고리즘, 투명한 설계","<b>관리자·기업</b>: 지속적인 점검과 영향 평가, 안전 기준 준수","<b>사용자</b>: 목적에 맞게 쓰고, 문제가 생기면 알리기","<b>사회·국가</b>: 법과 가이드라인 마련, 새로운 일자리 교육","특이점(인공지능이 사람 지능을 넘는 시점)에 대한 논쟁도 미리 생각해 봐요"], key:"윤리 문제를 줄이려면 개발자, 관리자, 사용자가 함께 노력해요",
+   q:{q:"로봇 윤리 문제를 줄이기 위한 사용자의 역할로 알맞은 것은?", o:["목적에 맞게 쓰고 문제가 생기면 알린다","알고리즘을 몰래 바꾼다","안전 기준을 무시한다","사고를 숨긴다"], a:0, why:"사용자도 윤리적 책임의 한 축이에요."}}
+ ],
+ summary:["로봇은 인공지능과 함께 지능형으로, 그리고 지속 가능한 방향으로 발전하고 있어요.","텔레프레즌스처럼 사람과 공간을 잇는 로봇도 늘어나고 있어요.","자동화 불안, 책임 소재, 도덕적 딜레마 같은 윤리 문제가 함께 생겨요.","개발자, 관리자, 사용자, 사회가 함께 노력해 윤리 문제를 줄여야 해요."],
+ cards:[["지능형 로봇","스스로 상황을 판단해 움직이는 로봇"],["텔레프레즌스","멀리 있어도 그 자리에 있는 듯 소통하는 기술"],["자동화 불안","기계가 일자리를 대신할지 모른다는 걱정"],["특이점","인공지능이 사람의 지능을 넘어선다는 시점"]],
+ test:[
+  {q:"로봇 발전의 방향으로 알맞지 않은 것은?", o:["에너지를 마구 쓰는 방향","지능형으로의 발전","지속 가능성 고려","위험 작업 대체"], a:0},
+  {q:"자율 주행차의 도덕적 딜레마를 많은 사람에게 물어본 온라인 실험은?", o:["모럴 머신","튜링 테스트","SLAM","티처블 머신"], a:0},
+  {q:"로봇 개발자의 윤리적 역할로 알맞은 것은?", o:["안전하고 편향 없는 알고리즘 설계","사고 숨기기","개인 정보 무단 수집","안전 장치 제거"], a:0},
+  {q:"로봇으로 일자리가 바뀔 때 사회가 할 일로 알맞은 것은?", o:["새로운 일자리를 위한 교육 지원","로봇 개발 전면 금지","아무것도 하지 않기","사람 일자리만 줄이기"], a:0},
+  {q:"로봇 사고의 책임 소재를 정해야 하는 까닭은?", o:["피해를 바로잡고 같은 사고를 막기 위해","로봇을 벌주기 위해","로봇 가격을 올리기 위해","광고를 하기 위해"], a:0},
+  {q:"드론으로 높은 곳의 불을 끄는 것은 로봇의 어떤 쓰임인가요?", o:["위험한 일을 대신하기","예술 창작","오락","장식"], a:0},
+  {q:"사람과 닮은 로봇에서 특히 조심해야 할 윤리 문제는?", o:["취약한 사용자의 감정적 의존을 이용하는 것","색이 화려한 것","크기가 작은 것","배터리가 큰 것"], a:0}
+ ]},
+
+{id:"3-1", unit:"3", title:"문제 정의와 정보 탐색", sub:"공감에서 시작해 부품을 고르기까지",
+ goals:["사용자 공감으로 프로젝트의 문제를 정의할 수 있다.","아이디어 발상 기법을 활용할 수 있다.","로봇 제작에 필요한 하드웨어와 소프트웨어 정보를 탐색할 수 있다."],
+ story:{title:"분리수거장의 한숨", p:["학교 분리수거장은 늘 엉망이었다. 플라스틱 칸에 캔이, 종이 칸에 비닐이 섞여 있었다. 환경 지킴이 담당인 다은이는 매일 손으로 다시 골라냈다.","“로봇이 대신 나눠 주면 좋겠다.” 그 말에 로봇 동아리 친구들이 모였다. 그런데 막상 시작하려니 무엇부터 해야 할지 막막했다. 로봇보다 먼저, 문제부터 제대로 알아야 했다."], q:"로봇 프로젝트는 무엇부터 시작해야 할까요?"},
+ steps:[
+  {t:"사용자 공감과 문제 정의", li:["프로젝트는 <b>디자인 씽킹</b> 과정을 따라가요: 공감 → 문제 정의 → 아이디어 → 시제품 → 평가","<b>사용자 공감</b>: 직접 관찰하고 인터뷰하며 사용자의 불편을 그 사람의 처지에서 느껴 봐요","<b>문제 정의</b>: ‘현재 상태’와 ‘목표 상태’를 적고, 그 차이를 해결할 문제로 정해요","예: 현재 상태(재활용품이 섞여 있다) → 목표 상태(종류별로 자동 분류된다)"],
+   q:{q:"사용자의 처지에서 불편을 관찰하고 인터뷰하는 단계는?", o:["사용자 공감","시연","제작","평가"], a:0, why:"디자인 씽킹의 첫 단계예요."}},
+  {t:"아이디어 탐색", li:["<b>브레인라이팅</b>: 아이디어를 글로 적어 돌려 가며 덧붙여요","<b>만다라트</b>: 가운데 목표를 적고 주변 8칸으로 아이디어를, 다시 각 아이디어를 8칸으로 넓혀요","<b>랜덤 워드</b>: 무작위 낱말에서 연상해 새로운 생각을 끌어내요","온라인 협업 보드와 와이어프레임 도구로 아이디어를 시각화하고 공유해요"],
+   q:{q:"가운데 목표를 두고 주변 칸으로 아이디어를 넓혀 가는 발상 기법은?", o:["만다라트","쌍비교","평가 행렬","순서도"], a:0, why:"연꽃처럼 바깥으로 펼쳐지는 표를 써요."}},
+  {t:"하드웨어와 소프트웨어 정보 탐색", li:["<b>기구부 재료</b>: 목재, 아크릴, 3D 프린팅 플라스틱, 금속 등에서 무게와 강도를 고려해 골라요","<b>구동부</b>: 서보 모터(정확한 각도, 높은 토크), 스텝 모터(정해진 각도씩 회전), DC 모터(빠른 회전, 간단한 구조)","<b>센서부</b>: 적외선 센서는 빛을 쏘아 반사되는 양으로 물체를 감지해요","<b>제어 장치</b>: 아두이노 같은 마이크로컨트롤러 보드, 라즈베리 파이 같은 싱글보드 컴퓨터","<b>소프트웨어</b>: 블록 코딩 또는 텍스트 코딩, 아두이노 통합 개발 환경(IDE)에서 코드를 작성해 보드로 업로드"], key:"목표 동작에 맞춰 부품을 골라요",
+   q:{q:"정확한 회전 각도 제어와 높은 토크가 장점인 모터는?", o:["서보 모터","DC 모터","선풍기 모터","진동 모터"], a:0, why:"로봇 팔 관절처럼 정확한 위치가 필요한 곳에 써요."}}
+ ],
+ summary:["로봇 프로젝트는 디자인 씽킹 과정을 따라 사용자 공감에서 시작해요.","현재 상태와 목표 상태의 차이로 문제를 정의해요.","브레인라이팅, 만다라트, 랜덤 워드로 아이디어를 넓혀요.","목표 동작에 맞춰 재료, 모터, 센서, 제어 장치, 소프트웨어를 골라요."],
+ cards:[["디자인 씽킹","공감에서 시작해 사용자 중심으로 문제를 푸는 과정"],["만다라트","가운데 목표에서 칸을 넓혀 가는 발상 표"],["스텝 모터","정해진 각도씩 끊어 회전하는 모터"],["싱글보드 컴퓨터","기판 하나에 컴퓨터 기능을 모두 담은 장치"]],
+ test:[
+  {q:"문제 정의에서 적어야 하는 두 가지는?", o:["현재 상태와 목표 상태","가격과 색상","팀 이름과 로고","날씨와 시간"], a:0},
+  {q:"빠른 회전과 간단한 구조가 장점이지만 정확한 위치 제어가 어려운 모터는?", o:["DC 모터","서보 모터","스텝 모터","리니어 엔코더"], a:0},
+  {q:"적외선 센서가 물체를 감지하는 원리는?", o:["적외선을 쏘아 반사되는 양을 측정한다","냄새를 맡는다","무게를 잰다","소리를 듣는다"], a:0},
+  {q:"아두이노에 코드를 작성하고 업로드하는 프로그램은?", o:["통합 개발 환경(IDE)","워드 프로세서","사진 편집기","웹 브라우저"], a:0},
+  {q:"토크의 뜻으로 알맞은 것은?", o:["물체를 회전시키는 힘(회전력)","전기의 양","빛의 세기","소리의 크기"], a:0},
+  {q:"글로 적은 아이디어를 돌려 가며 덧붙이는 기법은?", o:["브레인라이팅","PID 제어","SLAM","역공학"], a:0},
+  {q:"디자인 씽킹의 첫 단계는?", o:["공감","평가","제작","시연"], a:0}
+ ]},
+
+{id:"3-2", unit:"3", title:"알고리즘과 제어 메커니즘", sub:"순서, 선택, 반복으로 로봇을 움직이기",
+ goals:["알고리즘의 제어 구조를 설명할 수 있다.","알고리즘을 순서도와 의사코드로 표현할 수 있다.","컨베이어 벨트, 로봇 팔, 압축 로봇 시스템의 제어 원리를 설명할 수 있다."],
+ story:{title:"내비게이션처럼 생각하기", p:["추석 연휴, 서울에서 부산으로 가는 차 안. 내비게이션이 말했다. “목적지까지 남은 거리 320km.” 도중에 기름이 떨어지자 내비게이션은 경로를 바꿔 주유소에 들렀다 다시 길을 안내했다.","보람이는 생각했다. ‘목적지에 도착했나? 아니면 계속 가고, 기름이 없으면 주유소로.’ 이렇게 단계와 조건으로 나눠 생각하면 로봇에게도 일을 시킬 수 있을 것 같았다."], q:"로봇이 알아듣는 ‘생각의 순서’는 어떻게 만들까요?"},
+ steps:[
+  {t:"알고리즘과 제어 구조", li:["<b>알고리즘</b>: 문제를 해결하는 순서와 방법을 단계별로 정리한 것","<b>순차 구조</b>: 위에서 아래로 차례대로 실행","<b>선택 구조</b>: 조건에 따라 다른 길을 고름 (만약 ~라면)","<b>반복 구조</b>: 조건이 만족될 때까지 같은 일을 되풀이","예: 로그인 → 아이디·비밀번호가 맞는가? 맞으면 접속, 틀리면 다시 입력(반복)"], key:"모든 알고리즘은 순차, 선택, 반복의 조합이에요",
+   q:{q:"‘목적지에 도착하지 않았다면 계속 이동한다’에 쓰인 제어 구조는?", o:["반복 구조","순차 구조","병렬 구조","무작위 구조"], a:0, why:"조건이 만족될 때까지 이동을 되풀이해요."}},
+  {t:"알고리즘 표현하기", li:["<b>자연어</b>: 일상 언어로 단계를 적어요. 쉽지만 뜻이 모호할 수 있어요","<b>순서도</b>: 약속된 도형(시작·끝, 처리, 판단 마름모)과 화살표로 흐름을 그려요","<b>의사코드</b>: 프로그래밍 언어와 비슷한 형식으로 적어 코드로 옮기기 쉬워요","조건을 하나 더하면(예: 기름이 없으면 주유소로) 알고리즘에 선택 구조가 늘어나요"],
+   q:{q:"순서도에서 ‘조건 판단’을 나타내는 도형은?", o:["마름모","원","타원","별"], a:0, why:"예/아니요로 갈라지는 지점을 마름모로 그려요."}},
+  {t:"로봇 시스템의 제어 원리", li:["<b>컨베이어 벨트 시스템</b>: 벨트 동작 → 센서로 물체 정보 수집 → 분리수거 가능한가? → 분리수거함으로 이동","<b>로봇 팔 시스템</b>: 다관절 로봇 팔이 경로를 겹치지 않게 정하고, 전체를 다 처리할 때까지 반복해요","<b>압축 로봇 시스템</b>: 적재량 센서로 쓰레기 양 감지 → 가득 찼는가? → 압축 시작 (공기 압축 장치 이용)","인공지능을 더하면 ‘재활용 가능한가?’를 카메라로 판단할 수 있어요"], widget:"servo",
+   q:{q:"압축 로봇 시스템에서 ‘쓰레기가 가득 찼는가?’를 판단하는 데 쓰는 것은?", o:["적재량 감지 센서","스피커","조명","바퀴"], a:0, why:"센서 값으로 조건을 판단해 압축을 시작해요."}}
+ ],
+ summary:["알고리즘은 문제를 해결하는 순서와 방법을 단계별로 정리한 것이에요.","제어 구조에는 순차, 선택, 반복이 있어요.","알고리즘은 자연어, 순서도, 의사코드로 표현해요.","컨베이어 벨트, 로봇 팔, 압축 로봇은 센서 판단과 반복으로 움직여요."],
+ cards:[["알고리즘","문제를 해결하는 단계별 순서와 방법"],["선택 구조","조건에 따라 실행할 길을 고르는 구조"],["반복 구조","조건을 만족할 때까지 되풀이하는 구조"],["순서도","도형과 화살표로 알고리즘의 흐름을 그린 그림"],["의사코드","프로그래밍 언어와 비슷하게 적은 알고리즘"]],
+ test:[
+  {q:"명령을 위에서 아래로 차례대로 실행하는 구조는?", o:["순차 구조","선택 구조","반복 구조","재귀 구조"], a:0},
+  {q:"‘아이디와 비밀번호가 맞는가?’에 따라 다르게 처리하는 구조는?", o:["선택 구조","순차 구조","반복 구조","출력 구조"], a:0},
+  {q:"알고리즘 표현 방법 가운데 코드로 옮기기 가장 쉬운 것은?", o:["의사코드","그림 일기","자연어 수필","노래 가사"], a:0},
+  {q:"컨베이어 벨트 분리수거 시스템에서 물체 정보를 모으는 것은?", o:["센서","벨트 색깔","스피커","손잡이"], a:0},
+  {q:"순서도에서 처리(계산, 동작)를 나타내는 도형은?", o:["직사각형","마름모","별","하트"], a:0},
+  {q:"로봇 청소 알고리즘에서 ‘전체 영역을 모두 청소했는가?’가 ‘아니요’면?", o:["청소를 계속 반복한다","바로 종료한다","전원을 끊는다","처음부터 지운다"], a:0},
+  {q:"재활용 가능 여부를 카메라로 판단하게 하려면 시스템에 더할 것은?", o:["인공지능","스프링","볼트","나무판"], a:0}
+ ]},
+
+{id:"3-3", unit:"3", title:"로봇 제작, 평가, 시연", sub:"대안을 고르고, 만들고, 고치고, 나누기",
+ goals:["ALU 기법과 평가 행렬법으로 대안을 고를 수 있다.","로봇 팔의 제작 과정을 설명할 수 있다.","프로젝트를 평가하고 개선해 시연·공유할 수 있다."],
+ story:{title:"동아리 발표회 전날 밤", p:["분리수거 로봇 팔 발표회 전날, 집게가 자꾸 캔을 떨어뜨렸다. 서보 모터 각도를 90도에서 120도로 바꾸자 이번엔 너무 세게 쥐어 종이컵이 찌그러졌다.","팀원들은 각도를 조금씩 바꾸며 기록했다. 새벽까지 이어진 시험 끝에 딱 맞는 값을 찾았다. 그리고 그 실패 기록까지 발표 자료에 넣기로 했다. 그게 진짜 공학이었으니까."], q:"로봇을 만들고, 평가하고, 세상과 나누는 과정은 어떻게 이루어질까요?"},
+ steps:[
+  {t:"대안 선정과 설계", li:["<b>수렴적 사고 기법</b>: 여러 아이디어 가운데 가장 가치 있는 것을 골라요 (PMI, ALU, 평가 행렬법, 쌍비교 분석법)","<b>ALU 기법</b>: 장점(Advantages), 한계(Limitations), 독특한 특성(Unique qualities)으로 평가","<b>평가 행렬법</b>: 아이디어와 평가 기준을 표로 만들어 점수를 매겨 비교","고른 아이디어는 프리핸드 스케치와 설명으로 구체화해요: 핵심은? 기존 제품과 다른 점은?"], widget:"matrix", key:"아이디어를 넓혔다면, 이제 기준으로 좁혀요",
+   q:{q:"장점, 한계, 독특한 특성으로 아이디어를 평가하는 기법은?", o:["ALU 기법","만다라트","브레인라이팅","랜덤 워드"], a:0, why:"Advantages, Limitations, Unique qualities의 머리글자예요."}},
+  {t:"로봇 팔 만들기", li:["준비물: 아두이노 보드, 센서 확장 쉴드, 서보 모터 4개, 적외선 센서, 기구부 부품","서보 모터 선 연결: 갈색(-), 빨간색(+), 주황색(신호)","제작 순서: 바닥판·회전부 → 1관절부 → 2관절부 → 집게부 → 센서 레일 → 전체 회로 확인 → 전체 코드 업로드","각 단계마다 회로를 연결하고 동작 코드를 올려 하나씩 확인해요 (서보 모터 초기 각도 설정이 중요)"],
+   q:{q:"서보 모터의 세 가닥 선 가운데 제어 신호를 받는 선의 색은? (교과서 예시 기준)", o:["주황색","갈색","빨간색","검은색"], a:0, why:"갈색은 -, 빨간색은 +, 주황색은 신호선이에요."}},
+  {t:"평가, 개선, 시연과 공유", li:["<b>평가</b>: 기능, 정확도, 안정성, 창의성, 협업 등 기준에 따라 결과물을 점검해요","<b>개선</b>: 사물인터넷으로 데이터 수집, 클라우드로 원격 모니터링, 인공지능 이미지 인식으로 대상 자동 인식","<b>시연 방법</b>: 실제 시연, 프레젠테이션, 사용자 테스트, 온라인 포럼","<b>모의 전시회</b>: 제품 이름, 제작 이유, 제작 방법, 시연 순서를 정리해 발표해요","<b>공유</b>: 협업 도구로 과정을 기록하고 나누면 다른 사람의 문제 해결에도 도움이 돼요"], key:"실패 기록도 소중한 공학 자료예요",
+   q:{q:"프로젝트 결과물을 실제 사용자에게 써 보게 하고 피드백을 받는 시연 방법은?", o:["사용자 테스트","프레젠테이션","포럼","실제 시연"], a:0, why:"사용자의 생생한 반응으로 개선점을 찾아요."}}
+ ],
+ summary:["ALU 기법과 평가 행렬법 같은 수렴적 사고로 최선의 대안을 골라요.","로봇 팔은 회전부, 관절부, 집게부, 센서를 단계별로 만들고 확인해요.","평가 기준에 따라 점검하고, IoT·클라우드·AI로 개선할 수 있어요.","실제 시연, 발표, 사용자 테스트, 포럼으로 결과를 나누고 공유해요."],
+ cards:[["ALU 기법","장점, 한계, 독특한 특성으로 아이디어를 평가하는 기법"],["평가 행렬법","아이디어와 기준을 표로 만들어 점수로 비교하는 기법"],["사용자 테스트","실제 사용자에게 써 보게 하고 피드백을 받는 방법"],["모의 전시회","결과물을 전시하며 발표해 보는 활동"]],
+ test:[
+  {q:"수렴적 사고 기법이 아닌 것은?", o:["브레인라이팅","PMI","ALU","평가 행렬법"], a:0},
+  {q:"로봇 팔 제작에서 맨 처음 만드는 부분은?", o:["바닥판과 회전부","집게부","센서 레일","2관절부"], a:0},
+  {q:"로봇 팔에 클라우드 기술을 더하면 좋은 점은?", o:["원격으로 상황을 모니터링하고 제어할 수 있다","무게가 늘어난다","전기가 필요 없어진다","센서가 사라진다"], a:0},
+  {q:"각 제작 단계마다 동작 코드를 올려 확인하는 까닭은?", o:["문제를 일찍 찾아 고치기 위해","시간을 늘리려고","부품을 늘리려고","전기를 아끼려고"], a:0},
+  {q:"온라인 커뮤니티에서 결과물을 공유하고 토론하는 방법은?", o:["포럼","실제 시연","사용자 테스트","현장 조립"], a:0},
+  {q:"인공지능 이미지 인식을 로봇 팔에 더하면?", o:["작업 대상을 자동으로 알아볼 수 있다","모터가 필요 없어진다","코드가 필요 없어진다","소리가 커진다"], a:0},
+  {q:"프로젝트 과정을 공유하는 가치로 알맞은 것은?", o:["다른 사람의 문제 해결과 기술 발전에 도움이 된다","아이디어를 숨길 수 있다","평가를 피할 수 있다","팀원을 줄일 수 있다"], a:0}
+ ]}
+];
+
+const LEVELS = [[0,"새싹"],[200,"관찰자"],[500,"탐구자"],[900,"설계자"],[1400,"로봇공학자"]];
+const BADGES = [
+  {id:"first", m:"1", name:"첫걸음", how:"첫 계단 통과"},
+  {id:"oneshot", m:"✓", name:"한 번에 통과", how:"시험 첫 도전에 80점 이상"},
+  {id:"perfect", m:"100", name:"만점왕", how:"시험 100점"},
+  {id:"cards", m:"가", name:"용어 박사", how:"카드를 실수 없이 완성"},
+  {id:"lab", m:"⚙", name:"실험가", how:"실습 위젯 직접 조작"},
+  {id:"unit", m:"▲", name:"단원 정복", how:"한 대단원 모두 완료"},
+  {id:"streak", m:"3일", name:"3일 연속", how:"3일 연속 학습"},
+  {id:"grad", m:"★", name:"졸업", how:"모든 레슨 완료"}
+];
+const XP = {step:10, cards:20, pass:50, perfect:20};
+
+/* ---------- state ---------- */
+const KEY = "robot-stairs-v1";
+const fresh = () => ({v:1, xp:0, les:{}, badges:[], streak:{last:null, n:0}});
+let S = (() => { try { const s = JSON.parse(localStorage.getItem(KEY)); if (s && s.v === 1) return s; } catch(e){} return fresh(); })();
+const save = () => { try { localStorage.setItem(KEY, JSON.stringify(S)); } catch(e){} };
+const L = id => S.les[id] || (S.les[id] = {steps:0, cards:false, best:null, passed:false, tries:0});
+const lessonById = id => LESSONS.find(l => l.id === id);
+const unitById = id => UNITS.find(u => u.id === id);
+const isPassed = id => !!(S.les[id] && S.les[id].passed);
+
+const dayStr = d => d.getFullYear()+"-"+String(d.getMonth()+1).padStart(2,"0")+"-"+String(d.getDate()).padStart(2,"0");
+(function streak(){
+  const today = dayStr(new Date()), y = new Date(); y.setDate(y.getDate()-1);
+  if (S.streak.last === today) return;
+  S.streak.n = S.streak.last === dayStr(y) ? S.streak.n + 1 : 1;
+  S.streak.last = today;
+  if (S.streak.n >= 3 && !S.badges.includes("streak")) S.badges.push("streak");
+  save();
+})();
+
+/* ---------- transient UI ---------- */
+let view = {name:"home"};
+const ui = {wrong:{}, cards:{}, test:{}, mx:[[3,3,2],[3,2,2],[2,3,1]], sv:90, confirmReset:false};
+const orders = new Map();
+function order(key, n){
+  if (!orders.has(key)) { const a = [...Array(n).keys()]; for (let i=n-1;i>0;i--){const j=Math.floor(Math.random()*(i+1)); [a[i],a[j]]=[a[j],a[i]];} orders.set(key,a); }
+  return orders.get(key);
+}
+
+/* ---------- rewards ---------- */
+function toast(html){
+  const t = document.createElement("div"); t.className = "toast"; t.innerHTML = html;
+  document.getElementById("toasts").appendChild(t); setTimeout(() => t.remove(), 2600);
+}
+function addXP(n, why){ const before = lvl(S.xp); S.xp += n; toast(`<b>+${n} XP</b> ${why}`); if (lvl(S.xp) > before) toast(`레벨 업! <b>Lv.${lvl(S.xp)+1} ${LEVELS[lvl(S.xp)][1]}</b>`); }
+function badge(id){ if (S.badges.includes(id)) return; S.badges.push(id); const b = BADGES.find(x=>x.id===id); toast(`배지 획득 <b>${b.name}</b>`); }
+function lvl(xp){ let i = 0; LEVELS.forEach((l,k) => { if (xp >= l[0]) i = k; }); return i; }
+function checkCompletion(){
+  UNITS.forEach(u => { const ls = LESSONS.filter(l => l.unit === u.id); if (ls.every(l => isPassed(l.id))) badge("unit"); });
+  if (LESSONS.every(l => isPassed(l.id))) badge("grad");
+}
+
+/* ---------- views ---------- */
+const OPTN = ["①","②","③","④"];
+
+function header(){
+  const i = lvl(S.xp);
+  return `<button class="brand" data-act="home" aria-label="홈으로"><span class="logo"><i></i><i></i><i></i></span>로봇 공학 계단 교실</button>
+  <nav class="nav"><button data-act="home" aria-current="${view.name!=="glossary"}">레슨</button><button data-act="glossary" aria-current="${view.name==="glossary"}">용어 사전</button><a class="sw" href="../">← 교실 홈</a></nav>
+  <div class="me"><span class="lv">Lv.${i+1} ${LEVELS[i][1]}</span><span class="num xp-txt">${S.xp} XP</span>
+  <button class="theme" data-act="theme" aria-label="밝게/어둡게 바꾸기">◐</button></div>`;
+}
+
+function nextLesson(){ return LESSONS.find(l => !isPassed(l.id)) || LESSONS[0]; }
+
+function home(){
+  const done = LESSONS.filter(l => isPassed(l.id)).length;
+  const started = Object.keys(S.les).length > 0;
+  const nx = nextLesson();
+  const i = lvl(S.xp), nextLv = LEVELS[i+1];
+  const pct = nextLv ? Math.round((S.xp - LEVELS[i][0]) / (nextLv[0] - LEVELS[i][0]) * 100) : 100;
+  return `
+  <section class="hero">
+    <div>
+      <p class="eyebrow">고등학교 로봇과 공학세계 · 레슨 ${LESSONS.length}개</p>
+      <h1>한 계단씩 오르는<br>로봇과 공학세계</h1>
+      <p class="lead">짧은 이야기로 궁금증을 만들고, 계단마다 확인문제를 풀며 올라가요. 레슨을 마칠 때마다 XP와 배지를 모아요.</p>
+      <div class="hero-cta">
+        <button class="btn primary" data-act="open" data-id="${nx.id}">${started ? "이어서 하기" : "첫 레슨 시작하기"} →</button>
+        <span class="hero-meta num">${done}/${LESSONS.length} 레슨 완료</span>
+      </div>
+    </div>
+    <div>
+      <div class="stairs" role="img" aria-label="레슨 ${LESSONS.length}개 중 ${done}개 완료">
+        ${LESSONS.map((l,k) => `<span class="stair ${isPassed(l.id)?"on":""} ${l.id===nx.id && done<LESSONS.length?"cur":""}" style="--h:${(k+1)*6/LESSONS.length}">${k+1}</span>`).join("")}
+      </div>
+      <p class="stairs-cap">레슨을 하나 마칠 때마다 계단이 한 칸씩 채워져요</p>
+    </div>
+  </section>
+
+  <ol class="flow">
+    <li><b>1</b><strong>짧은 이야기</strong><span>일상 속 장면으로 궁금증 만들기</span></li>
+    <li><b>2</b><strong>계단 오르기</strong><span>확인문제를 맞히면 다음 칸이 열려요</span></li>
+    <li><b>3</b><strong>용어 카드</strong><span>용어와 뜻을 짝지어요</span></li>
+    <li><b>4</b><strong>10문제 시험</strong><span>80점 이상이면 레슨 통과</span></li>
+  </ol>
+
+  <section>
+    <div class="sec-h"><h2>내 기록</h2><small class="num">🔥 ${S.streak.n}일 연속 학습</small></div>
+    <div class="card rec">
+      <div>
+        <div class="rec-lv">Lv.${i+1} ${LEVELS[i][1]}</div>
+        <div class="rec-sub num">${S.xp} XP</div>
+        <div class="bar"><i style="width:${pct}%"></i></div>
+        <div class="rec-sub">${nextLv ? `다음 레벨(${nextLv[1]})까지 <span class="num">${nextLv[0]-S.xp}</span> XP` : "최고 레벨이에요"}</div>
+      </div>
+      <div class="badges">
+        ${BADGES.map(b => `<div class="badge ${S.badges.includes(b.id)?"on":""}"><span class="m">${b.m}</span><div><strong>${b.name}</strong><span>${b.how}</span></div></div>`).join("")}
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="sec-h"><h2>대단원</h2><small>레슨을 눌러 시작해요</small></div>
+    <div class="units">
+    ${UNITS.map(u => `
+      <div class="unit">
+        <div class="unit-no">${u.no}</div>
+        <div>
+          <h3>${u.title}</h3><p>${u.desc}</p>
+          ${LESSONS.filter(l => l.unit === u.id).map(l => {
+            const s = S.les[l.id];
+            const chip = s && s.passed ? `<span class="chip done">완료 · ${s.best}점</span>` : s && s.steps > 0 ? `<span class="chip go">계단 ${s.steps}/3</span>` : `<span class="chip">시작 전</span>`;
+            return `<button class="les" data-act="open" data-id="${l.id}"><span class="code">${l.id}</span><span class="t">${l.title}<small>${l.sub}</small></span>${chip}</button>`;
+          }).join("")}
+        </div>
+      </div>`).join("")}
+    </div>
+  </section>
+
+  <div class="reset">${ui.confirmReset
+    ? `기록을 모두 지울까요? 되돌릴 수 없어요. <button class="btn ghost" data-act="reset-yes">모두 지우기</button><button class="linkish" data-act="reset-no">취소</button>`
+    : `<button class="linkish" data-act="reset">기록 모두 지우기</button>`}</div>`;
+}
+
+function quizBlock(key, q, opts){
+  // opts: {solved, wrong:Set, act, data}
+  const ord = order(key, q.o.length);
+  return `<div class="opts">${ord.map((oi,k) => {
+    const cls = opts.solved && oi === q.a ? "right" : opts.wrong.has(oi) ? "wrong" : "";
+    return `<button class="opt ${cls}" data-act="${opts.act}" ${opts.data} data-i="${oi}" ${opts.solved || opts.wrong.has(oi) ? "disabled" : ""}><span class="n">${OPTN[k]}</span><span>${q.o[oi]}</span></button>`;
+  }).join("")}</div>`;
+}
+
+function matrix(){
+  const ideas = ["A 컨베이어 벨트 분류기","B 로봇 팔 분류기","C 압축 로봇"], crit = ["기능","비용","제작 난이도"], lab = ["","미흡","보통","우수"];
+  const tot = ui.mx.map(r => r.reduce((a,b) => a+b, 0)), best = Math.max(...tot);
+  return `<div class="pc"><span class="tag">직접 채점해 봐요 · 칸을 누르면 점수가 바뀌어요</span>
+    <div class="pc-out"><table class="mx"><thead><tr><th>아이디어</th>${crit.map(c => `<th>${c}</th>`).join("")}<th>총점</th></tr></thead><tbody>
+    ${ui.mx.map((r,i) => `<tr class="${tot[i]===best?"best":""}"><th>${ideas[i]}</th>${r.map((v,j) => `<td><button class="tog" data-act="mx" data-i="${i}" data-j="${j}">${lab[v]}<span class="num">${v}</span></button></td>`).join("")}<td class="num">${tot[i]}</td></tr>`).join("")}
+    </tbody></table></div>
+    <p class="pc-res">평가 행렬 결과, 가장 알맞은 아이디어: <b>${ideas[tot.indexOf(best)]}</b></p></div>`;
+}
+
+function servo(){
+  const a = ui.sv, state = a <= 60 ? "꽉 쥠" : a <= 120 ? "반쯤 열림" : "활짝 열림";
+  return `<div class="pc"><span class="tag">직접 움직여 봐요 · 서보 모터로 집게 각도 바꾸기</span>
+    <div class="pc-in">${[0,45,90,135,180].map(v => `<button class="tog" data-act="sv" data-v="${v}" aria-pressed="${a===v}">${v}°</button>`).join("")}</div>
+    <div class="pc-out num">gripServo.write(${a});<br>집게 상태 → <span class="res">${state}</span></div></div>`;
+}
+
+function lesson(id){
+  const l = lessonById(id), s = L(id), u = unitById(l.unit);
+  const idx = LESSONS.indexOf(l), prev = LESSONS[idx-1], next = LESSONS[idx+1];
+  const stairsDone = s.steps >= l.steps.length;
+
+  const steps = l.steps.map((st, k) => {
+    const n = `${k+1}계단`;
+    if (k > s.steps) return `<div class="card step locked" id="step-${k}"><div class="step-h"><b>${n}</b><h3>${st.t}</h3></div><p class="note">앞 계단의 확인문제를 맞히면 열려요.</p></div>`;
+    const solved = s.steps > k, wk = id+"-s"+k, wrong = ui.wrong[wk] || new Set();
+    return `<div class="card step" id="step-${k}">
+      <div class="step-h"><b>${n}</b><h3>${st.t}</h3></div>
+      ${st.p ? `<p class="intro">${st.p}</p>` : ""}
+      <ul>${st.li.map(x => `<li>${x}</li>`).join("")}</ul>
+      ${st.widget === "matrix" ? matrix() : st.widget === "servo" ? servo() : ""}
+      ${st.key ? `<div class="key"><b>꼭 기억해요</b>${st.key}</div>` : ""}
+      <div class="quiz"><span class="tag">확인문제 · 맞히면 다음 계단이 열려요</span>
+        <p class="qq">${st.q.q}</p>
+        ${quizBlock(wk, st.q, {solved, wrong, act:"step", data:`data-id="${id}" data-k="${k}"`})}
+        ${solved ? `<p class="fb ok">정답이에요! ${st.q.why}</p>` : wrong.size ? `<p class="fb no">아쉬워요. 위 설명을 다시 읽고 골라 봐요.</p>` : ""}
+      </div></div>`;
+  }).join("");
+
+  const pips = l.steps.map((st,k) => `<span class="pip ${s.steps>k?"done":s.steps===k?"cur":""}">${s.steps>k?"✓ ":""}${k+1}계단</span>`).join("");
+
+  return `
+  <div class="l-head">
+    <div class="crumb"><button data-act="home">로봇 공학 계단 교실</button><span>›</span><span>${u.no}. ${u.title}</span><span>›</span><span class="num">${l.id}</span></div>
+    <h1>${l.title}</h1><p class="sub">${l.sub}</p>
+  </div>
+
+  <section class="card"><span class="tag">이번 레슨의 목표</span><ul class="goals">${l.goals.map(g => `<li>${g}</li>`).join("")}</ul></section>
+
+  <section class="story"><span class="tag">이야기 · 먼저 읽어 봐요</span><h2>${l.story.title}</h2>
+    ${l.story.p.map(p => `<p>${p}</p>`).join("")}<p class="q">${l.story.q}</p></section>
+
+  <section><div class="sec-h"><h2>계단 오르기</h2><small>${l.steps.length}칸을 한 칸씩</small></div>
+    <div class="pips">${pips}</div><div class="steps">${steps}</div></section>
+
+  <section class="card"><span class="tag">정리 · 한 줄씩 다시 보기</span>
+    ${stairsDone ? `<ul class="sumlist">${l.summary.map(x => `<li>${x}</li>`).join("")}</ul>` : `<p class="lock">계단을 모두 오르면 열려요.</p>`}</section>
+
+  <section class="card" id="cards"><span class="tag">게임 · 용어 카드 짝 맞추기</span>
+    ${stairsDone ? cardGame(l) : `<p class="lock">계단을 모두 오르면 열려요.</p>`}</section>
+
+  <section class="card" id="test"><span class="tag">시험 · 10문제, 80점 이상이면 통과</span>
+    ${stairsDone ? testBlock(l) : `<p class="lock">계단을 모두 오르면 열려요. 시험에서 80점 이상을 받으면 이 레슨이 완료돼요.</p>`}</section>
+
+  <nav class="foot-nav">
+    ${prev ? `<button class="btn ghost" data-act="open" data-id="${prev.id}"><small>← 이전 레슨</small>${prev.title}</button>` : ""}
+    ${next ? `<button class="btn ghost next" data-act="open" data-id="${next.id}"><small>다음 레슨 →</small>${next.title}</button>` : `<button class="btn ghost next" data-act="home"><small>마지막 레슨이에요</small>홈으로</button>`}
+  </nav>`;
+}
+
+function cardGame(l){
+  const s = L(l.id);
+  const g = ui.cards[l.id] || (ui.cards[l.id] = {sel:null, got:s.cards ? l.cards.map((_,i)=>i) : [], bad:null, miss:0});
+  const n = l.cards.length, to = order("ct"+l.id, n), dor = order("cd"+l.id, n);
+  const cls = (side, i) => g.got.includes(i) ? "got" : g.bad && g.bad[side] === i ? "bad" : g.sel && g.sel.side === side && g.sel.i === i ? "sel" : "";
+  const all = g.got.length === n;
+  return `<p style="margin-bottom:12px;color:var(--muted);font-size:14px">왼쪽 용어를 누르고, 알맞은 뜻을 눌러 짝을 지어요.</p>
+  <div class="match">
+    <div>${to.map(i => `<button class="mc term ${cls("t",i)}" data-act="card" data-id="${l.id}" data-side="t" data-i="${i}" ${g.got.includes(i)?"disabled":""}>${l.cards[i][0]}</button>`).join("")}</div>
+    <div>${dor.map(i => `<button class="mc ${cls("d",i)}" data-act="card" data-id="${l.id}" data-side="d" data-i="${i}" ${g.got.includes(i)?"disabled":""}>${l.cards[i][1]}</button>`).join("")}</div>
+  </div>
+  ${all ? `<p class="fb ok">모든 짝을 맞혔어요! <button class="linkish" data-act="card-again" data-id="${l.id}">다시 하기</button></p>` : `<p class="fb num" style="color:var(--muted)">${g.got.length}/${n} 짝 완성</p>`}`;
+}
+
+function testQs(l){ return [...l.steps.map(s => s.q), ...l.test]; }
+
+function testBlock(l){
+  const s = L(l.id);
+  const t = ui.test[l.id] || (ui.test[l.id] = {seed:0, ans:{}, done:false, score:0});
+  const qs = testQs(l), qo = order("tq"+l.id+"-"+t.seed, qs.length);
+  const answered = Object.keys(t.ans).length;
+  let head = "";
+  if (t.done) {
+    const pass = t.score >= 80;
+    head = `<div class="result ${pass?"pass":"fail"}"><span class="score">${t.score}점</span>
+      <div><strong>${pass ? "통과했어요! 레슨 완료" : "아쉬워요. 80점부터 통과예요"}</strong><br>
+      <span style="font-size:14px;color:var(--muted)">틀린 문제의 정답을 아래에서 확인하고 다시 도전해 봐요.</span></div>
+      <button class="btn ghost" data-act="retest" data-id="${l.id}">다시 풀기</button></div>`;
+  } else if (s.passed) {
+    head = `<p class="fb ok" style="margin:0 0 8px">이미 통과한 레슨이에요 (최고 ${s.best}점). 다시 풀어도 좋아요.</p>`;
+  }
+  const body = qo.map((qi, k) => {
+    const q = qs[qi], key = `t${l.id}-${t.seed}-${qi}`, ord = order(key, q.o.length), pick = t.ans[qi];
+    return `<div class="tq"><p class="qq"><span class="num">${String(k+1).padStart(2,"0")}</span>${q.q}</p><div class="opts">
+      ${ord.map((oi, j) => {
+        let c = "";
+        if (t.done) c = oi === q.a ? "right" : oi === pick ? "wrong" : "";
+        else if (pick === oi) c = "sel";
+        return `<button class="opt ${c}" data-act="tpick" data-id="${l.id}" data-q="${qi}" data-i="${oi}" ${t.done?"disabled":""}><span class="n">${OPTN[j]}</span><span>${q.o[oi]}</span></button>`;
+      }).join("")}</div></div>`;
+  }).join("");
+  const submit = t.done ? "" : `<div style="display:flex;align-items:center;gap:12px;margin-top:16px;flex-wrap:wrap">
+    <button class="btn primary" data-act="submit" data-id="${l.id}" ${answered < qs.length ? "disabled" : ""}>채점하기</button>
+    <span class="num" style="color:var(--muted);font-size:14px">${answered}/${qs.length} 답함</span></div>`;
+  return head + body + submit;
+}
+
+function glossary(){
+  const rows = LESSONS.flatMap(l => l.cards.map(c => ({t:c[0], d:c[1], l})))
+    .sort((a,b) => a.t.localeCompare(b.t, "ko"));
+  return `<div class="l-head"><h1>용어 사전</h1><p class="sub">모든 레슨의 용어 ${rows.length}개를 가나다순으로 모았어요.</p></div>
+  <input class="search" id="gl-search" type="search" placeholder="용어나 뜻으로 찾기" aria-label="용어 찾기">
+  <div class="gl">${rows.map(r => `<div class="gl-row" data-s="${(r.t+" "+r.d).toLowerCase()}"><strong>${r.t}</strong><span>${r.d}</span><button data-act="open" data-id="${r.l.id}">${r.l.id} ${r.l.title} →</button></div>`).join("")}</div>`;
+}
+
+function render(){
+  document.getElementById("top").innerHTML = header();
+  const app = document.getElementById("app");
+  app.innerHTML = view.name === "lesson" ? lesson(view.id) : view.name === "glossary" ? glossary() : home();
+}
+function go(v){ view = v; ui.confirmReset = false; render(); window.scrollTo(0,0); }
+
+/* ---------- events ---------- */
+document.addEventListener("input", e => {
+  if (e.target.id !== "gl-search") return;
+  const q = e.target.value.trim().toLowerCase();
+  document.querySelectorAll(".gl-row").forEach(r => { r.hidden = q && !r.dataset.s.includes(q); });
+});
+
+document.addEventListener("click", e => {
+  const el = e.target.closest("[data-act]"); if (!el) return;
+  const a = el.dataset.act, id = el.dataset.id;
+  if (a === "home") return go({name:"home"});
+  if (a === "glossary") return go({name:"glossary"});
+  if (a === "open") return go({name:"lesson", id});
+  if (a === "theme") {
+    const root = document.documentElement;
+    const dark = root.dataset.theme ? root.dataset.theme === "dark" : matchMedia("(prefers-color-scheme: dark)").matches;
+    root.dataset.theme = dark ? "light" : "dark";
+    try { localStorage.setItem(KEY+"-theme", root.dataset.theme); } catch(e){}
+    return;
+  }
+  if (a === "reset") { ui.confirmReset = true; return render(); }
+  if (a === "reset-no") { ui.confirmReset = false; return render(); }
+  if (a === "reset-yes") {
+    S = fresh(); S.streak = {last:dayStr(new Date()), n:1}; save();
+    ui.wrong = {}; ui.cards = {}; ui.test = {}; ui.confirmReset = false; orders.clear();
+    toast("기록을 모두 지웠어요"); return render();
+  }
+
+  if (a === "step") {
+    const k = +el.dataset.k, i = +el.dataset.i, l = lessonById(id), q = l.steps[k].q, s = L(id), wk = id+"-s"+k;
+    if (i === q.a) {
+      if (s.steps === k) { s.steps++; addXP(XP.step, `${k+1}계단 통과`); badge("first"); save(); }
+      render();
+      const nx = document.getElementById("step-"+(k+1)) || document.getElementById("cards");
+      if (nx && s.steps === k+1) setTimeout(() => nx.scrollIntoView({behavior:"smooth", block:"start"}), 350);
+    } else { (ui.wrong[wk] || (ui.wrong[wk] = new Set())).add(i); render(); }
+    return;
+  }
+
+  if (a === "sv") {
+    ui.sv = +el.dataset.v;
+    if (!S.badges.includes("lab")) { badge("lab"); save(); }
+    return render();
+  }
+  if (a === "mx") {
+    const i = +el.dataset.i, j = +el.dataset.j; ui.mx[i][j] = ui.mx[i][j] % 3 + 1;
+    if (!S.badges.includes("lab")) { badge("lab"); save(); }
+    return render();
+  }
+
+  if (a === "card") {
+    const l = lessonById(id), g = ui.cards[id], side = el.dataset.side, i = +el.dataset.i;
+    if (g.bad) return;
+    if (!g.sel || g.sel.side === side) { g.sel = {side, i}; return render(); }
+    const t = side === "t" ? i : g.sel.i, d = side === "d" ? i : g.sel.i;
+    g.sel = null;
+    if (t === d) {
+      g.got.push(t);
+      if (g.got.length === l.cards.length) {
+        const s = L(id);
+        if (!s.cards) { s.cards = true; addXP(XP.cards, "용어 카드 완성"); }
+        if (g.miss === 0) badge("cards");
+        save();
+      }
+      return render();
+    }
+    g.miss++; g.bad = {t, d}; render();
+    setTimeout(() => { g.bad = null; render(); }, 650);
+    return;
+  }
+  if (a === "card-again") { ui.cards[id] = {sel:null, got:[], bad:null, miss:0}; orders.delete("ct"+id); orders.delete("cd"+id); return render(); }
+
+  if (a === "tpick") { ui.test[id].ans[+el.dataset.q] = +el.dataset.i; return render(); }
+  if (a === "submit") {
+    const l = lessonById(id), t = ui.test[id], s = L(id), qs = testQs(l);
+    const right = qs.filter((q, qi) => t.ans[qi] === q.a).length;
+    t.score = right * 10; t.done = true; s.tries++;
+    if (t.score >= 80) {
+      if (!s.passed) { s.passed = true; addXP(XP.pass, "레슨 통과"); if (s.tries === 1) badge("oneshot"); }
+      if (t.score === 100 && (s.best || 0) < 100) { addXP(XP.perfect, "만점 보너스"); badge("perfect"); }
+    }
+    s.best = Math.max(s.best || 0, t.score);
+    checkCompletion(); save(); render();
+    document.getElementById("test").scrollIntoView({behavior:"smooth", block:"start"});
+    return;
+  }
+  if (a === "retest") { const t = ui.test[id]; t.seed++; t.ans = {}; t.done = false; render(); document.getElementById("test").scrollIntoView({block:"start"}); }
+});
+
+try { const th = localStorage.getItem(KEY+"-theme"); if (th) document.documentElement.dataset.theme = th; } catch(e){}
+render();
+</script>
+</body>
+</html>
