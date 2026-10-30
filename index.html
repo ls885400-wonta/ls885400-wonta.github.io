@@ -11,7 +11,7 @@
 <style>
 /* Layout: one 1080px column; friendly header, a "how to study" strip, a 2×2 grid of photo course cards, then a news list fed by updates.json */
 :root{
-  --bg:#F3F8FC; --surface:#FFFFFF; --ink:#0E2433; --text:#29404F; --muted:#5B7080; --line:#DAE6EF; --soft:#EAF2F8;
+  --bg:#F3F8FC; --surface:#FFFFFF; --ink:#0A1D2B; --text:#1B2E3C; --muted:#465A6A; --line:#D3E0EA; --soft:#E8F1F8;
   --sun:#FFC93C; --sun-ink:#3A2A00; --sun-soft:#FFF4D1;
   --ai:#0CA678; --ai-s:#E3F8F1; --de:#1C7ED6; --de-s:#E7F2FD; --rb:#7048E8; --rb-s:#F0ECFE; --tc:#E67700; --tc-s:#FFF1DB;
   --shadow:0 1px 2px rgba(14,36,51,.05),0 8px 24px rgba(14,36,51,.07);
@@ -19,14 +19,14 @@
   color-scheme:light;
 }
 @media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
-  --bg:#0E1620; --surface:#15202B; --ink:#EAF2F8; --text:#CFDCE6; --muted:#93A6B5; --line:#24323F; --soft:#1B2834; --sun-soft:#3A3014;
+  --bg:#0E1620; --surface:#15202B; --ink:#F3F8FC; --text:#DDE8F0; --muted:#A9BBC8; --line:#24323F; --soft:#1B2834; --sun-soft:#3A3014;
   --ai:#38D9A9; --ai-s:#123A30; --de:#74C0FC; --de-s:#15304A; --rb:#B197FC; --rb-s:#2A2148; --tc:#FFB84D; --tc-s:#3A2A12; --shadow:none; color-scheme:dark}}
 :root[data-theme="dark"]{
-  --bg:#0E1620; --surface:#15202B; --ink:#EAF2F8; --text:#CFDCE6; --muted:#93A6B5; --line:#24323F; --soft:#1B2834; --sun-soft:#3A3014;
+  --bg:#0E1620; --surface:#15202B; --ink:#F3F8FC; --text:#DDE8F0; --muted:#A9BBC8; --line:#24323F; --soft:#1B2834; --sun-soft:#3A3014;
   --ai:#38D9A9; --ai-s:#123A30; --de:#74C0FC; --de-s:#15304A; --rb:#B197FC; --rb-s:#2A2148; --tc:#FFB84D; --tc-s:#3A2A12; --shadow:none; color-scheme:dark}
 :root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
 *{box-sizing:border-box}
-body{margin:0;background:var(--bg);color:var(--text);font-family:var(--f-body);font-size:17px;line-height:1.7;word-break:keep-all;overflow-wrap:break-word;-webkit-font-smoothing:antialiased}
+body{margin:0;background:var(--bg);color:var(--text);font-family:var(--f-body);font-size:18px;line-height:1.75;word-break:keep-all;overflow-wrap:break-word;-webkit-font-smoothing:antialiased}
 h1,h2,h3,p{margin:0}
 h1,h2,h3{color:var(--ink);text-wrap:balance;line-height:1.3;letter-spacing:-.02em}
 a{color:inherit}

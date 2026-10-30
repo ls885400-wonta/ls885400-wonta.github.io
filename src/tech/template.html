@@ -13,7 +13,7 @@
 <style>
 /* Layout: 1120px column. Home = hero + five colour-coded category bands of photo cards. Field page = 760px reading column: photo, lead, numbered mechanism, tech cards, figures, videos, quiz */
 :root{
-  --bg:#F3F8FC; --surface:#FFFFFF; --ink:#0E2433; --text:#29404F; --muted:#5B7080; --line:#DAE6EF; --soft:#EAF2F8;
+  --bg:#F3F8FC; --surface:#FFFFFF; --ink:#0A1D2B; --text:#1B2E3C; --muted:#465A6A; --line:#D3E0EA; --soft:#E8F1F8;
   --mfg:#C9561A; --mfg-s:#FBEBE1; --ict:#2563C9; --ict-s:#E4ECFA; --con:#8A6414; --con-s:#F4ECD9;
   --trn:#0B7F73; --trn-s:#DDF2EF; --bio:#B7325F; --bio-s:#F8E3EA;
   --ok:#17803D; --ok-s:#E2F3E7; --bad:#B9381A; --bad-s:#FBE6E0; --marker:#F2C14E; --marker-ink:#2B2104;
@@ -22,18 +22,18 @@
   color-scheme:light;
 }
 @media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
-  --bg:#0E1620; --surface:#15202B; --ink:#EAF2F8; --text:#CFDCE6; --muted:#93A6B5; --line:#24323F; --soft:#1B2834;
+  --bg:#0E1620; --surface:#15202B; --ink:#F3F8FC; --text:#DDE8F0; --muted:#A9BBC8; --line:#24323F; --soft:#1B2834;
   --mfg:#F08A50; --mfg-s:#3A2418; --ict:#79A8F5; --ict-s:#18263D; --con:#D9AE52; --con-s:#33291A;
   --trn:#4CC9B9; --trn-s:#123430; --bio:#EE7FA3; --bio-s:#3A1C27;
   --ok:#5BCB83; --ok-s:#173222; --bad:#F2876A; --bad-s:#3A2019; color-scheme:dark}}
 :root[data-theme="dark"]{
-  --bg:#0E1620; --surface:#15202B; --ink:#EAF2F8; --text:#CFDCE6; --muted:#93A6B5; --line:#24323F; --soft:#1B2834;
+  --bg:#0E1620; --surface:#15202B; --ink:#F3F8FC; --text:#DDE8F0; --muted:#A9BBC8; --line:#24323F; --soft:#1B2834;
   --mfg:#F08A50; --mfg-s:#3A2418; --ict:#79A8F5; --ict-s:#18263D; --con:#D9AE52; --con-s:#33291A;
   --trn:#4CC9B9; --trn-s:#123430; --bio:#EE7FA3; --bio-s:#3A1C27;
   --ok:#5BCB83; --ok-s:#173222; --bad:#F2876A; --bad-s:#3A2019; color-scheme:dark}
 :root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
 *{box-sizing:border-box}
-body{margin:0;background:var(--bg);color:var(--text);font-family:var(--f-body);font-size:17px;line-height:1.8;word-break:keep-all;overflow-wrap:break-word;-webkit-font-smoothing:antialiased}
+body{margin:0;background:var(--bg);color:var(--text);font-family:var(--f-body);font-size:18px;line-height:1.8;word-break:keep-all;overflow-wrap:break-word;-webkit-font-smoothing:antialiased}
 body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:10;background:var(--surface)}
 h1,h2,h3,p{margin:0}
 h1,h2,h3{color:var(--ink);text-wrap:balance;line-height:1.3;letter-spacing:-.01em}
@@ -60,7 +60,28 @@ button{font:inherit;color:inherit;cursor:pointer}
 .home-link{font-size:14px;font-weight:700;text-decoration:none;color:var(--muted);padding:6px 10px;border:1px solid var(--line);border-radius:8px}
 .theme{width:36px;height:36px;border-radius:50%;border:1px solid var(--line);background:var(--surface);font-size:15px}
 
-main{padding-block:28px 72px}
+/* field sidebar */
+.shell{display:grid;grid-template-columns:260px minmax(0,1fr);gap:28px;align-items:start;padding-block:28px 72px}
+.shell > main{min-width:0}
+.side{position:sticky;top:84px;max-height:calc(100vh - 100px);overflow:auto;overscroll-behavior:contain;background:var(--surface);border:1px solid var(--line);border-radius:18px;padding:12px 10px;scrollbar-width:thin}
+.side a{display:flex;align-items:center;gap:10px;text-decoration:none;color:var(--text);font-size:.95rem;font-weight:600;padding:7px 10px;border-radius:10px;line-height:1.4}
+.side a:hover{background:var(--soft);color:var(--ink)}
+.side a.on{background:var(--cs,var(--soft));color:var(--c,var(--ink));font-weight:800}
+.side .s-home{font-weight:800;color:var(--ink);font-size:1rem}
+.side .s-cat{margin:14px 10px 4px;font-size:.85rem;font-weight:900;color:var(--c);display:flex;align-items:center;gap:8px}
+.side .s-cat i{width:10px;height:10px;border-radius:3px;background:var(--c)}
+.side a b{flex:none;width:20px;height:20px;border-radius:50%;border:2px solid var(--line);display:grid;place-items:center;font-size:.7rem;color:#fff}
+.side a.seen b{background:var(--ok);border-color:var(--ok)}
+.scrim{position:fixed;inset:0;background:rgba(8,20,30,.45);z-index:29}
+.menu-btn{display:none}
+@media (max-width:1000px){
+  .shell{grid-template-columns:1fr}
+  .side{position:fixed;top:0;left:0;bottom:0;width:min(320px,86vw);max-height:none;border-radius:0 20px 20px 0;z-index:30;transform:translateX(-105%);transition:transform .22s;padding:calc(14px + env(safe-area-inset-top,0px)) 10px 14px max(10px,env(safe-area-inset-left,0px))}
+  .side.open{transform:none}
+  .menu-btn{display:grid;place-items:center}
+}
+@media (max-width:1180px){ .grid{grid-template-columns:1fr 1fr} }
+
 
 /* home */
 .hero{display:grid;grid-template-columns:1.2fr 1fr;gap:28px;align-items:end;padding-bottom:28px;border-bottom:1px solid var(--line)}
@@ -186,11 +207,12 @@ footer{color:var(--muted);font-size:13px;text-align:center;padding:24px 16px 40p
 </head>
 <body>
 <header class="top"><div class="wrap">
-  <button class="brand" data-go="#/" aria-label="첨단 공학 탐험관 처음으로"><svg viewBox="0 0 32 32" aria-hidden="true"><rect width="32" height="32" rx="8" fill="currentColor"/><circle cx="16" cy="16" r="9" fill="none" stroke="#F2C14E" stroke-width="2.5"/><path d="M16 7v18M7 16h18" stroke="#F2C14E" stroke-width="2"/></svg>첨단 공학 탐험관</button>
+  <button class="theme menu-btn" id="menuBtn" aria-label="분야 메뉴 열기">☰</button><button class="brand" data-go="#/" aria-label="첨단 공학 탐험관 처음으로"><svg viewBox="0 0 32 32" aria-hidden="true"><rect width="32" height="32" rx="8" fill="currentColor"/><circle cx="16" cy="16" r="9" fill="none" stroke="#F2C14E" stroke-width="2.5"/><path d="M16 7v18M7 16h18" stroke="#F2C14E" stroke-width="2"/></svg>첨단 공학 탐험관</button>
   <nav class="cats" id="cats" aria-label="영역"></nav>
   <div class="tools"><a class="home-link" href="../">← 교실 홈</a><button class="theme" id="theme" aria-label="밝게/어둡게 바꾸기">◐</button></div>
 </div></header>
-<main class="wrap" id="app"></main>
+<div class="shell wrap"><aside class="side" id="side" aria-label="분야 메뉴"></aside><main id="app"></main></div>
+<div class="scrim" id="scrim" hidden></div>
 <footer>사진: 위키미디어 공용(Wikimedia Commons)의 자유 이용 사진, 각 사진 아래에 작가와 라이선스 표시 · 영상: 각 채널의 YouTube 영상을 연결 · 설명 참고: 위키백과와 각 기관 자료<br><a href="../">← 우리 반 AI·공학 교실로 돌아가기</a></footer>
 
 <script>
@@ -278,22 +300,33 @@ function fieldPage(f){
   </article>`;
 }
 
+function sideNav(route){
+  const cur = route.v === "field" ? route.id : null;
+  document.getElementById("side").innerHTML = `<a class="s-home ${route.v==="home"?"on":""}" href="#/">🧭 탐험관 처음</a>` +
+    CATS.map(c => `<p class="s-cat c-${c.id}"><i></i>${c.name}</p>` + FIELDS.filter(f => f.cat === c.id).map(f =>
+      `<a class="c-${c.id} ${cur===f.id?"on":""} ${S.seen[f.id]?"seen":""}" href="#/f/${f.id}" ${cur===f.id?'aria-current="page"':""}><b>${S.seen[f.id]?"✓":""}</b>${esc(f.name)}</a>`).join("")).join("");
+  const on = document.querySelector(".side a.on"); if (on) on.scrollIntoView({block:"nearest"});
+}
+function setSide(open){ document.getElementById("side").classList.toggle("open", open); document.getElementById("scrim").hidden = !open; }
+
 function route(){
   const h = location.hash.replace(/^#\/?/, "");
   const [kind, id] = h.split("/");
   if (kind === "f" && FIELDS.find(f => f.id === id)) {
     const f = FIELDS.find(x => x.id === id);
     if (!S.seen[f.id]) { S.seen[f.id] = 1; save(); }
-    nav({v:"field", cat:f.cat}); app.innerHTML = fieldPage(f); document.title = f.name + " · 첨단 공학 탐험관";
+    nav({v:"field", cat:f.cat}); sideNav({v:"field", id:f.id}); app.innerHTML = fieldPage(f); document.title = f.name + " · 첨단 공학 탐험관";
   } else if (kind === "c" && cat(id)) {
-    nav({v:"cat", cat:id}); app.innerHTML = band(cat(id)); document.title = cat(id).name + " · 첨단 공학 탐험관";
+    nav({v:"cat", cat:id}); sideNav({v:"cat"}); app.innerHTML = band(cat(id)); document.title = cat(id).name + " · 첨단 공학 탐험관";
   } else {
-    nav({v:"home"}); app.innerHTML = home(""); document.title = "첨단 공학 탐험관";
+    nav({v:"home"}); sideNav({v:"home"}); app.innerHTML = home(""); document.title = "첨단 공학 탐험관";
   }
-  window.scrollTo(0, 0);
+  setSide(false); window.scrollTo(0, 0);
 }
 
 document.addEventListener("click", e => {
+  if (e.target.closest("#menuBtn")) return setSide(true);
+  if (e.target.id === "scrim") return setSide(false);
   const go = e.target.closest("[data-go]"); if (go) { location.hash = go.dataset.go; return; }
   const p = e.target.closest("[data-play]");
   if (p) {
