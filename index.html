@@ -13,17 +13,17 @@
 :root{
   --bg:#F3F8FC; --surface:#FFFFFF; --ink:#0A1D2B; --text:#1B2E3C; --muted:#465A6A; --line:#D3E0EA; --soft:#E8F1F8;
   --sun:#FFC93C; --sun-ink:#3A2A00; --sun-soft:#FFF4D1;
-  --ai:#0CA678; --ai-s:#E3F8F1; --de:#1C7ED6; --de-s:#E7F2FD; --rb:#7048E8; --rb-s:#F0ECFE; --tc:#E67700; --tc-s:#FFF1DB;
+  --ai:#0CA678; --ai-s:#E3F8F1; --de:#1C7ED6; --de-s:#E7F2FD; --rb:#7048E8; --rb-s:#F0ECFE; --tc:#E67700; --tc-s:#FFF1DB; --wd:#C2780C; --wd-s:#FDF1DE;
   --shadow:0 1px 2px rgba(14,36,51,.05),0 8px 24px rgba(14,36,51,.07);
   --f-body:"Pretendard Variable",Pretendard,"Malgun Gothic","Apple SD Gothic Neo",sans-serif;
   color-scheme:light;
 }
 @media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
   --bg:#0E1620; --surface:#15202B; --ink:#F3F8FC; --text:#DDE8F0; --muted:#A9BBC8; --line:#24323F; --soft:#1B2834; --sun-soft:#3A3014;
-  --ai:#38D9A9; --ai-s:#123A30; --de:#74C0FC; --de-s:#15304A; --rb:#B197FC; --rb-s:#2A2148; --tc:#FFB84D; --tc-s:#3A2A12; --shadow:none; color-scheme:dark}}
+  --ai:#38D9A9; --ai-s:#123A30; --de:#74C0FC; --de-s:#15304A; --rb:#B197FC; --rb-s:#2A2148; --tc:#FFB84D; --tc-s:#3A2A12; --wd:#F2B45A; --wd-s:#3A2A12; --shadow:none; color-scheme:dark}}
 :root[data-theme="dark"]{
   --bg:#0E1620; --surface:#15202B; --ink:#F3F8FC; --text:#DDE8F0; --muted:#A9BBC8; --line:#24323F; --soft:#1B2834; --sun-soft:#3A3014;
-  --ai:#38D9A9; --ai-s:#123A30; --de:#74C0FC; --de-s:#15304A; --rb:#B197FC; --rb-s:#2A2148; --tc:#FFB84D; --tc-s:#3A2A12; --shadow:none; color-scheme:dark}
+  --ai:#38D9A9; --ai-s:#123A30; --de:#74C0FC; --de-s:#15304A; --rb:#B197FC; --rb-s:#2A2148; --tc:#FFB84D; --tc-s:#3A2A12; --wd:#F2B45A; --wd-s:#3A2A12; --shadow:none; color-scheme:dark}
 :root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
 *{box-sizing:border-box}
 body{margin:0;background:var(--bg);color:var(--text);font-family:var(--f-body);font-size:18px;line-height:1.75;word-break:keep-all;overflow-wrap:break-word;-webkit-font-smoothing:antialiased}
@@ -64,6 +64,7 @@ img{max-width:100%;display:block}
 .bar{flex:1;height:8px;border-radius:999px;background:var(--soft);overflow:hidden}
 .bar i{display:block;height:100%;background:var(--c);border-radius:999px}
 .go{font-weight:800;color:var(--c);white-space:nowrap}
+.c-wd{--c:var(--wd);--cs:var(--wd-s)} .grid .c-tc{grid-column:1/-1} .grid .c-tc .ph{aspect-ratio:16/5}
 .c-ai{--c:var(--ai);--cs:var(--ai-s)} .c-de{--c:var(--de);--cs:var(--de-s)} .c-rb{--c:var(--rb);--cs:var(--rb-s)} .c-tc{--c:var(--tc);--cs:var(--tc-s)}
 .credit{font-size:.72rem;color:var(--muted)}
 
@@ -120,6 +121,11 @@ img{max-width:100%;display:block}
       <div class="ph"><img src="https://thumb.wikimedia.org/wikipedia/commons/thumb/7/77/New_Da_Vinci_Xi.jpg/500px-New_Da_Vinci_Xi.jpg" alt="수술 로봇 다빈치 Xi" loading="lazy"><span class="pill">고등 로봇과 공학세계</span></div>
       <div class="bd"><h2><i></i>로봇과 공학세계</h2><p>로봇의 구성과 원리, 인공지능과 로봇 윤리, 7개 공학 분야의 로봇, 로봇 팔 프로젝트까지 14개 레슨이에요.</p>
         <div class="meta" data-key="robot-stairs-v1" data-total="14"><span class="num">0/14 레슨 완료</span><span class="bar"><i style="width:0%"></i></span><span class="go">공부하기 →</span></div></div>
+    </a>
+    <a class="course c-wd" href="wood/">
+      <div class="ph"><img src="https://thumb.wikimedia.org/wikipedia/commons/thumb/6/6d/Shaving_wood_%28Unsplash%29.jpg/500px-Shaving_wood_%28Unsplash%29.jpg" alt="대패질로 나온 대팻밥" loading="lazy"><span class="pill">목공 교육</span></div>
+      <div class="bd"><h2><i></i>목공 교실</h2><p>목재, 공구와 안전, 재단·짜임·접착, 샌딩과 도료, 아이디어 구상과 도면, 제작까지 15개 레슨과 참고 자료 모음이에요.</p>
+        <div class="meta" data-key="wood-stairs-v1" data-total="15"><span class="num">0/15 레슨 완료</span><span class="bar"><i style="width:0%"></i></span><span class="go">공부하기 →</span></div></div>
     </a>
     <a class="course c-tc" href="tech/">
       <div class="ph"><img src="https://thumb.wikimedia.org/wikipedia/commons/thumb/9/91/IBM_Quantum_System_One.jpg/500px-IBM_Quantum_System_One.jpg" alt="IBM 양자 컴퓨터" loading="lazy"><span class="pill">첨단 공학 · 분야 탐험</span></div>

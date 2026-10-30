@@ -35,7 +35,7 @@ def video_ok(vid):
 
 
 def items():
-    for c in ("ai", "design", "robot"):
+    for c in ("ai", "design", "robot", "wood"):
         p = os.path.join(ROOT, "src", "media", f"{c}.json")
         for lid, m in json.load(open(p, encoding="utf-8")).items():
             where = f"{c}/{lid}"
@@ -46,6 +46,10 @@ def items():
             for label, url in m.get("links", []):
                 if url.startswith("http"):
                     yield where, "link", url
+    res = open(os.path.join(ROOT, "src", "courses", "wood.js"), encoding="utf-8").read()
+    for url in re.findall(r'url:"(https://[^"]+)"', res):
+        if "instagram.com" not in url:  # Instagram answers 200 for every handle, so it cannot be checked
+            yield "wood/resources", "link", url
     for fid, m in json.load(open(os.path.join(ROOT, "src", "tech", "media.json"), encoding="utf-8")).items():
         where = f"tech/{fid}"
         yield where, "img", m["img"]["card"]; yield where, "img", m["img"]["big"]

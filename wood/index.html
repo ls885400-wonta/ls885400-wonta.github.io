@@ -1,0 +1,1639 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>목공 계단 교실</title>
+<meta name="description" content="목재, 공구, 안전, 가공, 짜임, 도료, 설계와 도면, 제작까지 목공 전반을 사진·영상과 계단식 문제로 배우는 학습 사이트">
+<meta name="theme-color" content="#F3F8FC">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%23FFFFFF'/%3E%3Crect x='6' y='18' width='6' height='8' rx='1.5' fill='%2312B886'/%3E%3Crect x='13' y='12' width='6' height='14' rx='1.5' fill='%23228BE6'/%3E%3Crect x='20' y='6' width='6' height='20' rx='1.5' fill='%23FFC93C'/%3E%3C/svg%3E">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@500;700&display=swap">
+<style>
+/* Layout: bright, cool learning UI. Sticky header with course menu; home = hero + stat tiles + unit lists with photo thumbnails;
+   lesson = sticky progress bar, left table of contents (desktop), main column with story, media, stairs, summary, cards, test. */
+:root{
+  --bg:#F3F8FC; --surface:#FFFFFF; --ink:#0A1D2B; --text:#1B2E3C; --muted:#465A6A; --line:#D3E0EA; --soft:#E8F1F8;
+  --accent:#C2780C; --accent-soft:#FDF1DE; --accent-ink:#FFFFFF; --accent-deep:#9A5B06;
+  --sun:#FFC93C; --sun-ink:#3A2A00; --sun-soft:#FFF4D1; --ok:#12A150; --ok-soft:#DFF6E7; --bad:#E8590C; --bad-soft:#FFEDE3;
+  --shadow:0 1px 2px rgba(14,36,51,.05),0 6px 20px rgba(14,36,51,.06);
+  --f-body:"Pretendard Variable",Pretendard,"Malgun Gothic","Apple SD Gothic Neo",sans-serif;
+  --f-mono:"JetBrains Mono",ui-monospace,Consolas,monospace;
+  --fs:1;
+  color-scheme:light;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#0E1620; --surface:#15202B; --ink:#F3F8FC; --text:#DDE8F0; --muted:#A9BBC8; --line:#24323F; --soft:#1B2834;
+  --accent:#F2B45A; --accent-soft:#3A2A12; --accent-ink:#04121C; --accent-deep:#F2B45A;
+  --sun-soft:#3A3014; --ok:#5CCB7E; --ok-soft:#173222; --bad:#FF9A5C; --bad-soft:#3A2116; --shadow:none; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#0E1620; --surface:#15202B; --ink:#F3F8FC; --text:#DDE8F0; --muted:#A9BBC8; --line:#24323F; --soft:#1B2834;
+  --accent:#F2B45A; --accent-soft:#3A2A12; --accent-ink:#04121C; --accent-deep:#F2B45A;
+  --sun-soft:#3A3014; --ok:#5CCB7E; --ok-soft:#173222; --bad:#FF9A5C; --bad-soft:#3A2116; --shadow:none; color-scheme:dark}
+:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+*{box-sizing:border-box}
+html{font-size:calc(16px * var(--fs))}
+body{margin:0;background:var(--bg);color:var(--text);font-family:var(--f-body);font-size:1.125rem;line-height:1.8;word-break:keep-all;overflow-wrap:break-word;-webkit-font-smoothing:antialiased}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:10;background:var(--surface)}
+h1,h2,h3,p{margin:0}
+h1,h2,h3{color:var(--ink);text-wrap:balance;line-height:1.3;letter-spacing:-.015em}
+a{color:inherit}
+img{max-width:100%;display:block}
+button{font:inherit;color:inherit;cursor:pointer}
+:focus-visible{outline:3px solid var(--accent);outline-offset:2px;border-radius:6px}
+[hidden]{display:none!important}
+.num{font-family:var(--f-mono);font-variant-numeric:tabular-nums}
+.wrap{max-width:1140px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+
+/* header */
+.top{position:sticky;top:env(safe-area-inset-top,0px);z-index:6;background:color-mix(in srgb,var(--surface) 92%,transparent);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+.top .wrap{display:flex;align-items:center;gap:10px;min-height:62px;padding-block:8px}
+.course{position:relative;flex:none}
+.course summary{list-style:none;display:flex;align-items:center;gap:10px;cursor:pointer;padding:6px 10px 6px 6px;border-radius:12px}
+.course summary::-webkit-details-marker{display:none}
+.course summary:hover{background:var(--soft)}
+.mark{width:34px;height:34px;border-radius:10px;background:var(--accent);display:grid;place-items:center;color:var(--accent-ink);font-weight:800;font-size:15px;flex:none}
+.course b{display:block;font-size:1rem;color:var(--ink);font-weight:800;line-height:1.2}
+.course small{display:block;font-size:.8rem;color:var(--muted);line-height:1.2}
+.course .chev{color:var(--muted);font-size:.8rem;margin-left:2px}
+.menu{position:absolute;top:calc(100% + 6px);left:0;min-width:260px;background:var(--surface);border:1px solid var(--line);border-radius:14px;box-shadow:var(--shadow);padding:8px;display:grid;gap:2px;z-index:8}
+.menu a{display:flex;align-items:center;gap:10px;text-decoration:none;padding:8px 10px;border-radius:10px;font-weight:600;font-size:.95rem}
+.menu a:hover{background:var(--soft)}
+.menu a i{width:10px;height:10px;border-radius:3px;flex:none}
+.menu a[aria-current="page"]{background:var(--accent-soft);color:var(--accent-deep)}
+.menu hr{border:0;border-top:1px solid var(--line);margin:4px 0}
+.nav{display:flex;gap:2px;margin-left:6px;overflow-x:auto;scrollbar-width:none}
+.nav::-webkit-scrollbar{display:none}
+.nav button{flex:none;background:none;border:0;padding:8px 12px;border-radius:10px;color:var(--muted);font-weight:700;font-size:.95rem}
+.nav button:hover{background:var(--soft);color:var(--ink)}
+.nav button[aria-current="true"]{color:var(--accent-deep);background:var(--accent-soft)}
+.nav .cnt{font-family:var(--f-mono);font-size:.72rem;background:var(--bad);color:#fff;border-radius:999px;padding:0 6px;margin-left:4px}
+.me{margin-left:auto;display:flex;align-items:center;gap:8px;flex:none}
+.lv{background:var(--sun);color:var(--sun-ink);font-weight:800;padding:3px 10px;border-radius:999px;font-size:.86rem;white-space:nowrap}
+.icon-btn{width:38px;height:38px;border-radius:10px;border:1px solid var(--line);background:var(--surface);font-size:.85rem;font-weight:800;display:grid;place-items:center;color:var(--ink)}
+.icon-btn:hover{border-color:var(--accent)}
+.lprog{height:4px;background:var(--line)}
+.lprog i{display:block;height:100%;background:var(--accent);transition:width .4s}
+
+/* course sidebar */
+.shell{display:grid;grid-template-columns:280px minmax(0,1fr);gap:30px;align-items:start;padding-block:26px 72px}
+.shell > main{min-width:0}
+.side{position:sticky;top:84px;max-height:calc(100vh - 100px);overflow:auto;overscroll-behavior:contain;background:var(--surface);border:1px solid var(--line);border-radius:18px;padding:12px 10px;box-shadow:var(--shadow);scrollbar-width:thin}
+.side button{display:flex;align-items:flex-start;gap:10px;width:100%;text-align:left;background:none;border:0;border-radius:11px;padding:8px 10px;color:var(--text);font-size:.95rem;line-height:1.45}
+.side button:hover{background:var(--soft);color:var(--ink)}
+.side-home{font-weight:800;color:var(--ink)!important;font-size:1rem!important}
+.side-home.on,.side-les.on,.side-tool.on{background:var(--accent-soft)!important;color:var(--accent-deep)!important}
+.su-h{display:flex;align-items:center;gap:8px;margin:16px 10px 6px;font-size:1.05rem;font-weight:800;color:var(--ink);line-height:1.4;letter-spacing:-.01em}
+.su-h span{flex:none;min-width:28px;height:24px;padding:0 6px;border-radius:7px;background:var(--accent);color:var(--accent-ink);display:grid;place-items:center;font-size:.85rem;font-family:"Times New Roman",serif}
+.side-les i{flex:none;width:15px;height:15px;margin-top:5px;border-radius:50%;border:2.5px solid color-mix(in srgb,var(--accent) 55%,var(--line));display:grid;place-items:center;font-style:normal;font-size:.58rem;font-weight:900;color:#fff;line-height:1}
+.side-les.go i{border-color:var(--accent);background:var(--accent);box-shadow:0 0 0 3px var(--accent-soft)}
+.side-les.done i{background:var(--ok);border-color:var(--ok);box-shadow:0 0 0 3px var(--ok-soft)}
+.side-les small{display:block;font-family:var(--f-mono);font-size:.8rem;color:var(--muted);line-height:1.2}
+.side-les.on small{color:var(--accent-deep)}
+.side-les span{min-width:0;font-weight:700}
+.side-sec{margin:2px 0 8px 22px;padding-left:12px;border-left:2px solid var(--accent-soft);display:grid;gap:1px}
+.side-sec a{display:flex;align-items:center;gap:8px;text-decoration:none;font-size:.9rem;font-weight:600;color:var(--text);padding:6px 8px;border-radius:9px;line-height:1.4}
+.side-sec a:hover{background:var(--soft)}
+.side-sec a i{flex:none;width:14px;display:grid;place-items:center;font-style:normal;font-size:.85rem;font-weight:900;line-height:1;color:var(--ok)}
+.side-sec a i:empty::before{content:"";width:7px;height:7px;border-radius:50%;background:var(--accent)}
+.side-sec a.lock i:empty::before{background:var(--line)}
+.side-sec a.done{color:var(--ink)}
+.side-sec a.lock{color:var(--muted)}
+.side-foot{border-top:1px solid var(--line);margin-top:12px;padding-top:8px;display:grid;gap:2px}
+.side-tool{font-weight:700}
+.side-tool .cnt{margin-left:auto;font-family:var(--f-mono);font-size:.78rem;background:var(--bad);color:#fff;border-radius:999px;padding:0 7px}
+.menu-btn{display:none}
+.scrim{position:fixed;inset:0;background:rgba(8,20,30,.45);z-index:29}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:18px;padding:22px;box-shadow:var(--shadow)}
+.btn{border:0;border-radius:12px;padding:12px 20px;font-weight:800;font-size:1rem;display:inline-flex;align-items:center;gap:8px;text-decoration:none}
+.btn.primary{background:var(--accent);color:var(--accent-ink)}
+.btn.primary:hover{filter:brightness(1.05)}
+.btn.ghost{background:var(--surface);border:1px solid var(--line);color:var(--ink)}
+.btn:disabled{opacity:.45;cursor:not-allowed}
+.sec-h{display:flex;align-items:baseline;justify-content:space-between;gap:12px;margin:36px 0 14px;flex-wrap:wrap}
+.sec-h h2{font-size:1.4rem;font-weight:800}
+.sec-h small{color:var(--muted);font-size:.9rem}
+
+/* home */
+.hero{position:relative;overflow:hidden;border-radius:24px;padding:36px;display:grid;grid-template-columns:1.2fr 1fr;gap:28px;align-items:center;
+  background:linear-gradient(135deg,var(--accent-soft),var(--surface) 70%);border:1px solid var(--line)}
+.hero > *{min-width:0;position:relative}
+.hero::after{content:"";position:absolute;inset:0;background-image:radial-gradient(color-mix(in srgb,var(--accent) 18%,transparent) 1.5px,transparent 1.5px);background-size:22px 22px;mask-image:linear-gradient(90deg,transparent 40%,#000);pointer-events:none}
+.eyebrow{font-size:.92rem;font-weight:800;color:var(--accent-deep);letter-spacing:.02em}
+.hero h1{font-size:clamp(2rem,5vw,3.1rem);font-weight:900;margin:8px 0 12px;letter-spacing:-.03em}
+.hero .lead{color:var(--muted);max-width:44ch}
+.hero-cta{display:flex;align-items:center;gap:14px;flex-wrap:wrap;margin-top:22px}
+.hero-cta small{color:var(--muted);font-size:.9rem}
+.stairs{display:flex;align-items:flex-end;gap:5px;height:200px;z-index:1}
+.stair{flex:1;height:calc(var(--h) * 100%);min-height:26px;border-radius:8px 8px 3px 3px;background:var(--surface);border:2px solid color-mix(in srgb,var(--accent) 35%,var(--line));display:flex;align-items:flex-start;justify-content:center;padding-top:5px;font-family:var(--f-mono);font-size:.7rem;color:var(--muted);transition:background .3s}
+.stair.on{background:var(--accent);border-color:var(--accent);color:var(--accent-ink)}
+.stair.cur{border-color:var(--sun);box-shadow:0 0 0 3px var(--sun-soft)}
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-top:18px}
+.stat{background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:16px 18px;box-shadow:var(--shadow);min-width:0}
+.stat small{display:block;font-size:.9rem;color:var(--muted);font-weight:600}
+.stat b{display:block;font-size:1.5rem;color:var(--ink);font-weight:800;line-height:1.3}
+.stat .bar{height:7px;border-radius:999px;background:var(--soft);overflow:hidden;margin-top:8px}
+.stat .bar i{display:block;height:100%;background:var(--sun);border-radius:999px}
+.flow{list-style:none;margin:18px 0 0;padding:0;display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
+.flow li{display:flex;gap:12px;align-items:flex-start;background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:14px;min-width:0}
+.flow b{flex:none;width:30px;height:30px;border-radius:9px;background:var(--accent-soft);color:var(--accent-deep);display:grid;place-items:center;font-family:var(--f-mono)}
+.flow strong{display:block;color:var(--ink);font-size:.98rem}
+.flow span{font-size:.92rem;color:var(--muted);line-height:1.5}
+.badges{display:grid;grid-template-columns:repeat(8,1fr);gap:10px}
+.badge{text-align:center;padding:12px 6px;border-radius:14px;background:var(--surface);border:1px solid var(--line);min-width:0}
+.badge .m{width:44px;height:44px;margin:0 auto 6px;border-radius:50%;display:grid;place-items:center;font-weight:800;font-size:.9rem;border:2px dashed var(--line);color:var(--muted)}
+.badge.on .m{border:0;background:var(--sun);color:var(--sun-ink);box-shadow:0 0 0 4px var(--sun-soft)}
+.badge strong{display:block;font-size:.88rem;color:var(--ink);line-height:1.3}
+.badge span{display:block;font-size:.8rem;color:var(--muted);line-height:1.35;margin-top:2px}
+.badge:not(.on) strong{color:var(--muted)}
+.units{display:grid;gap:22px}
+.unit-h{display:flex;align-items:baseline;gap:12px;margin-bottom:10px}
+.unit-h .no{flex:none;min-width:40px;height:40px;padding:0 8px;border-radius:12px;background:var(--accent);color:var(--accent-ink);font-weight:800;font-size:1.05rem;display:grid;place-items:center;font-family:"Times New Roman",serif}
+.unit-h h3{font-size:1.2rem;font-weight:800}
+.unit-d{color:var(--muted);font-size:.95rem;margin:-4px 0 12px}
+.les-list{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
+.les{display:flex;align-items:center;gap:14px;width:100%;text-align:left;background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:10px;transition:border-color .15s,transform .15s;min-width:0}
+.les:hover{border-color:var(--accent);transform:translateY(-1px)}
+.les .th{flex:none;width:92px;height:68px;border-radius:11px;background:var(--soft);overflow:hidden}
+.les .th img{width:100%;height:100%;object-fit:cover;object-position:center 30%}
+.les .t{flex:1;min-width:0}
+.les .code{font-family:var(--f-mono);font-size:.8rem;color:var(--muted)}
+.les .t b{display:block;color:var(--ink);font-size:1.06rem;line-height:1.35}
+.les .t small{display:block;color:var(--muted);font-size:.9rem;line-height:1.4;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.dots{display:flex;gap:4px;margin-top:5px;align-items:center}
+.dots i{width:16px;height:5px;border-radius:3px;background:var(--line)}
+.dots i.on{background:var(--accent)}
+.dots .score{margin-left:6px;font-size:.82rem;font-weight:800;color:var(--ok)}
+.reset{display:flex;gap:8px;align-items:center;justify-content:flex-end;font-size:.85rem;color:var(--muted);flex-wrap:wrap;margin-top:28px}
+.linkish{background:none;border:0;color:var(--muted);text-decoration:underline;padding:4px;font-size:.85rem}
+
+/* lesson */
+.lmain{display:grid;gap:22px;min-width:0}
+.crumb{font-size:.92rem;color:var(--muted);display:flex;gap:6px;flex-wrap:wrap;align-items:center}
+.crumb button{background:none;border:0;padding:0;color:var(--accent-deep);font-weight:700}
+.l-head h1{font-size:clamp(1.8rem,4vw,2.5rem);font-weight:900;margin:6px 0 4px;letter-spacing:-.03em}
+.l-head .sub{color:var(--muted);font-size:1.05rem}
+.tag{display:inline-block;font-size:.86rem;font-weight:800;color:var(--accent-deep);background:var(--accent-soft);padding:2px 10px;border-radius:999px;margin-bottom:10px}
+.goals{list-style:none;padding:0;margin:0;display:grid;gap:8px}
+.goals li{padding-left:30px;position:relative}
+.goals li::before{content:"✓";position:absolute;left:0;top:.15em;width:21px;height:21px;border-radius:7px;background:var(--accent-soft);color:var(--accent-deep);font-size:.75rem;font-weight:900;display:grid;place-items:center}
+.story{background:var(--sun-soft);border:1px solid color-mix(in srgb,var(--sun) 40%,var(--line));border-radius:18px;padding:26px 28px}
+.story .tag{background:var(--surface);color:var(--sun-ink)}
+:root[data-theme="dark"] .story .tag{color:var(--sun)}
+.story h2{font-size:1.25rem;margin-bottom:10px}
+.story p{line-height:1.95;max-width:64ch}
+.story p + p{margin-top:8px}
+.story .q{margin-top:14px;font-weight:800;color:var(--ink)}
+.media{display:grid;gap:14px}
+.media > .tag{justify-self:start;margin-bottom:0}
+.photo{margin:0;border-radius:16px;overflow:hidden;border:1px solid var(--line);background:var(--surface)}
+.photo img{width:100%;aspect-ratio:16/8;object-fit:cover;object-position:center 30%}
+.photo figcaption{font-size:.82rem;color:var(--muted);padding:8px 14px}
+.photo figcaption a{color:var(--muted)}
+.videos{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.vid{background:var(--surface);border:1px solid var(--line);border-radius:16px;overflow:hidden;min-width:0}
+.vid .frame{aspect-ratio:16/9;position:relative;background:#000}
+.vid .frame img{width:100%;height:100%;object-fit:cover;opacity:.92}
+.vid .frame iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
+.vid .play{position:absolute;inset:0;display:grid;place-items:center;background:none;border:0;width:100%}
+.vid .play span{width:64px;height:46px;border-radius:12px;background:#E3242B;display:grid;place-items:center;box-shadow:0 4px 18px rgba(0,0,0,.35)}
+.vid .play span::after{content:"";border-left:17px solid #fff;border-top:10px solid transparent;border-bottom:10px solid transparent;margin-left:4px}
+.vid .len{position:absolute;right:8px;bottom:8px;background:rgba(0,0,0,.78);color:#fff;font-family:var(--f-mono);font-size:.72rem;padding:1px 6px;border-radius:4px}
+.vid .info{padding:10px 14px 12px;display:grid;gap:2px}
+.vid .info b{font-size:.92rem;color:var(--ink);line-height:1.45;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.vid .info span{font-size:.86rem;color:var(--muted)}
+.vid .info a{font-size:.86rem;font-weight:700;color:var(--accent-deep);text-decoration:none}
+.links{display:flex;flex-wrap:wrap;gap:8px}
+.links a{font-size:.88rem;font-weight:700;text-decoration:none;color:var(--accent-deep);background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:7px 12px}
+.links a:hover{border-color:var(--accent)}
+.pips{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:14px}
+.pip{font-size:.88rem;font-weight:700;padding:4px 12px;border-radius:999px;border:1px solid var(--line);color:var(--muted);background:var(--surface)}
+.pip.done{background:var(--accent);border-color:var(--accent);color:var(--accent-ink)}
+.pip.cur{border-color:var(--accent);color:var(--accent-deep)}
+.steps{display:grid;gap:14px}
+.step{scroll-margin-top:110px}
+.step-h{display:flex;align-items:center;gap:10px}
+.step-h b{flex:none;font-size:.85rem;font-weight:800;color:var(--accent-ink);background:var(--accent);padding:2px 10px;border-radius:999px}
+.step-h h3{font-size:1.25rem;font-weight:800}
+.step.locked{box-shadow:none;background:none;border-style:dashed;padding:14px 22px}
+.step.locked .step-h b{background:var(--line);color:var(--muted)}
+.step.locked h3{color:var(--muted);font-size:1rem}
+.step.locked .note{color:var(--muted);font-size:.85rem}
+.step ul{margin:12px 0 0;padding-left:20px;display:grid;gap:5px}
+.step li::marker{color:var(--accent)}
+.step .intro{margin-top:10px}
+.key{margin-top:14px;padding:12px 16px;border-radius:12px;background:var(--accent-soft);font-weight:600;color:var(--ink)}
+.key b{color:var(--accent-deep);margin-right:6px}
+.quiz{margin-top:18px;border-top:1px dashed var(--line);padding-top:16px}
+.quiz .qq{font-weight:800;color:var(--ink);margin-bottom:10px}
+.opts{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.opt{display:flex;gap:10px;align-items:flex-start;text-align:left;width:100%;background:var(--bg);border:1.5px solid var(--line);border-radius:12px;padding:10px 12px;font-size:.98rem;transition:border-color .12s}
+.opt:hover:not(:disabled){border-color:var(--accent)}
+.opt .n{font-family:var(--f-mono);color:var(--muted);flex:none;font-size:.8rem;padding-top:2px}
+.opt.sel{border-color:var(--accent);background:var(--accent-soft)}
+.opt.right{border-color:var(--ok);background:var(--ok-soft);color:var(--ok);font-weight:700}
+.opt.wrong{border-color:var(--bad);background:var(--bad-soft);color:var(--bad)}
+.opt:disabled{cursor:default}
+.fb{margin-top:10px;font-size:.95rem}
+.fb.ok{color:var(--ok);font-weight:600}
+.fb.no{color:var(--bad)}
+.sumlist{margin:0;padding-left:20px;display:grid;gap:6px}
+.lock{color:var(--muted);font-size:.92rem}
+.match{display:grid;grid-template-columns:1fr 1.6fr;gap:10px}
+.match > div{display:grid;gap:8px;align-content:start;min-width:0}
+.mc{text-align:left;background:var(--bg);border:1.5px solid var(--line);border-radius:12px;padding:10px 12px;font-size:.92rem;min-height:48px}
+.mc.term{font-weight:800;color:var(--ink)}
+.mc.sel{border-color:var(--accent);background:var(--accent-soft)}
+.mc.got{border-color:var(--ok);background:var(--ok-soft);color:var(--ok);cursor:default}
+.mc.bad{border-color:var(--bad);background:var(--bad-soft);animation:shake .3s}
+@keyframes shake{25%{transform:translateX(-4px)}75%{transform:translateX(4px)}}
+.tq{padding:16px 0;border-top:1px solid var(--line)}
+.tq:first-of-type{border-top:0;padding-top:4px}
+.tq .qq{font-weight:600;color:var(--ink);margin-bottom:10px}
+.tq .qq .num{color:var(--accent-deep);margin-right:6px}
+.result{display:flex;align-items:center;gap:18px;flex-wrap:wrap;padding:16px 18px;border-radius:14px;margin-bottom:8px}
+.result.pass{background:var(--ok-soft)}
+.result.fail{background:var(--bad-soft)}
+.result .score{font-family:var(--f-mono);font-size:2rem;font-weight:700}
+.result.pass .score{color:var(--ok)} .result.fail .score{color:var(--bad)}
+.foot-nav{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
+.foot-nav .btn{display:flex;flex-direction:column;align-items:flex-start;text-align:left;font-weight:700}
+.foot-nav .btn small{color:var(--muted);font-size:.75rem;font-weight:500}
+.foot-nav .next{margin-left:auto;align-items:flex-end;text-align:right}
+.pc{margin-top:14px;border:1px solid var(--line);border-radius:14px;padding:14px;background:var(--bg)}
+.pc-in{display:flex;gap:8px;flex-wrap:wrap}
+.tog{border:1.5px solid var(--line);background:var(--surface);border-radius:999px;padding:6px 12px;font-size:.9rem;font-weight:600}
+.tog[aria-pressed="true"]{background:var(--accent);border-color:var(--accent);color:var(--accent-ink)}
+.tog .num{opacity:.75;margin-left:4px;font-size:.75rem}
+.pc-out{margin-top:12px;font-size:.9rem;overflow-x:auto}
+.pc-out .res{font-weight:800;color:var(--accent-deep)}
+.mx{border-collapse:collapse;font-size:.9rem;width:100%}
+.mx th,.mx td{padding:6px 8px;border-bottom:1px solid var(--line);text-align:left;white-space:nowrap}
+.mx tr.best th{color:var(--accent-deep)}
+.pc-res{margin-top:10px;font-size:.9rem}
+
+/* resources */
+.res-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+.res{display:flex;flex-direction:column;gap:4px;background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:14px 16px;text-decoration:none;color:var(--text);transition:border-color .15s,transform .15s;min-width:0}
+.res:hover{border-color:var(--accent);transform:translateY(-2px)}
+.res-tag{align-self:flex-start;font-size:.8rem;font-weight:800;color:var(--accent-deep);background:var(--accent-soft);padding:1px 9px;border-radius:999px}
+.res b{color:var(--ink);font-size:1.02rem;line-height:1.4}
+.res span:not(.res-tag){font-size:.92rem;color:var(--text);line-height:1.55}
+.res small{margin-top:auto;font-family:var(--f-mono);font-size:.8rem;color:var(--muted);overflow-wrap:anywhere}
+@media (max-width:1180px){ .res-grid{grid-template-columns:1fr 1fr} }
+@media (max-width:760px){ .res-grid{grid-template-columns:1fr} }
+
+/* glossary & review */
+.search{width:100%;padding:13px 16px;border-radius:14px;border:1.5px solid var(--line);background:var(--surface);color:var(--ink);font:inherit}
+.search:focus{border-color:var(--accent);outline:0}
+.gl-row{display:grid;grid-template-columns:200px 1fr auto;gap:16px;padding:14px 6px;border-bottom:1px solid var(--line);align-items:baseline}
+.gl-row > *{min-width:0}
+.gl-row strong{color:var(--ink)}
+.gl-row button{background:none;border:0;color:var(--accent-deep);font-size:.85rem;font-weight:700;padding:0}
+.rv{display:grid;gap:12px}
+.rv .card{padding:18px 20px}
+.rv .qq{font-weight:700;color:var(--ink)}
+.rv .ans{margin-top:8px;color:var(--ok);font-weight:700}
+.rv .meta{display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin-top:10px;font-size:.85rem;color:var(--muted)}
+.empty{padding:40px 0;color:var(--muted);text-align:center}
+
+#toasts{position:fixed;left:50%;transform:translateX(-50%);bottom:calc(20px + env(safe-area-inset-bottom,0px));display:grid;gap:8px;z-index:20;width:max-content;max-width:calc(100% - 32px)}
+.toast{background:var(--ink);color:var(--bg);padding:10px 16px;border-radius:12px;font-size:.9rem;font-weight:600;box-shadow:0 8px 24px rgba(0,0,0,.2);animation:up .25s}
+.toast b{color:var(--sun)}
+@keyframes up{from{transform:translateY(8px);opacity:0}}
+footer{color:var(--muted);font-size:.8rem;text-align:center;padding:10px 16px 40px;line-height:1.7}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+
+@media (max-width:1180px){ .badges{grid-template-columns:repeat(4,1fr)} }
+@media (max-width:1000px){
+  .shell{grid-template-columns:1fr}
+  .side{position:fixed;top:0;left:0;bottom:0;width:min(330px,88vw);max-height:none;border-radius:0 20px 20px 0;z-index:30;transform:translateX(-105%);transition:transform .22s;padding:calc(14px + env(safe-area-inset-top,0px)) 10px calc(14px + env(safe-area-inset-bottom,0px)) max(10px,env(safe-area-inset-left,0px))}
+  .side.open{transform:none}
+  .menu-btn{display:grid}
+}
+@media (max-width:760px){
+  .hero{grid-template-columns:1fr;padding:24px}
+  .stairs{height:120px}
+  .stats,.flow{grid-template-columns:1fr 1fr}
+  .les-list,.videos,.opts,.match{grid-template-columns:1fr}
+  .gl-row{grid-template-columns:1fr;gap:2px}
+  .story{padding:20px}
+  .card{padding:18px}
+  .top .wrap{flex-wrap:wrap}
+  .nav{order:3;flex-basis:100%;margin-left:0}
+  .course small{display:none}
+}
+</style>
+</head>
+<body>
+<header class="top">
+  <div class="wrap" id="top"></div>
+  <div class="lprog" id="lprog" hidden><i></i></div>
+</header>
+<div class="shell wrap">
+  <aside class="side" id="side" aria-label="과정 메뉴"></aside>
+  <main id="app"></main>
+</div>
+<div class="scrim" id="scrim" data-act="side-close" hidden></div>
+<div id="toasts" aria-live="polite"></div>
+<footer>사진: 위키미디어 공용(Wikimedia Commons)의 자유 이용 사진, 각 사진 아래에 작가·라이선스 표시 · 영상: 각 채널의 YouTube 영상 연결 · 이야기·설명·문제는 교과서 단원 구성을 바탕으로 새로 쓴 학습 자료예요.<br><a href="../">← 우리 반 AI·공학 교실</a></footer>
+
+<script>
+const COURSE = {"id": "wood", "name": "목공 교실", "short": "목공", "key": "wood-stairs-v1", "eyebrow": "목공 교육 · 목재부터 설계·제작까지", "matrix": {"ideas": ["A 벽걸이 선반", "B 작은 스툴", "C 탁상 책꽂이"], "crit": ["쓰임새", "제작 난이도", "재료비"]}};
+const UNITS = [
+  {id:"1", no:"Ⅰ", title:"목재 이해하기", desc:"나무가 목재가 되는 과정, 목재의 종류와 성질, 좋은 목재를 고르는 법을 알아봐요."},
+  {id:"2", no:"Ⅱ", title:"공구와 안전", desc:"안전 수칙을 먼저 익히고, 수공구와 전동 공구의 쓰임과 바른 사용법을 배워요."},
+  {id:"3", no:"Ⅲ", title:"목재 가공", desc:"재고, 긋고, 자르고, 깎고, 짜 맞추고, 붙이는 목공의 핵심 기술을 익혀요."},
+  {id:"4", no:"Ⅳ", title:"마감과 도료", desc:"사포로 표면을 다듬고, 쓰임에 맞는 도료를 골라 안전하게 칠하는 법을 배워요."},
+  {id:"5", no:"Ⅴ", title:"설계와 제작", desc:"아이디어를 구상하고, 도면과 재료표를 만들고, 실제 작품을 완성해 평가해요."}
+];
+
+const LESSONS = [
+{id:"1-1", unit:"1", title:"나무에서 목재로", sub:"나이테, 결, 그리고 물기를 품은 나무",
+ goals:["나무 줄기의 구조와 심재·변재를 설명할 수 있다.","목재의 세 단면과 결을 구분할 수 있다.","함수율과 건조가 목재에 미치는 영향을 설명할 수 있다."],
+ story:{title:"갈라진 도마", p:["가을 캠핑에서 주워 온 통나무를 반으로 켜서 도마를 만든 민호. 처음엔 반질반질 예뻤는데, 겨울이 되자 도마 가운데에 손가락이 들어갈 만한 금이 쩍 갈라졌다.","공방 선생님이 도마를 보고 웃으셨다. “나무가 숨을 쉬면서 물을 뱉어 낸 거야. 목재는 다 마른 것 같아도 계속 움직이거든.”"], q:"살아 있던 나무는 어떻게 쓸 수 있는 목재가 될까요?"},
+ steps:[
+  {t:"나무 줄기의 구조", li:["바깥부터 <b>수피</b>(껍질) → <b>형성층</b>(자라는 층) → <b>변재</b> → <b>심재</b> → <b>수</b>(가운데 심)","<b>변재</b>: 바깥쪽의 밝은 부분. 물과 양분이 지나가는 길이라 수분이 많고 벌레·곰팡이에 약해요","<b>심재</b>: 안쪽의 짙은 부분. 단단하고 썩음에 강해 가구용으로 좋아요","<b>나이테</b>: 봄에 자란 연한 부분(춘재)과 여름·가을에 자란 짙고 치밀한 부분(추재)이 한 쌍이에요"],
+   q:{q:"나무 안쪽의 짙고 단단하며 썩음에 강한 부분은?", o:["심재","변재","수피","형성층"], a:0, why:"심재는 더 이상 물이 지나가지 않는 부분이라 단단하고 튼튼해요."}},
+  {t:"세 단면과 결", li:["<b>횡단면(마구리)</b>: 줄기를 가로로 자른 면. 나이테가 동그랗게 보여요","<b>곧은결(정목)</b>: 나이테에 직각으로 켠 면. 줄무늬가 곧고, 덜 휘어요","<b>널결(판목)</b>: 나이테에 접하게 켠 면. 물결 같은 산 무늬가 나타나요","<b>결</b>: 나무 섬유가 놓인 방향. 결 방향으로는 강하고, 결을 가로지르면 쉽게 쪼개져요"], key:"목공은 ‘결을 읽는’ 데서 시작해요",
+   q:{q:"줄기를 가로로 잘라 나이테가 동그랗게 보이는 면은?", o:["마구리(횡단면)","곧은결","널결","옆면"], a:0, why:"섬유 끝이 드러난 면이라 ‘마구리’라고 불러요."}},
+  {t:"함수율과 건조", li:["<b>함수율</b>: 목재 속 물의 무게를 마른 목재 무게로 나눈 백분율","갓 벤 나무는 물이 아주 많고, 함수율이 약 30%(섬유 포화점) 아래로 내려가면서부터 줄어들기 시작해요","실내 가구용 목재는 보통 함수율 8~12% 정도로 말려서 써요 (자연 건조, 건조실의 인공 건조)","줄어드는 정도는 나이테 방향(접선)이 지름 방향의 약 2배, 길이 방향은 거의 없어요 → 그래서 판재가 휘고 갈라져요"], key:"목재는 다 마른 뒤에도 습도에 따라 늘었다 줄었다 해요",
+   q:{q:"실내 가구용 목재로 알맞은 함수율은 대략 얼마일까요?", o:["8~12%","40~50%","80% 이상","0%"], a:0, why:"사는 공간의 습도와 비슷하게 맞춰야 덜 움직여요."}}
+ ],
+ summary:["나무 줄기는 수피, 형성층, 변재, 심재, 수로 이루어져요.","심재는 단단하고 썩음에 강하며, 변재는 밝고 수분이 많아요.","목재의 면은 마구리, 곧은결, 널결로 나뉘고, 결 방향에 따라 강도가 달라요.","함수율이 섬유 포화점(약 30%) 아래로 내려가면 목재가 줄어들어 휘거나 갈라질 수 있어요."],
+ cards:[["심재","나무 안쪽의 짙고 단단한 부분"],["변재","나무 바깥쪽의 밝고 수분 많은 부분"],["마구리","줄기를 가로로 잘라 섬유 끝이 드러난 면"],["함수율","목재에 든 물의 비율"],["널결","나이테에 접하게 켜서 산 무늬가 나는 면"]],
+ test:[
+  {q:"나무 줄기 바깥에서 안쪽 순서로 알맞은 것은?", o:["수피 → 형성층 → 변재 → 심재","심재 → 변재 → 수피 → 형성층","변재 → 수피 → 심재 → 형성층","형성층 → 심재 → 수피 → 변재"], a:0},
+  {q:"나이테에서 여름·가을에 자라 짙고 치밀한 부분은?", o:["추재","춘재","수피","수"], a:0},
+  {q:"나이테에 직각으로 켜서 줄무늬가 곧게 나오는 면은?", o:["곧은결","널결","마구리","껍질면"], a:0},
+  {q:"목재가 가장 덜 줄어드는 방향은?", o:["길이(섬유) 방향","나이테 접선 방향","지름(방사) 방향","모든 방향이 같다"], a:0},
+  {q:"섬유 포화점에 대한 설명으로 옳은 것은?", o:["함수율 약 30%로, 이보다 마르면 수축이 시작된다","목재가 불에 타는 온도다","목재가 가장 무거운 상태다","나무가 자라는 속도다"], a:0},
+  {q:"목재를 결 방향으로 쪼개기 쉬운 까닭은?", o:["섬유가 그 방향으로 나란히 놓여 있어서","나무가 너무 단단해서","물이 없어서","색이 짙어서"], a:0},
+  {q:"갓 벤 통나무로 바로 도마를 만들면 생기기 쉬운 문제는?", o:["마르면서 갈라지고 휜다","더 무거워진다","색이 사라진다","결이 없어진다"], a:0}
+ ]},
+
+{id:"1-2", unit:"1", title:"목재의 종류", sub:"소나무부터 월넛, 합판과 MDF까지",
+ goals:["침엽수와 활엽수의 특징을 비교할 수 있다.","가구에 많이 쓰는 원목의 특징을 말할 수 있다.","합판, 집성목, MDF, OSB의 특징과 쓰임을 구분할 수 있다."],
+ story:{title:"목재상에서 길을 잃다", p:["첫 작품으로 책꽂이를 만들기로 한 서윤이는 목재상에 갔다. 소나무, 편백, 오크, 월넛… 이름표가 줄줄이 붙어 있고 값도 몇 배씩 차이가 났다. 한쪽에는 겹겹이 붙인 판과 톱밥을 눌러 만든 판도 쌓여 있었다.","“어떤 걸 사야 하지?” 사장님이 물었다. “어디에 두고, 뭘 올릴 건데요?” 서윤이는 그제야 목재마다 성격이 다르다는 걸 알았다."], q:"만들 물건에 맞는 목재는 어떻게 고를까요?"},
+ steps:[
+  {t:"침엽수와 활엽수", li:["<b>침엽수(소프트우드)</b>: 바늘잎 나무. 소나무, 잣나무, 삼나무, 편백, 스프러스 등","대체로 가볍고 부드러워 가공이 쉽고 값이 싸서 연습용, 구조재, 실내 마감재로 많이 써요. 편백은 향이 좋아요","<b>활엽수(하드우드)</b>: 넓은잎 나무. 오크(참나무), 월넛(호두나무), 메이플(단풍나무), 애쉬(물푸레나무), 체리 등","대체로 단단하고 무늬가 아름다워 가구와 도마에 많이 써요","이름과 실제 단단함이 늘 같지는 않아요. 발사는 활엽수지만 아주 가벼워요"],
+   q:{q:"다음 중 활엽수 목재는?", o:["월넛","소나무","편백","삼나무"], a:0, why:"월넛(호두나무)은 넓은잎 나무예요."}},
+  {t:"가구에 많이 쓰는 원목", li:["<b>오크</b>: 단단하고 튼튼하며 굵은 무늬. 식탁, 의자","<b>월넛</b>: 짙은 갈색, 고급 가구와 소품","<b>메이플</b>: 밝고 치밀해 도마, 작업대 상판","<b>애쉬</b>: 탄력이 좋아 의자, 공구 손잡이","<b>소나무·편백</b>: 가볍고 다루기 쉬워 첫 작품용, 수납장"], key:"쓰임(무게, 단단함, 습기)과 예산으로 고르기",
+   q:{q:"밝고 치밀해서 도마로 많이 쓰는 목재는?", o:["메이플","발사","OSB","스프러스"], a:0, why:"메이플은 결이 촘촘하고 단단해 칼자국과 물에 잘 견뎌요."}},
+  {t:"가공 목재(판재)", li:["<b>합판</b>: 얇은 단판을 결 방향이 서로 직각이 되도록 홀수 겹 붙인 판. 잘 휘지 않고 튼튼해요","<b>집성목</b>: 작은 원목 조각을 붙여 넓게 만든 판. 원목 느낌에 덜 휘어요","<b>MDF</b>: 나무 섬유를 접착제와 눌러 만든 판. 표면이 매끈해 칠하기 좋지만 물과 나사 고정에 약해요","<b>OSB</b>: 길쭉한 나뭇조각을 방향 맞춰 눌러 만든 판. 값싸고 튼튼해 구조용, 바닥 밑판에 써요"],
+   q:{q:"얇은 단판을 결이 직각이 되도록 홀수 겹 붙인 판은?", o:["합판","MDF","OSB","원목"], a:0, why:"결을 엇갈려 붙여서 한 방향으로 휘거나 줄어드는 것을 막아요."}}
+ ],
+ summary:["침엽수는 대체로 가볍고 가공이 쉬우며, 활엽수는 단단하고 무늬가 아름다워요.","오크, 월넛, 메이플, 애쉬는 가구에, 소나무·편백은 첫 작품과 수납장에 많이 써요.","합판과 집성목은 휨이 적고, MDF는 칠하기 좋지만 물에 약해요.","목재는 쓰임, 무게, 습기, 예산을 함께 따져 골라요."],
+ cards:[["침엽수","바늘잎 나무로 대체로 가볍고 가공이 쉬운 목재"],["활엽수","넓은잎 나무로 대체로 단단한 목재"],["합판","결을 엇갈려 홀수 겹 붙인 판재"],["MDF","나무 섬유를 눌러 만든 매끈한 판재"],["집성목","작은 원목 조각을 붙여 넓힌 판재"]],
+ test:[
+  {q:"다음 중 침엽수 목재는?", o:["편백","오크","월넛","메이플"], a:0},
+  {q:"MDF의 약점으로 알맞은 것은?", o:["물과 나사 고정에 약하다","표면이 너무 거칠다","너무 비싸다","칠이 안 된다"], a:0},
+  {q:"합판이 잘 휘지 않는 까닭은?", o:["단판의 결을 서로 직각으로 엇갈려 붙여서","가운데가 비어 있어서","물을 많이 머금어서","한 장의 통나무라서"], a:0},
+  {q:"탄력이 좋아 의자나 공구 손잡이에 많이 쓰는 목재는?", o:["애쉬(물푸레나무)","MDF","OSB","발사"], a:0},
+  {q:"길쭉한 나뭇조각을 방향을 맞춰 눌러 만든 구조용 판재는?", o:["OSB","합판","집성목","MDF"], a:0},
+  {q:"첫 작품용으로 소나무를 많이 쓰는 까닭은?", o:["가볍고 부드러워 다루기 쉽고 값이 싸서","가장 단단해서","무늬가 없어서","물에 절대 젖지 않아서"], a:0},
+  {q:"‘하드우드’라는 이름에 대한 설명으로 옳은 것은?", o:["활엽수를 뜻하며, 모든 하드우드가 단단한 것은 아니다","모든 단단한 나무를 뜻한다","침엽수를 뜻한다","합판의 다른 이름이다"], a:0}
+ ]},
+
+{id:"1-3", unit:"1", title:"목재 고르기와 단위", sub:"옹이, 갈라짐, 뒤틀림을 살피고 치수를 읽어요",
+ goals:["목재의 대표적인 결함을 찾아낼 수 있다.","목재의 규격과 판매 단위를 읽을 수 있다.","좋은 목재를 고르는 방법을 실천할 수 있다."],
+ story:{title:"반값 목재의 비밀", p:["인터넷에서 반값에 파는 원목 판재를 산 하준이. 상자를 열어 보니 판 하나는 프로펠러처럼 비틀려 있었고, 끝에는 금이 가 있었다. 옹이 하나는 손가락으로 밀자 쏙 빠져 버렸다.","“싼 게 비지떡이네.” 아빠가 말했다. 하지만 하준이는 생각했다. 미리 보는 법을 알았다면 고를 수 있지 않았을까?"], q:"좋은 목재와 문제 있는 목재는 어떻게 구별할까요?"},
+ steps:[
+  {t:"목재의 결함", li:["<b>옹이</b>: 가지가 붙어 있던 자리. 둘레가 단단히 붙은 산옹이는 괜찮지만, 검고 헐거운 죽은옹이는 빠질 수 있어요","<b>할렬(갈라짐)</b>: 주로 마구리 끝이 마르면서 갈라져요","<b>뒤틀림</b>: 길이로 굽음, 폭으로 오목하게 휨(컵), 프로펠러처럼 비틀림","그 밖에 썩음, 벌레 구멍, 송진 주머니 등"],
+   q:{q:"검게 변하고 헐거워 빠질 수 있는 옹이는?", o:["죽은옹이","산옹이","나이테","곧은결"], a:0, why:"가지가 죽은 뒤 묻힌 자리라 주변 섬유와 붙어 있지 않아요."}},
+  {t:"규격과 판매 단위", li:["치수는 보통 <b>두께 × 폭 × 길이</b>(mm)로 적어요","‘2×4(투바이포)’ 같은 구조재는 이름(인치)과 실제 치수가 달라요. 실제로는 약 38×89mm예요","국내 원목은 ‘<b>재(才)</b>’ 단위로 많이 팔아요. 1재 = 1치 × 1치 × 12자(약 3.03cm × 3.03cm × 3.64m)의 부피예요","<b>S4S(4면 대패)</b>: 네 면을 대패로 고르게 다듬어 바로 쓸 수 있는 목재"], key:"주문하기 전에 실제 치수를 꼭 확인해요",
+   q:{q:"‘2×4’ 구조재의 실제 단면 치수로 가장 가까운 것은?", o:["약 38 × 89mm","정확히 2 × 4cm","정확히 2 × 4인치","약 50 × 100mm"], a:0, why:"건조와 대패 가공으로 이름보다 작아져요."}},
+  {t:"좋은 목재 고르기", li:["판재 끝을 눈높이에 대고 길게 바라보며 굽음과 비틀림을 확인해요","평평한 바닥에 놓아 흔들리는지 봐요","마구리 갈라짐, 죽은옹이, 벌레 구멍을 살펴요","만들 부품 치수보다 조금 넉넉하게 사요 (자르고 다듬을 여유)","사 온 목재는 작업할 곳에 며칠 두어 습도에 적응시켜요"],
+   q:{q:"사 온 목재를 작업할 곳에 며칠 두는 까닭은?", o:["그곳의 습도에 적응해 덜 움직이게 하려고","색을 바꾸려고","무게를 늘리려고","냄새를 없애려고"], a:0, why:"주변 습도에 맞춰 함수율이 안정되면 가공 후 덜 휘어요."}}
+ ],
+ summary:["옹이, 할렬, 뒤틀림, 썩음, 벌레 구멍은 대표적인 목재 결함이에요.","치수는 두께×폭×길이로 읽고, 구조재는 이름과 실제 치수가 달라요.","국내 원목은 ‘재’ 단위로 많이 팔아요.","길게 바라보고, 바닥에 놓아 보고, 마구리를 살펴 좋은 목재를 골라요."],
+ cards:[["옹이","가지가 붙어 있던 자리"],["할렬","마르면서 목재가 갈라진 결함"],["재(才)","1치×1치×12자 부피의 원목 판매 단위"],["S4S","네 면을 대패로 다듬은 목재"]],
+ test:[
+  {q:"목재 치수를 적는 일반적인 순서는?", o:["두께 × 폭 × 길이","길이 × 무게 × 색","폭 × 무게 × 두께","나이 × 길이 × 폭"], a:0},
+  {q:"목재 끝이 마르면서 생기는 갈라짐을 무엇이라 하나요?", o:["할렬","옹이","결","심재"], a:0},
+  {q:"판재가 프로펠러처럼 꼬인 결함은?", o:["비틀림","굽음","컵","할렬"], a:0},
+  {q:"목재의 굽음과 비틀림을 확인하는 좋은 방법은?", o:["끝을 눈높이에 대고 길게 바라본다","냄새를 맡는다","두드려 소리를 듣는다","무게만 잰다"], a:0},
+  {q:"부품 치수보다 목재를 조금 넉넉하게 사는 까닭은?", o:["자르고 다듬을 여유를 두려고","값을 더 내려고","무겁게 하려고","색을 맞추려고"], a:0},
+  {q:"산옹이에 대한 설명으로 옳은 것은?", o:["주변 섬유와 단단히 붙어 있어 대체로 괜찮다","반드시 빠진다","썩은 부분이다","벌레 구멍이다"], a:0},
+  {q:"국내 원목 판매에서 많이 쓰는 부피 단위는?", o:["재(才)","평","근","되"], a:0}
+ ]},
+
+{id:"2-1", unit:"2", title:"목공 안전", sub:"모든 작업보다 먼저 배우는 것",
+ goals:["목공 작업에 필요한 보호구를 말할 수 있다.","전동 공구 사용 시 위험 요인과 예방법을 설명할 수 있다.","안전한 작업 습관을 실천할 수 있다."],
+ story:{title:"1초의 방심", p:["공방 벽에는 선생님이 붙여 둔 사진이 있었다. 날에 튕겨 나간 나뭇조각이 벽에 깊이 박힌 자국이었다. “톱날이 나무를 물고 사람 쪽으로 던진 거야. 다행히 그 자리에 아무도 없었지.”","수업 첫날, 선생님은 공구 대신 보안경과 귀마개부터 나눠 주셨다. “목공에서 가장 중요한 공구는 이거야.”"], q:"목공에서 다치지 않으려면 무엇을 지켜야 할까요?"},
+ steps:[
+  {t:"보호구와 복장", li:["<b>보안경</b>: 튀는 나뭇조각과 먼지로부터 눈 보호 (항상 착용)","<b>귀마개·귀덮개</b>: 전동 공구 소음으로부터 청력 보호","<b>방진 마스크</b>: 고운 나무 먼지를 오래 마시면 건강에 해로워요. 나무 먼지는 국제암연구소(IARC)가 1군 발암 물질로 분류해요","긴 머리는 묶고, 헐렁한 옷·소매·목걸이는 피해요","회전하는 전동 공구(드릴 프레스, 테이블쏘)를 쓸 때는 장갑을 끼지 않아요. 장갑이 말려 들어갈 수 있어요"],
+   q:{q:"드릴 프레스처럼 회전하는 공구를 쓸 때 장갑을 끼지 않는 까닭은?", o:["장갑이 회전부에 말려 들어갈 수 있어서","손이 더러워져서","미끄러워 공구가 고장 나서","장갑이 비싸서"], a:0, why:"말려 들어가면 손까지 끌려 들어가 크게 다칠 수 있어요."}},
+  {t:"전동 공구의 위험", li:["<b>킥백</b>: 톱날이 목재를 물고 작업자 쪽으로 세게 튕겨 내는 현상 (테이블쏘, 원형톱)","예방: 분리대(리빙 나이프) 사용, 날 높이는 목재 위로 조금만, 날과 펜스 사이에 손 넣지 않기","좁은 재료는 손 대신 <b>푸시 스틱</b>으로 밀어요","날을 바꾸거나 조정할 때는 반드시 전원 플러그를 뽑아요"], key:"손은 언제나 날이 지나가는 길 밖에",
+   q:{q:"톱날이 목재를 물고 작업자 쪽으로 튕겨 내는 현상은?", o:["킥백","그무개","컵","할렬"], a:0, why:"테이블쏘와 원형톱에서 특히 조심해야 하는 사고예요."}},
+  {t:"안전한 작업 습관", li:["재료는 손으로 잡지 말고 <b>클램프</b>로 작업대에 단단히 고정해요","작업대와 바닥을 정리해 걸려 넘어지지 않게 해요","피곤하거나 서두를 때는 위험한 작업을 쉬어요","먼지 집진기·청소기로 먼지를 바로 치우고 환기해요","소화기 위치를 알고, 기름 묻은 걸레는 따로 안전하게 처리해요(4-2 레슨)"],
+   q:{q:"작은 재료를 톱질할 때 가장 안전한 방법은?", o:["클램프로 작업대에 고정한다","한 손으로 잡고 자른다","친구가 잡아 준다","발로 누른다"], a:0, why:"두 손을 자유롭게 하고 재료가 움직이지 않아야 안전해요."}}
+ ],
+ summary:["보안경, 귀마개, 방진 마스크는 목공의 기본 보호구예요.","긴 머리를 묶고, 회전 공구 앞에서는 장갑과 헐렁한 옷을 피해요.","킥백을 막으려면 분리대, 알맞은 날 높이, 푸시 스틱을 써요.","재료는 클램프로 고정하고, 날을 다룰 땐 전원을 뽑아요."],
+ cards:[["킥백","톱날이 목재를 작업자 쪽으로 튕겨 내는 현상"],["푸시 스틱","좁은 재료를 손 대신 밀어 주는 도구"],["리빙 나이프","톱날 뒤에서 목재 틈을 벌려 킥백을 막는 분리대"],["방진 마스크","고운 나무 먼지를 막는 보호구"]],
+ test:[
+  {q:"목공 작업 내내 착용해야 하는 기본 보호구는?", o:["보안경","손목시계","목도리","슬리퍼"], a:0},
+  {q:"전동 공구의 날을 바꿀 때 가장 먼저 할 일은?", o:["전원 플러그를 뽑는다","날을 손으로 돌려 본다","속도를 높인다","보안경을 벗는다"], a:0},
+  {q:"좁은 재료를 테이블쏘로 켤 때 알맞은 방법은?", o:["푸시 스틱으로 민다","손가락으로 끝까지 민다","재료를 던져 넣는다","날을 멈춘 채 민다"], a:0},
+  {q:"나무 먼지에 대한 설명으로 옳은 것은?", o:["오래 마시면 해로워 방진 마스크와 집진이 필요하다","몸에 좋다","눈에만 해롭다","전혀 해롭지 않다"], a:0},
+  {q:"킥백을 줄이는 방법이 아닌 것은?", o:["날과 펜스 사이에 손을 넣어 재료를 누른다","분리대(리빙 나이프) 사용","날 높이를 알맞게","푸시 스틱 사용"], a:0},
+  {q:"작업 중 긴 머리를 묶는 까닭은?", o:["회전하는 공구에 말려 들어가지 않게","멋을 내려고","더위를 피하려고","먼지를 모으려고"], a:0},
+  {q:"피곤하거나 서두를 때 바람직한 태도는?", o:["위험한 작업을 쉬고 다음에 한다","더 빨리 끝낸다","보호구를 벗는다","혼자 몰래 한다"], a:0}
+ ]},
+
+{id:"2-2", unit:"2", title:"수공구", sub:"재고, 긋고, 자르고, 깎는 손의 도구",
+ goals:["측정·마킹 공구의 쓰임을 설명할 수 있다.","톱, 대패, 끌의 종류와 쓰임을 구분할 수 있다.","클램프와 망치 등 보조 공구를 바르게 쓸 수 있다."],
+ story:{title:"할아버지의 대패", p:["할아버지 창고에서 손때 묻은 나무 대패를 찾았다. 날을 빼 보니 녹이 슬어 있었지만, 할아버지는 숫돌에 날을 갈아 판재 위를 슥 밀었다. 얇은 대팻밥이 리본처럼 말려 나왔다.","“전기 없이도 이렇게 매끈해지지.” 지우는 대팻밥을 손에 올려 보았다. 종이보다 얇았다."], q:"전동 공구가 없던 시절의 도구들은 어떻게 일했을까요?"},
+ steps:[
+  {t:"측정과 마킹 공구", li:["<b>줄자·쇠자</b>: 길이 재기 (mm 단위로 읽어요)","<b>직각자(스퀘어)</b>: 90° 선 긋기와 직각 확인","<b>연귀자·각도자</b>: 45° 등 각도 긋기","<b>그무개(마킹 게이지)</b>: 모서리에서 일정한 거리에 평행선을 그어요","<b>칼금</b>: 연필 대신 칼로 선을 그으면 더 가늘고 정확해요"],
+   q:{q:"모서리에서 일정한 거리에 평행선을 긋는 공구는?", o:["그무개","대패","끌","클램프"], a:0, why:"짜임 홈의 깊이나 두께를 표시할 때 많이 써요."}},
+  {t:"톱, 대패, 끌", li:["<b>양날톱</b>: 한쪽은 결 방향으로 켜는 날, 다른 쪽은 결을 가로질러 자르는 날","<b>등대기톱</b>: 톱 등에 보강대가 있어 곧고 얇게 잘려 짜임 가공에 좋아요","한국·일본 톱은 대체로 <b>당길 때</b>, 서양 톱은 <b>밀 때</b> 잘라요","<b>대패</b>: 날을 조금만 내밀고 결 방향으로 밀어 표면을 평평하고 매끈하게 해요","<b>끌</b>: 홈이나 구멍을 파요. 나무망치로 끌 손잡이를 쳐서 써요"], key:"결 방향을 읽어야 톱질과 대패질이 쉬워요",
+   q:{q:"양날톱에서 결 방향으로 길게 자를 때 쓰는 날은?", o:["켜는 날","자르는 날","등대기 날","줄 날"], a:0, why:"켜는 날은 끌처럼 생겨 섬유를 길게 파내며 나가요."}},
+  {t:"고정과 조립 공구", li:["<b>클램프</b>: F클램프, 퀵그립, 파이프(바) 클램프로 재료를 고정하거나 접착할 때 눌러 줘요","<b>망치·나무망치</b>: 못 박기, 끌 치기, 부품 맞추기(나무망치나 받침목으로 자국 방지)","<b>줄·사포 블록</b>: 모서리 다듬기","날 관리: 끌과 대패 날은 숫돌에 갈아 날카롭게. 무딘 날이 오히려 더 위험해요"],
+   q:{q:"끌이나 대패의 날이 무딜 때 더 위험한 까닭은?", o:["힘을 더 주게 되어 미끄러지기 쉬워서","날이 더 날카로워서","소리가 커서","나무가 젖어서"], a:0, why:"무딘 날은 억지로 밀다가 손이 미끄러져 다치기 쉬워요."}}
+ ],
+ summary:["줄자, 직각자, 연귀자, 그무개, 칼금으로 정확히 재고 그어요.","양날톱은 켜는 날과 자르는 날이 있고, 등대기톱은 정밀한 짜임에 써요.","대패는 결 방향으로 표면을 다듬고, 끌은 홈과 구멍을 파요.","클램프로 고정하고, 날은 숫돌에 갈아 날카롭게 관리해요."],
+ cards:[["그무개","모서리에서 일정한 거리에 평행선을 긋는 공구"],["등대기톱","등에 보강대가 있어 곧고 얇게 자르는 톱"],["대패","표면을 깎아 평평하고 매끈하게 하는 공구"],["끌","나무에 홈이나 구멍을 파는 공구"],["클램프","재료를 고정하거나 눌러 주는 공구"]],
+ test:[
+  {q:"90° 선을 긋고 직각을 확인하는 공구는?", o:["직각자","줄자","끌","대패"], a:0},
+  {q:"결을 가로질러 자를 때 쓰는 양날톱의 날은?", o:["자르는 날","켜는 날","대패 날","끌 날"], a:0},
+  {q:"한국·일본 톱이 대체로 자르는 방향은?", o:["당길 때","밀 때","돌릴 때","두드릴 때"], a:0},
+  {q:"연필 선보다 칼금이 좋은 까닭은?", o:["선이 가늘고 정확해서","색이 진해서","지우기 쉬워서","빨리 그어져서"], a:0},
+  {q:"대패질을 할 때 알맞은 방법은?", o:["날을 조금만 내밀고 결 방향으로 민다","날을 많이 내밀고 결 반대로 민다","옆으로 문지른다","두드린다"], a:0},
+  {q:"끌을 칠 때 쇠망치 대신 나무망치를 쓰는 까닭은?", o:["끌 손잡이를 덜 상하게 하려고","소리를 크게 하려고","더 무거워서","빨라서"], a:0},
+  {q:"접착한 부품을 마를 때까지 눌러 주는 공구는?", o:["클램프","그무개","연귀자","줄자"], a:0}
+ ]},
+
+{id:"2-3", unit:"2", title:"전동 공구", sub:"구멍 뚫기부터 곡선 자르기, 모서리 다듬기까지",
+ goals:["대표적인 전동 공구의 쓰임을 구분할 수 있다.","작업에 맞는 전동 공구를 고를 수 있다.","전동 공구를 안전하게 사용하는 순서를 말할 수 있다."],
+ story:{title:"공구 벽 앞에서", p:["고등학교 메이커실 벽에는 전동 공구가 줄지어 걸려 있었다. 드릴, 직소, 원형톱, 트리머, 샌더… 생김새는 비슷한데 이름도 쓰임도 다 달랐다.","“둥근 구멍을 뚫고, 곡선으로 자르고, 모서리를 둥글게 하고 싶어요.” 선생님이 공구 세 개를 내려 주셨다. “하는 일마다 맞는 공구가 있어.”"], q:"작업마다 어떤 전동 공구가 맞을까요?"},
+ steps:[
+  {t:"구멍 뚫고 조이는 공구", li:["<b>전동 드릴·드라이버</b>: 구멍 뚫기와 나사 조이기. <b>클러치</b> 숫자로 조이는 힘을 조절해 나사 머리가 망가지지 않게 해요","<b>임팩트 드라이버</b>: 두드리는 힘을 더해 긴 나사를 힘 있게 박아요","<b>드릴 프레스</b>: 정확히 수직인 구멍을 뚫어요","비트 종류: 목재용 드릴 비트, 넓고 깨끗한 구멍을 내는 포스너 비트, 나사 머리를 묻는 카운터싱크"],
+   q:{q:"전동 드라이버에서 나사를 조이는 힘을 조절하는 장치는?", o:["클러치","펜스","분리대","집진구"], a:0, why:"숫자가 작을수록 약하게 조여 나사와 목재를 보호해요."}},
+  {t:"자르는 공구", li:["<b>직소</b>: 위아래로 움직이는 가는 날로 곡선과 구멍 안쪽을 잘라요","<b>원형톱</b>: 큰 판재를 곧게 잘라요 (가이드 레일·자 활용)","<b>각도 절단기(마이터 쏘)</b>: 각재를 직각이나 45° 등 정확한 각도로 잘라요","<b>테이블쏘</b>: 판재를 같은 폭으로 길게 켜요. 가장 조심해야 할 공구예요","<b>밴드쏘</b>: 띠 모양 날로 곡선과 두꺼운 재료를 잘라요"], key:"곡선은 직소·밴드쏘, 곧은 선은 원형톱·테이블쏘, 각도는 각도 절단기",
+   q:{q:"합판에 하트 모양 곡선을 자를 때 알맞은 공구는?", o:["직소","각도 절단기","테이블쏘","드릴 프레스"], a:0, why:"가는 날이 위아래로 움직여 곡선을 따라갈 수 있어요."}},
+  {t:"다듬는 공구와 사용 순서", li:["<b>트리머·라우터</b>: 빠르게 도는 비트로 모서리를 둥글게 하거나 홈을 파요","<b>원형(랜덤 오비탈) 샌더</b>: 넓은 면을 빠르고 고르게 샌딩해요","사용 순서: ① 설명서·보호구 확인 ② 재료 고정 ③ 공구 점검(날, 전선) ④ 전원 켜고 최고 속도가 된 뒤 작업 ⑤ 날이 완전히 멈춘 뒤 내려놓기 ⑥ 전원 분리·청소","전동 공구는 집진기나 청소기를 연결해 먼지를 바로 빨아들이면 좋아요"],
+   q:{q:"전동 공구를 내려놓기 전에 확인할 것은?", o:["날이 완전히 멈췄는지","색이 바뀌었는지","소리가 커졌는지","전선이 길어졌는지"], a:0, why:"돌던 날이 바닥이나 몸에 닿으면 위험해요."}}
+ ],
+ summary:["드릴·드라이버는 구멍과 나사, 클러치로 조이는 힘을 조절해요.","직소는 곡선, 원형톱·테이블쏘는 곧은 선, 각도 절단기는 각도 자르기에 써요.","트리머·라우터는 모서리와 홈, 샌더는 넓은 면 다듬기에 써요.","보호구, 고정, 점검, 완전 정지, 전원 분리 순서를 지켜요."],
+ cards:[["직소","가는 날로 곡선을 자르는 전동 공구"],["각도 절단기","각재를 정확한 각도로 자르는 톱"],["트리머","모서리를 둥글게 하거나 홈을 파는 공구"],["포스너 비트","바닥이 평평하고 깨끗한 구멍을 뚫는 비트"],["클러치","드라이버의 조이는 힘을 조절하는 장치"]],
+ test:[
+  {q:"각재를 정확히 45°로 자를 때 알맞은 공구는?", o:["각도 절단기","직소","샌더","트리머"], a:0},
+  {q:"넓은 판재 면을 고르게 다듬는 공구는?", o:["원형 샌더","드릴 프레스","직소","끌"], a:0},
+  {q:"모서리를 둥글게 다듬는 데 쓰는 공구는?", o:["트리머(라우터)","줄자","각도 절단기","클램프"], a:0},
+  {q:"긴 나사를 힘 있게 박는 데 알맞은 공구는?", o:["임팩트 드라이버","직소","대패","그무개"], a:0},
+  {q:"정확히 수직인 구멍을 뚫는 데 알맞은 공구는?", o:["드릴 프레스","직소","원형톱","샌더"], a:0},
+  {q:"전동 공구 작업을 시작하는 바른 방법은?", o:["전원을 켜고 날이 최고 속도가 된 뒤 재료에 댄다","날을 재료에 댄 채 전원을 켠다","한 손으로 재료를 잡고 켠다","보호구는 끝나고 쓴다"], a:0},
+  {q:"작업이 끝난 뒤 바로 할 일은?", o:["전원을 분리하고 청소한다","공구를 켜 둔 채 둔다","날을 손으로 만진다","먼지를 그대로 둔다"], a:0}
+ ]},
+
+{id:"3-1", unit:"3", title:"측정, 마킹, 재단", sub:"두 번 재고 한 번 자른다",
+ goals:["기준면과 기준 모서리를 정해 정확히 마킹할 수 있다.","톱 길(커프)을 고려해 선을 따라 자를 수 있다.","켜기와 자르기를 구분해 재단할 수 있다."],
+ story:{title:"2mm가 모자란 선반", p:["주말에 벽 선반을 만든 아빠와 수아. 길이를 재고 선을 그은 뒤 그 선 한가운데를 톱으로 잘랐다. 그런데 조립하려니 판이 2mm쯤 짧아 틈이 벌어졌다.","선생님이 설명해 주셨다. “톱날도 두께가 있어. 선 위를 자르면 톱날 두께만큼 나무가 사라지는 거야.”"], q:"정확한 크기로 자르려면 무엇을 알아야 할까요?"},
+ steps:[
+  {t:"기준을 먼저 정하기", li:["가장 곧고 평평한 면을 <b>기준면</b>, 그 옆 곧은 모서리를 <b>기준 모서리</b>로 정해 표시해요","모든 치수는 기준면·기준 모서리에서 재요. 그래야 오차가 쌓이지 않아요","여러 부품에 같은 치수를 그을 때는 줄자 대신 부품끼리 맞대어 옮기면 더 정확해요","목공의 격언: <b>두 번 재고, 한 번 자른다</b>"],
+   q:{q:"모든 치수를 기준면과 기준 모서리에서 재는 까닭은?", o:["오차가 쌓이지 않게 하려고","더 빨리 하려고","재료를 아끼려고","색을 맞추려고"], a:0, why:"재는 기준이 바뀌면 작은 오차가 계속 더해져요."}},
+  {t:"선을 긋고 톱 길 생각하기", li:["직각자로 연필선 또는 칼금을 긋고, 버릴 쪽에 ×표를 해요","<b>톱 길(커프)</b>: 톱날 두께만큼 사라지는 폭이에요","그래서 선 위가 아니라 <b>선의 버리는 쪽</b>을 따라 잘라요","톱질 시작은 가볍게 몇 번 당겨 길을 낸 뒤, 톱을 수직으로 유지하며 길게 써요"], key:"선은 남기고, 버리는 쪽을 자른다",
+   q:{q:"톱날 두께만큼 사라지는 폭을 무엇이라 하나요?", o:["톱 길(커프)","결","마구리","옹이"], a:0, why:"이 폭을 생각해 선의 버리는 쪽을 잘라야 치수가 맞아요."}},
+  {t:"켜기와 자르기", li:["<b>켜기</b>: 결 방향으로 길게 자르기 (폭 줄이기) → 켜는 날, 테이블쏘","<b>자르기</b>: 결을 가로질러 자르기 (길이 줄이기) → 자르는 날, 각도 절단기","결을 가로지를 때는 끝부분이 뜯기기 쉬워요. 칼금을 깊게 넣거나 테이프를 붙이면 깔끔해요","자른 뒤 직각자로 직각을 확인하고, 필요하면 대패나 사포로 다듬어요"],
+   q:{q:"긴 판재의 폭을 줄이려고 결 방향으로 자르는 것은?", o:["켜기","자르기","대패질","샌딩"], a:0, why:"결을 따라 길게 자르는 것을 켜기라고 해요."}}
+ ],
+ summary:["기준면과 기준 모서리를 정하고 모든 치수를 거기서 재요.","두 번 재고 한 번 자르며, 부품끼리 맞대어 치수를 옮기면 정확해요.","톱 길만큼 나무가 사라지므로 선의 버리는 쪽을 잘라요.","결 방향은 켜기, 결을 가로지르면 자르기예요."],
+ cards:[["기준면","모든 치수를 재는 출발점이 되는 평평한 면"],["톱 길(커프)","톱날 두께만큼 사라지는 폭"],["켜기","결 방향으로 길게 자르기"],["자르기","결을 가로질러 자르기"]],
+ test:[
+  {q:"목공의 격언 ‘두 번 재고 ○○ 자른다’에서 ○○는?", o:["한 번","세 번","열 번","천천히"], a:0},
+  {q:"선을 그은 뒤 버릴 쪽에 하는 표시는?", o:["×표","동그라미","별표","숫자"], a:0},
+  {q:"결을 가로질러 자를 때 끝이 뜯기는 것을 줄이는 방법은?", o:["칼금을 깊게 넣거나 테이프를 붙인다","톱을 빨리 흔든다","물을 붓는다","힘껏 누른다"], a:0},
+  {q:"선 한가운데를 자르면 생기는 문제는?", o:["톱 길만큼 부품이 짧아진다","부품이 길어진다","색이 바뀐다","결이 사라진다"], a:0},
+  {q:"여러 부품에 같은 길이를 표시하는 정확한 방법은?", o:["부품끼리 맞대어 옮긴다","매번 다른 자로 잰다","눈대중으로 한다","대충 긋는다"], a:0},
+  {q:"자른 뒤 직각을 확인하는 공구는?", o:["직각자","그무개","끌","망치"], a:0},
+  {q:"톱질을 시작하는 바른 방법은?", o:["가볍게 몇 번 당겨 길을 낸다","처음부터 세게 내리친다","톱을 비스듬히 눕힌다","선 반대쪽부터 자른다"], a:0}
+ ]},
+
+{id:"3-2", unit:"3", title:"깎고 다듬고 뚫기", sub:"대패질, 끌질, 구멍 뚫기의 요령",
+ goals:["결 방향에 맞춰 대패질을 할 수 있다.","끌로 홈을 파는 순서를 설명할 수 있다.","예비 구멍과 받침목을 이용해 깔끔하게 구멍을 뚫을 수 있다."],
+ story:{title:"뜯겨 나간 결", p:["대패를 밀 때마다 판재 한쪽이 거칠게 뜯겨 나갔다. 은호는 힘을 더 줬지만 더 심해질 뿐이었다.","선생님이 판재를 반대로 돌려 놓았다. 대패가 스르륵 미끄러지며 매끈한 면이 나왔다. “나무도 쓰다듬는 방향이 있어. 고양이 털처럼.”"], q:"깎고 뚫을 때 나무가 뜯기지 않게 하려면 어떻게 할까요?"},
+ steps:[
+  {t:"대패질과 결 방향", li:["섬유가 위로 비스듬히 올라오는 방향으로 밀면 <b>순결</b>, 반대면 <b>역결</b>이에요","역결로 깎으면 섬유가 뜯겨 거칠어져요. 판을 돌려 순결로 밀어요","대패는 날을 조금만 내밀고, 앞쪽을 누르며 시작해 끝에서는 뒤쪽을 눌러요","마구리를 대패질할 때는 끝이 깨지지 않게 안쪽으로 밀거나 덧댐목을 대요"],
+   q:{q:"대패질에서 섬유가 뜯겨 거칠어지는 깎는 방향은?", o:["역결","순결","마구리","곧은결"], a:0, why:"섬유를 거슬러 깎으면 섬유가 들려 뜯겨요."}},
+  {t:"끌로 홈 파기", li:["홈의 테두리를 칼금이나 그무개로 먼저 그어요","끌의 평평한 면을 버리지 않을 쪽(선 쪽)으로 두고 수직으로 쳐서 테두리를 끊어요","안쪽을 조금씩 비스듬히 떠내며 깊이를 맞춰요","한 번에 깊이 파지 말고, 얇게 여러 번 떠내요. 손은 언제나 끌날 뒤쪽에 둬요"], key:"선 먼저 끊고, 안쪽은 조금씩",
+   q:{q:"끌로 홈을 팔 때 가장 먼저 할 일은?", o:["테두리를 긋고 수직으로 끊는다","가운데를 깊게 판다","끌을 옆으로 비튼다","사포질을 한다"], a:0, why:"테두리를 먼저 끊어야 홈 바깥이 뜯기지 않아요."}},
+  {t:"구멍 뚫기", li:["나사 박을 자리에는 <b>예비 구멍(파일럿 홀)</b>을 먼저 뚫어 목재가 갈라지지 않게 해요","나사 머리를 묻으려면 <b>카운터싱크</b>로 입구를 넓혀요","관통 구멍은 뒤쪽에 <b>받침목</b>을 대면 출구가 터지지 않아요","정해진 깊이까지 뚫을 땐 드릴 비트에 테이프나 스토퍼로 표시해요"],
+   q:{q:"나사를 박기 전 목재가 갈라지지 않게 미리 뚫는 작은 구멍은?", o:["예비 구멍(파일럿 홀)","장부 구멍","옹이 구멍","홈"], a:0, why:"나사가 들어갈 길을 미리 내 주면 섬유가 쪼개지지 않아요."}}
+ ],
+ summary:["순결로 대패질하고, 역결이면 판을 돌려요.","끌질은 테두리를 먼저 수직으로 끊고 안쪽을 얇게 여러 번 떠내요.","나사 자리에는 예비 구멍, 나사 머리에는 카운터싱크를 써요.","관통 구멍 뒤에는 받침목을 대 출구가 터지지 않게 해요."],
+ cards:[["순결","섬유를 따라 매끈하게 깎이는 방향"],["역결","섬유를 거슬러 뜯겨 나가는 방향"],["예비 구멍","나사를 박기 전 미리 뚫는 작은 구멍"],["카운터싱크","나사 머리가 묻히도록 입구를 넓히는 가공"]],
+ test:[
+  {q:"대패질하다 표면이 뜯긴다면 어떻게 할까요?", o:["판을 돌려 순결로 민다","더 세게 민다","날을 더 내민다","물을 뿌린다"], a:0},
+  {q:"마구리를 대패질할 때 끝이 깨지지 않게 하는 방법은?", o:["안쪽으로 밀거나 덧댐목을 댄다","끝에서 밖으로 세게 민다","망치로 친다","불로 그을린다"], a:0},
+  {q:"끌질에서 손을 두는 바른 위치는?", o:["끌날 뒤쪽","끌날 앞쪽","나무 밑","홈 안"], a:0},
+  {q:"관통 구멍의 출구가 터지지 않게 하려면?", o:["뒤쪽에 받침목을 댄다","더 빨리 뚫는다","비트를 비튼다","물을 붓는다"], a:0},
+  {q:"드릴로 정해진 깊이까지만 뚫는 요령은?", o:["비트에 테이프나 스토퍼로 표시한다","눈을 감고 뚫는다","최대 속도로 뚫는다","끝까지 뚫는다"], a:0},
+  {q:"넓고 바닥이 평평한 구멍을 깔끔하게 뚫는 비트는?", o:["포스너 비트","카운터싱크","줄","사포"], a:0},
+  {q:"끌로 홈을 한 번에 깊이 파면 생기는 문제는?", o:["목재가 터지거나 홈이 지저분해진다","더 깔끔해진다","끌이 길어진다","나무가 단단해진다"], a:0}
+ ]},
+
+{id:"3-3", unit:"3", title:"짜임", sub:"나무끼리 맞물려 버티는 기술",
+ goals:["대표적인 짜임의 종류와 특징을 설명할 수 있다.","쓰임에 맞는 짜임을 고를 수 있다.","결 방향과 접착면의 관계를 설명할 수 있다."],
+ story:{title:"못 하나 없는 반닫이", p:["박물관에서 본 조선 시대 반닫이. 이백 년이 넘었다는데 못이 하나도 보이지 않았다. 모서리는 손가락을 깍지 낀 것처럼 맞물려 있었다.","설명판에는 ‘짜맞춤’이라고 적혀 있었다. 나무끼리 서로 붙잡게 만들면 못이 없어도 오래 버틸 수 있다는 것이다."], q:"나무와 나무는 어떻게 맞물려 튼튼해질까요?"},
+ steps:[
+  {t:"기본 짜임", li:["<b>맞대기</b>: 두 부재를 그대로 맞대어 붙임. 가장 쉽지만 약해서 나사·목심으로 보강해요","<b>반턱 맞춤</b>: 두 부재를 반씩 따내 겹쳐요. 접착면이 넓어 튼튼해요","<b>연귀 맞춤</b>: 두 부재를 45°로 잘라 모서리를 맞춰요. 액자처럼 마구리가 안 보여 깔끔해요","<b>홈 맞춤(다도)</b>: 한 부재에 홈을 파 다른 부재를 끼워요. 책꽂이 선반에 좋아요"],
+   q:{q:"두 부재를 반씩 따내 겹쳐 붙이는 짜임은?", o:["반턱 맞춤","맞대기","연귀 맞춤","주먹장"], a:0, why:"서로 반씩 덜어내 같은 높이로 겹쳐져요."}},
+  {t:"튼튼한 전통 짜임", li:["<b>장부 맞춤</b>: 한 부재에 혀 모양 장부를, 다른 부재에 장부 구멍을 파서 끼워요. 의자·탁자 다리에 많이 써요","<b>주먹장(도브테일)</b>: 비둘기 꼬리 모양으로 맞물려 당겨도 빠지지 않아요. 서랍 앞판에 써요","우리나라 전통 목가구는 못 없이 이런 <b>짜맞춤</b>으로 오래 버텨요"], key:"당기는 힘을 견디는 주먹장, 무게를 견디는 장부",
+   q:{q:"서랍 앞판처럼 당기는 힘을 견뎌야 하는 곳에 알맞은 짜임은?", o:["주먹장(도브테일)","맞대기","연귀","홈 맞춤"], a:0, why:"사다리꼴로 맞물려 당기는 방향으로 빠지지 않아요."}},
+  {t:"보강 부품과 접착면", li:["<b>목심(도웰)</b>: 둥근 나무 막대를 양쪽 구멍에 끼워 맞춤을 보강해요","<b>비스킷</b>: 얇은 타원형 조각을 홈에 끼워 판재를 정렬하고 이어요","<b>포켓홀</b>: 비스듬한 구멍으로 나사를 박아 빠르게 조립해요","접착은 옆면(긴 결)끼리는 아주 강하지만, <b>마구리끼리는 약해요</b>. 그래서 짜임으로 옆면이 맞닿게 해요"],
+   q:{q:"목공용 본드가 가장 약하게 붙는 면은?", o:["마구리끼리","옆면끼리","곧은결끼리","널결끼리"], a:0, why:"마구리는 섬유 끝의 빨대 같은 구멍으로 본드를 빨아들여 접착이 약해요."}}
+ ],
+ summary:["맞대기, 반턱, 연귀, 홈 맞춤은 기본 짜임이에요.","장부 맞춤은 다리와 틀, 주먹장은 서랍처럼 당기는 힘에 강해요.","목심, 비스킷, 포켓홀로 맞춤을 보강하거나 빠르게 조립해요.","접착은 옆면끼리 강하고 마구리끼리 약해요."],
+ cards:[["장부 맞춤","혀 모양 장부를 장부 구멍에 끼우는 짜임"],["주먹장","비둘기 꼬리 모양으로 맞물리는 짜임"],["연귀 맞춤","45°로 잘라 모서리를 맞추는 짜임"],["목심(도웰)","구멍에 끼워 맞춤을 보강하는 둥근 막대"],["포켓홀","비스듬한 구멍으로 나사를 박는 조립법"]],
+ test:[
+  {q:"가장 쉽지만 약해서 보강이 필요한 짜임은?", o:["맞대기","장부 맞춤","주먹장","반턱"], a:0},
+  {q:"액자 모서리처럼 마구리가 보이지 않게 45°로 맞추는 짜임은?", o:["연귀 맞춤","맞대기","포켓홀","비스킷"], a:0},
+  {q:"의자 다리와 가로대를 튼튼하게 잇는 전통 짜임은?", o:["장부 맞춤","맞대기","비스킷","OSB"], a:0},
+  {q:"책꽂이 옆판에 홈을 파서 선반을 끼우는 짜임은?", o:["홈 맞춤(다도)","주먹장","연귀","목심"], a:0},
+  {q:"우리나라 전통 목가구가 못 없이 오래 버틴 까닭은?", o:["짜맞춤으로 나무끼리 맞물려서","강철 나사를 써서","플라스틱을 써서","본드만 써서"], a:0},
+  {q:"판재 여러 장을 이을 때 정렬을 돕는 얇은 타원형 조각은?", o:["비스킷","장부","옹이","커프"], a:0},
+  {q:"짜임이 옆면끼리 맞닿도록 설계하는 까닭은?", o:["옆면끼리 접착이 가장 강해서","마구리가 더 예뻐서","가볍게 하려고","색을 맞추려고"], a:0}
+ ]},
+
+{id:"3-4", unit:"3", title:"접착과 체결", sub:"본드, 클램프, 나사와 못",
+ goals:["목공용 본드를 바르게 바르고 클램핑할 수 있다.","나사와 못을 쓰임에 맞게 고를 수 있다.","가조립과 직각 확인의 중요성을 설명할 수 있다."],
+ story:{title:"굳어 버린 본드 자국", p:["의자를 조립하며 본드를 넉넉히 짰더니 이음매 밖으로 하얗게 흘러나왔다. 다 마른 뒤 오일을 바르자, 본드가 묻었던 자리만 얼룩처럼 하얗게 남았다.","“본드는 많이 바른다고 더 튼튼해지지 않아. 얇고 고르게, 그리고 흘러나온 건 바로 정리해야 해.”"], q:"목재를 튼튼하고 깔끔하게 붙이려면 어떻게 해야 할까요?"},
+ steps:[
+  {t:"목공용 본드와 클램핑", li:["실내 목공에는 흰색 <b>목공용 본드(PVA)</b>를 많이 써요. 실외용은 내수성 제품을 골라요","붙일 두 면에 얇고 고르게 펴 발라요","클램프로 고르게 눌러 본드가 살짝 배어 나올 정도면 알맞아요. 너무 세게 조이면 본드가 다 빠져나가요","보통 30분~1시간 이상 클램핑하고, 완전히 굳는 데는 약 하루가 걸려요(제품 설명 확인)","흘러나온 본드는 젖은 천으로 닦거나 반쯤 굳었을 때 긁어내요. 남으면 도료가 스며들지 않아 얼룩이 생겨요"],
+   q:{q:"흘러나온 본드를 그대로 두면 생기는 문제는?", o:["그 자리에 도료가 스며들지 않아 얼룩이 생긴다","더 튼튼해진다","나무 색이 진해진다","아무 문제 없다"], a:0, why:"굳은 본드가 표면을 막아 오일이나 스테인이 스며들지 못해요."}},
+  {t:"나사와 못", li:["<b>목재용 나사(피스)</b>: 조이는 힘이 강하고 다시 풀 수 있어요","<b>못</b>: 빠르게 고정하지만 당기는 힘에는 약해요. 엇갈린 각도로 박으면 더 잘 버텨요","나사 길이는 대체로 고정할 판 두께의 2~3배 정도가 알맞아요","끝부분이나 단단한 목재는 꼭 예비 구멍을 뚫어요","나사 구멍은 목심 마개로 막고 다듬으면 보이지 않아요"],
+   q:{q:"나중에 분해해야 할 가구를 조립할 때 알맞은 것은?", o:["목재용 나사","못","본드만","순간접착제"], a:0, why:"나사는 풀었다가 다시 조일 수 있어요."}},
+  {t:"가조립과 직각 맞추기", li:["본드를 바르기 전에 본드 없이 먼저 맞춰 보는 <b>가조립(드라이 피팅)</b>을 해요","클램프 위치와 조립 순서를 미리 정해 두면 본드가 굳기 전에 당황하지 않아요","상자나 틀은 두 <b>대각선 길이가 같으면 직각</b>이에요","직각이 아니면 긴 대각선 쪽으로 클램프를 비스듬히 걸어 바로잡아요"], key:"본드를 바르기 전에 한 번 더 맞춰 보기",
+   q:{q:"사각 틀이 직각인지 확인하는 간단한 방법은?", o:["두 대각선 길이가 같은지 잰다","무게를 잰다","색을 본다","소리를 듣는다"], a:0, why:"직사각형은 두 대각선 길이가 같아요."}}
+ ],
+ summary:["목공용 본드는 얇고 고르게 바르고 클램프로 고르게 눌러요.","흘러나온 본드는 바로 정리해야 마감 얼룩이 생기지 않아요.","나사는 강하고 분해가 쉽고, 못은 빠르지만 당기는 힘에 약해요.","본드 전 가조립을 하고, 대각선 길이로 직각을 확인해요."],
+ cards:[["PVA 본드","실내 목공에 많이 쓰는 흰색 목공용 본드"],["가조립","본드 없이 먼저 맞춰 보는 과정"],["클램핑","접착하는 동안 클램프로 눌러 고정하는 것"],["목심 마개","나사 구멍을 막아 감추는 나무 마개"]],
+ test:[
+  {q:"본드를 바른 뒤 클램프를 너무 세게 조이면?", o:["본드가 다 빠져나가 접착이 약해질 수 있다","무조건 더 튼튼해진다","색이 바뀐다","나사가 생긴다"], a:0},
+  {q:"실외에 둘 작품에 알맞은 본드는?", o:["내수성 목공용 본드","물풀","종이 풀","테이프"], a:0},
+  {q:"못을 엇갈린 각도로 박는 까닭은?", o:["당기는 힘에 더 잘 버티게 하려고","빨리 박으려고","못을 아끼려고","예쁘게 보이려고"], a:0},
+  {q:"18mm 판을 고정할 나사 길이로 가장 알맞은 것은?", o:["약 35~50mm","5mm","200mm","10mm"], a:0},
+  {q:"가조립을 하는 가장 큰 까닭은?", o:["본드가 굳기 전에 생길 문제를 미리 찾으려고","재료를 낭비하려고","색을 칠하려고","무게를 재려고"], a:0},
+  {q:"상자가 직각이 아닐 때 바로잡는 방법은?", o:["긴 대각선 쪽으로 클램프를 걸어 당긴다","망치로 세게 친다","물에 담근다","그대로 둔다"], a:0},
+  {q:"목공용 본드가 완전히 굳는 데 걸리는 일반적인 시간은?", o:["약 하루(제품마다 다름)","1초","1분","1년"], a:0}
+ ]},
+
+{id:"4-1", unit:"4", title:"샌딩과 표면 준비", sub:"사포 번호와 순서, 결 방향",
+ goals:["사포 번호(입도)의 뜻을 설명할 수 있다.","알맞은 순서로 샌딩할 수 있다.","도장 전 표면을 준비할 수 있다."],
+ story:{title:"거칠거칠한 매끈함", p:["완성한 스툴을 120번 사포로 열심히 문지른 하린이. 손으로 만지면 매끈했는데, 스테인을 바르자 동그란 긁힌 자국이 줄줄이 드러났다.","선생님이 빛을 비스듬히 비춰 보여 주셨다. “눈에 안 보이던 자국이 색을 만나면 다 보여. 샌딩은 순서와 방향이 전부야.”"], q:"매끈하고 고른 표면은 어떻게 만들까요?"},
+ steps:[
+  {t:"사포 번호 읽기", li:["사포 뒷면의 숫자(<b>입도</b>, ‘방’)는 연마 입자의 고운 정도예요","<b>숫자가 작을수록 거칠고, 클수록 고와요</b>","#60~80: 거친 자국·단차 없애기 / #120~150: 일반 다듬기 / #180~240: 마감 전 / #320 이상: 칠 사이 다듬기","입자가 막히면 금방 무뎌지니 털거나 새 사포로 바꿔요"],
+   q:{q:"다음 중 가장 고운 사포는?", o:["#240","#80","#120","#60"], a:0, why:"숫자가 클수록 입자가 작고 고와요."}},
+  {t:"샌딩 순서와 방향", li:["거친 번호에서 고운 번호로 한 단계씩 올라가요 (예: #120 → #180 → #240)","단계를 크게 건너뛰면 앞 단계의 깊은 자국이 남아요","손 샌딩은 반드시 <b>결 방향</b>으로 해요. 결을 가로지른 자국은 칠하면 잘 보여요","평평한 면은 샌딩 블록에 사포를 감아 써서 모서리가 둥글게 먹히지 않게 해요","모서리는 마지막에 가볍게 다듬어 손을 베지 않게 해요"], key:"거친 것에서 고운 것으로, 결을 따라",
+   q:{q:"손 샌딩을 하는 바른 방향은?", o:["결 방향","결을 가로질러","동그랗게","아무 방향"], a:0, why:"결을 따라야 자국이 결 무늬에 묻혀 보이지 않아요."}},
+  {t:"도장 전 준비", li:["샌딩 먼지를 솔, 청소기, 살짝 젖은 천으로 깨끗이 없애요","빛을 비스듬히 비춰 긁힌 자국과 본드 자국을 찾아요","수성 도료를 쓸 때는 물을 살짝 묻혀 결을 일으킨 뒤 마르면 고운 사포로 가볍게 다듬어요(결 세우기)","작은 틈은 같은 색 메꿈제(우드 필러)로 메워요"],
+   q:{q:"수성 도료 전에 물을 묻혀 결을 일으킨 뒤 다시 다듬는 까닭은?", o:["칠할 때 결이 일어나 거칠어지는 것을 미리 막으려고","나무를 무겁게 하려고","색을 빼려고","냄새를 없애려고"], a:0, why:"물에 부푼 섬유를 미리 다듬어 두면 칠한 뒤 표면이 매끈해요."}}
+ ],
+ summary:["사포 번호는 숫자가 작을수록 거칠고 클수록 고와요.","거친 번호에서 고운 번호로 한 단계씩, 결 방향으로 샌딩해요.","샌딩 블록으로 면을 평평하게 유지하고, 모서리는 마지막에 다듬어요.","먼지를 없애고, 빛을 비춰 자국을 찾고, 수성 도료 전에는 결을 세워 다듬어요."],
+ cards:[["입도","사포 연마 입자의 고운 정도를 나타내는 번호"],["샌딩 블록","사포를 감아 면을 평평하게 다듬는 받침"],["결 세우기","물로 결을 일으킨 뒤 다시 다듬는 준비 작업"],["우드 필러","작은 틈과 구멍을 메우는 메꿈제"]],
+ test:[
+  {q:"거친 톱 자국을 먼저 없앨 때 알맞은 사포는?", o:["#80","#400","#1000","#2000"], a:0},
+  {q:"샌딩 단계를 크게 건너뛰면 생기는 문제는?", o:["앞 단계의 깊은 자국이 남는다","더 매끈해진다","색이 진해진다","결이 사라진다"], a:0},
+  {q:"넓은 면을 샌딩할 때 샌딩 블록을 쓰는 까닭은?", o:["면을 평평하게 유지하려고","더 거칠게 하려고","사포를 아끼려고","소리를 줄이려고"], a:0},
+  {q:"샌딩 뒤 긁힌 자국을 찾는 좋은 방법은?", o:["빛을 비스듬히 비춰 본다","눈을 감고 만진다","물에 담근다","냄새를 맡는다"], a:0},
+  {q:"칠과 칠 사이를 가볍게 다듬을 때 알맞은 사포는?", o:["#320 이상","#40","#60","#80"], a:0},
+  {q:"샌딩 먼지를 없애지 않고 칠하면?", o:["먼지가 굳어 표면이 거칠어진다","더 매끈해진다","색이 사라진다","빨리 마른다"], a:0},
+  {q:"사포가 금방 무뎌지는 까닭은?", o:["입자 사이가 먼지로 막혀서","너무 새것이라서","번호가 커서","물이 없어서"], a:0}
+ ]},
+
+{id:"4-2", unit:"4", title:"도료와 칠하기", sub:"오일, 스테인, 바니시, 페인트 고르기",
+ goals:["도료의 종류와 특징을 비교할 수 있다.","작품의 쓰임에 맞는 도료를 고를 수 있다.","도료를 안전하게 칠하고 처리할 수 있다."],
+ story:{title:"저절로 불이 난 걸레", p:["뉴스에서 목공방 화재 소식을 들었다. 원인은 놀랍게도 쓰레기통 속 걸레였다. 오일을 닦은 걸레를 뭉쳐 버렸더니, 기름이 마르며 열이 쌓여 저절로 불이 붙었다고 했다.","도윤이는 어제 아빠와 도마에 오일을 바르고 걸레를 비닐에 꼭꼭 싸서 버린 게 떠올라 등골이 오싹했다."], q:"도료는 어떻게 고르고, 어떻게 안전하게 써야 할까요?"},
+ steps:[
+  {t:"도료의 종류", li:["<b>오일(침투형)</b>: 나무 속으로 스며들어 자연스러운 촉감과 결을 살려요. 보호막은 얇아 다시 바르기 쉬워요 (아마인유, 텅 오일, 하드왁스 오일)","<b>바니시·우레탄(도막형)</b>: 표면에 단단한 막을 만들어 물과 긁힘에 강해요. 광택을 고를 수 있어요","<b>스테인</b>: 색만 입히는 착색제. 위에 바니시 등으로 보호막을 따로 올려요","<b>페인트</b>: 나무 결을 덮고 원하는 색을 칠해요","<b>왁스</b>: 은은한 광택과 촉감, 보호력은 약해요"],
+   q:{q:"나무 속에 스며들어 자연스러운 촉감을 살리는 도료는?", o:["오일","페인트","바니시","시트지"], a:0, why:"오일은 표면에 막을 만들지 않고 스며들어요."}},
+  {t:"쓰임에 맞게 고르기", li:["<b>식탁·책상 상판</b>: 물과 긁힘에 강한 우레탄·바니시","<b>도마·주방 도구</b>: 식품에 안전하다고 표시된 오일(미네랄 오일 등)","<b>손이 자주 닿는 소품</b>: 촉감이 좋은 오일·왁스","<b>야외 가구</b>: 자외선·물에 강한 실외용 제품","<b>수성</b>: 냄새가 적고 물로 씻겨 교실에 알맞아요 / <b>유성</b>: 오래 버티지만 냄새가 강하고 환기가 필요해요"], key:"쓰임, 안전, 작업 환경을 함께 따지기",
+   q:{q:"도마에 알맞은 마감으로 가장 적절한 것은?", o:["식품에 안전하다고 표시된 오일","자동차용 페인트","유성 바니시 두껍게","락카 스프레이"], a:0, why:"음식이 닿는 곳은 식품 안전 표시가 있는 제품을 써요."}},
+  {t:"칠하기와 안전", li:["얇게 여러 번 칠해요. 두껍게 한 번 칠하면 흘러내리고 잘 마르지 않아요","칠이 마르면 고운 사포(#320~400)로 가볍게 다듬고 다음 칠을 해요","환기가 잘되는 곳에서 장갑과 마스크를 써요","<b>건성유(아마인유 등)를 닦은 걸레는 마르면서 열이 나 저절로 불이 날 수 있어요</b>. 펼쳐서 말리거나 물을 채운 금속 통에 담가 처리해요","남은 도료는 뚜껑을 닫아 서늘한 곳에 보관하고, 설명서에 따라 버려요"],
+   q:{q:"오일을 닦은 걸레를 안전하게 처리하는 방법은?", o:["펼쳐서 말리거나 물 담긴 금속 통에 담근다","뭉쳐서 비닐에 싸 버린다","난로 옆에 둔다","쓰레기통에 꾹꾹 눌러 담는다"], a:0, why:"뭉쳐 두면 기름이 마르며 생긴 열이 쌓여 불이 날 수 있어요."}}
+ ],
+ summary:["오일은 스며들어 자연스럽고, 바니시·우레탄은 단단한 막으로 보호해요.","스테인은 색만 입히므로 위에 보호막을 따로 올려요.","식탁은 우레탄, 도마는 식품 안전 오일처럼 쓰임에 맞춰 골라요.","얇게 여러 번 칠하고, 환기하며, 오일 걸레는 펼쳐 말리거나 물에 담가 처리해요."],
+ cards:[["침투형 도료","나무 속으로 스며드는 오일 같은 도료"],["도막형 도료","표면에 단단한 막을 만드는 바니시·우레탄"],["스테인","나무에 색만 입히는 착색제"],["자연 발화","기름 걸레가 마르며 생긴 열로 저절로 불이 나는 현상"]],
+ test:[
+  {q:"물과 긁힘에 강해 식탁 상판에 알맞은 도료는?", o:["우레탄·바니시","왁스만","물감","오일 한 번"], a:0},
+  {q:"스테인에 대한 설명으로 옳은 것은?", o:["색만 입히므로 보호막을 따로 올린다","그 자체로 가장 튼튼한 막이다","식품용이다","나무를 단단하게 한다"], a:0},
+  {q:"교실에서 쓰기에 알맞은 도료의 특징은?", o:["냄새가 적고 물로 씻기는 수성","냄새가 강한 유성","불에 잘 타는 것","유해 표시가 많은 것"], a:0},
+  {q:"도료를 칠하는 바른 방법은?", o:["얇게 여러 번 칠한다","한 번에 두껍게 붓는다","젖은 채로 겹쳐 바른다","먼지 위에 바른다"], a:0},
+  {q:"칠과 칠 사이에 하는 일로 알맞은 것은?", o:["고운 사포로 가볍게 다듬는다","거친 사포로 깎아 낸다","물을 붓는다","망치로 두드린다"], a:0},
+  {q:"건성유를 닦은 걸레가 위험한 까닭은?", o:["마르면서 생긴 열로 저절로 불이 날 수 있어서","냄새가 나서","색이 묻어서","무거워서"], a:0},
+  {q:"유성 도료를 쓸 때 꼭 해야 할 일은?", o:["충분히 환기한다","창문을 모두 닫는다","난로 옆에서 칠한다","맨손으로 바른다"], a:0}
+ ]},
+
+{id:"5-1", unit:"5", title:"아이디어 구상", sub:"쓰는 사람과 공간에서 출발하기",
+ goals:["사용자와 공간을 조사해 만들 물건의 조건을 정할 수 있다.","인체 치수를 고려해 크기를 정할 수 있다.","스케치로 아이디어를 넓히고 평가해 고를 수 있다."],
+ story:{title:"동생의 첫 책상", p:["초등학생 동생에게 책상을 만들어 주기로 한 수빈이. 인터넷에서 멋진 책상 사진을 찾아 그대로 만들려다 멈췄다. 사진 속 책상은 어른용이라 동생에게는 턱밑까지 올 높이였다.","수빈이는 줄자를 들고 동생을 의자에 앉혀 보았다. 무릎 높이, 팔꿈치 높이, 방의 빈 공간까지 하나씩 적어 내려갔다."], q:"잘 쓰이는 목공 작품은 어디서부터 구상할까요?"},
+ steps:[
+  {t:"누가, 어디서, 무엇을", li:["<b>사용자</b>: 누가 쓰나요? 나이, 키, 쓰는 습관","<b>공간</b>: 어디에 두나요? 놓일 자리의 폭·깊이·높이, 습기와 햇빛","<b>기능</b>: 무엇을 올리고, 얼마나 무거운가요?","<b>조건</b>: 예산, 재료, 공구, 제작 시간","이것을 한 문장으로 정리해요: “○○가 ○○에서 ○○하도록 돕는 ○○”"],
+   q:{q:"목공 작품을 구상할 때 가장 먼저 살필 것은?", o:["사용자와 놓일 공간","가장 비싼 목재","유행하는 색","공구 브랜드"], a:0, why:"쓰는 사람과 장소에 맞아야 잘 쓰이는 물건이 돼요."}},
+  {t:"인체 치수와 크기 정하기", li:["성인 책상 높이: 약 700~750mm, 의자 앉는 면 높이: 약 400~450mm","책꽂이 선반 깊이: 일반 책은 약 250~300mm","손이 닿는 높이와 다리가 들어갈 공간을 사용자 몸에 직접 재 봐요","넓은 원목 판재는 계절에 따라 <b>폭 방향으로 늘고 줄어요</b>. 꽉 조여 막지 말고 움직일 여유를 둬요"], key:"자보다 사용자의 몸이 기준",
+   q:{q:"넓은 원목 상판을 설계할 때 고려할 점은?", o:["폭 방향으로 늘고 줄어들 여유를 둔다","길이 방향으로 크게 늘어난다","절대 움직이지 않는다","무게가 계절마다 두 배가 된다"], a:0, why:"목재는 습도에 따라 주로 폭(결을 가로지르는) 방향으로 움직여요."}},
+  {t:"스케치와 평가", li:["<b>썸네일 스케치</b>: 작은 그림으로 아이디어를 여러 개 빠르게 그려요","<b>등각 스케치</b>: 고른 아이디어를 입체로 그려 모양을 확인해요","평가 기준(쓰임새, 제작 난이도, 재료비, 안전)으로 점수를 매겨 하나를 골라요","골판지나 폼보드로 작은 모형을 만들어 보면 크기 감을 잡기 좋아요"], widget:"matrix",
+   q:{q:"아이디어를 여러 개 빠르게 작게 그려 보는 스케치는?", o:["썸네일 스케치","부품도","재료표","조립도"], a:0, why:"엄지손톱만 하게 여러 개 그려 아이디어를 넓혀요."}}
+ ],
+ summary:["사용자, 공간, 기능, 조건을 조사해 한 문장으로 목표를 정해요.","책상 약 700~750mm, 의자 약 400~450mm처럼 인체 치수로 크기를 정해요.","넓은 원목은 폭 방향으로 움직일 여유를 둬요.","썸네일 스케치로 넓히고, 평가 기준으로 골라, 모형으로 확인해요."],
+ cards:[["썸네일 스케치","작게 여러 개 그려 아이디어를 넓히는 스케치"],["인체 치수","사람 몸의 크기를 바탕으로 한 설계 기준"],["모형","실제 크기 감을 잡으려고 만드는 작은 견본"],["평가 기준","아이디어를 비교해 고르는 잣대"]],
+ test:[
+  {q:"성인용 책상 높이로 가장 알맞은 것은?", o:["약 700~750mm","약 300mm","약 1,200mm","약 2,000mm"], a:0},
+  {q:"의자 앉는 면의 높이로 알맞은 것은?", o:["약 400~450mm","약 100mm","약 900mm","약 1,500mm"], a:0},
+  {q:"일반 책을 꽂을 선반 깊이로 알맞은 것은?", o:["약 250~300mm","약 50mm","약 800mm","약 1,000mm"], a:0},
+  {q:"아이디어를 평가하는 기준으로 알맞지 않은 것은?", o:["친구의 인기","쓰임새","제작 난이도","재료비"], a:0},
+  {q:"폼보드로 작은 모형을 만드는 까닭은?", o:["실제 크기와 모양을 미리 확인하려고","재료를 낭비하려고","칠을 연습하려고","목재를 대신하려고"], a:0},
+  {q:"넓은 원목 상판을 나사로 꽉 고정하면 생길 수 있는 문제는?", o:["목재가 움직이지 못해 갈라지거나 휜다","더 튼튼해진다","색이 밝아진다","무게가 줄어든다"], a:0},
+  {q:"작품의 목표를 한 문장으로 정리할 때 들어갈 요소가 아닌 것은?", o:["판매 가격 순위","사용자","장소","하는 일"], a:0}
+ ]},
+
+{id:"5-2", unit:"5", title:"도면과 재료표", sub:"머릿속 작품을 누구나 만들 수 있는 정보로",
+ goals:["3면도와 등각도로 작품을 표현할 수 있다.","치수를 정확히 기입할 수 있다.","재료표와 재단 계획을 작성할 수 있다."],
+ story:{title:"엄마가 대신 만든 선반", p:["방학 동안 선반을 설계한 지민이는 갑자기 캠프에 가게 됐다. 남은 제작은 엄마가 맡기로 했다. 지민이가 남긴 건 도면 한 장과 재료표 한 장뿐이었다.","캠프에서 돌아오니 선반이 벽에 걸려 있었다. 지민이가 생각한 그대로였다. “네 도면대로 했을 뿐이야.” 엄마가 웃었다."], q:"다른 사람도 똑같이 만들 수 있는 도면은 어떻게 그릴까요?"},
+ steps:[
+  {t:"3면도와 등각도", li:["<b>3면도</b>: 정면도, 평면도(위에서 본 모습), 우측면도를 정해진 자리에 그려요. 우리나라 제도는 주로 <b>제3각법</b>을 써요","보이는 선은 굵은 실선, 숨은 선은 파선, 중심은 가는 1점 쇄선","<b>등각도</b>: 입체를 한눈에 보여 줘요","<b>분해도·조립도</b>: 부품이 어떻게 맞물리는지 보여 줘요"],
+   q:{q:"제3각법 3면도에서 평면도는 어떤 모습을 그린 것일까요?", o:["위에서 내려다본 모습","앞에서 본 모습","오른쪽에서 본 모습","뒤에서 본 모습"], a:0, why:"평면도는 물체를 위에서 본 모습이에요."}},
+  {t:"치수 기입", li:["목공 도면의 기본 단위는 <b>mm</b>예요. 단위는 도면 한쪽에 한 번만 적어요","전체 치수(폭·깊이·높이)를 먼저, 부품 치수와 위치를 다음에 적어요","같은 치수를 여러 번 적지 않고, 재기 쉬운 기준면에서 치수를 잡아요","짜임 부분(홈 깊이, 장부 크기)은 따로 확대한 <b>상세도</b>로 그려요"], key:"도면만 보고도 만들 수 있게",
+   q:{q:"목공 도면에서 기본으로 쓰는 길이 단위는?", o:["mm","m","km","inch만"], a:0, why:"정밀한 가공을 위해 mm를 써요."}},
+  {t:"재료표와 재단 계획", li:["<b>재료표(커팅 리스트)</b>: 부품 이름, 수량, 두께 × 폭 × 길이, 재료, 결 방향을 적어요","<b>재단 계획</b>: 판재 위에 부품을 배치해 버리는 조각을 줄이고, 톱 길 여유도 둬요","결 방향을 맞춰 배치해요 (긴 부품은 결을 따라)","<b>3D 모델링</b>(스케치업, 퓨전 360 등)으로 미리 조립해 보면 실수를 줄일 수 있어요"],
+   q:{q:"부품 이름, 수량, 치수, 재료를 정리한 표는?", o:["재료표(커팅 리스트)","평가 행렬","순서도","시간표"], a:0, why:"재료를 사고 재단할 때 그대로 따라 하면 돼요."}}
+ ],
+ summary:["3면도는 정면도, 평면도, 우측면도로 그리고 우리나라는 주로 제3각법을 써요.","목공 도면은 mm 단위로 전체 치수부터 부품 치수 순서로 적어요.","짜임은 상세도로 따로 그려요.","재료표와 재단 계획으로 재료를 아끼고, 3D 모델링으로 실수를 줄여요."],
+ cards:[["3면도","정면도·평면도·우측면도로 물체를 나타낸 도면"],["상세도","짜임 같은 부분을 크게 그린 도면"],["재료표","부품 이름, 수량, 치수, 재료를 정리한 표"],["재단 계획","판재 위에 부품을 배치해 자를 순서를 정한 계획"]],
+ test:[
+  {q:"도면에서 숨은 선을 나타내는 선은?", o:["파선","굵은 실선","가는 1점 쇄선","물결선"], a:0},
+  {q:"입체를 한눈에 보여 주는 그림은?", o:["등각도","평면도","재료표","재단 계획"], a:0},
+  {q:"부품이 어떻게 맞물리는지 보여 주는 도면은?", o:["분해도·조립도","평면도만","재료표","사진"], a:0},
+  {q:"재단 계획을 세우는 주된 까닭은?", o:["버리는 재료를 줄이려고","공구를 늘리려고","칠을 줄이려고","무게를 늘리려고"], a:0},
+  {q:"긴 부품을 판재에 배치하는 바른 방향은?", o:["결 방향을 따라","결을 가로질러","아무 방향","대각선으로만"], a:0},
+  {q:"치수 기입의 바른 순서는?", o:["전체 치수 → 부품 치수와 위치","부품 색 → 전체 치수","무게 → 가격","아무 순서나"], a:0},
+  {q:"3D 모델링 프로그램으로 미리 조립해 보는 까닭은?", o:["제작 전에 실수를 찾으려고","목재를 사지 않으려고","도면을 없애려고","칠을 하려고"], a:0}
+ ]},
+
+{id:"5-3", unit:"5", title:"제작과 평가", sub:"작은 벽 선반으로 처음부터 끝까지",
+ goals:["설계에 따라 제작 순서를 계획할 수 있다.","안전하게 작품을 완성할 수 있다.","기준에 따라 작품을 평가하고 개선점을 찾을 수 있다."],
+ story:{title:"첫 작품의 이름표", p:["드디어 완성한 작은 벽 선반. 모서리가 살짝 어긋났고 한쪽에는 본드 자국도 남았다. 그래도 화분을 올리니 꼭 맞았다.","선생님은 선반 밑면에 이름과 날짜를 연필로 쓰게 하셨다. “잘된 점과 아쉬운 점을 작업 일지에 적어 둬. 다음 작품은 오늘보다 나아질 거야.”"], q:"하나의 작품을 끝까지 완성하는 과정은 어떻게 이어질까요?"},
+ steps:[
+  {t:"제작 순서 계획", li:["① 도면·재료표 확인 → ② 재료 준비와 적응 → ③ 기준면 잡고 마킹 → ④ 재단","⑤ 짜임 가공(홈, 반턱 등) → ⑥ <b>가조립</b> → ⑦ 부품 안쪽 샌딩(조립하면 닿기 어려운 곳)","⑧ 접착·체결과 직각 확인 → ⑨ 전체 샌딩 → ⑩ 도장 → ⑪ 벽 고정 장치 달기","각 단계 옆에 필요한 공구와 안전 수칙을 함께 적어요"],
+   q:{q:"조립 전에 부품 안쪽을 미리 샌딩하는 까닭은?", o:["조립하면 손이 닿기 어려워서","색을 빼려고","무게를 줄이려고","더 거칠게 하려고"], a:0, why:"모서리 안쪽은 조립 뒤에는 사포가 잘 들어가지 않아요."}},
+  {t:"작은 벽 선반 만들기", li:["재료 예: 18mm 소나무 집성목 — 옆판 2개, 선반 2개, 뒤판(얇은 합판) 1개","옆판에 홈 맞춤으로 선반을 끼우면 튼튼하고 깔끔해요","선반을 끼운 뒤 대각선으로 직각을 확인하고 클램핑해요","벽에 걸 때는 벽 재질에 맞는 앵커와 나사를 쓰고, 올릴 물건 무게를 생각해요"], key:"작은 작품으로 모든 단계를 한 번 경험하기",
+   q:{q:"옆판에 홈을 파 선반을 끼우는 짜임은?", o:["홈 맞춤(다도)","주먹장","연귀","맞대기"], a:0, why:"선반 무게를 홈의 턱이 받쳐 줘 튼튼해요."}},
+  {t:"평가와 개선", li:["<b>기능</b>: 원래 목적대로 잘 쓰이나요? 무게를 버티나요?","<b>완성도</b>: 치수, 직각, 짜임 틈, 샌딩과 도장 상태","<b>안전</b>: 날카로운 모서리, 흔들림, 걸 때의 고정","<b>과정</b>: 계획대로 했나요? 어디서 실수가 생겼나요?","<b>작업 일지</b>에 사진, 잘된 점, 아쉬운 점, 다음 개선점을 기록해요"],
+   q:{q:"작품 평가 항목 가운데 ‘날카로운 모서리와 흔들림’을 살피는 것은?", o:["안전","완성도","과정","가격"], a:0, why:"쓰는 사람이 다치지 않는지가 안전 평가예요."}}
+ ],
+ summary:["도면 확인부터 도장과 설치까지 제작 순서를 미리 계획해요.","가조립과 부품 안쪽 샌딩을 잊지 말아요.","작은 벽 선반 같은 작품으로 마킹, 재단, 짜임, 접착, 마감을 모두 경험해요.","기능, 완성도, 안전, 과정으로 평가하고 작업 일지에 개선점을 남겨요."],
+ cards:[["제작 순서","재료 준비부터 설치까지 작업 단계를 정리한 계획"],["작업 일지","과정, 사진, 잘된 점, 개선점을 기록한 노트"],["앵커","벽 재질에 맞춰 나사를 단단히 잡아 주는 부품"],["완성도","치수, 직각, 틈, 마감 상태로 본 작품의 품질"]],
+ test:[
+  {q:"제작 순서에서 ‘가조립’은 언제 할까요?", o:["짜임 가공 뒤, 접착 전","도장 뒤","재료를 사기 전","설치한 뒤"], a:0},
+  {q:"도장은 제작 순서의 어디쯤일까요?", o:["전체 샌딩 뒤","재단 전","마킹 전","재료 구입 전"], a:0},
+  {q:"벽 선반을 걸 때 알맞은 방법은?", o:["벽 재질에 맞는 앵커와 나사를 쓴다","본드로만 붙인다","테이프로 붙인다","못 하나로 건다"], a:0},
+  {q:"작품의 ‘기능’을 평가하는 질문은?", o:["원래 목적대로 잘 쓰이고 무게를 버티는가?","색이 유행인가?","비싸 보이는가?","친구가 좋아하는가?"], a:0},
+  {q:"작업 일지를 쓰는 가장 큰 까닭은?", o:["다음 작품을 더 잘 만들기 위해","점수를 숨기려고","재료를 버리려고","공구를 늘리려고"], a:0},
+  {q:"각 제작 단계에 안전 수칙을 함께 적는 까닭은?", o:["단계마다 위험 요인이 달라서","종이를 채우려고","외우기 싫어서","순서를 바꾸려고"], a:0},
+  {q:"선반을 끼운 뒤 클램핑 전에 확인할 것은?", o:["대각선 길이로 직각","칠 색깔","나무 냄새","공구 가격"], a:0}
+ ]}
+];
+
+const LEVELS = [[0,"새싹 목수"],[200,"견습 목수"],[500,"솜씨 목수"],[900,"설계 목수"],[1400,"마스터 목수"]];
+
+const RESOURCES = [
+ {group:"국내 유튜브 채널", note:"우리말로 기초부터 배울 수 있는 채널이에요.", items:[
+  {name:"쑤니르 SSOONIR", url:"https://www.youtube.com/@SSOONIR", tag:"유튜브", desc:"부산 목공방 운영자의 채널. 기초 기법을 차근차근, 영상이 깔끔해요."},
+  {name:"목수수첩", url:"https://www.youtube.com/@CarpenterDiary", tag:"유튜브", desc:"목공 기술과 공구 정보를 쉽게 정리해 줘요."},
+  {name:"목공 놀이터 나무와늘보", url:"https://www.youtube.com/@nulbo", tag:"유튜브", desc:"공방에서 실제로 가르치는 모습을 담은 수업형 영상."},
+  {name:"백만기 (짜맞춤 전수관)", url:"https://www.youtube.com/@zzamachum-korea", tag:"유튜브", desc:"우리 전통 짜맞춤 기법을 깊이 있게 보여 줘요."},
+  {name:"디지우드", url:"https://www.youtube.com/@digiwood7", tag:"유튜브", desc:"생활 소품과 가구 DIY 메이킹 영상."}
+ ]},
+ {group:"해외 유튜브 채널", note:"영어지만 자막(자동 번역)을 켜면 보기 좋아요. 손동작만 봐도 배울 게 많아요.", items:[
+  {name:"Steve Ramsey – Woodworking for Mere Mortals", url:"https://www.youtube.com/@SteveRamsey", tag:"유튜브 · 초보", desc:"적은 공구와 좁은 공간으로 만드는 초보용 프로젝트."},
+  {name:"Paul Sellers", url:"https://www.youtube.com/@Paul.Sellers", tag:"유튜브 · 수공구", desc:"전기 없이 수공구만으로 하는 정통 목공. 대패·끌·톱 기초에 좋아요."},
+  {name:"The Wood Whisperer", url:"https://www.youtube.com/@woodwhisperer", tag:"유튜브", desc:"전동 공구와 수공구를 함께 쓰는 가구 제작과 마감."},
+  {name:"Rob Cosman", url:"https://www.youtube.com/@RobCosmanWoodworking", tag:"유튜브 · 짜임", desc:"도브테일 등 수공구 짜임을 정밀하게 보여 줘요."},
+  {name:"Stumpy Nubs", url:"https://www.youtube.com/@StumpyNubs", tag:"유튜브 · 팁", desc:"작업이 쉬워지는 요령과 지그 아이디어."},
+  {name:"Matthias Wandel", url:"https://www.youtube.com/@matthiaswandel", tag:"유튜브 · 원리", desc:"직접 만든 공구와 실험으로 목공 원리를 탐구해요."},
+  {name:"Jonathan Katz-Moses", url:"https://www.youtube.com/@katzmosestools", tag:"유튜브", desc:"전동 공구를 정확하고 안전하게 쓰는 요령."},
+  {name:"ISHITANI FURNITURE", url:"https://www.youtube.com/@ISHITANIFURNITURE", tag:"유튜브 · 감상", desc:"일본 가구 공방의 제작 과정을 말없이 보여 줘요. 작업 순서를 보는 눈이 길러져요."},
+  {name:"FineWoodworking", url:"https://www.youtube.com/@FineWoodworking", tag:"유튜브", desc:"목공 전문 잡지의 기법 영상."}
+ ]},
+ {group:"웹사이트와 학습 자료", note:"목재 정보, 기법 기사, 무료 설계 도구를 찾을 수 있어요.", items:[
+  {name:"The Wood Database", url:"https://www.wood-database.com", tag:"영어 · 목재 정보", desc:"수백 가지 목재의 사진, 단단함, 무게, 쓰임을 찾아볼 수 있어요. 1-2 레슨과 함께 보기 좋아요."},
+  {name:"Fine Woodworking", url:"https://www.finewoodworking.com", tag:"영어 · 잡지", desc:"기법, 공구, 프로젝트 기사가 풍부한 목공 전문 잡지 사이트."},
+  {name:"Popular Woodworking", url:"https://www.popularwoodworking.com", tag:"영어 · 잡지", desc:"초보부터 숙련자까지 다양한 프로젝트와 기법 기사."},
+  {name:"Woodworkers Guild of America", url:"https://www.woodworkersguildofamerica.com", tag:"영어 · 강좌", desc:"짧은 기법 영상과 기사."},
+  {name:"The Wood Whisperer 웹사이트", url:"https://thewoodwhisperer.com", tag:"영어", desc:"마감(도료) 관련 글과 영상이 특히 많아요. 4-2 레슨과 함께 보기 좋아요."},
+  {name:"Instructables 목공 프로젝트", url:"https://www.instructables.com/workshop/woodworking/projects/", tag:"영어 · 프로젝트", desc:"사람들이 올린 단계별 제작 과정. 아이디어 구상(5-1)에 도움이 돼요."},
+  {name:"SketchUp (무료 웹 버전)", url:"https://app.sketchup.com", tag:"설계 도구", desc:"웹 브라우저에서 바로 쓰는 3D 모델링. 5-2 레슨의 도면 연습에 써요."},
+  {name:"국립산림과학원", url:"https://nifos.forest.go.kr", tag:"공공기관", desc:"우리나라 목재와 산림 연구 자료."},
+  {name:"한국임업진흥원", url:"https://www.kofpi.or.kr", tag:"공공기관", desc:"국산 목재와 목재 제품 품질 정보."},
+  {name:"산림청", url:"https://www.forest.go.kr", tag:"공공기관", desc:"목재 이용과 목공 교육 관련 정책·행사 소식."}
+ ]},
+ {group:"읽을거리", note:"목공을 시작하는 사람을 위한 국내 기사예요.", items:[
+  {name:"[김기자의 주말목공] 목공, 유튜브에서 배워봐 (1)", url:"https://www.seoul.co.kr/news/plan/woodwork/2023/07/29/20230729500002", tag:"서울신문 기사", desc:"국내 목공 유튜브 채널을 소개한 기사."},
+  {name:"[김기자의 주말목공] 목공, 유튜브에서 배워봐 (2)", url:"https://www.seoul.co.kr/news/newsView.php?id=20230811500234", tag:"서울신문 기사", desc:"해외 목공 유튜브 채널을 소개한 기사."}
+ ]},
+ {group:"인스타그램", note:"작품 사진으로 아이디어를 얻기 좋아요. 해시태그로 찾아보고, 아래 계정은 목공 잡지 기사에서 소개된 곳이에요. 운영 여부는 직접 확인해 주세요.", items:[
+  {name:"#목공", url:"https://www.instagram.com/explore/tags/목공/", tag:"해시태그", desc:"국내 목공 작품과 공방 소식."},
+  {name:"#짜맞춤", url:"https://www.instagram.com/explore/tags/짜맞춤/", tag:"해시태그", desc:"못 없이 짜 맞춘 전통 가구와 짜임."},
+  {name:"#woodworking", url:"https://www.instagram.com/explore/tags/woodworking/", tag:"해시태그", desc:"전 세계 목공 작품."},
+  {name:"#handtools", url:"https://www.instagram.com/explore/tags/handtools/", tag:"해시태그", desc:"수공구 작업과 공구 관리."},
+  {name:"@finewoodworkingmagazine", url:"https://www.instagram.com/finewoodworkingmagazine/", tag:"계정", desc:"Fine Woodworking 잡지 공식 계정."},
+  {name:"@vic_tesolin_woodworks", url:"https://www.instagram.com/vic_tesolin_woodworks/", tag:"계정", desc:"수공구 목공 강사 빅 테솔린 (Fine Woodworking 소개)."},
+  {name:"@vondriskaworks", url:"https://www.instagram.com/vondriskaworks/", tag:"계정", desc:"목공 강사 조지 본드리스카 (목공 기사에서 소개)."}
+ ]}
+];
+
+const MEDIA = {
+ "1-1": {
+  "img": {
+   "thumb": "https://thumb.wikimedia.org/wikipedia/commons/thumb/3/36/Pine_log_cross-sections%2C_Teutendorf%2C_2016-09-17.jpg/330px-Pine_log_cross-sections%2C_Teutendorf%2C_2016-09-17.jpg",
+   "big": "https://thumb.wikimedia.org/wikipedia/commons/thumb/3/36/Pine_log_cross-sections%2C_Teutendorf%2C_2016-09-17.jpg/960px-Pine_log_cross-sections%2C_Teutendorf%2C_2016-09-17.jpg",
+   "page": "https://commons.wikimedia.org/wiki/File:Pine_log_cross-sections,_Teutendorf,_2016-09-17.jpg",
+   "lic": "CC BY-SA 4.0",
+   "artist": "Radomianin",
+   "alt": "소나무 통나무 단면의 나이테"
+  },
+  "videos": [
+   {
+    "id": "AMItTosuc2k",
+    "title": "[우드슬랩 #1] 나무의 이해, 변재, 심재/제재 방식에 대해 설명 해드리겠습니다.",
+    "ch": "가구싶다TV",
+    "len": "7:00"
+   },
+   {
+    "id": "PBmEMmLjaBc",
+    "title": "[Renewal 나무의사] 수목생리학 - 제5강 형성층, 춘재-추재, 목재의 구조",
+    "ch": "나무쌤",
+    "len": "11:26"
+   }
+  ],
+  "links": [
+   [
+    "위키백과 · 목재",
+    "https://ko.wikipedia.org/wiki/%EB%AA%A9%EC%9E%AC"
+   ]
+  ]
+ },
+ "1-2": {
+  "img": {
+   "thumb": "https://thumb.wikimedia.org/wikipedia/commons/thumb/1/11/Samples_of_Wood_at_Martin_Guitar_Factory.jpg/330px-Samples_of_Wood_at_Martin_Guitar_Factory.jpg",
+   "big": "https://thumb.wikimedia.org/wikipedia/commons/thumb/1/11/Samples_of_Wood_at_Martin_Guitar_Factory.jpg/960px-Samples_of_Wood_at_Martin_Guitar_Factory.jpg",
+   "page": "https://commons.wikimedia.org/wiki/File:Samples_of_Wood_at_Martin_Guitar_Factory.jpg",
+   "lic": "CC BY 4.0",
+   "artist": "Henrysz",
+   "alt": "여러 가지 목재 견본 (기타 공장)"
+  },
+  "videos": [
+   {
+    "id": "qHR6uSoNqbY",
+    "title": "[목재 상식]초보 목공인들을 위한 완벽 정리 ep.1 I 나무의 종류, 원목가구, 희귀한 나무",
+    "ch": "이승석 Woodworker Lee",
+    "len": "8:40"
+   },
+   {
+    "id": "2KpFp_NLaJE",
+    "title": "[우드킴목재] 목재의 종류에 대해서 간략하게 정리했움다. 우리 목공초보어른이 형님들을 위해  / PB, MDF, 집성목, 합판, 통원목",
+    "ch": "우드킴TV woodkim",
+    "len": "5:53"
+   }
+  ],
+  "links": [
+   [
+    "위키백과 · 합판",
+    "https://ko.wikipedia.org/wiki/%ED%95%A9%ED%8C%90"
+   ],
+   [
+    "The Wood Database (목재 정보)",
+    "https://www.wood-database.com"
+   ]
+  ]
+ },
+ "1-3": {
+  "img": {
+   "thumb": "https://thumb.wikimedia.org/wikipedia/commons/thumb/2/26/Stacked_Timber_Displaying_Growth_Rings.jpg/330px-Stacked_Timber_Displaying_Growth_Rings.jpg",
+   "big": "https://thumb.wikimedia.org/wikipedia/commons/thumb/2/26/Stacked_Timber_Displaying_Growth_Rings.jpg/960px-Stacked_Timber_Displaying_Growth_Rings.jpg",
+   "page": "https://commons.wikimedia.org/wiki/File:Stacked_Timber_Displaying_Growth_Rings.jpg",
+   "lic": "CC BY-SA 4.0",
+   "artist": "Kelsey Todd",
+   "alt": "쌓아 둔 통나무 — 마구리의 갈라짐과 나이테를 살펴요"
+  },
+  "videos": [
+   {
+    "id": "znHUkQbfkvg",
+    "title": "현장에서 제일 많이 쓰는 목재를 깔끔하게 정리해봤습니다 : )",
+    "ch": "하다툴스",
+    "len": "2:40"
+   },
+   {
+    "id": "VWNKT8-6Bjk",
+    "title": "소송각재 건조 vs 비건조 차이점 비교 (인테리어 목재 다루끼 고르는 법, 구별 방법, 단가 차이, 하자의 원인 총정리)",
+    "ch": "건축자재의 달인",
+    "len": "2:41"
+   }
+  ],
+  "links": [
+   [
+    "위키백과 · 목재",
+    "https://ko.wikipedia.org/wiki/%EB%AA%A9%EC%9E%AC"
+   ],
+   [
+    "한국임업진흥원",
+    "https://www.kofpi.or.kr"
+   ]
+  ]
+ },
+ "2-1": {
+  "img": {
+   "thumb": "https://thumb.wikimedia.org/wikipedia/commons/thumb/f/f0/2023_Okulary_ochronne_%281%29.jpg/330px-2023_Okulary_ochronne_%281%29.jpg",
+   "big": "https://thumb.wikimedia.org/wikipedia/commons/thumb/f/f0/2023_Okulary_ochronne_%281%29.jpg/960px-2023_Okulary_ochronne_%281%29.jpg",
+   "page": "https://commons.wikimedia.org/wiki/File:2023_Okulary_ochronne_(1).jpg",
+   "lic": "CC BY-SA 4.0",
+   "artist": "Jacek Halicki",
+   "alt": "작업용 보안경"
+  },
+  "videos": [
+   {
+    "id": "8HPi0F4vdDw",
+    "title": "목공 베이직 2 - 반드시 알아야하는 테이블쏘 사용법과 안전수칙",
+    "ch": "Mokumoku 모쿠모쿠 취미목공",
+    "len": "13:55"
+   },
+   {
+    "id": "sLogdN34O4M",
+    "title": "table saw  kick back 테이블쏘/톱다이 킥백에 대해",
+    "ch": "목수이박사",
+    "len": "3:31"
+   }
+  ],
+  "links": [
+   [
+    "위키백과 · 개인 보호 장비",
+    "https://ko.wikipedia.org/wiki/%EA%B0%9C%EC%9D%B8_%EB%B3%B4%ED%98%B8_%EC%9E%A5%EB%B9%84"
+   ]
+  ]
+ },
+ "2-2": {
+  "img": {
+   "thumb": "https://upload.wikimedia.org/wikipedia/commons/5/5e/%E3%81%AE%E3%81%93%E3%81%8E%E3%82%8A_%E8%AA%AC%E6%98%8E%E5%9B%B3.png",
+   "big": "https://upload.wikimedia.org/wikipedia/commons/5/5e/%E3%81%AE%E3%81%93%E3%81%8E%E3%82%8A_%E8%AA%AC%E6%98%8E%E5%9B%B3.png",
+   "page": "https://commons.wikimedia.org/wiki/File:%E3%81%AE%E3%81%93%E3%81%8E%E3%82%8A_%E8%AA%AC%E6%98%8E%E5%9B%B3.png",
+   "lic": "CC0",
+   "artist": "すじにくシチュー",
+   "alt": "톱의 각 부분 이름 (일본어 표기 그림)"
+  },
+  "videos": [
+   {
+    "id": "ftu_7Ey1RpE",
+    "title": "수공구 대패 사용법 How to use a japanese hand plane.",
+    "ch": "목공남(男)",
+    "len": "39:11"
+   },
+   {
+    "id": "yilXu_AmrDo",
+    "title": "[목공 수공구 6. 타격끌] 맞장부홈 가공하기_How to make through mortise",
+    "ch": "한트베르커 HANDWERKER",
+    "len": "8:01"
+   }
+  ],
+  "links": [
+   [
+    "위키백과 · 대패",
+    "https://ko.wikipedia.org/wiki/%EB%8C%80%ED%8C%A8"
+   ],
+   [
+    "Paul Sellers (수공구 유튜브)",
+    "https://www.youtube.com/@Paul.Sellers"
+   ]
+  ]
+ },
+ "2-3": {
+  "img": {
+   "thumb": "https://thumb.wikimedia.org/wikipedia/commons/thumb/7/74/Jigsaw_AccuMaster.jpg/330px-Jigsaw_AccuMaster.jpg",
+   "big": "https://thumb.wikimedia.org/wikipedia/commons/thumb/7/74/Jigsaw_AccuMaster.jpg/960px-Jigsaw_AccuMaster.jpg",
+   "page": "https://commons.wikimedia.org/wiki/File:Jigsaw_AccuMaster.jpg",
+   "lic": "CC BY-SA 4.0",
+   "artist": "Артём В.",
+   "alt": "전동 직소"
+  },
+  "videos": [
+   {
+    "id": "yUnPCsndATs",
+    "title": "[목공 기초] 공구 추천 전동 공구 구입 순서 꼭 알아야 할 것 드릴 다음에 뭐사요?",
+    "ch": "목수그렝이",
+    "len": "6:33"
+   },
+   {
+    "id": "de0dvoGBvmU",
+    "title": "드릴비트 잘 모른다면...? 영상 하나로 정리해보자!!! (ft.종류별 드릴비트)",
+    "ch": "철물박사 TV",
+    "len": "7:57"
+   }
+  ],
+  "links": [
+   [
+    "위키백과 · 전동 공구",
+    "https://ko.wikipedia.org/wiki/%EC%A0%84%EB%8F%99_%EA%B3%B5%EA%B5%AC"
+   ]
+  ]
+ },
+ "3-1": {
+  "img": {
+   "thumb": "https://thumb.wikimedia.org/wikipedia/commons/thumb/f/fe/Using_a_marking_gauge_to_strike_a_line_on_MDF.jpg/330px-Using_a_marking_gauge_to_strike_a_line_on_MDF.jpg",
+   "big": "https://thumb.wikimedia.org/wikipedia/commons/thumb/f/fe/Using_a_marking_gauge_to_strike_a_line_on_MDF.jpg/960px-Using_a_marking_gauge_to_strike_a_line_on_MDF.jpg",
+   "page": "https://commons.wikimedia.org/wiki/File:Using_a_marking_gauge_to_strike_a_line_on_MDF.jpg",
+   "lic": "CC BY 2.0",
+   "artist": "Jordanhill School D&amp;T Dept",
+   "alt": "그무개로 MDF에 선 긋기"
+  },
+  "videos": [
+   {
+    "id": "xPRh7Tp6_uk",
+    "title": "[목공 수공구 1. 등대기톱] 톱질, 이것만 기억하자!_How to use hand saw.",
+    "ch": "한트베르커 HANDWERKER",
+    "len": "11:14"
+   },
+   {
+    "id": "JDTMCR68vF0",
+    "title": "[정밀목공 짜임편 #4] 정교한 톱질을 하는 방법! (피쳐링 : 등대기톱)",
+    "ch": "쑤니르 SSOONIR",
+    "len": "16:23"
+   }
+  ],
+  "links": [
+   [
+    "위키백과 · 톱",
+    "https://ko.wikipedia.org/wiki/%ED%86%B1"
+   ]
+  ]
+ },
+ "3-2": {
+  "img": {
+   "thumb": "https://thumb.wikimedia.org/wikipedia/commons/thumb/6/6d/Shaving_wood_%28Unsplash%29.jpg/330px-Shaving_wood_%28Unsplash%29.jpg",
+   "big": "https://thumb.wikimedia.org/wikipedia/commons/thumb/6/6d/Shaving_wood_%28Unsplash%29.jpg/960px-Shaving_wood_%28Unsplash%29.jpg",
+   "page": "https://commons.wikimedia.org/wiki/File:Shaving_wood_(Unsplash).jpg",
+   "lic": "CC0",
+   "artist": "fireskystudios.com asthetik",
+   "alt": "대패질로 나온 얇은 대팻밥"
+  },
+  "videos": [
+   {
+    "id": "GmrG_9Ih_as",
+    "title": "[목공 수공구 9. 대패] 대패 기초 셋팅과정_이것만 기억하자!  [How to set hand plane]",
+    "ch": "한트베르커 HANDWERKER",
+    "len": "13:26"
+   },
+   {
+    "id": "uPVrNePg0Jo",
+    "title": "(Woodworking Class #4)대패하는 법",
+    "ch": "Somokjang 소목장 심용식 SimYongsik",
+    "len": "13:37"
+   }
+  ],
+  "links": [
+   [
+    "위키백과 · 끌",
+    "https://ko.wikipedia.org/wiki/%EB%81%8C"
+   ]
+  ]
+ },
+ "3-3": {
+  "img": {
+   "thumb": "https://thumb.wikimedia.org/wikipedia/commons/thumb/2/2f/Finished_dovetail.jpg/330px-Finished_dovetail.jpg",
+   "big": "https://thumb.wikimedia.org/wikipedia/commons/thumb/2/2f/Finished_dovetail.jpg/960px-Finished_dovetail.jpg",
+   "page": "https://commons.wikimedia.org/wiki/File:Finished_dovetail.jpg",
+   "lic": "CC BY-SA 3.0",
+   "artist": "",
+   "alt": "나무끼리 맞물려 끼운 짜임"
+  },
+  "videos": [
+   {
+    "id": "1PavkmmKrZo",
+    "title": "1.Making Dovetail joint by hand tools[woodworking]",
+    "ch": "Kobeomsuk furniture",
+    "len": "18:56"
+   },
+   {
+    "id": "uUY7VqavWfM",
+    "title": "가구 다리 제작에 쓰이는 장부짜임, 기초 1편 [정밀목공 #22]",
+    "ch": "쑤니르 SSOONIR",
+    "len": "4:36"
+   }
+  ],
+  "links": [
+   [
+    "백만기 짜맞춤 전수관 (유튜브)",
+    "https://www.youtube.com/@zzamachum-korea"
+   ]
+  ]
+ },
+ "3-4": {
+  "img": {
+   "thumb": "https://thumb.wikimedia.org/wikipedia/commons/thumb/1/13/Bar_clamp_2.jpg/330px-Bar_clamp_2.jpg",
+   "big": "https://thumb.wikimedia.org/wikipedia/commons/thumb/1/13/Bar_clamp_2.jpg/960px-Bar_clamp_2.jpg",
+   "page": "https://commons.wikimedia.org/wiki/File:Bar_clamp_2.jpg",
+   "lic": "CC BY-SA 3.0",
+   "artist": "Aerolin55",
+   "alt": "바 클램프"
+  },
+  "videos": [
+   {
+    "id": "Php3bgk2KBo",
+    "title": "[손잡이닷컴] DIY 아카데미_올바른목공본드사용",
+    "ch": "손잡이닷컴",
+    "len": "3:14"
+   },
+   {
+    "id": "NbcaIYcRMW0",
+    "title": "목공 깨알 팁 : 모든 본드의 세가지 공통시간",
+    "ch": "마울공작소",
+    "len": "2:35"
+   }
+  ],
+  "links": [
+   [
+    "위키백과 · 클램프",
+    "https://ko.wikipedia.org/wiki/%ED%81%B4%EB%9E%A8%ED%94%84"
+   ]
+  ]
+ },
+ "4-1": {
+  "img": {
+   "thumb": "https://thumb.wikimedia.org/wikipedia/commons/thumb/9/90/Schleifpapier_verschiedene_Sorten.jpg/330px-Schleifpapier_verschiedene_Sorten.jpg",
+   "big": "https://thumb.wikimedia.org/wikipedia/commons/thumb/9/90/Schleifpapier_verschiedene_Sorten.jpg/960px-Schleifpapier_verschiedene_Sorten.jpg",
+   "page": "https://commons.wikimedia.org/wiki/File:Schleifpapier_verschiedene_Sorten.jpg",
+   "lic": "CC BY-SA 3.0",
+   "artist": "Simon Eugster – Simon / ?! 12:43, 1",
+   "alt": "여러 가지 번호의 사포"
+  },
+  "videos": [
+   {
+    "id": "5bsJFjYMWgI",
+    "title": "초보가 샌딩으로 가구를 망치는 이유 (+ 사포 선택)",
+    "ch": "보동웍스BodongWorks",
+    "len": "8:10"
+   },
+   {
+    "id": "NfUUsuU0CMI",
+    "title": "사포종류와 사용방법(Types of sandpaper and how to use sandpaper)",
+    "ch": "한스아저씨",
+    "len": "6:51"
+   }
+  ],
+  "links": [
+   [
+    "위키백과 · 사포",
+    "https://ko.wikipedia.org/wiki/%EC%82%AC%ED%8F%AC"
+   ]
+  ]
+ },
+ "4-2": {
+  "img": {
+   "thumb": "https://thumb.wikimedia.org/wikipedia/commons/thumb/0/06/Applying_Varnish_on_Unfinished_Violin.jpg/330px-Applying_Varnish_on_Unfinished_Violin.jpg",
+   "big": "https://thumb.wikimedia.org/wikipedia/commons/thumb/0/06/Applying_Varnish_on_Unfinished_Violin.jpg/960px-Applying_Varnish_on_Unfinished_Violin.jpg",
+   "page": "https://commons.wikimedia.org/wiki/File:Applying_Varnish_on_Unfinished_Violin.jpg",
+   "lic": "CC BY-SA 4.0",
+   "artist": "Ronaldmoretto",
+   "alt": "붓으로 바니시를 칠하는 모습"
+  },
+  "videos": [
+   {
+    "id": "bOWeNKn3bX8",
+    "title": "스테인과 바니쉬의 차이 | 목재 마감방법 | DIY",
+    "ch": "만고사 ",
+    "len": "12:08"
+   },
+   {
+    "id": "aE3iA7NB_f4",
+    "title": "제대로 알고 칠하자! 스테인, 바니쉬, 우레탄 칠하는 방법",
+    "ch": "가구스케치 / 디자인 가구",
+    "len": "9:52"
+   }
+  ],
+  "links": [
+   [
+    "위키백과 · 바니시",
+    "https://ko.wikipedia.org/wiki/%EB%B0%94%EB%8B%88%EC%8B%9C"
+   ],
+   [
+    "The Wood Whisperer (마감 자료)",
+    "https://thewoodwhisperer.com"
+   ]
+  ]
+ },
+ "5-1": {
+  "img": {
+   "thumb": "https://thumb.wikimedia.org/wikipedia/commons/thumb/3/33/Drawing%2C_Design_for_Serving_Table_with_Alternate_Design_Sketch%2C_1900%E2%80%9305_%28CH_18680659%29.jpg/330px-Drawing%2C_Design_for_Serving_Table_with_Alternate_Design_Sketch%2C_1900%E2%80%9305_%28CH_18680659%29.jpg",
+   "big": "https://thumb.wikimedia.org/wikipedia/commons/thumb/3/33/Drawing%2C_Design_for_Serving_Table_with_Alternate_Design_Sketch%2C_1900%E2%80%9305_%28CH_18680659%29.jpg/960px-Drawing%2C_Design_for_Serving_Table_with_Alternate_Design_Sketch%2C_1900%E2%80%9305_%28CH_18680659%29.jpg",
+   "page": "https://commons.wikimedia.org/wiki/File:Drawing,_Design_for_Serving_Table_with_Alternate_Design_Sketch,_1900%E2%80%9305_(CH_18680659).jpg",
+   "lic": "Public domain",
+   "artist": "Unknown artist Unknown artist",
+   "alt": "서빙 테이블 디자인 스케치 (두 가지 안)"
+  },
+  "videos": [
+   {
+    "id": "AWJEtOv4V4g",
+    "title": "[ 왕초보DIY ] 만들고 싶은 가구 스케치하는 방법",
+    "ch": "우드킴TV woodkim",
+    "len": "1:57"
+   },
+   {
+    "id": "nb0jjufsxvw",
+    "title": "가구디자인 기초드로잉 두번째 #2 [ 가구디자인 / 목공 / 드로잉 ]",
+    "ch": "헌이킴",
+    "len": "10:20"
+   }
+  ],
+  "links": [
+   [
+    "위키백과 · 가구",
+    "https://ko.wikipedia.org/wiki/%EA%B0%80%EA%B5%AC"
+   ],
+   [
+    "Instructables 목공 프로젝트",
+    "https://www.instructables.com/workshop/woodworking/projects/"
+   ]
+  ]
+ },
+ "5-2": {
+  "img": {
+   "thumb": "https://thumb.wikimedia.org/wikipedia/commons/thumb/d/d1/Woodwork_and_mechanical_drawing_%281914%29_%2814759789426%29.jpg/330px-Woodwork_and_mechanical_drawing_%281914%29_%2814759789426%29.jpg",
+   "big": "https://thumb.wikimedia.org/wikipedia/commons/thumb/d/d1/Woodwork_and_mechanical_drawing_%281914%29_%2814759789426%29.jpg/960px-Woodwork_and_mechanical_drawing_%281914%29_%2814759789426%29.jpg",
+   "page": "https://commons.wikimedia.org/wiki/File:Woodwork_and_mechanical_drawing_(1914)_(14759789426).jpg",
+   "lic": "No restrictions",
+   "artist": "Internet Archive Book Images",
+   "alt": "목공 제도 교재의 도면 (1914)"
+  },
+  "videos": [
+   {
+    "id": "sv7jIJAmgEg",
+    "title": "왕 초보 스케치 업 길고 긴 간단 설명 / 가구 그리기",
+    "ch": "모두의목공방",
+    "len": "23:37"
+   },
+   {
+    "id": "p7sUmrztSpU",
+    "title": "가구디자인(목공)을 위한 스케치업(SketchUp) 무료강좌 - 응용편 : 트레이 그려보기",
+    "ch": "우드워킹 아카데미 더늠",
+    "len": "14:55"
+   }
+  ],
+  "links": [
+   [
+    "위키백과 · 제도",
+    "https://ko.wikipedia.org/wiki/%EC%A0%9C%EB%8F%84"
+   ],
+   [
+    "SketchUp 무료 웹 버전",
+    "https://app.sketchup.com"
+   ]
+  ]
+ },
+ "5-3": {
+  "img": {
+   "thumb": "https://thumb.wikimedia.org/wikipedia/commons/thumb/8/86/Handmade_shelf.jpg/330px-Handmade_shelf.jpg",
+   "big": "https://thumb.wikimedia.org/wikipedia/commons/thumb/8/86/Handmade_shelf.jpg/960px-Handmade_shelf.jpg",
+   "page": "https://commons.wikimedia.org/wiki/File:Handmade_shelf.jpg",
+   "lic": "CC0",
+   "artist": "",
+   "alt": "손으로 만든 원목 선반"
+  },
+  "videos": [
+   {
+    "id": "zW1ym84wsh0",
+    "title": "[목공] 원목\"선반\"만들기 톱과 끌만 있으면 나도 만들 수 있다!? wood working Dovetail 배워두면 \"유용한\" 목공 \"선반\"직접만들면 싸다구!!",
+    "ch": "boyjuda",
+    "len": "13:52"
+   },
+   {
+    "id": "Tcmttf_AoL8",
+    "title": "[가구] 누구든지 쉽게 할 수 있는 원목 선반 만들기",
+    "ch": "hym크래프트 [ hym Crafts ]",
+    "len": "6:51"
+   }
+  ],
+  "links": [
+   [
+    "위키백과 · 선반 (가구)",
+    "https://ko.wikipedia.org/wiki/%EC%84%A0%EB%B0%98_(%EA%B0%80%EA%B5%AC)"
+   ]
+  ]
+ }
+};
+
+
+const COURSES = [
+  {id:"ai", name:"인공지능 기초", href:"../ai/", color:"#12B886"},
+  {id:"design", name:"창의 공학 설계", href:"../design/", color:"#228BE6"},
+  {id:"robot", name:"로봇과 공학세계", href:"../robot/", color:"#7048E8"},
+  {id:"wood", name:"목공 교실", href:"../wood/", color:"#C2780C"},
+  {id:"tech", name:"첨단 공학 탐험관", href:"../tech/", color:"#F59F00"}
+];
+const BADGES = [
+  {id:"first", m:"1", name:"첫걸음", how:"첫 계단 통과"},
+  {id:"oneshot", m:"✓", name:"한 번에 통과", how:"시험 첫 도전에 80점 이상"},
+  {id:"perfect", m:"100", name:"만점왕", how:"시험 100점"},
+  {id:"cards", m:"가", name:"용어 박사", how:"카드를 실수 없이 완성"},
+  {id:"lab", m:"⚙", name:"실험가", how:"실습 위젯 직접 조작"},
+  {id:"unit", m:"▲", name:"단원 정복", how:"한 대단원 모두 완료"},
+  {id:"streak", m:"3일", name:"3일 연속", how:"3일 연속 학습"},
+  {id:"grad", m:"★", name:"졸업", how:"모든 레슨 완료"}
+];
+const XP = {step:10, cards:20, pass:50, perfect:20};
+const KEY = COURSE.key;
+const HAS_RES = typeof RESOURCES !== "undefined" && RESOURCES.length > 0;
+
+/* ---------- state ---------- */
+const fresh = () => ({v:1, xp:0, les:{}, badges:[], streak:{last:null, n:0}, wrong:{}});
+let S = (() => { try { const s = JSON.parse(localStorage.getItem(KEY)); if (s && s.v === 1) { s.wrong = s.wrong || {}; return s; } } catch(e){} return fresh(); })();
+const save = () => { try { localStorage.setItem(KEY, JSON.stringify(S)); } catch(e){} };
+const L = id => S.les[id] || (S.les[id] = {steps:0, cards:false, best:null, passed:false, tries:0});
+const lessonById = id => LESSONS.find(l => l.id === id);
+const unitById = id => UNITS.find(u => u.id === id);
+const isPassed = id => !!(S.les[id] && S.les[id].passed);
+const esc = s => String(s).replace(/[&<>"]/g, m => ({"&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;"}[m]));
+const dayStr = d => d.getFullYear()+"-"+String(d.getMonth()+1).padStart(2,"0")+"-"+String(d.getDate()).padStart(2,"0");
+
+/* streak counts days with real learning (a solved step or a test), not visits */
+function studied(){
+  const today = dayStr(new Date()), y = new Date(); y.setDate(y.getDate()-1);
+  if (S.streak.last === today) return;
+  S.streak.n = S.streak.last === dayStr(y) ? S.streak.n + 1 : 1;
+  S.streak.last = today;
+  if (S.streak.n >= 3) badge("streak");
+}
+function streakNow(){
+  const today = dayStr(new Date()), y = new Date(); y.setDate(y.getDate()-1);
+  return S.streak.last === today || S.streak.last === dayStr(y) ? S.streak.n : 0;
+}
+
+/* ---------- transient UI ---------- */
+let view = {name:"home"};
+const ui = {wrong:{}, cards:{}, test:{}, pc:{meat:1, dessert:0, soup:1}, mx:[[3,3,2],[3,2,2],[2,3,1]], sv:90, confirmReset:false};
+const orders = new Map();
+function order(key, n){
+  if (!orders.has(key)) { const a = [...Array(n).keys()]; for (let i=n-1;i>0;i--){const j=Math.floor(Math.random()*(i+1)); [a[i],a[j]]=[a[j],a[i]];} orders.set(key,a); }
+  return orders.get(key);
+}
+
+/* ---------- rewards ---------- */
+function toast(html){
+  const t = document.createElement("div"); t.className = "toast"; t.innerHTML = html;
+  document.getElementById("toasts").appendChild(t); setTimeout(() => t.remove(), 2600);
+}
+function lvl(xp){ let i = 0; LEVELS.forEach((l,k) => { if (xp >= l[0]) i = k; }); return i; }
+function addXP(n, why){ const before = lvl(S.xp); S.xp += n; toast(`<b>+${n} XP</b> ${why}`); if (lvl(S.xp) > before) toast(`레벨 업! <b>Lv.${lvl(S.xp)+1} ${LEVELS[lvl(S.xp)][1]}</b>`); }
+function badge(id){ if (S.badges.includes(id)) return; S.badges.push(id); const b = BADGES.find(x=>x.id===id); toast(`배지 획득 <b>${b.name}</b>`); }
+function checkCompletion(){
+  UNITS.forEach(u => { if (LESSONS.filter(l => l.unit === u.id).every(l => isPassed(l.id))) badge("unit"); });
+  if (LESSONS.every(l => isPassed(l.id))) badge("grad");
+}
+function wrongCount(){ return Object.values(S.wrong).reduce((a, l) => a + l.length, 0); }
+
+/* ---------- views ---------- */
+const OPTN = ["①","②","③","④"];
+const med = id => (typeof MEDIA !== "undefined" && MEDIA[id]) || null;
+
+function header(){
+  const i = lvl(S.xp), wc = wrongCount();
+  return `<button class="icon-btn menu-btn" data-act="side" aria-label="과정 메뉴 열기" title="과정 메뉴">☰</button><details class="course"><summary><span class="mark">${esc(COURSE.short)}</span><span><b>${esc(COURSE.name)}</b><small>우리 반 AI·공학 교실</small></span><span class="chev">▾</span></summary>
+    <div class="menu">${COURSES.map(c => `<a href="${c.href}" ${c.id===COURSE.id?'aria-current="page"':""}><i style="background:${c.color}"></i>${c.name}</a>`).join("")}<hr><a href="../">← 교실 홈</a></div></details>
+  <nav class="nav"><button data-act="home" aria-current="${view.name==="home"||view.name==="lesson"}">레슨</button><button data-act="glossary" aria-current="${view.name==="glossary"}">용어 사전</button><button data-act="review" aria-current="${view.name==="review"}">오답 노트${wc?`<span class="cnt">${wc}</span>`:""}</button>${HAS_RES?`<button data-act="resources" aria-current="${view.name==="resources"}">참고 자료</button>`:""}</nav>
+  <div class="me"><span class="lv">Lv.${i+1} ${LEVELS[i][1]}</span><button class="icon-btn" data-act="fs" aria-label="글자 크기 바꾸기" title="글자 크기">가+</button><button class="icon-btn" data-act="theme" aria-label="밝게/어둡게 바꾸기" title="밝게/어둡게">◐</button></div>`;
+}
+
+function nextLesson(){ return LESSONS.find(l => !isPassed(l.id)) || LESSONS[0]; }
+
+function lessonRow(l){
+  const s = S.les[l.id] || {}, m = med(l.id);
+  const dots = [0,1,2].map(k => `<i class="${(s.steps||0)>k?"on":""}"></i>`).join("") + `<i class="${s.cards?"on":""}"></i><i class="${s.passed?"on":""}"></i>`;
+  return `<button class="les" data-act="open" data-id="${l.id}">
+    <span class="th">${m && m.img ? `<img src="${m.img.thumb}" alt="" loading="lazy">` : ""}</span>
+    <span class="t"><span class="code">${l.id}</span><b>${esc(l.title)}</b><small>${esc(l.sub)}</small>
+      <span class="dots" aria-label="진행 상황">${dots}${s.passed ? `<span class="score">${s.best}점</span>` : ""}</span></span></button>`;
+}
+
+function home(){
+  const done = LESSONS.filter(l => isPassed(l.id)).length, started = Object.keys(S.les).length > 0, nx = nextLesson();
+  const i = lvl(S.xp), nextLv = LEVELS[i+1];
+  const pct = nextLv ? Math.round((S.xp - LEVELS[i][0]) / (nextLv[0] - LEVELS[i][0]) * 100) : 100;
+  return `
+  <section class="hero">
+    <div><p class="eyebrow">${esc(COURSE.eyebrow)} · 레슨 ${LESSONS.length}개</p>
+      <h1>한 계단씩 오르는<br>${esc(COURSE.name)}</h1>
+      <p class="lead">짧은 이야기로 궁금증을 만들고, 사진과 영상으로 보고, 계단마다 확인문제를 풀며 올라가요.</p>
+      <div class="hero-cta"><button class="btn primary" data-act="open" data-id="${nx.id}">${started ? "이어서 하기" : "첫 레슨 시작하기"} →</button>
+        <small>${done < LESSONS.length ? `다음: <b>${nx.id} ${esc(nx.title)}</b>` : "모든 레슨을 마쳤어요! 복습해 볼까요?"}</small></div></div>
+    <div class="stairs" role="img" aria-label="레슨 ${LESSONS.length}개 중 ${done}개 완료">
+      ${LESSONS.map((l,k) => `<span class="stair ${isPassed(l.id)?"on":""} ${l.id===nx.id && done<LESSONS.length?"cur":""}" style="--h:${(k+1)/LESSONS.length}">${k+1}</span>`).join("")}</div>
+  </section>
+  <div class="stats">
+    <div class="stat"><small>레벨</small><b>Lv.${i+1} ${LEVELS[i][1]}</b><div class="bar"><i style="width:${pct}%"></i></div></div>
+    <div class="stat"><small>경험치</small><b class="num">${S.xp} XP</b><small>${nextLv ? `다음 레벨까지 ${nextLv[0]-S.xp} XP` : "최고 레벨"}</small></div>
+    <div class="stat"><small>연속 학습</small><b>🔥 ${streakNow()}일</b><small>계단을 풀거나 시험을 본 날만 세요</small></div>
+    <div class="stat"><small>완료한 레슨</small><b class="num">${done} / ${LESSONS.length}</b><div class="bar"><i style="width:${done/LESSONS.length*100}%"></i></div></div>
+  </div>
+  <ol class="flow">
+    <li><b>1</b><div><strong>이야기·영상</strong><span>장면과 영상으로 궁금증 만들기</span></div></li>
+    <li><b>2</b><div><strong>계단 오르기</strong><span>확인문제를 맞히면 다음 칸이 열려요</span></div></li>
+    <li><b>3</b><div><strong>용어 카드</strong><span>용어와 뜻을 짝지어요</span></div></li>
+    <li><b>4</b><div><strong>10문제 시험</strong><span>80점 이상이면 통과, 틀린 문제는 오답 노트로</span></div></li>
+  </ol>
+  <div class="sec-h"><h2>대단원</h2><small>레슨을 눌러 시작해요</small></div>
+  <div class="units">${UNITS.map(u => `<section>
+      <div class="unit-h"><span class="no">${u.no}</span><h3>${esc(u.title)}</h3></div><p class="unit-d">${esc(u.desc)}</p>
+      <div class="les-list">${LESSONS.filter(l => l.unit === u.id).map(lessonRow).join("")}</div></section>`).join("")}</div>
+  <div class="sec-h"><h2>배지</h2><small>${S.badges.length} / ${BADGES.length}</small></div>
+  <div class="badges">${BADGES.map(b => `<div class="badge ${S.badges.includes(b.id)?"on":""}"><div class="m">${b.m}</div><strong>${b.name}</strong><span>${b.how}</span></div>`).join("")}</div>
+  <div class="reset">${ui.confirmReset
+    ? `기록을 모두 지울까요? 되돌릴 수 없어요. <button class="btn ghost" data-act="reset-yes">모두 지우기</button><button class="linkish" data-act="reset-no">취소</button>`
+    : `<button class="linkish" data-act="reset">기록 모두 지우기</button>`}</div>`;
+}
+
+function quizBlock(key, q, opts){
+  const ord = order(key, q.o.length);
+  return `<div class="opts">${ord.map((oi,k) => {
+    const cls = opts.solved && oi === q.a ? "right" : opts.wrong.has(oi) ? "wrong" : "";
+    return `<button class="opt ${cls}" data-act="${opts.act}" ${opts.data} data-i="${oi}" ${opts.solved || opts.wrong.has(oi) ? "disabled" : ""}><span class="n">${OPTN[k]}</span><span>${q.o[oi]}</span></button>`;
+  }).join("")}</div>`;
+}
+
+/* ---------- widgets ---------- */
+function perceptron(){
+  const p = ui.pc, w = {meat:.6, dessert:.2, soup:.3}, b = -.5;
+  const sum = p.meat*w.meat + p.dessert*w.dessert + p.soup*w.soup + b, out = sum > 0 ? 1 : 0;
+  const tog = (k, label) => `<button class="tog" data-act="pc" data-k="${k}" aria-pressed="${!!p[k]}">${label}<span class="num">w=${w[k]}</span></button>`;
+  return `<div class="pc"><span class="tag">직접 계산해 봐요</span>
+    <div class="pc-in">${tog("meat","고기 반찬")}${tog("dessert","디저트")}${tog("soup","따뜻한 국")}</div>
+    <div class="pc-out num">가중합 = ${p.meat}×0.6 + ${p.dessert}×0.2 + ${p.soup}×0.3 − 0.5 = ${sum.toFixed(1)}<br>출력 → <span class="res">${out} (${out ? "맛있음" : "아쉬움"})</span></div></div>`;
+}
+function matrix(){
+  const cfg = COURSE.matrix || {ideas:["A","B","C"], crit:["기준1","기준2","기준3"]}, lab = ["","미흡","보통","우수"];
+  const tot = ui.mx.map(r => r.reduce((a,b) => a+b, 0)), best = Math.max(...tot);
+  return `<div class="pc"><span class="tag">직접 채점해 봐요 · 칸을 누르면 점수가 바뀌어요</span>
+    <div class="pc-out"><table class="mx"><thead><tr><th>아이디어</th>${cfg.crit.map(c => `<th>${c}</th>`).join("")}<th>총점</th></tr></thead><tbody>
+    ${ui.mx.map((r,i) => `<tr class="${tot[i]===best?"best":""}"><th>${cfg.ideas[i]}</th>${r.map((v,j) => `<td><button class="tog" data-act="mx" data-i="${i}" data-j="${j}">${lab[v]}<span class="num">${v}</span></button></td>`).join("")}<td class="num">${tot[i]}</td></tr>`).join("")}
+    </tbody></table></div><p class="pc-res">평가 행렬 결과, 가장 알맞은 아이디어: <b>${cfg.ideas[tot.indexOf(best)]}</b></p></div>`;
+}
+function servo(){
+  const a = ui.sv, state = a <= 60 ? "꽉 쥠" : a <= 120 ? "반쯤 열림" : "활짝 열림";
+  return `<div class="pc"><span class="tag">직접 움직여 봐요 · 서보 모터로 집게 각도 바꾸기</span>
+    <div class="pc-in">${[0,45,90,135,180].map(v => `<button class="tog" data-act="sv" data-v="${v}" aria-pressed="${a===v}">${v}°</button>`).join("")}</div>
+    <div class="pc-out num">gripServo.write(${a});<br>집게 상태 → <span class="res">${state}</span></div></div>`;
+}
+const WIDGETS = {perceptron, matrix, servo};
+
+function mediaBlock(l){
+  const m = med(l.id); if (!m) return "";
+  const vids = (m.videos || []).map(v => `<div class="vid">
+      <div class="frame" id="v-${v.id}"><img src="https://i.ytimg.com/vi/${v.id}/hqdefault.jpg" alt="" loading="lazy">
+        <button class="play" data-act="play" data-v="${v.id}" aria-label="${esc(v.title)} 재생"><span></span></button>${v.len ? `<span class="len">${v.len}</span>` : ""}</div>
+      <div class="info"><b>${esc(v.title)}</b><span>${esc(v.ch)}</span><a href="https://www.youtube.com/watch?v=${v.id}" target="_blank" rel="noopener">YouTube에서 보기 ↗</a></div></div>`).join("");
+  const links = (m.links || []).map(k => `<a href="${k[1]}" target="_blank" rel="noopener">${esc(k[0])} ↗</a>`).join("");
+  return `<section class="card media" id="sec-media"><span class="tag">보고 이해하기 · 사진과 영상</span>
+    ${m.img ? `<figure class="photo"><img src="${m.img.big}" alt="${esc(m.img.alt || l.title)}" loading="lazy"><figcaption>${esc(m.img.alt || "")} · 사진: ${esc(m.img.artist || "작가 미상")} · ${esc(m.img.lic)} · <a href="${m.img.page}" target="_blank" rel="noopener">위키미디어 공용</a></figcaption></figure>` : ""}
+    ${vids ? `<div class="videos">${vids}</div>` : ""}
+    ${links ? `<div><p class="lock" style="margin-bottom:8px">더 알아보기</p><div class="links">${links}</div></div>` : ""}</section>`;
+}
+
+function lessonProgress(id){
+  const l = lessonById(id), s = L(id);
+  return (Math.min(s.steps, l.steps.length) + (s.cards?1:0) + (s.passed?1:0)) / (l.steps.length + 2);
+}
+
+function lesson(id){
+  const l = lessonById(id), s = L(id), u = unitById(l.unit);
+  const idx = LESSONS.indexOf(l), prev = LESSONS[idx-1], next = LESSONS[idx+1];
+  const stairsDone = s.steps >= l.steps.length;
+  const steps = l.steps.map((st, k) => {
+    const n = `${k+1}계단`;
+    if (k > s.steps) return `<div class="card step locked" id="step-${k}"><div class="step-h"><b>${n}</b><h3>${st.t}</h3></div><p class="note">앞 계단의 확인문제를 맞히면 열려요.</p></div>`;
+    const solved = s.steps > k, wk = id+"-s"+k, wrong = ui.wrong[wk] || new Set();
+    return `<div class="card step" id="step-${k}">
+      <div class="step-h"><b>${n}</b><h3>${st.t}</h3></div>
+      ${st.p ? `<p class="intro">${st.p}</p>` : ""}
+      <ul>${st.li.map(x => `<li>${x}</li>`).join("")}</ul>
+      ${st.widget && WIDGETS[st.widget] ? WIDGETS[st.widget]() : ""}
+      ${st.key ? `<div class="key"><b>꼭 기억해요</b>${st.key}</div>` : ""}
+      <div class="quiz"><p class="qq">확인문제 · ${st.q.q}</p>
+        ${quizBlock(wk, st.q, {solved, wrong, act:"step", data:`data-id="${id}" data-k="${k}"`})}
+        ${solved ? `<p class="fb ok">정답이에요! ${st.q.why}</p>` : wrong.size ? `<p class="fb no">아쉬워요. 위 설명을 다시 읽고 골라 봐요.</p>` : ""}</div></div>`;
+  }).join("");
+  const pips = l.steps.map((st,k) => `<span class="pip ${s.steps>k?"done":s.steps===k?"cur":""}">${s.steps>k?"✓ ":""}${k+1}계단</span>`).join("");
+  return `<div class="lesson"><div class="lmain">
+    <div class="l-head"><div class="crumb"><button data-act="home">${esc(COURSE.name)}</button><span>›</span><span>${u.no}. ${esc(u.title)}</span><span>›</span><span class="num">${l.id}</span></div>
+      <h1>${esc(l.title)}</h1><p class="sub">${esc(l.sub)}</p></div>
+    <section class="card" id="sec-goals"><span class="tag">이번 레슨의 목표</span><ul class="goals">${l.goals.map(g => `<li>${g}</li>`).join("")}</ul></section>
+    <section class="story" id="sec-story"><span class="tag">이야기 · 먼저 읽어 봐요</span><h2>${l.story.title}</h2>
+      ${l.story.p.map(p => `<p>${p}</p>`).join("")}<p class="q">🤔 ${l.story.q}</p></section>
+    ${mediaBlock(l)}
+    <section><div class="sec-h" style="margin-top:6px"><h2>계단 오르기</h2><small>${l.steps.length}칸을 한 칸씩</small></div>
+      <div class="pips">${pips}</div><div class="steps">${steps}</div></section>
+    <section class="card" id="sec-sum"><span class="tag">정리 · 한 줄씩 다시 보기</span>
+      ${stairsDone ? `<ul class="sumlist">${l.summary.map(x => `<li>${x}</li>`).join("")}</ul>` : `<p class="lock">🔒 계단을 모두 오르면 열려요.</p>`}</section>
+    <section class="card step" id="cards"><span class="tag">게임 · 용어 카드 짝 맞추기</span>
+      ${stairsDone ? cardGame(l) : `<p class="lock">🔒 계단을 모두 오르면 열려요.</p>`}</section>
+    <section class="card step" id="test"><span class="tag">시험 · 10문제, 80점 이상이면 통과</span>
+      ${stairsDone ? testBlock(l) : `<p class="lock">🔒 계단을 모두 오르면 열려요. 80점 이상을 받으면 레슨이 완료돼요.</p>`}</section>
+    <nav class="foot-nav">
+      ${prev ? `<button class="btn ghost" data-act="open" data-id="${prev.id}"><small>← 이전 레슨</small>${esc(prev.title)}</button>` : ""}
+      ${next ? `<button class="btn ghost next" data-act="open" data-id="${next.id}"><small>다음 레슨 →</small>${esc(next.title)}</button>` : `<button class="btn ghost next" data-act="home"><small>마지막 레슨이에요</small>레슨 목록으로</button>`}
+    </nav></div></div>`;
+}
+
+function cardGame(l){
+  const s = L(l.id);
+  const g = ui.cards[l.id] || (ui.cards[l.id] = {sel:null, got:s.cards ? l.cards.map((_,i)=>i) : [], bad:null, miss:0});
+  const n = l.cards.length, to = order("ct"+l.id, n), dor = order("cd"+l.id, n);
+  const cls = (side, i) => g.got.includes(i) ? "got" : g.bad && g.bad[side] === i ? "bad" : g.sel && g.sel.side === side && g.sel.i === i ? "sel" : "";
+  const all = g.got.length === n;
+  return `<p class="lock" style="margin-bottom:12px">왼쪽 용어를 누르고, 알맞은 뜻을 눌러 짝을 지어요.</p>
+  <div class="match">
+    <div>${to.map(i => `<button class="mc term ${cls("t",i)}" data-act="card" data-id="${l.id}" data-side="t" data-i="${i}" ${g.got.includes(i)?"disabled":""}>${l.cards[i][0]}</button>`).join("")}</div>
+    <div>${dor.map(i => `<button class="mc ${cls("d",i)}" data-act="card" data-id="${l.id}" data-side="d" data-i="${i}" ${g.got.includes(i)?"disabled":""}>${l.cards[i][1]}</button>`).join("")}</div>
+  </div>
+  ${all ? `<p class="fb ok">모든 짝을 맞혔어요! <button class="linkish" data-act="card-again" data-id="${l.id}">다시 하기</button></p>` : `<p class="fb num lock">${g.got.length}/${n} 짝 완성</p>`}`;
+}
+
+function testQs(l){ return [...l.steps.map(s => s.q), ...l.test]; }
+
+function testBlock(l){
+  const s = L(l.id);
+  const t = ui.test[l.id] || (ui.test[l.id] = {seed:0, ans:{}, done:false, score:0});
+  const qs = testQs(l), qo = order("tq"+l.id+"-"+t.seed, qs.length), answered = Object.keys(t.ans).length;
+  let head = "";
+  if (t.done) {
+    const pass = t.score >= 80, nWrong = qs.filter((q, qi) => t.ans[qi] !== q.a).length;
+    head = `<div class="result ${pass?"pass":"fail"}"><span class="score">${t.score}점</span>
+      <div><strong>${pass ? "🎉 통과했어요! 레슨 완료" : "아쉬워요. 80점부터 통과예요"}</strong><br>
+      <span class="lock">${nWrong ? `틀린 ${nWrong}문제는 오답 노트에 담았어요. 아래에서 정답을 확인해요.` : "모두 맞혔어요!"}</span></div>
+      <button class="btn ghost" data-act="retest" data-id="${l.id}">다시 풀기</button></div>`;
+  } else if (s.passed) head = `<p class="fb ok" style="margin:0 0 8px">이미 통과한 레슨이에요 (최고 ${s.best}점). 다시 풀어도 좋아요.</p>`;
+  const body = qo.map((qi, k) => {
+    const q = qs[qi], ord = order(`t${l.id}-${t.seed}-${qi}`, q.o.length), pick = t.ans[qi];
+    return `<div class="tq"><p class="qq"><span class="num">${String(k+1).padStart(2,"0")}</span>${q.q}</p><div class="opts">
+      ${ord.map((oi, j) => {
+        let c = ""; if (t.done) c = oi === q.a ? "right" : oi === pick ? "wrong" : ""; else if (pick === oi) c = "sel";
+        return `<button class="opt ${c}" data-act="tpick" data-id="${l.id}" data-q="${qi}" data-i="${oi}" ${t.done?"disabled":""}><span class="n">${OPTN[j]}</span><span>${q.o[oi]}</span></button>`;
+      }).join("")}</div></div>`;
+  }).join("");
+  const submit = t.done ? "" : `<div style="display:flex;align-items:center;gap:12px;margin-top:16px;flex-wrap:wrap">
+    <button class="btn primary" data-act="submit" data-id="${l.id}" ${answered < qs.length ? "disabled" : ""}>채점하기</button>
+    <span class="num lock">${answered}/${qs.length} 답함</span></div>`;
+  return head + body + submit;
+}
+
+function glossary(){
+  const rows = LESSONS.flatMap(l => l.cards.map(c => ({t:c[0], d:c[1], l}))).sort((a,b) => a.t.localeCompare(b.t, "ko"));
+  return `<div class="l-head"><h1>용어 사전</h1><p class="sub">모든 레슨의 용어 ${rows.length}개를 가나다순으로 모았어요.</p></div>
+  <div style="margin:18px 0"><input class="search" id="gl-search" type="search" placeholder="용어나 뜻으로 찾기" aria-label="용어 찾기"></div>
+  <div class="card" style="padding:6px 18px">${rows.map(r => `<div class="gl-row" data-s="${esc((r.t+" "+r.d).toLowerCase())}"><strong>${r.t}</strong><span>${r.d}</span><button data-act="open" data-id="${r.l.id}">${r.l.id} ${esc(r.l.title)} →</button></div>`).join("")}</div>`;
+}
+
+function review(){
+  const items = Object.entries(S.wrong).flatMap(([lid, list]) => { const l = lessonById(lid); return l ? list.map(qi => ({l, qi, q:testQs(l)[qi]})) : []; }).filter(x => x.q);
+  return `<div class="l-head"><h1>오답 노트</h1><p class="sub">시험에서 틀린 문제를 모았어요. 정답을 확인하고, 이해했으면 ‘알았어요’를 눌러 지워요.</p></div>
+  <div class="rv" style="margin-top:18px">${items.length ? items.map(x => `<div class="card"><p class="qq">${x.q.q}</p><p class="ans">정답: ${x.q.o[x.q.a]}</p>${x.q.why ? `<p class="lock">${x.q.why}</p>` : ""}
+    <div class="meta"><span class="num">${x.l.id} ${esc(x.l.title)}</span><button class="btn ghost" style="padding:6px 12px" data-act="open" data-id="${x.l.id}">레슨으로 가기</button><button class="btn primary" style="padding:6px 12px" data-act="unwrong" data-id="${x.l.id}" data-q="${x.qi}">알았어요 ✓</button></div></div>`).join("")
+    : `<p class="empty">틀린 문제가 없어요. 시험을 보면 틀린 문제가 여기에 모여요.</p>`}</div>`;
+}
+
+function sectionList(l){
+  const s = L(l.id), stairsDone = s.steps >= l.steps.length;
+  const item = (href, label, done, locked) => `<a href="#${href}" data-jump="${href}" class="${done?"done":""} ${locked?"lock":""}"><i>${done?"✓":""}</i>${label}</a>`;
+  return `<nav class="side-sec" aria-label="레슨 차례">${item("sec-goals","이번 레슨의 목표", true)}${item("sec-story","이야기", true)}${med(l.id)?item("sec-media","사진과 영상", true):""}
+    ${l.steps.map((st,k) => item("step-"+k, `${k+1}계단 · ${st.t}`, s.steps>k, k > s.steps)).join("")}
+    ${item("sec-sum","정리", stairsDone, !stairsDone)}${item("cards","용어 카드", s.cards, !stairsDone)}${item("test","10문제 시험", s.passed, !stairsDone)}</nav>`;
+}
+function sidebar(){
+  const cur = view.name === "lesson" ? view.id : null, wc = wrongCount();
+  return `<button class="side-home ${view.name==="home"?"on":""}" data-act="home">🏠 ${esc(COURSE.name)} 처음</button>
+    ${UNITS.map(u => `<p class="su-h"><span>${u.no}</span>${esc(u.title)}</p>
+      ${LESSONS.filter(l => l.unit === u.id).map(l => {
+        const s = S.les[l.id] || {}, st = s.passed ? "done" : (s.steps > 0 ? "go" : "");
+        return `<button class="side-les ${st} ${cur===l.id?"on":""}" data-act="open" data-id="${l.id}" ${cur===l.id?'aria-current="page"':""}><i>${s.passed?"✓":""}</i><span><small>${l.id}</small>${esc(l.title)}</span></button>${cur===l.id ? sectionList(l) : ""}`;
+      }).join("")}`).join("")}
+    <div class="side-foot"><button class="side-tool ${view.name==="glossary"?"on":""}" data-act="glossary">📖 용어 사전</button>
+      <button class="side-tool ${view.name==="review"?"on":""}" data-act="review">📝 오답 노트${wc?`<span class="cnt">${wc}</span>`:""}</button>${HAS_RES?`<button class="side-tool ${view.name==="resources"?"on":""}" data-act="resources">🔗 참고 자료</button>`:""}</div>`;
+}
+function setSide(open){
+  document.getElementById("side").classList.toggle("open", open);
+  document.getElementById("scrim").hidden = !open;
+}
+
+function resources(){
+  const host = u => { try { return new URL(u).hostname.replace(/^www\./, ""); } catch(e) { return ""; } };
+  return `<div class="l-head"><h1>참고 자료</h1><p class="sub">더 배우고 싶을 때 찾아볼 사이트, 유튜브 채널, 인스타그램을 모았어요. 링크는 새 창으로 열려요.</p></div>
+  ${RESOURCES.map(g => `<section class="res-group"><div class="sec-h"><h2>${esc(g.group)}</h2><small>${g.items.length}곳</small></div>${g.note ? `<p class="lock" style="margin:-6px 0 12px">${esc(g.note)}</p>` : ""}
+    <div class="res-grid">${g.items.map(r => `<a class="res" href="${r.url}" target="_blank" rel="noopener"><span class="res-tag">${esc(r.tag)}</span><b>${esc(r.name)} ↗</b><span>${esc(r.desc)}</span><small>${esc(host(r.url))}</small></a>`).join("")}</div></section>`).join("")}`;
+}
+
+function setProgress(){
+  const bar = document.getElementById("lprog");
+  if (view.name !== "lesson") { bar.hidden = true; return; }
+  bar.hidden = false; bar.firstElementChild.style.width = (lessonProgress(view.id) * 100) + "%";
+}
+function render(){
+  document.getElementById("top").innerHTML = header();
+  const side = document.getElementById("side"), sy = side.scrollTop;
+  side.innerHTML = sidebar(); side.scrollTop = sy;
+  const app = document.getElementById("app");
+  app.innerHTML = view.name === "lesson" ? lesson(view.id) : view.name === "glossary" ? glossary() : view.name === "review" ? review() : view.name === "resources" ? resources() : home();
+  setProgress();
+}
+function go(v){
+  view = v; ui.confirmReset = false; setSide(false); render(); window.scrollTo(0,0);
+  const on = document.querySelector(".side .on"); if (on) on.scrollIntoView({block:"nearest"});
+}
+
+/* ---------- events ---------- */
+document.addEventListener("input", e => {
+  if (e.target.id !== "gl-search") return;
+  const q = e.target.value.trim().toLowerCase();
+  document.querySelectorAll(".gl-row").forEach(r => { r.hidden = q && !r.dataset.s.includes(q); });
+});
+document.addEventListener("click", e => {
+  const j = e.target.closest("[data-jump]");
+  if (j) { e.preventDefault(); setSide(false); const t = document.getElementById(j.dataset.jump); if (t) t.scrollIntoView({behavior:"smooth", block:"start"}); return; }
+  const el = e.target.closest("[data-act]"); if (!el) return;
+  const a = el.dataset.act, id = el.dataset.id;
+  if (el.tagName === "A") e.preventDefault();
+  if (a === "side") return setSide(true);
+  if (a === "side-close") return setSide(false);
+  if (a === "home") return go({name:"home"});
+  if (a === "glossary") return go({name:"glossary"});
+  if (a === "review") return go({name:"review"});
+  if (a === "resources") return go({name:"resources"});
+  if (a === "open") return go({name:"lesson", id});
+  if (a === "theme") {
+    const r = document.documentElement, dark = r.dataset.theme ? r.dataset.theme === "dark" : matchMedia("(prefers-color-scheme: dark)").matches;
+    r.dataset.theme = dark ? "light" : "dark"; try { localStorage.setItem("class-theme", r.dataset.theme); } catch(e){}
+    return;
+  }
+  if (a === "fs") {
+    const steps = [1, 1.12, 1.25], cur = +getComputedStyle(document.documentElement).getPropertyValue("--fs") || 1;
+    const nx = steps[(steps.indexOf(cur) + 1) % steps.length] || 1;
+    document.documentElement.style.setProperty("--fs", nx); try { localStorage.setItem("class-fs", nx); } catch(e){}
+    toast(`글자 크기 <b>${Math.round(nx*100)}%</b>`); return;
+  }
+  if (a === "play") { document.getElementById("v-" + el.dataset.v).innerHTML = `<iframe src="https://www.youtube-nocookie.com/embed/${el.dataset.v}?autoplay=1&rel=0" title="참고 영상" allow="autoplay; encrypted-media; picture-in-picture; fullscreen" allowfullscreen></iframe>`; return; }
+  if (a === "reset") { ui.confirmReset = true; return render(); }
+  if (a === "reset-no") { ui.confirmReset = false; return render(); }
+  if (a === "reset-yes") { S = fresh(); save(); ui.wrong = {}; ui.cards = {}; ui.test = {}; ui.confirmReset = false; orders.clear(); toast("기록을 모두 지웠어요"); return render(); }
+  if (a === "unwrong") { S.wrong[id] = (S.wrong[id] || []).filter(q => q !== +el.dataset.q); if (!S.wrong[id].length) delete S.wrong[id]; save(); return render(); }
+
+  if (a === "step") {
+    const k = +el.dataset.k, i = +el.dataset.i, q = lessonById(id).steps[k].q, s = L(id), wk = id+"-s"+k;
+    if (i === q.a) {
+      if (s.steps === k) { s.steps++; addXP(XP.step, `${k+1}계단 통과`); badge("first"); studied(); save(); }
+      render();
+      const nx = document.getElementById("step-"+(k+1)) || document.getElementById("sec-sum");
+      if (nx && s.steps === k+1) setTimeout(() => nx.scrollIntoView({behavior:"smooth", block:"start"}), 350);
+    } else { (ui.wrong[wk] || (ui.wrong[wk] = new Set())).add(i); render(); }
+    return;
+  }
+  if (a === "pc" || a === "mx" || a === "sv") {
+    if (a === "pc") { const k = el.dataset.k; ui.pc[k] = ui.pc[k] ? 0 : 1; }
+    if (a === "mx") { const i = +el.dataset.i, j2 = +el.dataset.j; ui.mx[i][j2] = ui.mx[i][j2] % 3 + 1; }
+    if (a === "sv") ui.sv = +el.dataset.v;
+    if (!S.badges.includes("lab")) { badge("lab"); save(); }
+    const y = window.scrollY; render(); window.scrollTo(0, y); return;
+  }
+  if (a === "card") {
+    const l = lessonById(id), g = ui.cards[id], side = el.dataset.side, i = +el.dataset.i;
+    if (g.bad) return;
+    if (!g.sel || g.sel.side === side) { g.sel = {side, i}; return render(); }
+    const t = side === "t" ? i : g.sel.i, d = side === "d" ? i : g.sel.i;
+    g.sel = null;
+    if (t === d) {
+      g.got.push(t);
+      if (g.got.length === l.cards.length) { const s = L(id); if (!s.cards) { s.cards = true; addXP(XP.cards, "용어 카드 완성"); } if (g.miss === 0) badge("cards"); save(); }
+      return render();
+    }
+    g.miss++; g.bad = {t, d}; render(); setTimeout(() => { g.bad = null; render(); }, 650); return;
+  }
+  if (a === "card-again") { ui.cards[id] = {sel:null, got:[], bad:null, miss:0}; orders.delete("ct"+id); orders.delete("cd"+id); return render(); }
+  if (a === "tpick") { ui.test[id].ans[+el.dataset.q] = +el.dataset.i; const y = window.scrollY; render(); window.scrollTo(0, y); return; }
+  if (a === "submit") {
+    const l = lessonById(id), t = ui.test[id], s = L(id), qs = testQs(l);
+    const wrongIdx = qs.map((q, qi) => t.ans[qi] === q.a ? -1 : qi).filter(x => x >= 0);
+    t.score = (qs.length - wrongIdx.length) * 10; t.done = true; s.tries++;
+    if (wrongIdx.length) S.wrong[id] = [...new Set([...(S.wrong[id] || []), ...wrongIdx])];
+    if (t.score >= 80) {
+      if (!s.passed) { s.passed = true; addXP(XP.pass, "레슨 통과"); if (s.tries === 1) badge("oneshot"); }
+      if (t.score === 100 && (s.best || 0) < 100) { addXP(XP.perfect, "만점 보너스"); badge("perfect"); }
+    }
+    s.best = Math.max(s.best || 0, t.score);
+    studied(); checkCompletion(); save(); render();
+    document.getElementById("test").scrollIntoView({behavior:"smooth", block:"start"}); return;
+  }
+  if (a === "retest") { const t = ui.test[id]; t.seed++; t.ans = {}; t.done = false; render(); document.getElementById("test").scrollIntoView({block:"start"}); }
+});
+document.addEventListener("click", e => { const d = document.querySelector(".course[open]"); if (d && !d.contains(e.target)) d.open = false; });
+
+try { const th = localStorage.getItem("class-theme"); if (th) document.documentElement.dataset.theme = th; const fs = localStorage.getItem("class-fs"); if (fs) document.documentElement.style.setProperty("--fs", fs); } catch(e){}
+render();
+</script>
+</body>
+</html>

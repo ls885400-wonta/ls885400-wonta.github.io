@@ -13,7 +13,8 @@ Never ask for or type passwords or tokens.
    - **img**: pick another freely licensed Wikimedia Commons photo of the same subject. Only standard thumbnail widths work
      (330/500/960/1280px). Record artist, license and file page.
    - **link**: replace with the current URL of the same page, or remove it.
-   Edit `src/media/<course>.json` (ai, design, robot) or `src/tech/media.json`.
+   Edit `src/media/<course>.json` (ai, design, robot, wood) or `src/tech/media.json`.
+   Broken links in the 목공 교실 reference list live in `RESOURCES` at the end of `src/courses/wood.js`.
 
 ## 2. Enrich (every week, small and careful)
 - Add at most **3** new, high-quality items in total across the courses, for example: one newer video that explains a lesson
@@ -29,7 +30,7 @@ Never ask for or type passwords or tokens.
 ```
 python -X utf8 tools/build.py
 python -X utf8 tools/build_tech.py
-powershell -File tools/test_course.ps1 -Course ai      (and design, robot)
+powershell -NoProfile -ExecutionPolicy Bypass -File tools/test_course.ps1 -Course ai   (and design, robot, wood)
 python -X utf8 tools/check_media.py
 ```
 All course tests must print `bad=[]` with no `ERR`/`EX`, and the checker must report `broken 0`.

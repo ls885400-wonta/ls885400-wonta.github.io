@@ -27,6 +27,12 @@ COURSES = {
         "accent": "#7048E8", "soft": "#F0ECFE", "deep": "#5F3DC4", "dark": "#B197FC", "soft_dark": "#2A2148",
         "matrix": {"ideas": ["A 컨베이어 벨트 분류기", "B 로봇 팔 분류기", "C 압축 로봇"], "crit": ["기능", "비용", "제작 난이도"]},
     },
+    "wood": {
+        "name": "목공 교실", "short": "목공", "key": "wood-stairs-v1", "eyebrow": "목공 교육 · 목재부터 설계·제작까지",
+        "title": "목공 계단 교실", "desc": "목재, 공구, 안전, 가공, 짜임, 도료, 설계와 도면, 제작까지 목공 전반을 사진·영상과 계단식 문제로 배우는 학습 사이트",
+        "accent": "#C2780C", "soft": "#FDF1DE", "deep": "#9A5B06", "dark": "#F2B45A", "soft_dark": "#3A2A12",
+        "matrix": {"ideas": ["A 벽걸이 선반", "B 작은 스툴", "C 탁상 책꽂이"], "crit": ["쓰임새", "제작 난이도", "재료비"]},
+    },
 }
 
 
