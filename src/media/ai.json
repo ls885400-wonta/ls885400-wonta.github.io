@@ -1,0 +1,190 @@
+{
+ "1-1": {
+  "img": {
+   "thumb": "https://upload.wikimedia.org/wikipedia/commons/b/b8/Alan_Turing_Memorial_Closer.jpg",
+   "big": "https://upload.wikimedia.org/wikipedia/commons/b/b8/Alan_Turing_Memorial_Closer.jpg",
+   "page": "https://commons.wikimedia.org/wiki/File:Alan_Turing_Memorial_Closer.jpg",
+   "lic": "CC BY-SA 3.0",
+   "artist": "",
+   "alt": "영국 맨체스터의 앨런 튜링 기념 조각상"
+  },
+  "videos": [
+   {
+    "id": "OREFx_iGsnk",
+    "title": "컴퓨터와 인공지능의 아버지, 앨런 튜링 [#핫클립] / YTN 사이언스",
+    "ch": "YTN 사이언스",
+    "len": "2:19"
+   },
+   {
+    "id": "5bS_a2UwF9Q",
+    "title": "북돋움_인공지능(초등편)_머신러닝과 딥러닝 이해하기",
+    "ch": "서울특별시교육청교육연구정보원",
+    "len": "3:26"
+   }
+  ],
+  "links": [
+   [
+    "위키백과 · 튜링 검사",
+    "https://ko.wikipedia.org/wiki/%ED%8A%9C%EB%A7%81_%EA%B2%80%EC%82%AC"
+   ],
+   [
+    "첨단 공학 탐험관 · 인공지능",
+    "../tech/#/f/ai"
+   ]
+  ]
+ },
+ "1-2": {
+  "img": {
+   "thumb": "https://thumb.wikimedia.org/wikipedia/commons/thumb/f/fe/Aerial_view_of_labyrinth_in_a_hemp_field_in_Kanepi_parish%2C_Estonia.jpg/330px-Aerial_view_of_labyrinth_in_a_hemp_field_in_Kanepi_parish%2C_Estonia.jpg",
+   "big": "https://thumb.wikimedia.org/wikipedia/commons/thumb/f/fe/Aerial_view_of_labyrinth_in_a_hemp_field_in_Kanepi_parish%2C_Estonia.jpg/960px-Aerial_view_of_labyrinth_in_a_hemp_field_in_Kanepi_parish%2C_Estonia.jpg",
+   "page": "https://commons.wikimedia.org/wiki/File:Aerial_view_of_labyrinth_in_a_hemp_field_in_Kanepi_parish,_Estonia.jpg",
+   "lic": "CC BY-SA 4.0",
+   "artist": "Sillerkiil",
+   "alt": "하늘에서 내려다본 미로"
+  },
+  "videos": [
+   {
+    "id": "BsYbdUnKZ-Y",
+    "title": "DFS BFS 깊이 너비 우선탐색 알고리즘 5분만에 이해하기",
+    "ch": "개발자로 취직하기",
+    "len": "5:22"
+   },
+   {
+    "id": "l0Rsu7dziws",
+    "title": "17강 - 깊이 우선 탐색(Depth First Search) [ 실전 알고리즘 강좌(Algorithm Programming Tutorial) #17 ]",
+    "ch": "동빈나",
+    "len": "7:07"
+   }
+  ],
+  "links": [
+   [
+    "위키백과 · 너비 우선 탐색",
+    "https://ko.wikipedia.org/wiki/%EB%84%88%EB%B9%84_%EC%9A%B0%EC%84%A0_%ED%83%90%EC%83%89"
+   ]
+  ]
+ },
+ "2-1": {
+  "img": {
+   "thumb": "https://thumb.wikimedia.org/wikipedia/commons/thumb/b/b8/NIST_SD-19_f1002_33.png/330px-NIST_SD-19_f1002_33.png",
+   "big": "https://thumb.wikimedia.org/wikipedia/commons/thumb/b/b8/NIST_SD-19_f1002_33.png/960px-NIST_SD-19_f1002_33.png",
+   "page": "https://commons.wikimedia.org/wiki/File:NIST_SD-19_f1002_33.png",
+   "lic": "Public domain",
+   "artist": "NIST",
+   "alt": "사람이 쓴 손글씨 숫자 데이터"
+  },
+  "videos": [
+   {
+    "id": "qJoqYKdDwKI",
+    "title": "[09] 머신러닝의 종류와 특징 - 지도학습, 비지도학습, 강화학습",
+    "ch": "친절한 AI",
+    "len": "14:43"
+   },
+   {
+    "id": "T5DDZB0mkzs",
+    "title": "강화 학습 (Reinforcement Learning)",
+    "ch": "소프트웨어야 놀자",
+    "len": "2:16"
+   }
+  ],
+  "links": [
+   [
+    "위키백과 · 기계 학습",
+    "https://ko.wikipedia.org/wiki/%EA%B8%B0%EA%B3%84_%ED%95%99%EC%8A%B5"
+   ]
+  ]
+ },
+ "2-2": {
+  "img": {
+   "thumb": "https://thumb.wikimedia.org/wikipedia/commons/thumb/e/ed/XBio_illustration_%E2%80%93_Multipolar_Neuron.png/330px-XBio_illustration_%E2%80%93_Multipolar_Neuron.png",
+   "big": "https://thumb.wikimedia.org/wikipedia/commons/thumb/e/ed/XBio_illustration_%E2%80%93_Multipolar_Neuron.png/960px-XBio_illustration_%E2%80%93_Multipolar_Neuron.png",
+   "page": "https://commons.wikimedia.org/wiki/File:XBio_illustration_%E2%80%93_Multipolar_Neuron.png",
+   "lic": "CC BY 4.0",
+   "artist": "explorebiology",
+   "alt": "신경 세포(뉴런)의 구조"
+  },
+  "videos": [
+   {
+    "id": "wrguEHxk_EI",
+    "title": "뉴럴네트워크라는걸 들어 보셨다면 보셔야 할 영상. - DL1",
+    "ch": "3Blue1Brown 한국어",
+    "len": "18:33"
+   },
+   {
+    "id": "C2sqt9pG6K0",
+    "title": "전문용어 없이 듣는 딥러닝의 모든 것 (Feat. 인공신경망, 퍼셉트론) [고지식-거니]",
+    "ch": "코딩하는거니",
+    "len": "20:08"
+   }
+  ],
+  "links": [
+   [
+    "위키백과 · 퍼셉트론",
+    "https://ko.wikipedia.org/wiki/%ED%8D%BC%EC%85%89%ED%8A%B8%EB%A1%A0"
+   ],
+   [
+    "첨단 공학 탐험관 · 인공지능",
+    "../tech/#/f/ai"
+   ]
+  ]
+ },
+ "3-1": {
+  "img": {
+   "thumb": "https://thumb.wikimedia.org/wikipedia/commons/thumb/3/33/CCTV_cameras_in_Mumbai.jpg/330px-CCTV_cameras_in_Mumbai.jpg",
+   "big": "https://thumb.wikimedia.org/wikipedia/commons/thumb/3/33/CCTV_cameras_in_Mumbai.jpg/960px-CCTV_cameras_in_Mumbai.jpg",
+   "page": "https://commons.wikimedia.org/wiki/File:CCTV_cameras_in_Mumbai.jpg",
+   "lic": "CC0",
+   "artist": "Punit Rajpal",
+   "alt": "거리에 설치된 CCTV 카메라"
+  },
+  "videos": [
+   {
+    "id": "4BRgJGLJeBo",
+    "title": "[알쓸범잡 부록] 인공지능은 정말로 공정할까?! 기술은 누가 통제하는가 #알쓸범잡 EP.13",
+    "ch": "tvN Joy",
+    "len": "6:09"
+   },
+   {
+    "id": "NxIEHHR-0zg",
+    "title": "[Aㅏ핫 AI] AI는 편견에서 자유로울 수 있을까? / KBS  2025.11.04.",
+    "ch": "KBS 뉴스 부산",
+    "len": "3:45"
+   }
+  ],
+  "links": [
+   [
+    "위키백과 · 알고리즘 편향",
+    "https://ko.wikipedia.org/wiki/%EC%95%8C%EA%B3%A0%EB%A6%AC%EC%A6%98_%ED%8E%B8%ED%96%A5"
+   ]
+  ]
+ },
+ "4-1": {
+  "img": {
+   "thumb": "https://thumb.wikimedia.org/wikipedia/commons/thumb/0/0e/Adelie_penguins_in_the_South_Shetland_Islands.jpg/330px-Adelie_penguins_in_the_South_Shetland_Islands.jpg",
+   "big": "https://thumb.wikimedia.org/wikipedia/commons/thumb/0/0e/Adelie_penguins_in_the_South_Shetland_Islands.jpg/960px-Adelie_penguins_in_the_South_Shetland_Islands.jpg",
+   "page": "https://commons.wikimedia.org/wiki/File:Adelie_penguins_in_the_South_Shetland_Islands.jpg",
+   "lic": "CC BY-SA 2.0",
+   "artist": "ravas51",
+   "alt": "남극의 아델리펭귄 (펭귄 분류 프로젝트의 대상)"
+  },
+  "videos": [
+   {
+    "id": "f4sP7OE68-A",
+    "title": "[머신러닝] 오버피팅 (overfitting)",
+    "ch": "Minsuk Heo 허민석",
+    "len": "3:53"
+   },
+   {
+    "id": "KEHhfZIobkc",
+    "title": "[Easy! 딥러닝] 8-4강. 과적합(overfitting)과 데이터 증강(data augmentation)",
+    "ch": "혁펜하임 | AI & 딥러닝 강의",
+    "len": "3:53"
+   }
+  ],
+  "links": [
+   [
+    "위키백과 · 과적합",
+    "https://ko.wikipedia.org/wiki/%EA%B3%BC%EC%A0%81%ED%95%A9"
+   ]
+  ]
+ }
+}

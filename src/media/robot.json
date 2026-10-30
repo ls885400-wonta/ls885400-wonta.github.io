@@ -1,0 +1,471 @@
+{
+ "1-1": {
+  "img": {
+   "thumb": "https://thumb.wikimedia.org/wikipedia/commons/thumb/c/cc/Unimate_pouring_coffee_for_a_woman_at_Biltmore_Hotel%2C_1967.jpg/330px-Unimate_pouring_coffee_for_a_woman_at_Biltmore_Hotel%2C_1967.jpg",
+   "big": "https://thumb.wikimedia.org/wikipedia/commons/thumb/c/cc/Unimate_pouring_coffee_for_a_woman_at_Biltmore_Hotel%2C_1967.jpg/960px-Unimate_pouring_coffee_for_a_woman_at_Biltmore_Hotel%2C_1967.jpg",
+   "page": "https://commons.wikimedia.org/wiki/File:Unimate_pouring_coffee_for_a_woman_at_Biltmore_Hotel,_1967.jpg",
+   "lic": "CC BY 4.0",
+   "artist": "Frank Q. Brown, Los Angeles Times",
+   "alt": "커피를 따르는 최초의 산업용 로봇 유니메이트"
+  },
+  "videos": [
+   {
+    "id": "1AcJyHEOGbA",
+    "title": "삶을 편리하게 하는 로봇의 역사 / YTN 사이언스",
+    "ch": "YTN 사이언스",
+    "len": "2:45"
+   },
+   {
+    "id": "bot4J-dAuwM",
+    "title": "국산 로봇 '휴보', 세계 정상에 올랐다 / YTN",
+    "ch": " YTN",
+    "len": "2:05"
+   }
+  ],
+  "links": [
+   [
+    "위키백과 · 로봇",
+    "https://ko.wikipedia.org/wiki/%EB%A1%9C%EB%B4%87"
+   ]
+  ]
+ },
+ "1-2": {
+  "img": {
+   "thumb": "https://thumb.wikimedia.org/wikipedia/commons/thumb/9/9c/Inside_a_servo_motor.JPG/330px-Inside_a_servo_motor.JPG",
+   "big": "https://thumb.wikimedia.org/wikipedia/commons/thumb/9/9c/Inside_a_servo_motor.JPG/960px-Inside_a_servo_motor.JPG",
+   "page": "https://commons.wikimedia.org/wiki/File:Inside_a_servo_motor.JPG",
+   "lic": "CC BY-SA 3.0",
+   "artist": "Jstapko",
+   "alt": "서보 모터의 내부 구조"
+  },
+  "videos": [
+   {
+    "id": "ej8K8fTRllc",
+    "title": "서보모터의 사용/연결방법 (원리, 분해, 360도, 활용방법)",
+    "ch": "Mr.아재",
+    "len": "12:55"
+   },
+   {
+    "id": "6rqZ2F66sUs",
+    "title": "[아두이노 기초] 8강_서보(Servo)모터 사용법과 버튼으로 제어하기",
+    "ch": "물리공작소 LAB | Physics Maker",
+    "len": "13:25"
+   }
+  ],
+  "links": [
+   [
+    "위키백과 · 서보모터",
+    "https://ko.wikipedia.org/wiki/%EC%84%9C%EB%B3%B4%EB%AA%A8%ED%84%B0"
+   ],
+   [
+    "아두이노 공식 사이트",
+    "https://www.arduino.cc"
+   ]
+  ]
+ },
+ "1-3": {
+  "img": {
+   "thumb": "https://thumb.wikimedia.org/wikipedia/commons/thumb/7/77/New_Da_Vinci_Xi.jpg/330px-New_Da_Vinci_Xi.jpg",
+   "big": "https://thumb.wikimedia.org/wikipedia/commons/thumb/7/77/New_Da_Vinci_Xi.jpg/960px-New_Da_Vinci_Xi.jpg",
+   "page": "https://commons.wikimedia.org/wiki/File:New_Da_Vinci_Xi.jpg",
+   "lic": "CC BY-SA 4.0",
+   "artist": "Alvarogarciamd",
+   "alt": "수술 로봇 다빈치 Xi"
+  },
+  "videos": [
+   {
+    "id": "h9nQNPXPWig",
+    "title": "“집사가 된 AI 로봇”…반려부터 노동까지, 로봇시대 온다 / KBS  2025.01.10.",
+    "ch": "KBS News",
+    "len": "2:12"
+   },
+   {
+    "id": "oUaOxJvu_tI",
+    "title": "[최신기술동향 시리즈] 협동로봇 도입방안과 활용사례",
+    "ch": "산기협TV",
+    "len": "10:56"
+   }
+  ],
+  "links": [
+   [
+    "위키백과 · 서비스 로봇",
+    "https://ko.wikipedia.org/wiki/%EC%84%9C%EB%B9%84%EC%8A%A4_%EB%A1%9C%EB%B4%87"
+   ],
+   [
+    "첨단 공학 탐험관 · 산업용·협동 로봇",
+    "../tech/#/f/robot"
+   ]
+  ]
+ },
+ "1-4": {
+  "img": {
+   "thumb": "https://thumb.wikimedia.org/wikipedia/commons/thumb/3/34/Isaac.Asimov01.jpg/330px-Isaac.Asimov01.jpg",
+   "big": "https://thumb.wikimedia.org/wikipedia/commons/thumb/3/34/Isaac.Asimov01.jpg/960px-Isaac.Asimov01.jpg",
+   "page": "https://commons.wikimedia.org/wiki/File:Isaac.Asimov01.jpg",
+   "lic": "Public domain",
+   "artist": "Phillip Leonian [ 1 ] from New York World-Telegram &amp; Sun",
+   "alt": "로봇 3원칙을 제안한 작가 아이작 아시모프"
+  },
+  "videos": [
+   {
+    "id": "o-CoyK76D6k",
+    "title": "[핫클립] 로봇의 3가지 원칙 / YTN 사이언스",
+    "ch": "YTN 사이언스",
+    "len": "3:31"
+   },
+   {
+    "id": "0zYq1Kr1kIg",
+    "title": "로봇의 3원칙",
+    "ch": "영화의숲",
+    "len": "6:38"
+   }
+  ],
+  "links": [
+   [
+    "위키백과 · 로봇공학의 삼원칙",
+    "https://ko.wikipedia.org/wiki/%EB%A1%9C%EB%B4%87%EA%B3%B5%ED%95%99%EC%9D%98_%EC%82%BC%EC%9B%90%EC%B9%99"
+   ],
+   [
+    "모럴 머신 실험",
+    "https://www.moralmachine.net"
+   ]
+  ]
+ },
+ "2-1": {
+  "img": {
+   "thumb": "https://thumb.wikimedia.org/wikipedia/commons/thumb/3/37/Robotic_Exoskeleton_%288393154145%29.jpg/330px-Robotic_Exoskeleton_%288393154145%29.jpg",
+   "big": "https://thumb.wikimedia.org/wikipedia/commons/thumb/3/37/Robotic_Exoskeleton_%288393154145%29.jpg/960px-Robotic_Exoskeleton_%288393154145%29.jpg",
+   "page": "https://commons.wikimedia.org/wiki/File:Robotic_Exoskeleton_(8393154145).jpg",
+   "lic": "CC BY 2.0",
+   "artist": "Paulo O from Halifax, Canada",
+   "alt": "몸에 입는 로봇 외골격"
+  },
+  "videos": [
+   {
+    "id": "ca5iv0F5Kro",
+    "title": "[핫클립] 근력 보조 웨어러블 로봇 / YTN 사이언스",
+    "ch": "YTN 사이언스",
+    "len": "4:17"
+   },
+   {
+    "id": "tdaWVUP2qcc",
+    "title": "웨어러블 로봇이 필요한 이유는 무엇일까?",
+    "ch": "EBS 컬렉션 - 사이언스",
+    "len": "9:44"
+   }
+  ],
+  "links": [
+   [
+    "위키백과 · 외골격",
+    "https://ko.wikipedia.org/wiki/%EC%99%B8%EA%B3%A8%EA%B2%A9"
+   ],
+   [
+    "첨단 공학 탐험관 · 스마트 팩토리",
+    "../tech/#/f/smart-factory"
+   ]
+  ]
+ },
+ "2-2": {
+  "img": {
+   "thumb": "https://thumb.wikimedia.org/wikipedia/commons/thumb/7/7d/Continued_demolition_and_removal_of_a_tunnel_boring_machine_cutterhead_that_was_used_during_a_previous_contract_to_bore_the_Queens_tunnels._%28CH058A%2C_10-08-19%29_%2848919623078%29.jpg/330px-thumbnail.jpg",
+   "big": "https://thumb.wikimedia.org/wikipedia/commons/thumb/7/7d/Continued_demolition_and_removal_of_a_tunnel_boring_machine_cutterhead_that_was_used_during_a_previous_contract_to_bore_the_Queens_tunnels._%28CH058A%2C_10-08-19%29_%2848919623078%29.jpg/960px-thumbnail.jpg",
+   "page": "https://commons.wikimedia.org/wiki/File:Continued_demolition_and_removal_of_a_tunnel_boring_machine_cutterhead_that_was_used_during_a_previous_contract_to_bore_the_Queens_tunnels._(CH058A,_10-08-19)_(48919623078).jpg",
+   "lic": "CC BY 2.0",
+   "artist": "MTA Capital Construction Mega Projects",
+   "alt": "터널 굴착기(TBM)의 커터헤드"
+  },
+  "videos": [
+   {
+    "id": "cCBBaWxtAxo",
+    "title": "\"위험한 작업, 로봇이 대신\"…건설현장도 로봇 딜레마 / 한국경제TV뉴스",
+    "ch": "한국경제TV뉴스",
+    "len": "2:14"
+   },
+   {
+    "id": "muaUCRVzL-Y",
+    "title": "힘든 일은 로봇한테 시킵니다. 자동화 시스템으로 “하루 네 채 뚝딱” 목수 대신 로봇이 짓는 목조주택 공장  | 목조주택 대량 생산 과정 | #극한직업 ",
+    "ch": "EBS 컬렉션 - 라이프스타일",
+    "len": "25:25"
+   }
+  ],
+  "links": [
+   [
+    "위키백과 · 건설",
+    "https://ko.wikipedia.org/wiki/%EA%B1%B4%EC%84%A4"
+   ],
+   [
+    "첨단 공학 탐험관 · 터널",
+    "../tech/#/f/tunnel"
+   ],
+   [
+    "한국건설기술연구원",
+    "https://www.kict.re.kr"
+   ]
+  ]
+ },
+ "2-3": {
+  "img": {
+   "thumb": "https://thumb.wikimedia.org/wikipedia/commons/thumb/7/71/Titan_FT35_FarmWise3.jpg/330px-Titan_FT35_FarmWise3.jpg",
+   "big": "https://thumb.wikimedia.org/wikipedia/commons/thumb/7/71/Titan_FT35_FarmWise3.jpg/960px-Titan_FT35_FarmWise3.jpg",
+   "page": "https://commons.wikimedia.org/wiki/File:Titan_FT35_FarmWise3.jpg",
+   "lic": "CC BY-SA 4.0",
+   "artist": "PaulineCant",
+   "alt": "밭에서 잡초를 제거하는 농업 로봇"
+  },
+  "videos": [
+   {
+    "id": "TcwxjTEn7wU",
+    "title": "[녹색] 사람 대신 24시간 딸기 수확...진화하는 농업용 로봇 / YTN",
+    "ch": " YTN",
+    "len": "1:48"
+   },
+   {
+    "id": "9KOcMpoTti4",
+    "title": "[녹색] 로봇이 농사 짓는다...'스마트팜 무인화' 현실로 / YTN",
+    "ch": " YTN",
+    "len": "2:11"
+   }
+  ],
+  "links": [
+   [
+    "위키백과 · 정밀 농업",
+    "https://ko.wikipedia.org/wiki/%EC%A0%95%EB%B0%80_%EB%86%8D%EC%97%85"
+   ],
+   [
+    "생명공학포털",
+    "https://www.bioin.or.kr"
+   ]
+  ]
+ },
+ "2-4": {
+  "img": {
+   "thumb": "https://thumb.wikimedia.org/wikipedia/commons/thumb/6/6f/Starship_robot_Maunonkatu_Oulu_20231125.jpg/330px-Starship_robot_Maunonkatu_Oulu_20231125.jpg",
+   "big": "https://thumb.wikimedia.org/wikipedia/commons/thumb/6/6f/Starship_robot_Maunonkatu_Oulu_20231125.jpg/960px-Starship_robot_Maunonkatu_Oulu_20231125.jpg",
+   "page": "https://commons.wikimedia.org/wiki/File:Starship_robot_Maunonkatu_Oulu_20231125.jpg",
+   "lic": "CC0",
+   "artist": "Estormiz",
+   "alt": "거리를 달리는 자율 주행 배달 로봇"
+  },
+  "videos": [
+   {
+    "id": "ufEiT1k2f6I",
+    "title": "[핫클립] 소비자와 자영업자 모두를 위한 자율주행 배달 로봇 / YTN 사이언스",
+    "ch": "YTN 사이언스",
+    "len": "3:58"
+   },
+   {
+    "id": "Zuk9Ht2Z8ow",
+    "title": "배달비 내가 줄인다… 길거리에 나타난 배달 로봇들｜크랩",
+    "ch": "크랩 KLAB",
+    "len": "5:25"
+   }
+  ],
+  "links": [
+   [
+    "위키백과 · 무인 자동차",
+    "https://ko.wikipedia.org/wiki/%EB%AC%B4%EC%9D%B8_%EC%9E%90%EB%8F%99%EC%B0%A8"
+   ],
+   [
+    "첨단 공학 탐험관 · 자율주행",
+    "../tech/#/f/autonomous"
+   ]
+  ]
+ },
+ "2-5": {
+  "img": {
+   "thumb": "https://thumb.wikimedia.org/wikipedia/commons/thumb/1/16/UR16e_robot_arm.png/330px-UR16e_robot_arm.png",
+   "big": "https://thumb.wikimedia.org/wikipedia/commons/thumb/1/16/UR16e_robot_arm.png/960px-UR16e_robot_arm.png",
+   "page": "https://commons.wikimedia.org/wiki/File:UR16e_robot_arm.png",
+   "lic": "CC BY-SA 4.0",
+   "artist": "Auledas",
+   "alt": "카메라와 센서로 물체를 집는 로봇 팔"
+  },
+  "videos": [
+   {
+    "id": "hEzZyjLZpm8",
+    "title": "[인공지능 기초] 딥러닝 영상인식, 컴퓨터비전 기술과 적용 사례!",
+    "ch": "한국딥러닝",
+    "len": "8:01"
+   },
+   {
+    "id": "YOKPo-I6cgs",
+    "title": "Why Computer Vision Is a Hard Problem for AI",
+    "ch": "Quanta Magazine",
+    "len": "8:39"
+   }
+  ],
+  "links": [
+   [
+    "위키백과 · 컴퓨터 비전",
+    "https://ko.wikipedia.org/wiki/%EC%BB%B4%ED%93%A8%ED%84%B0_%EB%B9%84%EC%A0%84"
+   ],
+   [
+    "첨단 공학 탐험관 · 5G·6G",
+    "../tech/#/f/mobile"
+   ]
+  ]
+ },
+ "2-6": {
+  "img": {
+   "thumb": "https://thumb.wikimedia.org/wikipedia/commons/thumb/3/39/SoftBank_Pepper_working_at_Heijo_Palace.jpg/330px-SoftBank_Pepper_working_at_Heijo_Palace.jpg",
+   "big": "https://thumb.wikimedia.org/wikipedia/commons/thumb/3/39/SoftBank_Pepper_working_at_Heijo_Palace.jpg/960px-SoftBank_Pepper_working_at_Heijo_Palace.jpg",
+   "page": "https://commons.wikimedia.org/wiki/File:SoftBank_Pepper_working_at_Heijo_Palace.jpg",
+   "lic": "CC BY-SA 4.0",
+   "artist": "Tokumeigakarinoaoshima",
+   "alt": "관광지에서 안내하는 감정 표현 로봇 페퍼"
+  },
+  "videos": [
+   {
+    "id": "NmeQdK0wsXY",
+    "title": "사람의 마음을 움직이는 감성 로봇 / YTN 사이언스",
+    "ch": "YTN 사이언스",
+    "len": "3:41"
+   },
+   {
+    "id": "BtBCiby3eDI",
+    "title": "최대 2억 넘는데 벌써 '1만 대' 주문..중국 '감성 로봇' 실물 보니 / SBS / #D리포트",
+    "ch": "SBS 뉴스",
+    "len": "2:01"
+   }
+  ],
+  "links": [
+   [
+    "위키백과 · 인간공학",
+    "https://ko.wikipedia.org/wiki/%EC%9D%B8%EA%B0%84%EA%B3%B5%ED%95%99"
+   ]
+  ]
+ },
+ "2-7": {
+  "img": {
+   "thumb": "https://thumb.wikimedia.org/wikipedia/commons/thumb/d/d7/Telepresence_robot_BotEyes_in_demo-room_03.jpg/330px-Telepresence_robot_BotEyes_in_demo-room_03.jpg",
+   "big": "https://thumb.wikimedia.org/wikipedia/commons/thumb/d/d7/Telepresence_robot_BotEyes_in_demo-room_03.jpg/960px-Telepresence_robot_BotEyes_in_demo-room_03.jpg",
+   "page": "https://commons.wikimedia.org/wiki/File:Telepresence_robot_BotEyes_in_demo-room_03.jpg",
+   "lic": "CC BY-SA 4.0",
+   "artist": "BotEyes.com",
+   "alt": "원격 대화를 돕는 텔레프레즌스 로봇"
+  },
+  "videos": [
+   {
+    "id": "3R7ys0mEmaI",
+    "title": "\"일자리 뺏을 거냐\" AI에 묻자…정교함에 창조자 놀랐다 / SBS 8뉴스",
+    "ch": "SBS 뉴스",
+    "len": "2:18"
+   },
+   {
+    "id": "h9nQNPXPWig",
+    "title": "“집사가 된 AI 로봇”…반려부터 노동까지, 로봇시대 온다 / KBS  2025.01.10.",
+    "ch": "KBS News",
+    "len": "2:12"
+   }
+  ],
+  "links": [
+   [
+    "위키백과 · 로봇 윤리",
+    "https://ko.wikipedia.org/wiki/%EB%A1%9C%EB%B4%87_%EC%9C%A4%EB%A6%AC"
+   ],
+   [
+    "모럴 머신 실험",
+    "https://www.moralmachine.net"
+   ]
+  ]
+ },
+ "3-1": {
+  "img": {
+   "thumb": "https://thumb.wikimedia.org/wikipedia/commons/thumb/d/de/Arduino_Uno_board.jpg/330px-Arduino_Uno_board.jpg",
+   "big": "https://thumb.wikimedia.org/wikipedia/commons/thumb/d/de/Arduino_Uno_board.jpg/960px-Arduino_Uno_board.jpg",
+   "page": "https://commons.wikimedia.org/wiki/File:Arduino_Uno_board.jpg",
+   "lic": "CC0",
+   "artist": "JrawX",
+   "alt": "아두이노 우노 보드"
+  },
+  "videos": [
+   {
+    "id": "BmINSZFZbxc",
+    "title": "[입문자 필수!] 아두이노 IDE 사용법 총정리 A to Zㅣ에듀이노",
+    "ch": "에듀이노EDUINO",
+    "len": "8:36"
+   },
+   {
+    "id": "Z5-riIUlNGA",
+    "title": "기초1- 아두이노 우노의 구조와 기능",
+    "ch": "제주아두이노",
+    "len": "3:18"
+   }
+  ],
+  "links": [
+   [
+    "위키백과 · 아두이노",
+    "https://ko.wikipedia.org/wiki/%EC%95%84%EB%91%90%EC%9D%B4%EB%85%B8"
+   ],
+   [
+    "아두이노 공식 사이트",
+    "https://www.arduino.cc"
+   ],
+   [
+    "엔트리",
+    "https://playentry.org"
+   ]
+  ]
+ },
+ "3-2": {
+  "img": null,
+  "videos": [
+   {
+    "id": "KlzLDnmeTSw",
+    "title": "[코딩교육] 프로그램의 논리를 표현하는 순서도(Flowchart) 기호 설명 - 알고리즘 algorithm",
+    "ch": "태지쌤",
+    "len": "4:35"
+   },
+   {
+    "id": "qqiKimA0koQ",
+    "title": "순차반복선택 이해",
+    "ch": "김SK",
+    "len": "3:36"
+   }
+  ],
+  "links": [
+   [
+    "위키백과 · 순서도",
+    "https://ko.wikipedia.org/wiki/%EC%88%9C%EC%84%9C%EB%8F%84"
+   ],
+   [
+    "엔트리",
+    "https://playentry.org"
+   ]
+  ]
+ },
+ "3-3": {
+  "img": {
+   "thumb": "https://thumb.wikimedia.org/wikipedia/commons/thumb/7/78/%D0%A0%D0%BE%D0%B1%D0%BE%D1%82%D1%81%D0%BA%D0%B0_%D1%80%D0%B0%D0%BA%D0%B0_%281%29.jpg/330px-%D0%A0%D0%BE%D0%B1%D0%BE%D1%82%D1%81%D0%BA%D0%B0_%D1%80%D0%B0%D0%BA%D0%B0_%281%29.jpg",
+   "big": "https://thumb.wikimedia.org/wikipedia/commons/thumb/7/78/%D0%A0%D0%BE%D0%B1%D0%BE%D1%82%D1%81%D0%BA%D0%B0_%D1%80%D0%B0%D0%BA%D0%B0_%281%29.jpg/960px-%D0%A0%D0%BE%D0%B1%D0%BE%D1%82%D1%81%D0%BA%D0%B0_%D1%80%D0%B0%D0%BA%D0%B0_%281%29.jpg",
+   "page": "https://commons.wikimedia.org/wiki/File:%D0%A0%D0%BE%D0%B1%D0%BE%D1%82%D1%81%D0%BA%D0%B0_%D1%80%D0%B0%D0%BA%D0%B0_(1).jpg",
+   "lic": "CC BY-SA 4.0",
+   "artist": "Луната1999",
+   "alt": "서보 모터로 만든 로봇 팔"
+  },
+  "videos": [
+   {
+    "id": "ADJGxOrEZAM",
+    "title": "How to Make Servo Robotic Arm using Arduino.",
+    "ch": "Namu Lab",
+    "len": "8:00"
+   },
+   {
+    "id": "Bmk1K_YWfEE",
+    "title": "아두이노 로봇팔 만들기 (서보모터, 조이스틱 사용)",
+    "ch": "비피랩 미래교육연구소 BPLab",
+    "len": "13:57"
+   }
+  ],
+  "links": [
+   [
+    "위키백과 · 로봇 팔",
+    "https://ko.wikipedia.org/wiki/%EB%A1%9C%EB%B4%87_%ED%8C%94"
+   ],
+   [
+    "아두이노 공식 사이트",
+    "https://www.arduino.cc"
+   ]
+  ]
+ }
+}

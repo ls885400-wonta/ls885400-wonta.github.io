@@ -1,0 +1,359 @@
+{
+ "1-1": {
+  "img": {
+   "thumb": "https://thumb.wikimedia.org/wikipedia/commons/thumb/1/1f/2007Computex_e21Forum-MartinCooper.jpg/330px-2007Computex_e21Forum-MartinCooper.jpg",
+   "big": "https://thumb.wikimedia.org/wikipedia/commons/thumb/1/1f/2007Computex_e21Forum-MartinCooper.jpg/960px-2007Computex_e21Forum-MartinCooper.jpg",
+   "page": "https://commons.wikimedia.org/wiki/File:2007Computex_e21Forum-MartinCooper.jpg",
+   "lic": "CC BY-SA 3.0",
+   "artist": "Rico Shen",
+   "alt": "최초의 휴대 전화를 개발한 공학자 마틴 쿠퍼"
+  },
+  "videos": [
+   {
+    "id": "lXGTvMkYIZI",
+    "title": "과학과 공학의 차이를 5초 안에 말하지 못한다면 꼭 봐야하는 영상",
+    "ch": "차세대공학리더 YEHS",
+    "len": "4:32"
+   },
+   {
+    "id": "NbNy6rGryco",
+    "title": "공학설계 01 공학이란",
+    "ch": "CADLab KNU",
+    "len": "26:29"
+   }
+  ],
+  "links": [
+   [
+    "위키백과 · 공학",
+    "https://ko.wikipedia.org/wiki/%EA%B3%B5%ED%95%99"
+   ],
+   [
+    "첨단 공학 탐험관",
+    "../tech/"
+   ]
+  ]
+ },
+ "1-2": {
+  "img": {
+   "thumb": "https://thumb.wikimedia.org/wikipedia/commons/thumb/8/86/Pyramid_of_Cheops_-_side.jpg/330px-Pyramid_of_Cheops_-_side.jpg",
+   "big": "https://thumb.wikimedia.org/wikipedia/commons/thumb/8/86/Pyramid_of_Cheops_-_side.jpg/960px-Pyramid_of_Cheops_-_side.jpg",
+   "page": "https://commons.wikimedia.org/wiki/File:Pyramid_of_Cheops_-_side.jpg",
+   "lic": "CC BY-SA 3.0",
+   "artist": "kallerna",
+   "alt": "이집트 쿠푸 왕의 대피라미드"
+  },
+  "videos": [
+   {
+    "id": "5f1mrKsqwzI",
+    "title": "[랜선과학관] 산업혁명의 시작, 증기기관에 대해 알아보자!(feat.미래기술관)",
+    "ch": "국립중앙과학관",
+    "len": "2:42"
+   },
+   {
+    "id": "SxeYvrOBi3g",
+    "title": "세상을 바꾼 발명 1 - 증기기관",
+    "ch": "IP STORY CENTER",
+    "len": "3:33"
+   }
+  ],
+  "links": [
+   [
+    "위키백과 · 증기기관",
+    "https://ko.wikipedia.org/wiki/%EC%A6%9D%EA%B8%B0%EA%B8%B0%EA%B4%80"
+   ]
+  ]
+ },
+ "2-1": {
+  "img": {
+   "thumb": "https://thumb.wikimedia.org/wikipedia/commons/thumb/2/20/Hippo_Roller_-_WFP_Rollers.jpg/330px-Hippo_Roller_-_WFP_Rollers.jpg",
+   "big": "https://thumb.wikimedia.org/wikipedia/commons/thumb/2/20/Hippo_Roller_-_WFP_Rollers.jpg/960px-Hippo_Roller_-_WFP_Rollers.jpg",
+   "page": "https://commons.wikimedia.org/wiki/File:Hippo_Roller_-_WFP_Rollers.jpg",
+   "lic": "CC BY-SA 4.0",
+   "artist": "Edmond-hipporlr",
+   "alt": "물을 굴려서 나르는 히포 롤러"
+  },
+  "videos": [
+   {
+    "id": "GDz9tIfyBFk",
+    "title": "디자인 씽킹 완벽 이해쓰💡 디자인 씽킹이 무엇인지 알려줌!",
+    "ch": "삼성 주니어 SW 창작대회",
+    "len": "4:41"
+   },
+   {
+    "id": "ILCnD61jdwk",
+    "title": "[디자인 씽킹] 디자인 씽킹 프로세스 소개: 스탠포드 디스쿨의 디자인 씽킹 5단계",
+    "ch": "디자인씽킹랩 Design Thinking Lab",
+    "len": "2:32"
+   }
+  ],
+  "links": [
+   [
+    "위키백과 · 디자인 싱킹",
+    "https://ko.wikipedia.org/wiki/%EB%94%94%EC%9E%90%EC%9D%B8_%EC%8B%B1%ED%82%B9"
+   ]
+  ]
+ },
+ "2-2": {
+  "img": {
+   "thumb": "https://thumb.wikimedia.org/wikipedia/commons/thumb/8/8b/Kitchen_and_Patio_LHA_Gold_dwelling_Ballina_NSW_P1050502.jpg/330px-Kitchen_and_Patio_LHA_Gold_dwelling_Ballina_NSW_P1050502.jpg",
+   "big": "https://thumb.wikimedia.org/wikipedia/commons/thumb/8/8b/Kitchen_and_Patio_LHA_Gold_dwelling_Ballina_NSW_P1050502.jpg/960px-Kitchen_and_Patio_LHA_Gold_dwelling_Ballina_NSW_P1050502.jpg",
+   "page": "https://commons.wikimedia.org/wiki/File:Kitchen_and_Patio_LHA_Gold_dwelling_Ballina_NSW_P1050502.jpg",
+   "lic": "CC BY-SA 4.0",
+   "artist": "John Robert McPherson",
+   "alt": "누구나 쓰기 편하게 설계한 부엌"
+  },
+  "videos": [
+   {
+    "id": "IWWm2ji_Rr8",
+    "title": "유니버설디자인은 누구에게나 행복을 더하는 이로운 디자인입니다.",
+    "ch": "서울디자인재단 유니버설디자인",
+    "len": "3:52"
+   },
+   {
+    "id": "LlfSGFfD8t4",
+    "title": "\"화장실, 욕조, 샴푸통에도 평등을\"…유니버설 디자인",
+    "ch": "cpbc 뉴스",
+    "len": "2:36"
+   }
+  ],
+  "links": [
+   [
+    "위키백과 · 유니버설 디자인",
+    "https://ko.wikipedia.org/wiki/%EC%9C%A0%EB%8B%88%EB%B2%84%EC%84%A4_%EB%94%94%EC%9E%90%EC%9D%B8"
+   ]
+  ]
+ },
+ "3-1": {
+  "img": {
+   "thumb": "https://thumb.wikimedia.org/wikipedia/commons/thumb/e/ea/Van_Gogh_-_Starry_Night_-_Google_Art_Project.jpg/330px-Van_Gogh_-_Starry_Night_-_Google_Art_Project.jpg",
+   "big": "https://thumb.wikimedia.org/wikipedia/commons/thumb/e/ea/Van_Gogh_-_Starry_Night_-_Google_Art_Project.jpg/960px-Van_Gogh_-_Starry_Night_-_Google_Art_Project.jpg",
+   "page": "https://commons.wikimedia.org/wiki/File:Van_Gogh_-_Starry_Night_-_Google_Art_Project.jpg",
+   "lic": "Public domain",
+   "artist": "Vincent van Gogh",
+   "alt": "빈센트 반 고흐, 별이 빛나는 밤 (1889)"
+  },
+  "videos": [
+   {
+    "id": "6esfx2Wr-q0",
+    "title": "창의적 아이디어 내는 법",
+    "ch": "한국청소년발명영재단",
+    "len": "5:21"
+   },
+   {
+    "id": "x3KlMjJf790",
+    "title": "창의성은 어떻게 기르는 걸까? 숨은 창의력을 깨우는 구체적인 방법 | 창의력, 교육",
+    "ch": "장동선의 궁금한 뇌",
+    "len": "13:49"
+   }
+  ],
+  "links": [
+   [
+    "위키백과 · 창의성",
+    "https://ko.wikipedia.org/wiki/%EC%B0%BD%EC%9D%98%EC%84%B1"
+   ]
+  ]
+ },
+ "3-2": {
+  "img": {
+   "thumb": "https://thumb.wikimedia.org/wikipedia/commons/thumb/1/14/Stickies_to_brainstorm_Edit.2014..jpg/330px-Stickies_to_brainstorm_Edit.2014..jpg",
+   "big": "https://thumb.wikimedia.org/wikipedia/commons/thumb/1/14/Stickies_to_brainstorm_Edit.2014..jpg/960px-Stickies_to_brainstorm_Edit.2014..jpg",
+   "page": "https://commons.wikimedia.org/wiki/File:Stickies_to_brainstorm_Edit.2014..jpg",
+   "lic": "CC BY-SA 3.0",
+   "artist": "victorgrigas",
+   "alt": "붙임쪽지로 아이디어를 모으는 브레인스토밍"
+  },
+  "videos": [
+   {
+    "id": "NCdKGJ0b0nY",
+    "title": "과학초 02 SCAMPER기법이란",
+    "ch": "YEEP TV",
+    "len": "3:27"
+   },
+   {
+    "id": "MRkorMpCEy8",
+    "title": "새로운 아이디어를 얻는 방법 – 스캠퍼 발상법",
+    "ch": "한국청소년발명영재단",
+    "len": "0:57"
+   }
+  ],
+  "links": [
+   [
+    "위키백과 · 브레인스토밍",
+    "https://ko.wikipedia.org/wiki/%EB%B8%8C%EB%A0%88%EC%9D%B8%EC%8A%A4%ED%86%A0%EB%B0%8D"
+   ]
+  ]
+ },
+ "4-1": {
+  "img": {
+   "thumb": "https://thumb.wikimedia.org/wikipedia/commons/thumb/e/e5/The_Apollo_11_Prime_Crew_-_GPN-2000-001164.jpg/330px-The_Apollo_11_Prime_Crew_-_GPN-2000-001164.jpg",
+   "big": "https://thumb.wikimedia.org/wikipedia/commons/thumb/e/e5/The_Apollo_11_Prime_Crew_-_GPN-2000-001164.jpg/960px-The_Apollo_11_Prime_Crew_-_GPN-2000-001164.jpg",
+   "page": "https://commons.wikimedia.org/wiki/File:The_Apollo_11_Prime_Crew_-_GPN-2000-001164.jpg",
+   "lic": "Public domain",
+   "artist": "NASA",
+   "alt": "아폴로 11호 승무원"
+  },
+  "videos": [
+   {
+    "id": "oi6e_on6xVc",
+    "title": "Tuckman's Team Development Stages: FORMING, STORMING, NORMING and PERFORMING",
+    "ch": "Max Castéra",
+    "len": "8:14"
+   },
+   {
+    "id": "A2qd0nwxIAs",
+    "title": "[김유리 강사] 신임 팀장 3개월 차에 팀이 삐그덕거리는 진짜 이유 (터크만 팀 발달 단계)",
+    "ch": "유리한 리더십",
+    "len": "12:36"
+   }
+  ],
+  "links": [
+   [
+    "위키백과 · 협동",
+    "https://ko.wikipedia.org/wiki/%ED%98%91%EB%8F%99"
+   ]
+  ]
+ },
+ "4-2": {
+  "img": {
+   "thumb": "https://upload.wikimedia.org/wikipedia/commons/f/f9/Tug_of_war_competition.jpg",
+   "big": "https://upload.wikimedia.org/wikipedia/commons/f/f9/Tug_of_war_competition.jpg",
+   "page": "https://commons.wikimedia.org/wiki/File:Tug_of_war_competition.jpg",
+   "lic": "CC BY-SA 4.0",
+   "artist": "Md. Shujayt Gani",
+   "alt": "줄다리기 경기"
+  },
+  "videos": [
+   {
+    "id": "mV8jhgbBhss",
+    "title": "링겔만 효과로 보는 조별과제가 망하는 이유",
+    "ch": "은근한 잡다한 지식",
+    "len": "4:00"
+   }
+  ],
+  "links": [
+   [
+    "위키백과 · 링겔만 효과",
+    "https://ko.wikipedia.org/wiki/%EB%A7%81%EA%B2%94%EB%A7%8C_%ED%9A%A8%EA%B3%BC"
+   ]
+  ]
+ },
+ "5-1": {
+  "img": {
+   "thumb": "https://thumb.wikimedia.org/wikipedia/commons/thumb/1/16/UR16e_robot_arm.png/330px-UR16e_robot_arm.png",
+   "big": "https://thumb.wikimedia.org/wikipedia/commons/thumb/1/16/UR16e_robot_arm.png/960px-UR16e_robot_arm.png",
+   "page": "https://commons.wikimedia.org/wiki/File:UR16e_robot_arm.png",
+   "lic": "CC BY-SA 4.0",
+   "artist": "Auledas",
+   "alt": "분해하고 분석할 수 있는 로봇 팔 부품 구조"
+  },
+  "videos": [
+   {
+    "id": "liflk2thO7A",
+    "title": "[역설계] 솔리드웍스로 기구 리버스엔지니어링 역설계 방법을 알아보자",
+    "ch": "프리즘21 솔리드웍스TV",
+    "len": "2:41"
+   },
+   {
+    "id": "udaxvq_e2kI",
+    "title": "[핫클립] 기획부터 제작까지, 가전 대표 기업의 까다로운 제품 제작 과정 / YTN 사이언스",
+    "ch": "YTN 사이언스",
+    "len": "4:46"
+   }
+  ],
+  "links": [
+   [
+    "위키백과 · 역공학",
+    "https://ko.wikipedia.org/wiki/%EC%97%AD%EA%B3%B5%ED%95%99"
+   ]
+  ]
+ },
+ "5-2": {
+  "img": {
+   "thumb": "https://thumb.wikimedia.org/wikipedia/commons/thumb/0/0d/DFC_5068_Bright_table_vignette_a_squeeze_bottle_of_Thai_chili_sauce_and_ketchup_stand_beside_a_small_vase_of_pink_daisies_ready_for_a_meal.jpg/330px-DFC_5068_Bright_table_vignette_a_squeeze_bottle_of_Thai_chili_sauce_and_ketchup_stand_beside_a_small_vase_of_pink_daisies_ready_for_a_meal.jpg",
+   "big": "https://thumb.wikimedia.org/wikipedia/commons/thumb/0/0d/DFC_5068_Bright_table_vignette_a_squeeze_bottle_of_Thai_chili_sauce_and_ketchup_stand_beside_a_small_vase_of_pink_daisies_ready_for_a_meal.jpg/960px-DFC_5068_Bright_table_vignette_a_squeeze_bottle_of_Thai_chili_sauce_and_ketchup_stand_beside_a_small_vase_of_pink_daisies_ready_for_a_meal.jpg",
+   "page": "https://commons.wikimedia.org/wiki/File:DFC_5068_Bright_table_vignette_a_squeeze_bottle_of_Thai_chili_sauce_and_ketchup_stand_beside_a_small_vase_of_pink_daisies_ready_for_a_meal.jpg",
+   "lic": "CC BY-SA 4.0",
+   "artist": "PattayaPatrol",
+   "alt": "짜서 쓰는 소스 용기"
+  },
+  "videos": [
+   {
+    "id": "udaxvq_e2kI",
+    "title": "[핫클립] 기획부터 제작까지, 가전 대표 기업의 까다로운 제품 제작 과정 / YTN 사이언스",
+    "ch": "YTN 사이언스",
+    "len": "4:46"
+   },
+   {
+    "id": "jPR3HNkgI-M",
+    "title": "스타트업이 제품개발과 관련된  제품디자인 기구설계 회로설계 시제품제작 금형제작 생산 외주업체와 일을 잘할 수 있는  실질적인 노하우 3가지를 알려드립니다.",
+    "ch": "아이디어메이트",
+    "len": "10:48"
+   }
+  ],
+  "links": [
+   [
+    "위키백과 · 프로토타입",
+    "https://ko.wikipedia.org/wiki/%ED%94%84%EB%A1%9C%ED%86%A0%ED%83%80%EC%9E%85"
+   ]
+  ]
+ },
+ "6-1": {
+  "img": {
+   "thumb": "https://thumb.wikimedia.org/wikipedia/commons/thumb/8/8e/Douglas_XB-19_3-view_line_drawing_%28technical_report%29.png/330px-Douglas_XB-19_3-view_line_drawing_%28technical_report%29.png",
+   "big": "https://thumb.wikimedia.org/wikipedia/commons/thumb/8/8e/Douglas_XB-19_3-view_line_drawing_%28technical_report%29.png/960px-Douglas_XB-19_3-view_line_drawing_%28technical_report%29.png",
+   "page": "https://commons.wikimedia.org/wiki/File:Douglas_XB-19_3-view_line_drawing_(technical_report).png",
+   "lic": "Public domain",
+   "artist": "Howard G. Bunker Materiel Division, Air Corps, War Departmen",
+   "alt": "비행기를 세 방향에서 그린 3면도"
+  },
+  "videos": [
+   {
+    "id": "qs4MYQ-_ZKM",
+    "title": "정투상법이란 무엇인가? #정투상도 그리기 기초",
+    "ch": "Dear클로이",
+    "len": "11:20"
+   },
+   {
+    "id": "cid6EewKucg",
+    "title": "헷갈리는 3각법 쉽게 배워 보세요~ [AutoCAD]",
+    "ch": "커피나무설계실",
+    "len": "7:20"
+   }
+  ],
+  "links": []
+ },
+ "6-2": {
+  "img": {
+   "thumb": "https://thumb.wikimedia.org/wikipedia/commons/thumb/b/b9/Laser_Engraving_Machine.jpg/330px-Laser_Engraving_Machine.jpg",
+   "big": "https://thumb.wikimedia.org/wikipedia/commons/thumb/b/b9/Laser_Engraving_Machine.jpg/960px-Laser_Engraving_Machine.jpg",
+   "page": "https://commons.wikimedia.org/wiki/File:Laser_Engraving_Machine.jpg",
+   "lic": "Public domain",
+   "artist": "Jason7825",
+   "alt": "레이저 각인기"
+  },
+  "videos": [
+   {
+    "id": "PERalww_AA0",
+    "title": "레이저 커터 기초 2 - 작동 원리",
+    "ch": "림어전씨의 레이저 커터",
+    "len": "5:14"
+   },
+   {
+    "id": "RD9qGpxD1NA",
+    "title": "[핫클립] 레이저란 무엇일까?  / YTN 사이언스",
+    "ch": "YTN 사이언스",
+    "len": "1:37"
+   }
+  ],
+  "links": [
+   [
+    "위키백과 · 레이저 절단",
+    "https://ko.wikipedia.org/wiki/%EB%A0%88%EC%9D%B4%EC%A0%80_%EC%A0%88%EB%8B%A8"
+   ],
+   [
+    "첨단 공학 탐험관 · 3D 프린팅",
+    "../tech/#/f/am"
+   ]
+  ]
+ }
+}

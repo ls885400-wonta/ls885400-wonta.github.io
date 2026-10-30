@@ -4,93 +4,88 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>우리 반 AI·공학 교실</title>
-<meta name="description" content="고등학교 인공지능 기초와 창의 공학 설계를 계단식으로 공부하는 학습 사이트 모음">
-<meta name="theme-color" content="#F4F5F1">
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%2315201B'/%3E%3Crect x='6' y='18' width='6' height='8' rx='1' fill='%233BC19C'/%3E%3Crect x='13' y='12' width='6' height='14' rx='1' fill='%236AA8F0'/%3E%3Crect x='20' y='6' width='6' height='20' rx='1' fill='%23F2C14E'/%3E%3C/svg%3E">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Black+Han+Sans&family=IBM+Plex+Sans+KR:wght@400;500;700&family=IBM+Plex+Mono:wght@500;600&display=swap">
+<meta name="description" content="고등학교 인공지능 기초, 창의 공학 설계, 로봇과 공학세계, 첨단 공학 탐험을 한곳에서 공부하는 학습 사이트 모음">
+<meta name="theme-color" content="#F3F8FC">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%23FFFFFF'/%3E%3Crect x='6' y='18' width='6' height='8' rx='1.5' fill='%2312B886'/%3E%3Crect x='13' y='12' width='6' height='14' rx='1.5' fill='%23228BE6'/%3E%3Crect x='20' y='6' width='6' height='20' rx='1.5' fill='%23FFC93C'/%3E%3C/svg%3E">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
 <style>
-/* Layout: one 880px column; profile-style header, one wide guide card, then a two-column grid of course cards */
+/* Layout: one 1080px column; friendly header, a "how to study" strip, a 2×2 grid of photo course cards, then a news list fed by updates.json */
 :root{
-  --bg:#F4F5F1; --surface:#FFFFFF; --ink:#18201C; --muted:#5C6660; --line:#DFE3DC;
-  --ai:#0E7A62; --ai-soft:#E1F1EB; --de:#1D5FA6; --de-soft:#E2ECF8;
-  --marker:#F2C14E; --marker-ink:#2B2104; --panel:#15201B;
-  --f-display:"Black Han Sans","IBM Plex Sans KR","Malgun Gothic",sans-serif;
-  --f-body:"IBM Plex Sans KR","Malgun Gothic","Apple SD Gothic Neo",sans-serif;
-  --f-mono:"IBM Plex Mono",ui-monospace,Consolas,monospace;
+  --bg:#F3F8FC; --surface:#FFFFFF; --ink:#0E2433; --text:#29404F; --muted:#5B7080; --line:#DAE6EF; --soft:#EAF2F8;
+  --sun:#FFC93C; --sun-ink:#3A2A00; --sun-soft:#FFF4D1;
+  --ai:#0CA678; --ai-s:#E3F8F1; --de:#1C7ED6; --de-s:#E7F2FD; --rb:#7048E8; --rb-s:#F0ECFE; --tc:#E67700; --tc-s:#FFF1DB;
+  --shadow:0 1px 2px rgba(14,36,51,.05),0 8px 24px rgba(14,36,51,.07);
+  --f-body:"Pretendard Variable",Pretendard,"Malgun Gothic","Apple SD Gothic Neo",sans-serif;
   color-scheme:light;
 }
 @media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
-  --bg:#0F1311; --surface:#171D1A; --ink:#E5EBE7; --muted:#99A49E; --line:#29322E;
-  --ai:#3BC19C; --ai-soft:#15302A; --de:#6AA8F0; --de-soft:#172A40;
-  --marker:#F2C14E; --marker-ink:#2B2104; --panel:#0A0F0D; color-scheme:dark}}
+  --bg:#0E1620; --surface:#15202B; --ink:#EAF2F8; --text:#CFDCE6; --muted:#93A6B5; --line:#24323F; --soft:#1B2834; --sun-soft:#3A3014;
+  --ai:#38D9A9; --ai-s:#123A30; --de:#74C0FC; --de-s:#15304A; --rb:#B197FC; --rb-s:#2A2148; --tc:#FFB84D; --tc-s:#3A2A12; --shadow:none; color-scheme:dark}}
 :root[data-theme="dark"]{
-  --bg:#0F1311; --surface:#171D1A; --ink:#E5EBE7; --muted:#99A49E; --line:#29322E;
-  --ai:#3BC19C; --ai-soft:#15302A; --de:#6AA8F0; --de-soft:#172A40;
-  --marker:#F2C14E; --marker-ink:#2B2104; --panel:#0A0F0D; color-scheme:dark}
+  --bg:#0E1620; --surface:#15202B; --ink:#EAF2F8; --text:#CFDCE6; --muted:#93A6B5; --line:#24323F; --soft:#1B2834; --sun-soft:#3A3014;
+  --ai:#38D9A9; --ai-s:#123A30; --de:#74C0FC; --de-s:#15304A; --rb:#B197FC; --rb-s:#2A2148; --tc:#FFB84D; --tc-s:#3A2A12; --shadow:none; color-scheme:dark}
 :root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
 *{box-sizing:border-box}
-body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--f-body);font-size:16px;line-height:1.7;word-break:keep-all;overflow-wrap:break-word}
-h1,h2,p{margin:0}
-h1,h2{text-wrap:balance;line-height:1.3}
+body{margin:0;background:var(--bg);color:var(--text);font-family:var(--f-body);font-size:17px;line-height:1.7;word-break:keep-all;overflow-wrap:break-word;-webkit-font-smoothing:antialiased}
+h1,h2,h3,p{margin:0}
+h1,h2,h3{color:var(--ink);text-wrap:balance;line-height:1.3;letter-spacing:-.02em}
 a{color:inherit}
-:focus-visible{outline:2px solid var(--ai);outline-offset:3px}
+img{max-width:100%;display:block}
+:focus-visible{outline:3px solid var(--de);outline-offset:3px;border-radius:8px}
 [hidden]{display:none!important}
-.num{font-family:var(--f-mono);font-variant-numeric:tabular-nums}
+.wrap{max-width:1080px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:40px 64px;display:grid;gap:22px}
 
-.wrap{max-width:880px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:48px 64px;display:grid;gap:18px}
-
-.head{display:flex;align-items:center;gap:22px;margin-bottom:10px}
-.mark{flex:none;width:96px;height:96px;border-radius:50%;background:var(--panel);display:flex;align-items:flex-end;justify-content:center;gap:5px;padding:0 22px 24px;box-shadow:0 0 0 4px var(--surface),0 0 0 6px var(--line)}
-.mark i{display:block;flex:1;border-radius:3px}
-.mark i:nth-child(1){height:22px;background:var(--ai)}.mark i:nth-child(2){height:36px;background:var(--de)}.mark i:nth-child(3){height:50px;background:var(--marker)}
-.head > div{min-width:0}
-.eyebrow{font-family:var(--f-mono);font-size:13px;letter-spacing:.12em;color:var(--ai);font-weight:600}
-.head h1{font-family:var(--f-display);font-weight:400;font-size:clamp(30px,5.4vw,46px);margin:2px 0 6px}
+.head{display:grid;grid-template-columns:auto 1fr auto;gap:20px;align-items:center;padding:30px;border-radius:24px;background:linear-gradient(135deg,var(--de-s),var(--ai-s) 55%,var(--surface));border:1px solid var(--line);position:relative;overflow:hidden}
+.head::after{content:"";position:absolute;inset:0;background-image:radial-gradient(color-mix(in srgb,var(--de) 16%,transparent) 1.5px,transparent 1.5px);background-size:22px 22px;mask-image:linear-gradient(90deg,transparent 45%,#000);pointer-events:none}
+.head > *{position:relative;z-index:1;min-width:0}
+.mark{width:84px;height:84px;border-radius:24px;background:var(--surface);box-shadow:var(--shadow);display:flex;align-items:flex-end;justify-content:center;gap:5px;padding:0 18px 20px}
+.mark i{display:block;flex:1;border-radius:4px}
+.mark i:nth-child(1){height:18px;background:var(--ai)}.mark i:nth-child(2){height:30px;background:var(--de)}.mark i:nth-child(3){height:42px;background:var(--sun)}
+.eyebrow{font-size:.85rem;font-weight:800;color:var(--de)}
+.head h1{font-size:clamp(1.9rem,4.6vw,2.8rem);font-weight:900;margin:2px 0 6px;letter-spacing:-.03em}
 .head p{color:var(--muted)}
-.theme{margin-left:auto;align-self:flex-start;flex:none;width:36px;height:36px;border-radius:50%;border:1px solid var(--line);background:var(--surface);color:var(--ink);font-size:15px;cursor:pointer}
+.theme{align-self:start;width:40px;height:40px;border-radius:12px;border:1px solid var(--line);background:var(--surface);color:var(--ink);font-size:15px;cursor:pointer}
 
-.card{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:22px 24px;display:flex;flex-direction:column;gap:10px;min-width:0}
-.pill{align-self:flex-start;font-size:12.5px;font-weight:700;padding:2px 10px;border-radius:999px;background:var(--ai-soft);color:var(--ai)}
-.de .pill{background:var(--de-soft);color:var(--de)}
-.t{display:flex;align-items:center;gap:12px}
-.ic{flex:none;width:42px;height:42px;border-radius:11px;display:grid;place-items:center;background:var(--ai);color:#fff}
-.de .ic{background:var(--de)}
-.ic svg{width:24px;height:24px}
-.t h2{font-size:22px;font-weight:700}
-.desc{color:var(--muted);font-size:15px}
-.meta{display:flex;align-items:center;gap:10px;font-size:13px;color:var(--muted);flex-wrap:wrap}
-.bar{flex:1;min-width:80px;height:6px;border-radius:999px;background:var(--line);overflow:hidden}
-.bar i{display:block;height:100%;background:var(--marker);border-radius:999px}
-.go{margin-top:auto;align-self:flex-end;font-weight:700;color:var(--ai);text-decoration:none;padding:4px 0}
-.de .go{color:var(--de)}
-.tc .pill{background:var(--marker);color:var(--marker-ink)}
-.tc .ic{background:var(--panel)}
-.tc .go{color:var(--ink)}
-.rb .pill{background:#FBEADF;color:#C2541B}
-.rb .ic{background:#C2541B}
-.rb .go{color:#C2541B}
-.go:hover{text-decoration:underline}
-
-.guide{border:2px solid var(--ink);flex-direction:row;align-items:center;gap:22px}
-.guide .pill{background:var(--marker);color:var(--marker-ink)}
-.guide > div{min-width:0;display:flex;flex-direction:column;gap:8px}
-.steps{list-style:none;margin:0;padding:0;display:flex;gap:6px;flex-wrap:wrap}
-.steps li{font-size:13px;font-weight:500;padding:3px 10px;border-radius:8px;background:var(--bg);border:1px solid var(--line)}
-.steps li b{font-family:var(--f-mono);color:var(--ai);margin-right:4px}
+.how{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;list-style:none;margin:0;padding:0}
+.how li{display:flex;gap:10px;align-items:center;background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:12px 14px;font-size:.92rem;font-weight:600;color:var(--ink);min-width:0}
+.how b{flex:none;width:28px;height:28px;border-radius:9px;background:var(--sun-soft);color:var(--sun-ink);display:grid;place-items:center;font-size:.85rem}
 
 .grid{display:grid;grid-template-columns:1fr 1fr;gap:18px}
-.foot{color:var(--muted);font-size:13px;text-align:center;margin-top:10px}
+.course{display:flex;flex-direction:column;background:var(--surface);border:1px solid var(--line);border-radius:20px;overflow:hidden;box-shadow:var(--shadow);text-decoration:none;transition:transform .15s,border-color .15s;min-width:0}
+.course:hover{transform:translateY(-3px);border-color:var(--c)}
+.course .ph{aspect-ratio:16/7;background:var(--cs);position:relative;overflow:hidden}
+.course .ph img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 35%}
+.course .pill{position:absolute;left:14px;top:14px;font-size:.78rem;font-weight:800;padding:3px 10px;border-radius:999px;background:var(--surface);color:var(--c)}
+.course .bd{padding:18px 20px 20px;display:flex;flex-direction:column;gap:8px;flex:1}
+.course h2{font-size:1.35rem;font-weight:900;display:flex;align-items:center;gap:10px}
+.course h2 i{width:12px;height:12px;border-radius:4px;background:var(--c);flex:none}
+.course p{color:var(--muted);font-size:.95rem}
+.meta{display:flex;align-items:center;gap:10px;font-size:.85rem;color:var(--muted);margin-top:auto;padding-top:6px}
+.bar{flex:1;height:8px;border-radius:999px;background:var(--soft);overflow:hidden}
+.bar i{display:block;height:100%;background:var(--c);border-radius:999px}
+.go{font-weight:800;color:var(--c);white-space:nowrap}
+.c-ai{--c:var(--ai);--cs:var(--ai-s)} .c-de{--c:var(--de);--cs:var(--de-s)} .c-rb{--c:var(--rb);--cs:var(--rb-s)} .c-tc{--c:var(--tc);--cs:var(--tc-s)}
+.credit{font-size:.72rem;color:var(--muted)}
 
-@media (max-width:680px){
-  .wrap{padding-block:28px 48px}
-  .head{gap:14px}
-  .mark{width:64px;height:64px;padding:0 14px 16px;gap:3px}
-  .mark i:nth-child(1){height:14px}.mark i:nth-child(2){height:24px}.mark i:nth-child(3){height:34px}
-  .grid{grid-template-columns:1fr}
-  .guide{flex-direction:column;align-items:stretch}
-  .card{padding:18px}
+.news{background:var(--surface);border:1px solid var(--line);border-radius:20px;padding:22px 24px;box-shadow:var(--shadow)}
+.news h2{font-size:1.2rem;font-weight:900;margin-bottom:12px;display:flex;align-items:center;gap:8px}
+.news ul{list-style:none;margin:0;padding:0;display:grid;gap:10px}
+.news li{display:grid;grid-template-columns:110px 1fr;gap:12px;padding-top:10px;border-top:1px solid var(--line)}
+.news li:first-child{border-top:0;padding-top:0}
+.news time{font-size:.85rem;font-weight:700;color:var(--de)}
+.news b{color:var(--ink)}
+.news span{display:block;color:var(--muted);font-size:.92rem}
+.foot{color:var(--muted);font-size:.8rem;text-align:center}
+
+@media (max-width:760px){
+  .wrap{padding-block:20px 48px}
+  .head{grid-template-columns:auto 1fr;padding:22px}
+  .head .theme{grid-column:2;justify-self:end;grid-row:1}
+  .mark{width:60px;height:60px;border-radius:18px;padding:0 12px 14px;gap:3px}
+  .mark i:nth-child(1){height:12px}.mark i:nth-child(2){height:20px}.mark i:nth-child(3){height:28px}
+  .head > div{grid-column:1/-1}
+  .grid,.how{grid-template-columns:1fr}
+  .news li{grid-template-columns:1fr;gap:2px}
 }
 </style>
 </head>
@@ -101,75 +96,49 @@ a{color:inherit}
     <div>
       <p class="eyebrow">AI · ENGINEERING CLASS</p>
       <h1>우리 반 AI·공학 교실</h1>
-      <p>교과서 단원 순서대로, 계단을 하나씩 오르며 공부하는 학습 사이트를 모았어요.</p>
+      <p>교과서 단원 순서대로 이야기를 읽고, 사진과 영상으로 보고, 계단을 오르며 공부해요.</p>
     </div>
     <button class="theme" id="theme" type="button" aria-label="밝게/어둡게 바꾸기">◐</button>
   </header>
 
-  <section class="card guide" aria-labelledby="guide-h">
-    <div>
-      <span class="pill">처음이라면 읽어 보세요</span>
-      <h2 id="guide-h" style="font-size:20px">이렇게 공부해요</h2>
-      <ol class="steps">
-        <li><b>1</b>짧은 이야기</li><li><b>2</b>계단 3칸 확인문제</li><li><b>3</b>용어 카드</li><li><b>4</b>10문제 시험 (80점 통과)</li>
-      </ol>
-      <p class="desc">진도와 XP는 지금 쓰는 기기의 브라우저에 저장돼요. 같은 기기, 같은 브라우저로 들어와야 기록이 이어져요.</p>
-    </div>
-  </section>
+  <ol class="how" aria-label="공부하는 방법">
+    <li><b>1</b>이야기와 영상으로 시작</li><li><b>2</b>계단마다 확인문제</li><li><b>3</b>용어 카드 짝 맞추기</li><li><b>4</b>10문제 시험 · 오답 노트</li>
+  </ol>
 
   <div class="grid">
-    <article class="card ai">
-      <span class="pill">고등 인공지능 기초 · 단원별 학습</span>
-      <div class="t">
-        <span class="ic" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="6" y="6" width="12" height="12" rx="2"/><path d="M9 2v4M15 2v4M9 18v4M15 18v4M2 9h4M2 15h4M18 9h4M18 15h4"/><path d="M10 10h4v4h-4z"/></svg></span>
-        <h2>인공지능 기초</h2>
-      </div>
-      <p class="desc">인공지능의 개념과 탐색, 기계학습과 딥러닝, 데이터 편향, 프로젝트 단계를 이야기와 계단 문제로 배워요.</p>
-      <div class="meta" data-key="ai-stairs-v1" data-total="6"><span class="num">0/6 레슨 완료</span><span class="bar"><i style="width:0%"></i></span></div>
-      <a class="go" href="ai/">공부하러 가기 →</a>
-    </article>
-
-    <article class="card de">
-      <span class="pill">고등 창의 공학 설계 · 단원별 학습</span>
-      <div class="t">
-        <span class="ic" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v3"/><circle cx="12" cy="8" r="2"/><path d="M11 10 6 21M13 10l5 11"/><path d="M8 16h8"/></svg></span>
-        <h2>창의 공학 설계</h2>
-      </div>
-      <p class="desc">공학의 의미와 역사, 9단계 설계 과정, 사고 기법, 팀워크, 제품 분석, 도면과 3D 프린팅 기초까지 12개 레슨이에요.</p>
-      <div class="meta" data-key="design-stairs-v1" data-total="12"><span class="num">0/12 레슨 완료</span><span class="bar"><i style="width:0%"></i></span></div>
-      <a class="go" href="design/">공부하러 가기 →</a>
-    </article>
-
-    <article class="card rb">
-      <span class="pill">고등 로봇과 공학세계 · 단원별 학습</span>
-      <div class="t">
-        <span class="ic" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="8" width="14" height="11" rx="2"/><path d="M12 4v4M9 13h.01M15 13h.01M9 16h6M3 12v3M21 12v3"/></svg></span>
-        <h2>로봇과 공학세계</h2>
-      </div>
-      <p class="desc">로봇의 구성과 작동 원리, 인공지능과 로봇 윤리, 7개 공학 분야의 로봇, 로봇 팔 프로젝트까지 14개 레슨이에요.</p>
-      <div class="meta" data-key="robot-stairs-v1" data-total="14"><span class="num">0/14 레슨 완료</span><span class="bar"><i style="width:0%"></i></span></div>
-      <a class="go" href="robot/">공부하러 가기 →</a>
-    </article>
-
-    <article class="card tc">
-      <span class="pill">첨단 공학 · 분야 탐험</span>
-      <div class="t">
-        <span class="ic" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="m15.5 8.5-2 5-5 2 2-5z"/></svg></span>
-        <h2>첨단 공학 탐험관</h2>
-      </div>
-      <p class="desc">제조, 정보통신, 건설, 수송, 생명 다섯 영역의 첨단 공학 30가지를 사진과 영상, 원리 설명과 퀴즈로 탐험해요.</p>
-      <div class="meta" data-key="tech-explore-v1" data-total="30" data-kind="seen"><span class="num">0/30 분야 탐험</span><span class="bar"><i style="width:0%"></i></span></div>
-      <a class="go" href="tech/">탐험하러 가기 →</a>
-    </article>
+    <a class="course c-ai" href="ai/">
+      <div class="ph"><img src="https://upload.wikimedia.org/wikipedia/commons/2/27/Artificial_Neural_Network_with_Chip.png" alt="인공 신경망을 표현한 그림" loading="lazy"><span class="pill">고등 인공지능 기초</span></div>
+      <div class="bd"><h2><i></i>인공지능 기초</h2><p>인공지능의 개념과 탐색, 기계학습과 딥러닝, 데이터 편향, 프로젝트 단계를 6개 레슨으로 배워요.</p>
+        <div class="meta" data-key="ai-stairs-v1" data-total="6"><span class="num">0/6 레슨 완료</span><span class="bar"><i style="width:0%"></i></span><span class="go">공부하기 →</span></div></div>
+    </a>
+    <a class="course c-de" href="design/">
+      <div class="ph"><img src="https://thumb.wikimedia.org/wikipedia/commons/thumb/2/20/Hippo_Roller_-_WFP_Rollers.jpg/500px-Hippo_Roller_-_WFP_Rollers.jpg" alt="물을 굴려서 나르는 히포 롤러" loading="lazy"><span class="pill">고등 창의 공학 설계</span></div>
+      <div class="bd"><h2><i></i>창의 공학 설계</h2><p>공학의 역사, 9단계 설계 과정, 사고 기법, 팀워크, 제품 분석, 도면과 3D 프린팅까지 12개 레슨이에요.</p>
+        <div class="meta" data-key="design-stairs-v1" data-total="12"><span class="num">0/12 레슨 완료</span><span class="bar"><i style="width:0%"></i></span><span class="go">공부하기 →</span></div></div>
+    </a>
+    <a class="course c-rb" href="robot/">
+      <div class="ph"><img src="https://thumb.wikimedia.org/wikipedia/commons/thumb/7/77/New_Da_Vinci_Xi.jpg/500px-New_Da_Vinci_Xi.jpg" alt="수술 로봇 다빈치 Xi" loading="lazy"><span class="pill">고등 로봇과 공학세계</span></div>
+      <div class="bd"><h2><i></i>로봇과 공학세계</h2><p>로봇의 구성과 원리, 인공지능과 로봇 윤리, 7개 공학 분야의 로봇, 로봇 팔 프로젝트까지 14개 레슨이에요.</p>
+        <div class="meta" data-key="robot-stairs-v1" data-total="14"><span class="num">0/14 레슨 완료</span><span class="bar"><i style="width:0%"></i></span><span class="go">공부하기 →</span></div></div>
+    </a>
+    <a class="course c-tc" href="tech/">
+      <div class="ph"><img src="https://thumb.wikimedia.org/wikipedia/commons/thumb/9/91/IBM_Quantum_System_One.jpg/500px-IBM_Quantum_System_One.jpg" alt="IBM 양자 컴퓨터" loading="lazy"><span class="pill">첨단 공학 · 분야 탐험</span></div>
+      <div class="bd"><h2><i></i>첨단 공학 탐험관</h2><p>제조, 정보통신, 건설, 수송, 생명 다섯 영역의 첨단 공학 30가지를 사진, 영상, 퀴즈로 탐험해요.</p>
+        <div class="meta" data-key="tech-explore-v1" data-total="30" data-kind="seen"><span class="num">0/30 분야 탐험</span><span class="bar"><i style="width:0%"></i></span><span class="go">탐험하기 →</span></div></div>
+    </a>
   </div>
 
-  <p class="foot">새 과목은 이 페이지에 카드로 하나씩 늘어나요.</p>
+  <section class="news" aria-labelledby="news-h">
+    <h2 id="news-h">📢 새 소식</h2>
+    <ul id="news"><li><time>준비 중</time><div><b>새 소식을 불러오고 있어요</b></div></li></ul>
+  </section>
+
+  <p class="foot">진도와 XP는 지금 쓰는 기기의 브라우저에 저장돼요. 사진은 위키미디어 공용의 자유 이용 사진이에요.</p>
 </main>
 
 <script>
 document.querySelectorAll(".meta[data-key]").forEach(m => {
-  const total = +m.dataset.total;
-  let done = 0;
+  const total = +m.dataset.total; let done = 0;
   try {
     const s = JSON.parse(localStorage.getItem(m.dataset.key));
     if (m.dataset.kind === "seen") { if (s && s.seen) done = Object.keys(s.seen).length; }
@@ -179,13 +148,16 @@ document.querySelectorAll(".meta[data-key]").forEach(m => {
   m.querySelector(".bar i").style.width = Math.round(done / total * 100) + "%";
 });
 
-const THEME_KEY = "ai-stairs-v1-theme";
-try { const th = localStorage.getItem(THEME_KEY); if (th) document.documentElement.dataset.theme = th; } catch (e) {}
+const esc = s => String(s).replace(/[&<>"]/g, m => ({"&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;"}[m]));
+fetch("updates.json", {cache:"no-cache"}).then(r => r.json()).then(list => {
+  document.getElementById("news").innerHTML = list.slice(0, 6).map(u =>
+    `<li><time>${esc(u.date)}</time><div><b>${esc(u.title)}</b>${(u.items || []).map(i => `<span>· ${esc(i)}</span>`).join("")}</div></li>`).join("");
+}).catch(() => { document.getElementById("news").innerHTML = '<li><time>-</time><div><b>새 소식을 불러오지 못했어요</b><span>잠시 뒤 다시 열어 보세요.</span></div></li>'; });
+
+try { const th = localStorage.getItem("class-theme"); if (th) document.documentElement.dataset.theme = th; } catch (e) {}
 document.getElementById("theme").addEventListener("click", () => {
-  const root = document.documentElement;
-  const dark = root.dataset.theme ? root.dataset.theme === "dark" : matchMedia("(prefers-color-scheme: dark)").matches;
-  root.dataset.theme = dark ? "light" : "dark";
-  try { localStorage.setItem(THEME_KEY, root.dataset.theme); } catch (e) {}
+  const r = document.documentElement, dark = r.dataset.theme ? r.dataset.theme === "dark" : matchMedia("(prefers-color-scheme: dark)").matches;
+  r.dataset.theme = dark ? "light" : "dark"; try { localStorage.setItem("class-theme", r.dataset.theme); } catch (e) {}
 });
 </script>
 </body>

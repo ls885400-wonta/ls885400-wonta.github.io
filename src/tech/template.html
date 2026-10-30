@@ -1,0 +1,329 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>첨단 공학 탐험관</title>
+<meta name="description" content="제조, 정보통신, 건설, 수송, 생명 다섯 영역의 첨단 공학 기술 30가지를 사진, 영상, 퀴즈로 탐험하는 학습 사이트">
+<meta name="theme-color" content="#F3F8FC">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%23141A1F'/%3E%3Ccircle cx='16' cy='16' r='9' fill='none' stroke='%23F2C14E' stroke-width='2.5'/%3E%3Cpath d='M16 7v18M7 16h18' stroke='%23F2C14E' stroke-width='2'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css"><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@500;600&display=swap">
+<style>
+/* Layout: 1120px column. Home = hero + five colour-coded category bands of photo cards. Field page = 760px reading column: photo, lead, numbered mechanism, tech cards, figures, videos, quiz */
+:root{
+  --bg:#F3F8FC; --surface:#FFFFFF; --ink:#0E2433; --text:#29404F; --muted:#5B7080; --line:#DAE6EF; --soft:#EAF2F8;
+  --mfg:#C9561A; --mfg-s:#FBEBE1; --ict:#2563C9; --ict-s:#E4ECFA; --con:#8A6414; --con-s:#F4ECD9;
+  --trn:#0B7F73; --trn-s:#DDF2EF; --bio:#B7325F; --bio-s:#F8E3EA;
+  --ok:#17803D; --ok-s:#E2F3E7; --bad:#B9381A; --bad-s:#FBE6E0; --marker:#F2C14E; --marker-ink:#2B2104;
+  --f-body:"Pretendard Variable",Pretendard,"Malgun Gothic","Apple SD Gothic Neo",sans-serif;
+  --f-mono:"IBM Plex Mono",ui-monospace,Consolas,monospace;
+  color-scheme:light;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#0E1620; --surface:#15202B; --ink:#EAF2F8; --text:#CFDCE6; --muted:#93A6B5; --line:#24323F; --soft:#1B2834;
+  --mfg:#F08A50; --mfg-s:#3A2418; --ict:#79A8F5; --ict-s:#18263D; --con:#D9AE52; --con-s:#33291A;
+  --trn:#4CC9B9; --trn-s:#123430; --bio:#EE7FA3; --bio-s:#3A1C27;
+  --ok:#5BCB83; --ok-s:#173222; --bad:#F2876A; --bad-s:#3A2019; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#0E1620; --surface:#15202B; --ink:#EAF2F8; --text:#CFDCE6; --muted:#93A6B5; --line:#24323F; --soft:#1B2834;
+  --mfg:#F08A50; --mfg-s:#3A2418; --ict:#79A8F5; --ict-s:#18263D; --con:#D9AE52; --con-s:#33291A;
+  --trn:#4CC9B9; --trn-s:#123430; --bio:#EE7FA3; --bio-s:#3A1C27;
+  --ok:#5BCB83; --ok-s:#173222; --bad:#F2876A; --bad-s:#3A2019; color-scheme:dark}
+:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--text);font-family:var(--f-body);font-size:17px;line-height:1.8;word-break:keep-all;overflow-wrap:break-word;-webkit-font-smoothing:antialiased}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:10;background:var(--surface)}
+h1,h2,h3,p{margin:0}
+h1,h2,h3{color:var(--ink);text-wrap:balance;line-height:1.3;letter-spacing:-.01em}
+a{color:inherit}
+img{max-width:100%;display:block}
+button{font:inherit;color:inherit;cursor:pointer}
+:focus-visible{outline:3px solid var(--ict);outline-offset:2px}
+[hidden]{display:none!important}
+.num{font-family:var(--f-mono);font-variant-numeric:tabular-nums}
+.wrap{max-width:1120px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+.c-mfg{--c:var(--mfg);--cs:var(--mfg-s)} .c-ict{--c:var(--ict);--cs:var(--ict-s)} .c-con{--c:var(--con);--cs:var(--con-s)} .c-trn{--c:var(--trn);--cs:var(--trn-s)} .c-bio{--c:var(--bio);--cs:var(--bio-s)}
+
+/* header */
+.top{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:var(--surface);border-bottom:1px solid var(--line)}
+.top .wrap{display:flex;align-items:center;gap:14px;min-height:60px;padding-block:8px}
+.brand{display:flex;align-items:center;gap:10px;background:none;border:0;padding:0;font-weight:900;font-size:19px;color:var(--ink);flex:none}
+.brand svg{width:28px;height:28px}
+.cats{display:flex;gap:6px;overflow-x:auto;scrollbar-width:none;flex:1;min-width:0}
+.cats::-webkit-scrollbar{display:none}
+.cats a{flex:none;text-decoration:none;font-size:15px;font-weight:700;padding:6px 12px;border-radius:999px;color:var(--muted);border:1px solid transparent}
+.cats a:hover{color:var(--c,var(--ink));background:var(--cs,var(--soft))}
+.cats a[aria-current="true"]{color:var(--c,var(--ink));background:var(--cs,var(--soft));border-color:var(--c,var(--line))}
+.tools{display:flex;gap:8px;align-items:center;flex:none}
+.home-link{font-size:14px;font-weight:700;text-decoration:none;color:var(--muted);padding:6px 10px;border:1px solid var(--line);border-radius:8px}
+.theme{width:36px;height:36px;border-radius:50%;border:1px solid var(--line);background:var(--surface);font-size:15px}
+
+main{padding-block:28px 72px}
+
+/* home */
+.hero{display:grid;grid-template-columns:1.2fr 1fr;gap:28px;align-items:end;padding-bottom:28px;border-bottom:1px solid var(--line)}
+.hero > *{min-width:0}
+.eyebrow{font-family:var(--f-mono);font-size:13px;letter-spacing:.14em;color:var(--muted);font-weight:600}
+.hero h1{font-size:clamp(34px,5.6vw,58px);font-weight:900;margin:8px 0 12px}
+.hero .lead{font-size:18px;color:var(--muted);max-width:46ch}
+.hero-side{display:grid;gap:12px}
+.meter{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:16px 18px;display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.meter div{min-width:0}
+.meter b{display:block;font-family:var(--f-mono);font-size:26px;color:var(--ink);line-height:1.2}
+.meter span{font-size:14px;color:var(--muted)}
+.bar{height:8px;border-radius:999px;background:var(--soft);overflow:hidden;margin-top:6px}
+.bar i{display:block;height:100%;background:var(--marker)}
+.search{width:100%;font:inherit;font-size:16px;padding:12px 16px;border-radius:12px;border:1px solid var(--line);background:var(--surface);color:var(--ink)}
+.legend{display:flex;flex-wrap:wrap;gap:8px;margin-top:18px}
+.legend a{display:flex;align-items:center;gap:8px;text-decoration:none;font-weight:700;font-size:15px;padding:8px 14px;border-radius:12px;background:var(--cs);color:var(--c)}
+.legend a small{font-family:var(--f-mono);font-weight:600;opacity:.8}
+
+.band{padding-top:40px}
+.band-h{display:grid;grid-template-columns:auto 1fr;gap:6px 16px;align-items:baseline;margin-bottom:18px}
+.band-h .k{grid-row:span 2;font-weight:900;font-size:40px;line-height:1;color:var(--c)}
+.band-h h2{font-size:26px;font-weight:900}
+.band-h h2 small{font-family:var(--f-mono);font-size:13px;font-weight:600;color:var(--muted);margin-left:10px;letter-spacing:.06em}
+.band-h p{color:var(--muted);max-width:70ch}
+.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+.fc{display:flex;flex-direction:column;background:var(--surface);border:1px solid var(--line);border-radius:14px;overflow:hidden;text-decoration:none;color:inherit;transition:transform .15s,border-color .15s;min-width:0}
+.fc:hover{transform:translateY(-2px);border-color:var(--c)}
+.fc .ph{aspect-ratio:16/10;background:var(--soft);position:relative;overflow:hidden;flex:none}
+.fc .ph img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.fc .seen{position:absolute;top:10px;right:10px;background:var(--surface);color:var(--ok);font-size:13px;font-weight:700;padding:2px 10px;border-radius:999px}
+.fc .bd{padding:14px 16px 18px;display:flex;flex-direction:column;gap:4px}
+.fc .tag{font-size:12.5px;font-weight:700;color:var(--c)}
+.fc h3{font-size:20px;font-weight:900}
+.fc p{font-size:15px;color:var(--muted);line-height:1.65;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
+.empty{padding:40px 0;color:var(--muted);text-align:center}
+
+/* field page */
+.field{max-width:820px;margin:0 auto;display:grid;gap:34px}
+.crumb{font-size:14px;color:var(--muted);display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+.crumb a{color:var(--c);font-weight:700;text-decoration:none}
+.f-head h1{font-size:clamp(32px,5vw,48px);font-weight:900;margin-top:6px}
+.f-head .en{font-family:var(--f-mono);font-size:14px;color:var(--muted);letter-spacing:.04em;margin-top:4px}
+.photo{margin:0;border-radius:16px;overflow:hidden;background:var(--soft)}
+.photo img{width:100%;aspect-ratio:16/9;object-fit:cover}
+.photo figcaption{font-size:12.5px;color:var(--muted);padding:8px 14px;background:var(--surface);border:1px solid var(--line);border-top:0;border-radius:0 0 16px 16px}
+.photo figcaption a{color:var(--muted)}
+.lead-box{font-size:21px;line-height:1.75;color:var(--ink);font-weight:500}
+.lead-box mark{background:var(--cs);color:inherit;padding:0 2px}
+.why{background:var(--cs);border-radius:14px;padding:18px 22px}
+.why b{color:var(--c);display:block;font-size:15px;margin-bottom:4px}
+.sec h2{font-size:24px;font-weight:900;margin-bottom:14px;display:flex;align-items:center;gap:10px}
+.sec h2 .dot{width:10px;height:10px;border-radius:3px;background:var(--c)}
+.steps{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(2,1fr);gap:12px;counter-reset:s}
+.steps li{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:16px 18px;counter-increment:s;min-width:0}
+.steps li::before{content:counter(s);display:inline-grid;place-items:center;width:28px;height:28px;border-radius:50%;background:var(--c);color:var(--surface);font-family:var(--f-mono);font-weight:600;font-size:14px;margin-right:8px}
+.steps b{color:var(--ink);font-size:18px}
+.steps p{margin-top:6px;font-size:16px}
+.tech{display:grid;gap:12px}
+.tech div{display:grid;grid-template-columns:200px 1fr;gap:16px;padding:16px 0;border-top:1px solid var(--line)}
+.tech div:last-child{border-bottom:1px solid var(--line)}
+.tech div > *{min-width:0}
+.tech b{color:var(--ink);font-size:18px}
+.figs{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+.figs div{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:16px;min-width:0}
+.figs b{display:block;font-size:22px;font-weight:900;color:var(--c);line-height:1.3}
+.figs span{font-size:14.5px;color:var(--muted);line-height:1.55;display:block;margin-top:6px}
+.chips{display:flex;flex-wrap:wrap;gap:8px}
+.chips span{background:var(--surface);border:1px solid var(--line);border-radius:999px;padding:6px 14px;font-size:15.5px;font-weight:500}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:24px}
+.two > *{min-width:0}
+.videos{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.vid{background:var(--surface);border:1px solid var(--line);border-radius:14px;overflow:hidden;min-width:0}
+.vid .frame{aspect-ratio:16/9;position:relative;background:#000}
+.vid .frame img{width:100%;height:100%;object-fit:cover;opacity:.92}
+.vid .frame iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
+.vid .play{position:absolute;inset:0;display:grid;place-items:center;background:none;border:0;width:100%}
+.vid .play span{width:68px;height:48px;border-radius:12px;background:#E3242B;display:grid;place-items:center;box-shadow:0 4px 18px rgba(0,0,0,.35)}
+.vid .play span::after{content:"";border-left:18px solid #fff;border-top:11px solid transparent;border-bottom:11px solid transparent;margin-left:4px}
+.vid .len{position:absolute;right:8px;bottom:8px;background:rgba(0,0,0,.78);color:#fff;font-family:var(--f-mono);font-size:12.5px;padding:1px 6px;border-radius:4px}
+.vid .info{padding:12px 14px 14px;display:grid;gap:4px}
+.vid .info b{font-size:15.5px;color:var(--ink);line-height:1.5;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.vid .info span{font-size:13.5px;color:var(--muted)}
+.vid .info a{font-size:13.5px;font-weight:700;color:var(--c);text-decoration:none}
+.quiz{display:grid;gap:18px}
+.q{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:18px 20px}
+.q p.qq{font-weight:700;color:var(--ink);font-size:18px;margin-bottom:12px}
+.opts{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.opt{text-align:left;background:var(--bg);border:1px solid var(--line);border-radius:10px;padding:10px 14px;font-size:16px}
+.opt:hover:not(:disabled){border-color:var(--c)}
+.opt.right{background:var(--ok-s);border-color:var(--ok);color:var(--ok);font-weight:700}
+.opt.wrong{background:var(--bad-s);border-color:var(--bad);color:var(--bad)}
+.opt:disabled{cursor:default}
+.fb{margin-top:10px;font-size:15.5px}
+.fb.ok{color:var(--ok);font-weight:500}
+.fb.no{color:var(--bad)}
+.more{display:flex;flex-wrap:wrap;gap:10px}
+.more a{font-weight:700;text-decoration:none;color:var(--c);border:1px solid var(--line);background:var(--surface);border-radius:10px;padding:10px 14px;font-size:15.5px}
+.pn{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;padding-top:8px;border-top:1px solid var(--line)}
+.pn a{text-decoration:none;display:flex;flex-direction:column;padding:12px 0;min-width:0}
+.pn a small{color:var(--muted);font-size:13px}
+.pn a b{color:var(--ink);font-size:18px}
+.pn .next{margin-left:auto;text-align:right}
+footer{color:var(--muted);font-size:13px;text-align:center;padding:24px 16px 40px;line-height:1.7}
+
+@media (max-width:900px){
+  .grid{grid-template-columns:1fr 1fr}
+  .hero{grid-template-columns:1fr}
+}
+@media (max-width:640px){
+  body{font-size:16.5px}
+  .grid,.steps,.figs,.videos,.two,.opts{grid-template-columns:1fr}
+  .tech div{grid-template-columns:1fr;gap:4px}
+  .top .wrap{flex-wrap:wrap;gap:8px}
+  .cats{order:3;flex-basis:100%}
+  .tools{margin-left:auto}
+  .home-link{display:none}
+  .lead-box{font-size:19px}
+  .band-h .k{font-size:32px}
+}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+</head>
+<body>
+<header class="top"><div class="wrap">
+  <button class="brand" data-go="#/" aria-label="첨단 공학 탐험관 처음으로"><svg viewBox="0 0 32 32" aria-hidden="true"><rect width="32" height="32" rx="8" fill="currentColor"/><circle cx="16" cy="16" r="9" fill="none" stroke="#F2C14E" stroke-width="2.5"/><path d="M16 7v18M7 16h18" stroke="#F2C14E" stroke-width="2"/></svg>첨단 공학 탐험관</button>
+  <nav class="cats" id="cats" aria-label="영역"></nav>
+  <div class="tools"><a class="home-link" href="../">← 교실 홈</a><button class="theme" id="theme" aria-label="밝게/어둡게 바꾸기">◐</button></div>
+</div></header>
+<main class="wrap" id="app"></main>
+<footer>사진: 위키미디어 공용(Wikimedia Commons)의 자유 이용 사진, 각 사진 아래에 작가와 라이선스 표시 · 영상: 각 채널의 YouTube 영상을 연결 · 설명 참고: 위키백과와 각 기관 자료<br><a href="../">← 우리 반 AI·공학 교실로 돌아가기</a></footer>
+
+<script>
+/*DATA*/
+
+const KEY = "tech-explore-v1";
+let S = { seen:{}, quiz:{} };
+try { const s = JSON.parse(localStorage.getItem(KEY)); if (s && s.seen) S = s; } catch (e) {}
+const save = () => { try { localStorage.setItem(KEY, JSON.stringify(S)); } catch (e) {} };
+const cat = id => CATS.find(c => c.id === id);
+const esc = s => String(s).replace(/[&<>"]/g, m => ({"&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;"}[m]));
+const app = document.getElementById("app");
+const picked = {};
+
+function nav(route){
+  document.getElementById("cats").innerHTML = `<a href="#/" aria-current="${route.v==="home"}">전체</a>` +
+    CATS.map(c => `<a class="c-${c.id}" href="#/c/${c.id}" aria-current="${route.cat===c.id}">${c.name}</a>`).join("");
+}
+
+function card(f){
+  const m = MEDIA[f.id];
+  return `<a class="fc c-${f.cat}" href="#/f/${f.id}">
+    <div class="ph"><img src="${m.img.card}" alt="${esc(f.name)} 사진" loading="lazy">${S.seen[f.id] ? '<span class="seen">✓ 탐험 완료</span>' : ""}</div>
+    <div class="bd"><span class="tag">${cat(f.cat).name}</span><h3>${esc(f.name)}</h3><p>${esc(f.one)}</p></div></a>`;
+}
+
+function band(c, list){
+  const fs = list || FIELDS.filter(f => f.cat === c.id);
+  if (!fs.length) return "";
+  return `<section class="band c-${c.id}" id="band-${c.id}">
+    <div class="band-h"><span class="k" aria-hidden="true">${String(CATS.indexOf(c)+1).padStart(2,"0")}</span>
+      <h2>${c.name}<small>${c.en.toUpperCase()}</small></h2><p>${c.tag}. ${c.desc}</p></div>
+    <div class="grid">${fs.map(card).join("")}</div></section>`;
+}
+
+function home(q){
+  const seen = Object.keys(S.seen).length, solved = Object.keys(S.quiz).length, qTotal = FIELDS.length * 2;
+  const term = (q || "").trim().toLowerCase();
+  const match = f => !term || [f.name, f.en, f.one, ...f.tech.map(t => t[0]), ...f.uses].join(" ").toLowerCase().includes(term);
+  const bands = CATS.map(c => band(c, FIELDS.filter(f => f.cat === c.id && match(f)))).join("");
+  return `<section class="hero">
+    <div><p class="eyebrow">ADVANCED ENGINEERING · 5 AREAS · 30 FIELDS</p>
+      <h1>첨단 공학 탐험관</h1>
+      <p class="lead">제조, 정보통신, 건설, 수송, 생명. 다섯 영역에서 지금 가장 활발한 공학 분야 30가지를 사진과 영상, 원리 설명과 퀴즈로 탐험해요.</p>
+      <div class="legend">${CATS.map(c => `<a class="c-${c.id}" href="#/c/${c.id}">${c.name}<small>${FIELDS.filter(f => f.cat===c.id).length}</small></a>`).join("")}</div></div>
+    <div class="hero-side">
+      <div class="meter"><div><b>${seen}<small style="font-size:16px;color:var(--muted)">/${FIELDS.length}</small></b><span>탐험한 분야</span><div class="bar"><i style="width:${seen/FIELDS.length*100}%"></i></div></div>
+        <div><b>${solved}<small style="font-size:16px;color:var(--muted)">/${qTotal}</small></b><span>맞힌 퀴즈</span><div class="bar"><i style="width:${solved/qTotal*100}%"></i></div></div></div>
+      <label for="q" class="eyebrow" style="letter-spacing:.06em">분야·기술 찾기</label>
+      <input class="search" id="q" type="search" placeholder="예: 배터리, 라이다, 유전자" value="${esc(q || "")}">
+    </div></section>
+    <div id="bands">${bands || '<p class="empty">찾는 분야가 없어요. 다른 낱말로 찾아보세요.</p>'}</div>`;
+}
+
+function fieldPage(f){
+  const c = cat(f.cat), m = MEDIA[f.id], list = FIELDS.filter(x => x.cat === f.cat), i = list.indexOf(f);
+  const prev = list[i-1], next = list[i+1];
+  const vids = m.videos.map(v => `<div class="vid">
+      <div class="frame" id="v-${v.id}"><img src="https://i.ytimg.com/vi/${v.id}/hqdefault.jpg" alt="" loading="lazy">
+        <button class="play" data-play="${v.id}" aria-label="${esc(v.title)} 재생"><span></span></button>${v.len ? `<span class="len">${v.len}</span>` : ""}</div>
+      <div class="info"><b>${esc(v.title)}</b><span>${esc(v.ch)}</span><a href="https://www.youtube.com/watch?v=${v.id}" target="_blank" rel="noopener">YouTube에서 보기 ↗</a></div></div>`).join("");
+  const quiz = f.quiz.map((q, qi) => {
+    const k = f.id + ":" + qi, wrong = picked[k] || [], solved = !!S.quiz[k];
+    return `<div class="q"><p class="qq">Q${qi+1}. ${esc(q.q)}</p><div class="opts">${q.o.map((o, oi) => {
+      const cls = solved && oi === q.a ? "right" : wrong.includes(oi) ? "wrong" : "";
+      return `<button class="opt ${cls}" data-q="${k}" data-i="${oi}" ${solved || wrong.includes(oi) ? "disabled" : ""}>${esc(o)}</button>`;
+    }).join("")}</div>${solved ? `<p class="fb ok">정답이에요. ${esc(q.why)}</p>` : wrong.length ? `<p class="fb no">다시 골라 보세요. 위의 설명에 힌트가 있어요.</p>` : ""}</div>`;
+  }).join("");
+  return `<article class="field c-${f.cat}">
+    <div class="f-head"><div class="crumb"><a href="#/">탐험관</a><span>›</span><a href="#/c/${c.id}">${c.name}</a><span>›</span><span>${i+1} / ${list.length}</span></div>
+      <h1>${esc(f.name)}</h1><p class="en">${esc(f.en)}</p></div>
+    <figure class="photo"><img src="${m.img.big}" alt="${esc(f.name)} 관련 사진"><figcaption>사진: ${esc(m.img.artist || "작가 미상")} · ${esc(m.img.lic)} · <a href="${m.img.page}" target="_blank" rel="noopener">위키미디어 공용</a></figcaption></figure>
+    <p class="lead-box">${esc(f.one)}</p>
+    <div class="why"><b>왜 중요할까?</b>${esc(f.why)}</div>
+    <section class="sec"><h2><span class="dot"></span>어떻게 작동할까</h2><ol class="steps">${f.how.map(h => `<li><b>${esc(h[0])}</b><p>${esc(h[1])}</p></li>`).join("")}</ol></section>
+    <section class="sec"><h2><span class="dot"></span>첨단 기술 포인트</h2><div class="tech">${f.tech.map(t => `<div><b>${esc(t[0])}</b><p>${esc(t[1])}</p></div>`).join("")}</div></section>
+    <section class="sec"><h2><span class="dot"></span>숫자와 낱말로 보기</h2><div class="figs">${f.nums.map(n => `<div><b>${esc(n[0])}</b><span>${esc(n[1])}</span></div>`).join("")}</div></section>
+    <div class="two"><section class="sec"><h2><span class="dot"></span>어디에 쓰일까</h2><div class="chips">${f.uses.map(u => `<span>${esc(u)}</span>`).join("")}</div></section>
+      <section class="sec"><h2><span class="dot"></span>관련 학과·직업</h2><div class="chips">${f.jobs.map(u => `<span>${esc(u)}</span>`).join("")}</div></section></div>
+    <section class="sec"><h2><span class="dot"></span>참고 영상</h2><div class="videos">${vids}</div></section>
+    <section class="sec"><h2><span class="dot"></span>확인 퀴즈</h2><div class="quiz">${quiz}</div></section>
+    <section class="sec"><h2><span class="dot"></span>더 알아보기</h2><div class="more">${m.wiki ? `<a href="${m.wiki}" target="_blank" rel="noopener">위키백과에서 더 읽기 ↗</a>` : ""}<a href="https://www.youtube.com/results?search_query=${encodeURIComponent(f.name + " 원리")}" target="_blank" rel="noopener">관련 영상 더 찾기 ↗</a></div></section>
+    <nav class="pn">${prev ? `<a href="#/f/${prev.id}"><small>← 이전 분야</small><b>${esc(prev.name)}</b></a>` : `<a href="#/c/${c.id}"><small>←</small><b>${c.name} 전체 보기</b></a>`}
+      ${next ? `<a class="next" href="#/f/${next.id}"><small>다음 분야 →</small><b>${esc(next.name)}</b></a>` : `<a class="next" href="#/"><small>→</small><b>다른 영역 탐험하기</b></a>`}</nav>
+  </article>`;
+}
+
+function route(){
+  const h = location.hash.replace(/^#\/?/, "");
+  const [kind, id] = h.split("/");
+  if (kind === "f" && FIELDS.find(f => f.id === id)) {
+    const f = FIELDS.find(x => x.id === id);
+    if (!S.seen[f.id]) { S.seen[f.id] = 1; save(); }
+    nav({v:"field", cat:f.cat}); app.innerHTML = fieldPage(f); document.title = f.name + " · 첨단 공학 탐험관";
+  } else if (kind === "c" && cat(id)) {
+    nav({v:"cat", cat:id}); app.innerHTML = band(cat(id)); document.title = cat(id).name + " · 첨단 공학 탐험관";
+  } else {
+    nav({v:"home"}); app.innerHTML = home(""); document.title = "첨단 공학 탐험관";
+  }
+  window.scrollTo(0, 0);
+}
+
+document.addEventListener("click", e => {
+  const go = e.target.closest("[data-go]"); if (go) { location.hash = go.dataset.go; return; }
+  const p = e.target.closest("[data-play]");
+  if (p) {
+    const id = p.dataset.play, fr = document.getElementById("v-" + id);
+    fr.innerHTML = `<iframe src="https://www.youtube-nocookie.com/embed/${id}?autoplay=1&rel=0" title="참고 영상" allow="autoplay; encrypted-media; picture-in-picture; fullscreen" allowfullscreen></iframe>`;
+    return;
+  }
+  const o = e.target.closest(".opt");
+  if (o) {
+    const k = o.dataset.q, i = +o.dataset.i, [fid, qi] = k.split(":"), f = FIELDS.find(x => x.id === fid), q = f.quiz[+qi];
+    if (i === q.a) { S.quiz[k] = 1; save(); } else { (picked[k] = picked[k] || []).push(i); }
+    const y = window.scrollY; app.innerHTML = fieldPage(f); window.scrollTo(0, y);
+  }
+});
+document.addEventListener("input", e => {
+  if (e.target.id !== "q") return;
+  const term = e.target.value.trim().toLowerCase();
+  const match = f => !term || [f.name, f.en, f.one, ...f.tech.map(t => t[0]), ...f.uses].join(" ").toLowerCase().includes(term);
+  const html = CATS.map(c => band(c, FIELDS.filter(f => f.cat === c.id && match(f)))).join("");
+  document.getElementById("bands").innerHTML = html || '<p class="empty">찾는 분야가 없어요. 다른 낱말로 찾아보세요.</p>';
+});
+window.addEventListener("hashchange", route);
+
+const THEME_KEY = "class-theme";
+try { const th = localStorage.getItem(THEME_KEY); if (th) document.documentElement.dataset.theme = th; } catch (e) {}
+document.getElementById("theme").addEventListener("click", () => {
+  const r = document.documentElement, dark = r.dataset.theme ? r.dataset.theme === "dark" : matchMedia("(prefers-color-scheme: dark)").matches;
+  r.dataset.theme = dark ? "light" : "dark"; try { localStorage.setItem(THEME_KEY, r.dataset.theme); } catch (e) {}
+});
+route();
+</script>
+</body>
+</html>

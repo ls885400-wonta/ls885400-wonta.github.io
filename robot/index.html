@@ -3,270 +3,308 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<meta name="description" content="고등학교 로봇과 공학세계를 이야기, 계단식 확인문제, 용어 카드, 10문제 시험으로 배우는 학습 사이트">
-<meta name="theme-color" content="#15201B">
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%2315201B'/%3E%3Crect x='6' y='18' width='6' height='8' rx='1' fill='%233BC19C'/%3E%3Crect x='13' y='12' width='6' height='14' rx='1' fill='%233BC19C'/%3E%3Crect x='20' y='6' width='6' height='20' rx='1' fill='%23F2C14E'/%3E%3C/svg%3E">
-<style>
-:root{color-scheme:light;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
-body{margin:0}
-img{max-width:100%}
-[hidden]{display:none!important}
-</style>
 <title>로봇 공학 계단 교실</title>
-
+<meta name="description" content="고등학교 로봇과 공학세계를 이야기, 사진·영상, 계단식 확인문제, 용어 카드, 10문제 시험으로 배우는 학습 사이트">
+<meta name="theme-color" content="#F3F8FC">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%23FFFFFF'/%3E%3Crect x='6' y='18' width='6' height='8' rx='1.5' fill='%2312B886'/%3E%3Crect x='13' y='12' width='6' height='14' rx='1.5' fill='%23228BE6'/%3E%3Crect x='20' y='6' width='6' height='20' rx='1.5' fill='%23FFC93C'/%3E%3C/svg%3E">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Black+Han+Sans&family=IBM+Plex+Sans+KR:wght@400;500;700&family=IBM+Plex+Mono:wght@500;600&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@500;700&display=swap">
 <style>
-/* Layout: one 960px reading column; dark graph-paper hero with a stair chart of lessons; lesson page = notebook story + stacked stair cards */
+/* Layout: bright, cool learning UI. Sticky header with course menu; home = hero + stat tiles + unit lists with photo thumbnails;
+   lesson = sticky progress bar, left table of contents (desktop), main column with story, media, stairs, summary, cards, test. */
 :root{
-  --bg:#F4F6F2; --surface:#FFFFFF; --ink:#17201C; --muted:#5A6761; --line:#DCE3DD;
-  --accent:#0E7A62; --accent-ink:#FFFFFF; --accent-soft:#E1F1EB;
-  --marker:#F2C14E; --marker-ink:#2B2104; --marker-soft:#FCF1D2;
-  --ok:#1D8549; --ok-soft:#E2F3E8; --bad:#BF4719; --bad-soft:#FBE8DF;
-  --panel:#15201B; --panel-ink:#E8F1EC; --panel-muted:#9DB0A7; --panel-line:rgba(232,241,236,.09);
-  --f-display:"Black Han Sans","IBM Plex Sans KR","Malgun Gothic",sans-serif;
-  --f-body:"IBM Plex Sans KR","Malgun Gothic","Apple SD Gothic Neo",sans-serif;
-  --f-mono:"IBM Plex Mono",ui-monospace,Consolas,monospace;
-  --r:12px;
+  --bg:#F3F8FC; --surface:#FFFFFF; --ink:#0E2433; --text:#29404F; --muted:#5B7080; --line:#DAE6EF; --soft:#EAF2F8;
+  --accent:#7048E8; --accent-soft:#F0ECFE; --accent-ink:#FFFFFF; --accent-deep:#5F3DC4;
+  --sun:#FFC93C; --sun-ink:#3A2A00; --sun-soft:#FFF4D1; --ok:#2B9348; --ok-soft:#E3F5E8; --bad:#E8590C; --bad-soft:#FFEDE3;
+  --shadow:0 1px 2px rgba(14,36,51,.05),0 6px 20px rgba(14,36,51,.06);
+  --f-body:"Pretendard Variable",Pretendard,"Malgun Gothic","Apple SD Gothic Neo",sans-serif;
+  --f-mono:"JetBrains Mono",ui-monospace,Consolas,monospace;
+  --fs:1;
+  color-scheme:light;
 }
 @media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
-  --bg:#0F1412; --surface:#171F1C; --ink:#E5ECE8; --muted:#98A69F; --line:#2A3530;
-  --accent:#3BC19C; --accent-ink:#062219; --accent-soft:#163329;
-  --marker:#F2C14E; --marker-ink:#2B2104; --marker-soft:#3A311C;
-  --ok:#4CC27F; --ok-soft:#163124; --bad:#F08A60; --bad-soft:#3A2118;
-  --panel:#0A0F0D; --panel-ink:#E8F1EC; --panel-muted:#8FA29A; --panel-line:rgba(232,241,236,.07);
-  color-scheme:dark}}
+  --bg:#0E1620; --surface:#15202B; --ink:#EAF2F8; --text:#CFDCE6; --muted:#93A6B5; --line:#24323F; --soft:#1B2834;
+  --accent:#B197FC; --accent-soft:#2A2148; --accent-ink:#04121C; --accent-deep:#B197FC;
+  --sun-soft:#3A3014; --ok:#5CCB7E; --ok-soft:#173222; --bad:#FF9A5C; --bad-soft:#3A2116; --shadow:none; color-scheme:dark}}
 :root[data-theme="dark"]{
-  --bg:#0F1412; --surface:#171F1C; --ink:#E5ECE8; --muted:#98A69F; --line:#2A3530;
-  --accent:#3BC19C; --accent-ink:#062219; --accent-soft:#163329;
-  --marker:#F2C14E; --marker-ink:#2B2104; --marker-soft:#3A311C;
-  --ok:#4CC27F; --ok-soft:#163124; --bad:#F08A60; --bad-soft:#3A2118;
-  --panel:#0A0F0D; --panel-ink:#E8F1EC; --panel-muted:#8FA29A; --panel-line:rgba(232,241,236,.07);
-  color-scheme:dark}
-
+  --bg:#0E1620; --surface:#15202B; --ink:#EAF2F8; --text:#CFDCE6; --muted:#93A6B5; --line:#24323F; --soft:#1B2834;
+  --accent:#B197FC; --accent-soft:#2A2148; --accent-ink:#04121C; --accent-deep:#B197FC;
+  --sun-soft:#3A3014; --ok:#5CCB7E; --ok-soft:#173222; --bad:#FF9A5C; --bad-soft:#3A2116; --shadow:none; color-scheme:dark}
+:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
 *{box-sizing:border-box}
-body{background:var(--bg);color:var(--ink);font-family:var(--f-body);font-size:16px;line-height:1.7;word-break:keep-all;overflow-wrap:break-word}
+html{font-size:calc(16px * var(--fs))}
+body{margin:0;background:var(--bg);color:var(--text);font-family:var(--f-body);font-size:1.0625rem;line-height:1.75;word-break:keep-all;overflow-wrap:break-word;-webkit-font-smoothing:antialiased}
 body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:10;background:var(--surface)}
-h1,h2,h3{text-wrap:balance;margin:0;line-height:1.3}
-p{margin:0}
+h1,h2,h3,p{margin:0}
+h1,h2,h3{color:var(--ink);text-wrap:balance;line-height:1.3;letter-spacing:-.015em}
+a{color:inherit}
+img{max-width:100%;display:block}
 button{font:inherit;color:inherit;cursor:pointer}
-:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+:focus-visible{outline:3px solid var(--accent);outline-offset:2px;border-radius:6px}
+[hidden]{display:none!important}
 .num{font-family:var(--f-mono);font-variant-numeric:tabular-nums}
+.wrap{max-width:1140px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
 
 /* header */
-.top{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:var(--surface);border-bottom:1px solid var(--line)}
-.top-in,.wrap{max-width:960px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
-.top-in{display:flex;align-items:center;gap:12px;min-height:56px;flex-wrap:wrap;padding-block:6px}
-.brand{display:flex;align-items:center;gap:8px;background:none;border:0;padding:0;font-family:var(--f-display);font-size:19px;letter-spacing:.01em}
-.logo{display:flex;align-items:flex-end;gap:2px;width:22px;height:20px}
-.logo i{display:block;flex:1;background:var(--accent);border-radius:2px}
-.logo i:nth-child(1){height:35%}.logo i:nth-child(2){height:65%}.logo i:nth-child(3){height:100%;background:var(--marker)}
-.nav{display:flex;gap:4px;margin-left:8px}
-.nav button{background:none;border:0;padding:6px 10px;border-radius:8px;color:var(--muted);font-weight:500;font-size:14px}
-.nav .sw{padding:6px 10px;border-radius:8px;color:var(--accent);font-weight:700;font-size:14px;text-decoration:none;border:1px solid var(--line)}
-.nav .sw:hover{border-color:var(--accent)}
-.nav button[aria-current="true"]{color:var(--ink);background:var(--accent-soft)}
-.me{margin-left:auto;display:flex;align-items:center;gap:10px;font-size:14px}
-.lv{background:var(--marker);color:var(--marker-ink);font-weight:700;padding:2px 9px;border-radius:999px;font-size:13px}
-.theme{width:34px;height:34px;border-radius:50%;border:1px solid var(--line);background:var(--surface);font-size:15px;line-height:1}
+.top{position:sticky;top:env(safe-area-inset-top,0px);z-index:6;background:color-mix(in srgb,var(--surface) 92%,transparent);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+.top .wrap{display:flex;align-items:center;gap:10px;min-height:62px;padding-block:8px}
+.course{position:relative;flex:none}
+.course summary{list-style:none;display:flex;align-items:center;gap:10px;cursor:pointer;padding:6px 10px 6px 6px;border-radius:12px}
+.course summary::-webkit-details-marker{display:none}
+.course summary:hover{background:var(--soft)}
+.mark{width:34px;height:34px;border-radius:10px;background:var(--accent);display:grid;place-items:center;color:var(--accent-ink);font-weight:800;font-size:15px;flex:none}
+.course b{display:block;font-size:1rem;color:var(--ink);font-weight:800;line-height:1.2}
+.course small{display:block;font-size:.75rem;color:var(--muted);line-height:1.2}
+.course .chev{color:var(--muted);font-size:.8rem;margin-left:2px}
+.menu{position:absolute;top:calc(100% + 6px);left:0;min-width:260px;background:var(--surface);border:1px solid var(--line);border-radius:14px;box-shadow:var(--shadow);padding:8px;display:grid;gap:2px;z-index:8}
+.menu a{display:flex;align-items:center;gap:10px;text-decoration:none;padding:8px 10px;border-radius:10px;font-weight:600;font-size:.95rem}
+.menu a:hover{background:var(--soft)}
+.menu a i{width:10px;height:10px;border-radius:3px;flex:none}
+.menu a[aria-current="page"]{background:var(--accent-soft);color:var(--accent-deep)}
+.menu hr{border:0;border-top:1px solid var(--line);margin:4px 0}
+.nav{display:flex;gap:2px;margin-left:6px;overflow-x:auto;scrollbar-width:none}
+.nav::-webkit-scrollbar{display:none}
+.nav button{flex:none;background:none;border:0;padding:8px 12px;border-radius:10px;color:var(--muted);font-weight:700;font-size:.95rem}
+.nav button:hover{background:var(--soft);color:var(--ink)}
+.nav button[aria-current="true"]{color:var(--accent-deep);background:var(--accent-soft)}
+.nav .cnt{font-family:var(--f-mono);font-size:.72rem;background:var(--bad);color:#fff;border-radius:999px;padding:0 6px;margin-left:4px}
+.me{margin-left:auto;display:flex;align-items:center;gap:8px;flex:none}
+.lv{background:var(--sun);color:var(--sun-ink);font-weight:800;padding:3px 10px;border-radius:999px;font-size:.8rem;white-space:nowrap}
+.icon-btn{width:38px;height:38px;border-radius:10px;border:1px solid var(--line);background:var(--surface);font-size:.85rem;font-weight:800;display:grid;place-items:center;color:var(--ink)}
+.icon-btn:hover{border-color:var(--accent)}
+.lprog{height:4px;background:var(--line)}
+.lprog i{display:block;height:100%;background:var(--accent);transition:width .4s}
 
-main.wrap{padding-block:28px 64px;display:grid;gap:28px}
-
-/* hero */
-.hero{background:var(--panel);color:var(--panel-ink);border-radius:18px;padding:32px;display:grid;grid-template-columns:1.25fr 1fr;gap:28px;align-items:end;
-  background-image:linear-gradient(var(--panel-line) 1px,transparent 1px),linear-gradient(90deg,var(--panel-line) 1px,transparent 1px);background-size:24px 24px}
-.hero > *{min-width:0}
-.eyebrow{font-size:13px;letter-spacing:.06em;color:var(--marker);font-weight:700}
-.hero h1{font-family:var(--f-display);font-weight:400;font-size:clamp(30px,5vw,46px);margin:10px 0 14px;letter-spacing:.01em}
-.hero p.lead{color:var(--panel-muted);max-width:40ch}
-.hero-cta{display:flex;align-items:center;gap:14px;flex-wrap:wrap;margin-top:22px}
-.hero-meta{color:var(--panel-muted);font-size:14px}
-.stairs{display:flex;align-items:flex-end;gap:6px;height:190px}
-.stair{flex:1;height:calc(var(--h) * 16.6%);border:1.5px solid var(--panel-muted);border-bottom:0;border-radius:6px 6px 0 0;display:flex;align-items:flex-start;justify-content:center;padding-top:6px;font-family:var(--f-mono);font-size:12px;color:var(--panel-muted);background:none;transition:background .3s}
-.stair.on{background:var(--marker);border-color:var(--marker);color:var(--marker-ink)}
-.stair.cur{border-color:var(--panel-ink);color:var(--panel-ink)}
-.stairs-cap{font-size:12px;color:var(--panel-muted);margin-top:8px;border-top:1.5px solid var(--panel-muted);padding-top:6px}
-
-.btn{border:0;border-radius:10px;padding:11px 18px;font-weight:700;font-size:15px}
+main.wrap{padding-block:28px 72px}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:18px;padding:22px;box-shadow:var(--shadow)}
+.btn{border:0;border-radius:12px;padding:12px 20px;font-weight:800;font-size:1rem;display:inline-flex;align-items:center;gap:8px;text-decoration:none}
 .btn.primary{background:var(--accent);color:var(--accent-ink)}
-.hero .btn.primary{background:var(--marker);color:var(--marker-ink)}
-.btn.ghost{background:none;border:1px solid var(--line);color:var(--ink)}
+.btn.primary:hover{filter:brightness(1.05)}
+.btn.ghost{background:var(--surface);border:1px solid var(--line);color:var(--ink)}
 .btn:disabled{opacity:.45;cursor:not-allowed}
+.sec-h{display:flex;align-items:baseline;justify-content:space-between;gap:12px;margin:36px 0 14px;flex-wrap:wrap}
+.sec-h h2{font-size:1.4rem;font-weight:800}
+.sec-h small{color:var(--muted);font-size:.9rem}
 
-/* flow */
-.flow{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
-.flow li{border-top:3px solid var(--accent);padding-top:10px;min-width:0}
-.flow b{font-family:var(--f-mono);color:var(--accent);font-size:13px;display:block}
-.flow strong{display:block;font-size:15px}
-.flow span{color:var(--muted);font-size:14px}
-
-/* record */
-.sec-h{display:flex;align-items:baseline;justify-content:space-between;gap:12px;margin-bottom:12px;flex-wrap:wrap}
-.sec-h h2{font-size:20px}
-.sec-h small{color:var(--muted);font-size:14px}
-.card{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:22px}
-.rec{display:grid;grid-template-columns:240px 1fr;gap:28px;align-items:start}
-.rec > *{min-width:0}
-.rec-lv{font-family:var(--f-display);font-size:28px;color:var(--accent)}
-.rec-sub{color:var(--muted);font-size:14px}
-.bar{height:10px;border-radius:999px;background:var(--line);overflow:hidden;margin:12px 0 6px}
-.bar i{display:block;height:100%;background:var(--marker);border-radius:999px;transition:width .4s}
-.badges{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
-.badge{display:flex;align-items:center;gap:10px;padding:8px;border-radius:10px;min-width:0}
-.badge .m{flex:none;width:38px;height:38px;border-radius:50%;display:grid;place-items:center;font-family:var(--f-mono);font-weight:600;font-size:13px;border:1.5px dashed var(--line);color:var(--muted)}
-.badge.on .m{border:0;background:var(--marker);color:var(--marker-ink)}
-.badge div{min-width:0;line-height:1.35}
-.badge strong{display:block;font-size:13px}
-.badge span{font-size:11.5px;color:var(--muted)}
+/* home */
+.hero{position:relative;overflow:hidden;border-radius:24px;padding:36px;display:grid;grid-template-columns:1.2fr 1fr;gap:28px;align-items:center;
+  background:linear-gradient(135deg,var(--accent-soft),var(--surface) 70%);border:1px solid var(--line)}
+.hero > *{min-width:0;position:relative}
+.hero::after{content:"";position:absolute;inset:0;background-image:radial-gradient(color-mix(in srgb,var(--accent) 18%,transparent) 1.5px,transparent 1.5px);background-size:22px 22px;mask-image:linear-gradient(90deg,transparent 40%,#000);pointer-events:none}
+.eyebrow{font-size:.85rem;font-weight:800;color:var(--accent-deep);letter-spacing:.02em}
+.hero h1{font-size:clamp(2rem,5vw,3.1rem);font-weight:900;margin:8px 0 12px;letter-spacing:-.03em}
+.hero .lead{color:var(--muted);max-width:44ch}
+.hero-cta{display:flex;align-items:center;gap:14px;flex-wrap:wrap;margin-top:22px}
+.hero-cta small{color:var(--muted);font-size:.9rem}
+.stairs{display:flex;align-items:flex-end;gap:5px;height:200px;z-index:1}
+.stair{flex:1;height:calc(var(--h) * 100%);min-height:26px;border-radius:8px 8px 3px 3px;background:var(--surface);border:2px solid color-mix(in srgb,var(--accent) 35%,var(--line));display:flex;align-items:flex-start;justify-content:center;padding-top:5px;font-family:var(--f-mono);font-size:.7rem;color:var(--muted);transition:background .3s}
+.stair.on{background:var(--accent);border-color:var(--accent);color:var(--accent-ink)}
+.stair.cur{border-color:var(--sun);box-shadow:0 0 0 3px var(--sun-soft)}
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-top:18px}
+.stat{background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:16px 18px;box-shadow:var(--shadow);min-width:0}
+.stat small{display:block;font-size:.82rem;color:var(--muted);font-weight:600}
+.stat b{display:block;font-size:1.5rem;color:var(--ink);font-weight:800;line-height:1.3}
+.stat .bar{height:7px;border-radius:999px;background:var(--soft);overflow:hidden;margin-top:8px}
+.stat .bar i{display:block;height:100%;background:var(--sun);border-radius:999px}
+.flow{list-style:none;margin:18px 0 0;padding:0;display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
+.flow li{display:flex;gap:12px;align-items:flex-start;background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:14px;min-width:0}
+.flow b{flex:none;width:30px;height:30px;border-radius:9px;background:var(--accent-soft);color:var(--accent-deep);display:grid;place-items:center;font-family:var(--f-mono)}
+.flow strong{display:block;color:var(--ink);font-size:.98rem}
+.flow span{font-size:.85rem;color:var(--muted);line-height:1.5}
+.badges{display:grid;grid-template-columns:repeat(8,1fr);gap:10px}
+.badge{text-align:center;padding:12px 6px;border-radius:14px;background:var(--surface);border:1px solid var(--line);min-width:0}
+.badge .m{width:44px;height:44px;margin:0 auto 6px;border-radius:50%;display:grid;place-items:center;font-weight:800;font-size:.9rem;border:2px dashed var(--line);color:var(--muted)}
+.badge.on .m{border:0;background:var(--sun);color:var(--sun-ink);box-shadow:0 0 0 4px var(--sun-soft)}
+.badge strong{display:block;font-size:.8rem;color:var(--ink);line-height:1.3}
+.badge span{display:block;font-size:.7rem;color:var(--muted);line-height:1.35;margin-top:2px}
 .badge:not(.on) strong{color:var(--muted)}
-
-/* units */
-.units{display:grid;gap:18px}
-.unit{display:grid;grid-template-columns:64px 1fr;gap:18px}
-.unit > *{min-width:0}
-.unit-no{font-family:var(--f-display);font-size:34px;color:var(--accent);line-height:1}
-.unit h3{font-size:18px}
-.unit p{color:var(--muted);font-size:14.5px;margin:4px 0 10px}
-.les{display:flex;align-items:center;gap:12px;width:100%;text-align:left;background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:12px 14px;margin-top:8px}
-.les:hover{border-color:var(--accent)}
-.les .code{font-family:var(--f-mono);font-size:12.5px;color:var(--muted);flex:none}
-.les .t{flex:1;min-width:0;font-weight:500}
-.les .t small{display:block;color:var(--muted);font-weight:400;font-size:13px}
-.chip{flex:none;font-size:12px;padding:2px 9px;border-radius:999px;background:var(--line);color:var(--muted);font-weight:500}
-.chip.go{background:var(--marker-soft);color:var(--ink)}
-.chip.done{background:var(--ok-soft);color:var(--ok)}
-.reset{display:flex;gap:8px;align-items:center;justify-content:flex-end;font-size:13px;color:var(--muted);flex-wrap:wrap}
-.linkish{background:none;border:0;color:var(--muted);text-decoration:underline;padding:4px;font-size:13px}
+.units{display:grid;gap:22px}
+.unit-h{display:flex;align-items:baseline;gap:12px;margin-bottom:10px}
+.unit-h .no{flex:none;min-width:40px;height:40px;padding:0 8px;border-radius:12px;background:var(--accent);color:var(--accent-ink);font-weight:800;font-size:1.05rem;display:grid;place-items:center;font-family:"Times New Roman",serif}
+.unit-h h3{font-size:1.2rem;font-weight:800}
+.unit-d{color:var(--muted);font-size:.95rem;margin:-4px 0 12px}
+.les-list{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
+.les{display:flex;align-items:center;gap:14px;width:100%;text-align:left;background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:10px;transition:border-color .15s,transform .15s;min-width:0}
+.les:hover{border-color:var(--accent);transform:translateY(-1px)}
+.les .th{flex:none;width:92px;height:68px;border-radius:11px;background:var(--soft);overflow:hidden}
+.les .th img{width:100%;height:100%;object-fit:cover;object-position:center 30%}
+.les .t{flex:1;min-width:0}
+.les .code{font-family:var(--f-mono);font-size:.72rem;color:var(--muted)}
+.les .t b{display:block;color:var(--ink);font-size:1rem;line-height:1.35}
+.les .t small{display:block;color:var(--muted);font-size:.82rem;line-height:1.4;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.dots{display:flex;gap:4px;margin-top:5px;align-items:center}
+.dots i{width:16px;height:5px;border-radius:3px;background:var(--line)}
+.dots i.on{background:var(--accent)}
+.dots .score{margin-left:6px;font-size:.72rem;font-weight:800;color:var(--ok)}
+.reset{display:flex;gap:8px;align-items:center;justify-content:flex-end;font-size:.85rem;color:var(--muted);flex-wrap:wrap;margin-top:28px}
+.linkish{background:none;border:0;color:var(--muted);text-decoration:underline;padding:4px;font-size:.85rem}
 
 /* lesson */
-.crumb{font-size:13.5px;color:var(--muted);display:flex;gap:6px;align-items:center;flex-wrap:wrap}
-.crumb button{background:none;border:0;padding:0;color:var(--accent);font-weight:500}
-.l-head h1{font-family:var(--f-display);font-weight:400;font-size:clamp(28px,4.5vw,40px);margin:8px 0 4px}
-.l-head .sub{color:var(--muted);font-size:16px}
-.goals{list-style:none;padding:0;margin:10px 0 0;display:grid;gap:6px}
-.goals li{padding-left:24px;position:relative}
-.goals li::before{content:"";position:absolute;left:2px;top:.55em;width:12px;height:12px;border:2px solid var(--accent);border-radius:3px}
-.tag{font-size:12px;font-weight:700;letter-spacing:.06em;color:var(--accent);display:block;margin-bottom:6px}
-.story{background:var(--marker-soft);border:0;border-radius:var(--r);padding:26px 28px;
-  background-image:repeating-linear-gradient(transparent 0 31px,rgba(127,110,60,.16) 31px 32px)}
-.story h2{font-size:20px;margin-bottom:10px}
-.story p{line-height:2;max-width:62ch}
+.lesson{display:grid;grid-template-columns:230px minmax(0,1fr);gap:32px;align-items:start}
+.toc{position:sticky;top:90px;display:grid;gap:2px}
+.toc a{display:flex;align-items:center;gap:8px;text-decoration:none;font-size:.9rem;font-weight:600;color:var(--muted);padding:7px 10px;border-radius:10px}
+.toc a:hover{background:var(--soft);color:var(--ink)}
+.toc a i{flex:none;width:18px;height:18px;border-radius:50%;border:2px solid var(--line);display:grid;place-items:center;font-style:normal;font-size:.65rem}
+.toc a.done i{background:var(--ok);border-color:var(--ok);color:#fff}
+.toc a.lock{opacity:.5}
+.toc .back{margin-bottom:8px;color:var(--accent-deep);font-weight:800}
+.lmain{display:grid;gap:22px;min-width:0}
+.crumb{font-size:.85rem;color:var(--muted);display:flex;gap:6px;flex-wrap:wrap;align-items:center}
+.crumb button{background:none;border:0;padding:0;color:var(--accent-deep);font-weight:700}
+.l-head h1{font-size:clamp(1.8rem,4vw,2.5rem);font-weight:900;margin:6px 0 4px;letter-spacing:-.03em}
+.l-head .sub{color:var(--muted);font-size:1.05rem}
+.tag{display:inline-block;font-size:.78rem;font-weight:800;color:var(--accent-deep);background:var(--accent-soft);padding:2px 10px;border-radius:999px;margin-bottom:10px}
+.goals{list-style:none;padding:0;margin:0;display:grid;gap:8px}
+.goals li{padding-left:30px;position:relative}
+.goals li::before{content:"✓";position:absolute;left:0;top:.15em;width:21px;height:21px;border-radius:7px;background:var(--accent-soft);color:var(--accent-deep);font-size:.75rem;font-weight:900;display:grid;place-items:center}
+.story{background:var(--sun-soft);border:1px solid color-mix(in srgb,var(--sun) 40%,var(--line));border-radius:18px;padding:26px 28px}
+.story .tag{background:var(--surface);color:var(--sun-ink)}
+:root[data-theme="dark"] .story .tag{color:var(--sun)}
+.story h2{font-size:1.25rem;margin-bottom:10px}
+.story p{line-height:1.95;max-width:64ch}
 .story p + p{margin-top:8px}
-.story .q{margin-top:14px;font-weight:700}
-
+.story .q{margin-top:14px;font-weight:800;color:var(--ink)}
+.media{display:grid;gap:14px}
+.media > .tag{justify-self:start;margin-bottom:0}
+.photo{margin:0;border-radius:16px;overflow:hidden;border:1px solid var(--line);background:var(--surface)}
+.photo img{width:100%;aspect-ratio:16/8;object-fit:cover;object-position:center 30%}
+.photo figcaption{font-size:.75rem;color:var(--muted);padding:8px 14px}
+.photo figcaption a{color:var(--muted)}
+.videos{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.vid{background:var(--surface);border:1px solid var(--line);border-radius:16px;overflow:hidden;min-width:0}
+.vid .frame{aspect-ratio:16/9;position:relative;background:#000}
+.vid .frame img{width:100%;height:100%;object-fit:cover;opacity:.92}
+.vid .frame iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
+.vid .play{position:absolute;inset:0;display:grid;place-items:center;background:none;border:0;width:100%}
+.vid .play span{width:64px;height:46px;border-radius:12px;background:#E3242B;display:grid;place-items:center;box-shadow:0 4px 18px rgba(0,0,0,.35)}
+.vid .play span::after{content:"";border-left:17px solid #fff;border-top:10px solid transparent;border-bottom:10px solid transparent;margin-left:4px}
+.vid .len{position:absolute;right:8px;bottom:8px;background:rgba(0,0,0,.78);color:#fff;font-family:var(--f-mono);font-size:.72rem;padding:1px 6px;border-radius:4px}
+.vid .info{padding:10px 14px 12px;display:grid;gap:2px}
+.vid .info b{font-size:.92rem;color:var(--ink);line-height:1.45;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.vid .info span{font-size:.8rem;color:var(--muted)}
+.vid .info a{font-size:.8rem;font-weight:700;color:var(--accent-deep);text-decoration:none}
+.links{display:flex;flex-wrap:wrap;gap:8px}
+.links a{font-size:.88rem;font-weight:700;text-decoration:none;color:var(--accent-deep);background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:7px 12px}
+.links a:hover{border-color:var(--accent)}
 .pips{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:14px}
-.pip{font-size:13px;padding:4px 10px;border-radius:999px;border:1px solid var(--line);color:var(--muted);background:var(--surface)}
+.pip{font-size:.82rem;font-weight:700;padding:4px 12px;border-radius:999px;border:1px solid var(--line);color:var(--muted);background:var(--surface)}
 .pip.done{background:var(--accent);border-color:var(--accent);color:var(--accent-ink)}
-.pip.cur{border-color:var(--accent);color:var(--accent);font-weight:700}
-.steps{display:grid;gap:12px}
-.step{scroll-margin-top:90px}
-.step-h{display:flex;align-items:baseline;gap:10px}
-.step-h b{font-family:var(--f-mono);font-size:13px;color:var(--accent);flex:none}
-.step-h h3{font-size:18px}
-.step.locked{background:none;border-style:dashed;padding:14px 22px}
-.step.locked h3{color:var(--muted);font-size:16px}
-.step.locked .note{color:var(--muted);font-size:13.5px}
-.step ul{margin:10px 0 0;padding-left:20px;display:grid;gap:4px}
-.step .intro{margin-top:8px}
-.key{margin-top:14px;padding:10px 14px;border-radius:8px;background:var(--accent-soft);font-weight:500}
-.key b{color:var(--accent);margin-right:6px}
-
-.quiz{margin-top:18px;border-top:1px solid var(--line);padding-top:16px}
-.quiz .qq{font-weight:700;margin-bottom:10px}
-.opts{display:grid;gap:8px}
-.opt{display:flex;gap:10px;align-items:flex-start;text-align:left;width:100%;background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:10px 12px;font-size:15px}
+.pip.cur{border-color:var(--accent);color:var(--accent-deep)}
+.steps{display:grid;gap:14px}
+.step{scroll-margin-top:110px}
+.step-h{display:flex;align-items:center;gap:10px}
+.step-h b{flex:none;font-size:.75rem;font-weight:800;color:var(--accent-ink);background:var(--accent);padding:2px 10px;border-radius:999px}
+.step-h h3{font-size:1.15rem;font-weight:800}
+.step.locked{box-shadow:none;background:none;border-style:dashed;padding:14px 22px}
+.step.locked .step-h b{background:var(--line);color:var(--muted)}
+.step.locked h3{color:var(--muted);font-size:1rem}
+.step.locked .note{color:var(--muted);font-size:.85rem}
+.step ul{margin:12px 0 0;padding-left:20px;display:grid;gap:5px}
+.step li::marker{color:var(--accent)}
+.step .intro{margin-top:10px}
+.key{margin-top:14px;padding:12px 16px;border-radius:12px;background:var(--accent-soft);font-weight:600;color:var(--ink)}
+.key b{color:var(--accent-deep);margin-right:6px}
+.quiz{margin-top:18px;border-top:1px dashed var(--line);padding-top:16px}
+.quiz .qq{font-weight:800;color:var(--ink);margin-bottom:10px}
+.opts{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.opt{display:flex;gap:10px;align-items:flex-start;text-align:left;width:100%;background:var(--bg);border:1.5px solid var(--line);border-radius:12px;padding:10px 12px;font-size:.98rem;transition:border-color .12s}
 .opt:hover:not(:disabled){border-color:var(--accent)}
-.opt .n{font-family:var(--f-mono);color:var(--muted);flex:none;font-size:13px;padding-top:2px}
+.opt .n{font-family:var(--f-mono);color:var(--muted);flex:none;font-size:.8rem;padding-top:2px}
 .opt.sel{border-color:var(--accent);background:var(--accent-soft)}
-.opt.right{border-color:var(--ok);background:var(--ok-soft)}
-.opt.wrong{border-color:var(--bad);background:var(--bad-soft)}
+.opt.right{border-color:var(--ok);background:var(--ok-soft);color:var(--ok);font-weight:700}
+.opt.wrong{border-color:var(--bad);background:var(--bad-soft);color:var(--bad)}
 .opt:disabled{cursor:default}
-.fb{margin-top:10px;font-size:14.5px}
-.fb.ok{color:var(--ok);font-weight:500}
+.fb{margin-top:10px;font-size:.95rem}
+.fb.ok{color:var(--ok);font-weight:600}
 .fb.no{color:var(--bad)}
-
 .sumlist{margin:0;padding-left:20px;display:grid;gap:6px}
-.lock{color:var(--muted);font-size:14px}
-
+.lock{color:var(--muted);font-size:.92rem}
 .match{display:grid;grid-template-columns:1fr 1.6fr;gap:10px}
 .match > div{display:grid;gap:8px;align-content:start;min-width:0}
-.mc{text-align:left;background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:10px 12px;font-size:14.5px;min-height:48px}
-.mc.term{font-weight:700}
+.mc{text-align:left;background:var(--bg);border:1.5px solid var(--line);border-radius:12px;padding:10px 12px;font-size:.92rem;min-height:48px}
+.mc.term{font-weight:800;color:var(--ink)}
 .mc.sel{border-color:var(--accent);background:var(--accent-soft)}
 .mc.got{border-color:var(--ok);background:var(--ok-soft);color:var(--ok);cursor:default}
 .mc.bad{border-color:var(--bad);background:var(--bad-soft);animation:shake .3s}
 @keyframes shake{25%{transform:translateX(-4px)}75%{transform:translateX(4px)}}
-
 .tq{padding:16px 0;border-top:1px solid var(--line)}
 .tq:first-of-type{border-top:0;padding-top:4px}
-.tq .qq{font-weight:500;margin-bottom:10px}
-.tq .qq .num{color:var(--accent);margin-right:6px}
-.result{display:flex;align-items:center;gap:18px;flex-wrap:wrap;padding:16px;border-radius:10px;margin-bottom:8px}
+.tq .qq{font-weight:600;color:var(--ink);margin-bottom:10px}
+.tq .qq .num{color:var(--accent-deep);margin-right:6px}
+.result{display:flex;align-items:center;gap:18px;flex-wrap:wrap;padding:16px 18px;border-radius:14px;margin-bottom:8px}
 .result.pass{background:var(--ok-soft)}
 .result.fail{background:var(--bad-soft)}
-.result .score{font-family:var(--f-mono);font-size:34px;font-weight:600}
+.result .score{font-family:var(--f-mono);font-size:2rem;font-weight:700}
 .result.pass .score{color:var(--ok)} .result.fail .score{color:var(--bad)}
 .foot-nav{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
-.foot-nav .btn{display:flex;flex-direction:column;align-items:flex-start;text-align:left;font-weight:500}
-.foot-nav .btn small{color:var(--muted);font-size:12px;font-weight:400}
+.foot-nav .btn{display:flex;flex-direction:column;align-items:flex-start;text-align:left;font-weight:700}
+.foot-nav .btn small{color:var(--muted);font-size:.75rem;font-weight:500}
 .foot-nav .next{margin-left:auto;align-items:flex-end;text-align:right}
-
-/* perceptron widget */
-.pc{margin-top:14px;border:1px solid var(--line);border-radius:10px;padding:14px}
-.pc .tag{margin-bottom:10px}
+.pc{margin-top:14px;border:1px solid var(--line);border-radius:14px;padding:14px;background:var(--bg)}
 .pc-in{display:flex;gap:8px;flex-wrap:wrap}
-.tog{border:1px solid var(--line);background:var(--surface);border-radius:999px;padding:6px 12px;font-size:14px}
+.tog{border:1.5px solid var(--line);background:var(--surface);border-radius:999px;padding:6px 12px;font-size:.9rem;font-weight:600}
 .tog[aria-pressed="true"]{background:var(--accent);border-color:var(--accent);color:var(--accent-ink)}
-.tog .num{opacity:.75;margin-left:4px;font-size:12px}
-.pc-out{margin-top:12px;font-size:14px;overflow-x:auto}
-.pc-out .res{font-weight:700}
+.tog .num{opacity:.75;margin-left:4px;font-size:.75rem}
+.pc-out{margin-top:12px;font-size:.9rem;overflow-x:auto}
+.pc-out .res{font-weight:800;color:var(--accent-deep)}
+.mx{border-collapse:collapse;font-size:.9rem;width:100%}
+.mx th,.mx td{padding:6px 8px;border-bottom:1px solid var(--line);text-align:left;white-space:nowrap}
+.mx tr.best th{color:var(--accent-deep)}
+.pc-res{margin-top:10px;font-size:.9rem}
 
-/* glossary */
-.search{width:100%;padding:12px 14px;border-radius:10px;border:1px solid var(--line);background:var(--surface);color:var(--ink);font:inherit}
-.gl{display:grid;gap:0}
-.gl-row{display:grid;grid-template-columns:180px 1fr auto;gap:16px;padding:14px 4px;border-bottom:1px solid var(--line);align-items:baseline}
+/* glossary & review */
+.search{width:100%;padding:13px 16px;border-radius:14px;border:1.5px solid var(--line);background:var(--surface);color:var(--ink);font:inherit}
+.search:focus{border-color:var(--accent);outline:0}
+.gl-row{display:grid;grid-template-columns:200px 1fr auto;gap:16px;padding:14px 6px;border-bottom:1px solid var(--line);align-items:baseline}
 .gl-row > *{min-width:0}
-.gl-row strong{font-size:16px}
-.gl-row button{background:none;border:0;color:var(--accent);font-size:13px;padding:0}
+.gl-row strong{color:var(--ink)}
+.gl-row button{background:none;border:0;color:var(--accent-deep);font-size:.85rem;font-weight:700;padding:0}
+.rv{display:grid;gap:12px}
+.rv .card{padding:18px 20px}
+.rv .qq{font-weight:700;color:var(--ink)}
+.rv .ans{margin-top:8px;color:var(--ok);font-weight:700}
+.rv .meta{display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin-top:10px;font-size:.85rem;color:var(--muted)}
+.empty{padding:40px 0;color:var(--muted);text-align:center}
 
 #toasts{position:fixed;left:50%;transform:translateX(-50%);bottom:calc(20px + env(safe-area-inset-bottom,0px));display:grid;gap:8px;z-index:20;width:max-content;max-width:calc(100% - 32px)}
-.toast{background:var(--panel);color:var(--panel-ink);padding:10px 16px;border-radius:10px;font-size:14px;box-shadow:0 6px 20px rgba(0,0,0,.2);animation:up .25s}
-.toast b{color:var(--marker)}
+.toast{background:var(--ink);color:var(--bg);padding:10px 16px;border-radius:12px;font-size:.9rem;font-weight:600;box-shadow:0 8px 24px rgba(0,0,0,.2);animation:up .25s}
+.toast b{color:var(--sun)}
 @keyframes up{from{transform:translateY(8px);opacity:0}}
-@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important;scroll-behavior:auto!important}}
+footer{color:var(--muted);font-size:.8rem;text-align:center;padding:10px 16px 40px;line-height:1.7}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
 
+@media (max-width:1000px){
+  .lesson{grid-template-columns:1fr}
+  .toc{display:none}
+  .badges{grid-template-columns:repeat(4,1fr)}
+}
 @media (max-width:760px){
   .hero{grid-template-columns:1fr;padding:24px}
   .stairs{height:120px}
-  .flow{grid-template-columns:1fr 1fr}
-  .rec{grid-template-columns:1fr}
-  .badges{grid-template-columns:1fr 1fr}
-  .unit{grid-template-columns:1fr;gap:6px}
-  .match{grid-template-columns:1fr}
+  .stats,.flow{grid-template-columns:1fr 1fr}
+  .les-list,.videos,.opts,.match{grid-template-columns:1fr}
   .gl-row{grid-template-columns:1fr;gap:2px}
-  .me .xp-txt{display:none}
   .story{padding:20px}
   .card{padding:18px}
+  .top .wrap{flex-wrap:wrap}
+  .nav{order:3;flex-basis:100%;margin-left:0}
+  .course small{display:none}
 }
-
-/* Graphite + signal-orange palette for the robotics subject */
-:root{--bg:#F5F5F3;--surface:#FFFFFF;--ink:#1B1D21;--muted:#5B5F66;--line:#DEDFDB;--accent:#C2541B;--accent-ink:#FFFFFF;--accent-soft:#FBEADF;--panel:#1E2127;--panel-ink:#EEF0F2;--panel-muted:#A3A9B1;--panel-line:rgba(238,240,242,.09)}
-@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){--bg:#111214;--surface:#1A1C1F;--ink:#ECEDEF;--muted:#A0A4AA;--line:#2C2F33;--accent:#F08A50;--accent-ink:#2A1205;--accent-soft:#3A2418;--panel:#0B0C0E;--panel-ink:#EEF0F2;--panel-muted:#8E949C;--panel-line:rgba(238,240,242,.07)}}
-:root[data-theme="dark"]{--bg:#111214;--surface:#1A1C1F;--ink:#ECEDEF;--muted:#A0A4AA;--line:#2C2F33;--accent:#F08A50;--accent-ink:#2A1205;--accent-soft:#3A2418;--panel:#0B0C0E;--panel-ink:#EEF0F2;--panel-muted:#8E949C;--panel-line:rgba(238,240,242,.07)}
-.mx{border-collapse:collapse;font-size:14px;width:100%}
-.mx th,.mx td{padding:6px 8px;border-bottom:1px solid var(--line);text-align:left;white-space:nowrap}
-.mx tr.best th{color:var(--accent)}
-.mx .tog .num{margin-left:6px}
-.pc-res{margin-top:10px;font-size:14px}
 </style>
 </head>
 <body>
-<header class="top"><div class="top-in" id="top"></div></header>
+<header class="top">
+  <div class="wrap" id="top"></div>
+  <div class="lprog" id="lprog" hidden><i></i></div>
+</header>
 <main class="wrap" id="app"></main>
 <div id="toasts" aria-live="polite"></div>
+<footer>사진: 위키미디어 공용(Wikimedia Commons)의 자유 이용 사진, 각 사진 아래에 작가·라이선스 표시 · 영상: 각 채널의 YouTube 영상 연결 · 이야기·설명·문제는 교과서 단원 구성을 바탕으로 새로 쓴 학습 자료예요.<br><a href="../">← 우리 반 AI·공학 교실</a></footer>
 
 <script>
+const COURSE = {"id": "robot", "name": "로봇과 공학세계", "short": "로봇", "key": "robot-stairs-v1", "eyebrow": "고등학교 로봇과 공학세계", "matrix": {"ideas": ["A 컨베이어 벨트 분류기", "B 로봇 팔 분류기", "C 압축 로봇"], "crit": ["기능", "비용", "제작 난이도"]}};
 const UNITS = [
   {id:"1", no:"Ⅰ", title:"로봇의 이해", desc:"로봇이 무엇이고 어떤 부품과 원리로 움직이는지, 생활 속 어디에 쓰이며 어떤 윤리가 필요한지 알아봐요."},
   {id:"2", no:"Ⅱ", title:"공학세계와 로봇의 활용", desc:"제조, 건설, 생명·환경, 에너지·수송, 정보통신·인공지능, 인간·감성 공학에서 로봇이 어떻게 쓰이는지 탐구해요."},
@@ -598,6 +636,486 @@ const LESSONS = [
 ];
 
 const LEVELS = [[0,"새싹"],[200,"관찰자"],[500,"탐구자"],[900,"설계자"],[1400,"로봇공학자"]];
+
+const MEDIA = {
+ "1-1": {
+  "img": {
+   "thumb": "https://thumb.wikimedia.org/wikipedia/commons/thumb/c/cc/Unimate_pouring_coffee_for_a_woman_at_Biltmore_Hotel%2C_1967.jpg/330px-Unimate_pouring_coffee_for_a_woman_at_Biltmore_Hotel%2C_1967.jpg",
+   "big": "https://thumb.wikimedia.org/wikipedia/commons/thumb/c/cc/Unimate_pouring_coffee_for_a_woman_at_Biltmore_Hotel%2C_1967.jpg/960px-Unimate_pouring_coffee_for_a_woman_at_Biltmore_Hotel%2C_1967.jpg",
+   "page": "https://commons.wikimedia.org/wiki/File:Unimate_pouring_coffee_for_a_woman_at_Biltmore_Hotel,_1967.jpg",
+   "lic": "CC BY 4.0",
+   "artist": "Frank Q. Brown, Los Angeles Times",
+   "alt": "커피를 따르는 최초의 산업용 로봇 유니메이트"
+  },
+  "videos": [
+   {
+    "id": "1AcJyHEOGbA",
+    "title": "삶을 편리하게 하는 로봇의 역사 / YTN 사이언스",
+    "ch": "YTN 사이언스",
+    "len": "2:45"
+   },
+   {
+    "id": "bot4J-dAuwM",
+    "title": "국산 로봇 '휴보', 세계 정상에 올랐다 / YTN",
+    "ch": " YTN",
+    "len": "2:05"
+   }
+  ],
+  "links": [
+   [
+    "위키백과 · 로봇",
+    "https://ko.wikipedia.org/wiki/%EB%A1%9C%EB%B4%87"
+   ]
+  ]
+ },
+ "1-2": {
+  "img": {
+   "thumb": "https://thumb.wikimedia.org/wikipedia/commons/thumb/9/9c/Inside_a_servo_motor.JPG/330px-Inside_a_servo_motor.JPG",
+   "big": "https://thumb.wikimedia.org/wikipedia/commons/thumb/9/9c/Inside_a_servo_motor.JPG/960px-Inside_a_servo_motor.JPG",
+   "page": "https://commons.wikimedia.org/wiki/File:Inside_a_servo_motor.JPG",
+   "lic": "CC BY-SA 3.0",
+   "artist": "Jstapko",
+   "alt": "서보 모터의 내부 구조"
+  },
+  "videos": [
+   {
+    "id": "ej8K8fTRllc",
+    "title": "서보모터의 사용/연결방법 (원리, 분해, 360도, 활용방법)",
+    "ch": "Mr.아재",
+    "len": "12:55"
+   },
+   {
+    "id": "6rqZ2F66sUs",
+    "title": "[아두이노 기초] 8강_서보(Servo)모터 사용법과 버튼으로 제어하기",
+    "ch": "물리공작소 LAB | Physics Maker",
+    "len": "13:25"
+   }
+  ],
+  "links": [
+   [
+    "위키백과 · 서보모터",
+    "https://ko.wikipedia.org/wiki/%EC%84%9C%EB%B3%B4%EB%AA%A8%ED%84%B0"
+   ],
+   [
+    "아두이노 공식 사이트",
+    "https://www.arduino.cc"
+   ]
+  ]
+ },
+ "1-3": {
+  "img": {
+   "thumb": "https://thumb.wikimedia.org/wikipedia/commons/thumb/7/77/New_Da_Vinci_Xi.jpg/330px-New_Da_Vinci_Xi.jpg",
+   "big": "https://thumb.wikimedia.org/wikipedia/commons/thumb/7/77/New_Da_Vinci_Xi.jpg/960px-New_Da_Vinci_Xi.jpg",
+   "page": "https://commons.wikimedia.org/wiki/File:New_Da_Vinci_Xi.jpg",
+   "lic": "CC BY-SA 4.0",
+   "artist": "Alvarogarciamd",
+   "alt": "수술 로봇 다빈치 Xi"
+  },
+  "videos": [
+   {
+    "id": "h9nQNPXPWig",
+    "title": "“집사가 된 AI 로봇”…반려부터 노동까지, 로봇시대 온다 / KBS  2025.01.10.",
+    "ch": "KBS News",
+    "len": "2:12"
+   },
+   {
+    "id": "oUaOxJvu_tI",
+    "title": "[최신기술동향 시리즈] 협동로봇 도입방안과 활용사례",
+    "ch": "산기협TV",
+    "len": "10:56"
+   }
+  ],
+  "links": [
+   [
+    "위키백과 · 서비스 로봇",
+    "https://ko.wikipedia.org/wiki/%EC%84%9C%EB%B9%84%EC%8A%A4_%EB%A1%9C%EB%B4%87"
+   ],
+   [
+    "첨단 공학 탐험관 · 산업용·협동 로봇",
+    "../tech/#/f/robot"
+   ]
+  ]
+ },
+ "1-4": {
+  "img": {
+   "thumb": "https://thumb.wikimedia.org/wikipedia/commons/thumb/3/34/Isaac.Asimov01.jpg/330px-Isaac.Asimov01.jpg",
+   "big": "https://thumb.wikimedia.org/wikipedia/commons/thumb/3/34/Isaac.Asimov01.jpg/960px-Isaac.Asimov01.jpg",
+   "page": "https://commons.wikimedia.org/wiki/File:Isaac.Asimov01.jpg",
+   "lic": "Public domain",
+   "artist": "Phillip Leonian [ 1 ] from New York World-Telegram &amp; Sun",
+   "alt": "로봇 3원칙을 제안한 작가 아이작 아시모프"
+  },
+  "videos": [
+   {
+    "id": "o-CoyK76D6k",
+    "title": "[핫클립] 로봇의 3가지 원칙 / YTN 사이언스",
+    "ch": "YTN 사이언스",
+    "len": "3:31"
+   },
+   {
+    "id": "0zYq1Kr1kIg",
+    "title": "로봇의 3원칙",
+    "ch": "영화의숲",
+    "len": "6:38"
+   }
+  ],
+  "links": [
+   [
+    "위키백과 · 로봇공학의 삼원칙",
+    "https://ko.wikipedia.org/wiki/%EB%A1%9C%EB%B4%87%EA%B3%B5%ED%95%99%EC%9D%98_%EC%82%BC%EC%9B%90%EC%B9%99"
+   ],
+   [
+    "모럴 머신 실험",
+    "https://www.moralmachine.net"
+   ]
+  ]
+ },
+ "2-1": {
+  "img": {
+   "thumb": "https://thumb.wikimedia.org/wikipedia/commons/thumb/3/37/Robotic_Exoskeleton_%288393154145%29.jpg/330px-Robotic_Exoskeleton_%288393154145%29.jpg",
+   "big": "https://thumb.wikimedia.org/wikipedia/commons/thumb/3/37/Robotic_Exoskeleton_%288393154145%29.jpg/960px-Robotic_Exoskeleton_%288393154145%29.jpg",
+   "page": "https://commons.wikimedia.org/wiki/File:Robotic_Exoskeleton_(8393154145).jpg",
+   "lic": "CC BY 2.0",
+   "artist": "Paulo O from Halifax, Canada",
+   "alt": "몸에 입는 로봇 외골격"
+  },
+  "videos": [
+   {
+    "id": "ca5iv0F5Kro",
+    "title": "[핫클립] 근력 보조 웨어러블 로봇 / YTN 사이언스",
+    "ch": "YTN 사이언스",
+    "len": "4:17"
+   },
+   {
+    "id": "tdaWVUP2qcc",
+    "title": "웨어러블 로봇이 필요한 이유는 무엇일까?",
+    "ch": "EBS 컬렉션 - 사이언스",
+    "len": "9:44"
+   }
+  ],
+  "links": [
+   [
+    "위키백과 · 외골격",
+    "https://ko.wikipedia.org/wiki/%EC%99%B8%EA%B3%A8%EA%B2%A9"
+   ],
+   [
+    "첨단 공학 탐험관 · 스마트 팩토리",
+    "../tech/#/f/smart-factory"
+   ]
+  ]
+ },
+ "2-2": {
+  "img": {
+   "thumb": "https://thumb.wikimedia.org/wikipedia/commons/thumb/7/7d/Continued_demolition_and_removal_of_a_tunnel_boring_machine_cutterhead_that_was_used_during_a_previous_contract_to_bore_the_Queens_tunnels._%28CH058A%2C_10-08-19%29_%2848919623078%29.jpg/330px-thumbnail.jpg",
+   "big": "https://thumb.wikimedia.org/wikipedia/commons/thumb/7/7d/Continued_demolition_and_removal_of_a_tunnel_boring_machine_cutterhead_that_was_used_during_a_previous_contract_to_bore_the_Queens_tunnels._%28CH058A%2C_10-08-19%29_%2848919623078%29.jpg/960px-thumbnail.jpg",
+   "page": "https://commons.wikimedia.org/wiki/File:Continued_demolition_and_removal_of_a_tunnel_boring_machine_cutterhead_that_was_used_during_a_previous_contract_to_bore_the_Queens_tunnels._(CH058A,_10-08-19)_(48919623078).jpg",
+   "lic": "CC BY 2.0",
+   "artist": "MTA Capital Construction Mega Projects",
+   "alt": "터널 굴착기(TBM)의 커터헤드"
+  },
+  "videos": [
+   {
+    "id": "cCBBaWxtAxo",
+    "title": "\"위험한 작업, 로봇이 대신\"…건설현장도 로봇 딜레마 / 한국경제TV뉴스",
+    "ch": "한국경제TV뉴스",
+    "len": "2:14"
+   },
+   {
+    "id": "muaUCRVzL-Y",
+    "title": "힘든 일은 로봇한테 시킵니다. 자동화 시스템으로 “하루 네 채 뚝딱” 목수 대신 로봇이 짓는 목조주택 공장  | 목조주택 대량 생산 과정 | #극한직업 ",
+    "ch": "EBS 컬렉션 - 라이프스타일",
+    "len": "25:25"
+   }
+  ],
+  "links": [
+   [
+    "위키백과 · 건설",
+    "https://ko.wikipedia.org/wiki/%EA%B1%B4%EC%84%A4"
+   ],
+   [
+    "첨단 공학 탐험관 · 터널",
+    "../tech/#/f/tunnel"
+   ],
+   [
+    "한국건설기술연구원",
+    "https://www.kict.re.kr"
+   ]
+  ]
+ },
+ "2-3": {
+  "img": {
+   "thumb": "https://thumb.wikimedia.org/wikipedia/commons/thumb/7/71/Titan_FT35_FarmWise3.jpg/330px-Titan_FT35_FarmWise3.jpg",
+   "big": "https://thumb.wikimedia.org/wikipedia/commons/thumb/7/71/Titan_FT35_FarmWise3.jpg/960px-Titan_FT35_FarmWise3.jpg",
+   "page": "https://commons.wikimedia.org/wiki/File:Titan_FT35_FarmWise3.jpg",
+   "lic": "CC BY-SA 4.0",
+   "artist": "PaulineCant",
+   "alt": "밭에서 잡초를 제거하는 농업 로봇"
+  },
+  "videos": [
+   {
+    "id": "TcwxjTEn7wU",
+    "title": "[녹색] 사람 대신 24시간 딸기 수확...진화하는 농업용 로봇 / YTN",
+    "ch": " YTN",
+    "len": "1:48"
+   },
+   {
+    "id": "9KOcMpoTti4",
+    "title": "[녹색] 로봇이 농사 짓는다...'스마트팜 무인화' 현실로 / YTN",
+    "ch": " YTN",
+    "len": "2:11"
+   }
+  ],
+  "links": [
+   [
+    "위키백과 · 정밀 농업",
+    "https://ko.wikipedia.org/wiki/%EC%A0%95%EB%B0%80_%EB%86%8D%EC%97%85"
+   ],
+   [
+    "생명공학포털",
+    "https://www.bioin.or.kr"
+   ]
+  ]
+ },
+ "2-4": {
+  "img": {
+   "thumb": "https://thumb.wikimedia.org/wikipedia/commons/thumb/6/6f/Starship_robot_Maunonkatu_Oulu_20231125.jpg/330px-Starship_robot_Maunonkatu_Oulu_20231125.jpg",
+   "big": "https://thumb.wikimedia.org/wikipedia/commons/thumb/6/6f/Starship_robot_Maunonkatu_Oulu_20231125.jpg/960px-Starship_robot_Maunonkatu_Oulu_20231125.jpg",
+   "page": "https://commons.wikimedia.org/wiki/File:Starship_robot_Maunonkatu_Oulu_20231125.jpg",
+   "lic": "CC0",
+   "artist": "Estormiz",
+   "alt": "거리를 달리는 자율 주행 배달 로봇"
+  },
+  "videos": [
+   {
+    "id": "ufEiT1k2f6I",
+    "title": "[핫클립] 소비자와 자영업자 모두를 위한 자율주행 배달 로봇 / YTN 사이언스",
+    "ch": "YTN 사이언스",
+    "len": "3:58"
+   },
+   {
+    "id": "Zuk9Ht2Z8ow",
+    "title": "배달비 내가 줄인다… 길거리에 나타난 배달 로봇들｜크랩",
+    "ch": "크랩 KLAB",
+    "len": "5:25"
+   }
+  ],
+  "links": [
+   [
+    "위키백과 · 무인 자동차",
+    "https://ko.wikipedia.org/wiki/%EB%AC%B4%EC%9D%B8_%EC%9E%90%EB%8F%99%EC%B0%A8"
+   ],
+   [
+    "첨단 공학 탐험관 · 자율주행",
+    "../tech/#/f/autonomous"
+   ]
+  ]
+ },
+ "2-5": {
+  "img": {
+   "thumb": "https://thumb.wikimedia.org/wikipedia/commons/thumb/1/16/UR16e_robot_arm.png/330px-UR16e_robot_arm.png",
+   "big": "https://thumb.wikimedia.org/wikipedia/commons/thumb/1/16/UR16e_robot_arm.png/960px-UR16e_robot_arm.png",
+   "page": "https://commons.wikimedia.org/wiki/File:UR16e_robot_arm.png",
+   "lic": "CC BY-SA 4.0",
+   "artist": "Auledas",
+   "alt": "카메라와 센서로 물체를 집는 로봇 팔"
+  },
+  "videos": [
+   {
+    "id": "hEzZyjLZpm8",
+    "title": "[인공지능 기초] 딥러닝 영상인식, 컴퓨터비전 기술과 적용 사례!",
+    "ch": "한국딥러닝",
+    "len": "8:01"
+   },
+   {
+    "id": "YOKPo-I6cgs",
+    "title": "Why Computer Vision Is a Hard Problem for AI",
+    "ch": "Quanta Magazine",
+    "len": "8:39"
+   }
+  ],
+  "links": [
+   [
+    "위키백과 · 컴퓨터 비전",
+    "https://ko.wikipedia.org/wiki/%EC%BB%B4%ED%93%A8%ED%84%B0_%EB%B9%84%EC%A0%84"
+   ],
+   [
+    "첨단 공학 탐험관 · 5G·6G",
+    "../tech/#/f/mobile"
+   ]
+  ]
+ },
+ "2-6": {
+  "img": {
+   "thumb": "https://thumb.wikimedia.org/wikipedia/commons/thumb/3/39/SoftBank_Pepper_working_at_Heijo_Palace.jpg/330px-SoftBank_Pepper_working_at_Heijo_Palace.jpg",
+   "big": "https://thumb.wikimedia.org/wikipedia/commons/thumb/3/39/SoftBank_Pepper_working_at_Heijo_Palace.jpg/960px-SoftBank_Pepper_working_at_Heijo_Palace.jpg",
+   "page": "https://commons.wikimedia.org/wiki/File:SoftBank_Pepper_working_at_Heijo_Palace.jpg",
+   "lic": "CC BY-SA 4.0",
+   "artist": "Tokumeigakarinoaoshima",
+   "alt": "관광지에서 안내하는 감정 표현 로봇 페퍼"
+  },
+  "videos": [
+   {
+    "id": "NmeQdK0wsXY",
+    "title": "사람의 마음을 움직이는 감성 로봇 / YTN 사이언스",
+    "ch": "YTN 사이언스",
+    "len": "3:41"
+   },
+   {
+    "id": "BtBCiby3eDI",
+    "title": "최대 2억 넘는데 벌써 '1만 대' 주문..중국 '감성 로봇' 실물 보니 / SBS / #D리포트",
+    "ch": "SBS 뉴스",
+    "len": "2:01"
+   }
+  ],
+  "links": [
+   [
+    "위키백과 · 인간공학",
+    "https://ko.wikipedia.org/wiki/%EC%9D%B8%EA%B0%84%EA%B3%B5%ED%95%99"
+   ]
+  ]
+ },
+ "2-7": {
+  "img": {
+   "thumb": "https://thumb.wikimedia.org/wikipedia/commons/thumb/d/d7/Telepresence_robot_BotEyes_in_demo-room_03.jpg/330px-Telepresence_robot_BotEyes_in_demo-room_03.jpg",
+   "big": "https://thumb.wikimedia.org/wikipedia/commons/thumb/d/d7/Telepresence_robot_BotEyes_in_demo-room_03.jpg/960px-Telepresence_robot_BotEyes_in_demo-room_03.jpg",
+   "page": "https://commons.wikimedia.org/wiki/File:Telepresence_robot_BotEyes_in_demo-room_03.jpg",
+   "lic": "CC BY-SA 4.0",
+   "artist": "BotEyes.com",
+   "alt": "원격 대화를 돕는 텔레프레즌스 로봇"
+  },
+  "videos": [
+   {
+    "id": "3R7ys0mEmaI",
+    "title": "\"일자리 뺏을 거냐\" AI에 묻자…정교함에 창조자 놀랐다 / SBS 8뉴스",
+    "ch": "SBS 뉴스",
+    "len": "2:18"
+   },
+   {
+    "id": "h9nQNPXPWig",
+    "title": "“집사가 된 AI 로봇”…반려부터 노동까지, 로봇시대 온다 / KBS  2025.01.10.",
+    "ch": "KBS News",
+    "len": "2:12"
+   }
+  ],
+  "links": [
+   [
+    "위키백과 · 로봇 윤리",
+    "https://ko.wikipedia.org/wiki/%EB%A1%9C%EB%B4%87_%EC%9C%A4%EB%A6%AC"
+   ],
+   [
+    "모럴 머신 실험",
+    "https://www.moralmachine.net"
+   ]
+  ]
+ },
+ "3-1": {
+  "img": {
+   "thumb": "https://thumb.wikimedia.org/wikipedia/commons/thumb/d/de/Arduino_Uno_board.jpg/330px-Arduino_Uno_board.jpg",
+   "big": "https://thumb.wikimedia.org/wikipedia/commons/thumb/d/de/Arduino_Uno_board.jpg/960px-Arduino_Uno_board.jpg",
+   "page": "https://commons.wikimedia.org/wiki/File:Arduino_Uno_board.jpg",
+   "lic": "CC0",
+   "artist": "JrawX",
+   "alt": "아두이노 우노 보드"
+  },
+  "videos": [
+   {
+    "id": "BmINSZFZbxc",
+    "title": "[입문자 필수!] 아두이노 IDE 사용법 총정리 A to Zㅣ에듀이노",
+    "ch": "에듀이노EDUINO",
+    "len": "8:36"
+   },
+   {
+    "id": "Z5-riIUlNGA",
+    "title": "기초1- 아두이노 우노의 구조와 기능",
+    "ch": "제주아두이노",
+    "len": "3:18"
+   }
+  ],
+  "links": [
+   [
+    "위키백과 · 아두이노",
+    "https://ko.wikipedia.org/wiki/%EC%95%84%EB%91%90%EC%9D%B4%EB%85%B8"
+   ],
+   [
+    "아두이노 공식 사이트",
+    "https://www.arduino.cc"
+   ],
+   [
+    "엔트리",
+    "https://playentry.org"
+   ]
+  ]
+ },
+ "3-2": {
+  "img": null,
+  "videos": [
+   {
+    "id": "KlzLDnmeTSw",
+    "title": "[코딩교육] 프로그램의 논리를 표현하는 순서도(Flowchart) 기호 설명 - 알고리즘 algorithm",
+    "ch": "태지쌤",
+    "len": "4:35"
+   },
+   {
+    "id": "qqiKimA0koQ",
+    "title": "순차반복선택 이해",
+    "ch": "김SK",
+    "len": "3:36"
+   }
+  ],
+  "links": [
+   [
+    "위키백과 · 순서도",
+    "https://ko.wikipedia.org/wiki/%EC%88%9C%EC%84%9C%EB%8F%84"
+   ],
+   [
+    "엔트리",
+    "https://playentry.org"
+   ]
+  ]
+ },
+ "3-3": {
+  "img": {
+   "thumb": "https://thumb.wikimedia.org/wikipedia/commons/thumb/7/78/%D0%A0%D0%BE%D0%B1%D0%BE%D1%82%D1%81%D0%BA%D0%B0_%D1%80%D0%B0%D0%BA%D0%B0_%281%29.jpg/330px-%D0%A0%D0%BE%D0%B1%D0%BE%D1%82%D1%81%D0%BA%D0%B0_%D1%80%D0%B0%D0%BA%D0%B0_%281%29.jpg",
+   "big": "https://thumb.wikimedia.org/wikipedia/commons/thumb/7/78/%D0%A0%D0%BE%D0%B1%D0%BE%D1%82%D1%81%D0%BA%D0%B0_%D1%80%D0%B0%D0%BA%D0%B0_%281%29.jpg/960px-%D0%A0%D0%BE%D0%B1%D0%BE%D1%82%D1%81%D0%BA%D0%B0_%D1%80%D0%B0%D0%BA%D0%B0_%281%29.jpg",
+   "page": "https://commons.wikimedia.org/wiki/File:%D0%A0%D0%BE%D0%B1%D0%BE%D1%82%D1%81%D0%BA%D0%B0_%D1%80%D0%B0%D0%BA%D0%B0_(1).jpg",
+   "lic": "CC BY-SA 4.0",
+   "artist": "Луната1999",
+   "alt": "서보 모터로 만든 로봇 팔"
+  },
+  "videos": [
+   {
+    "id": "ADJGxOrEZAM",
+    "title": "How to Make Servo Robotic Arm using Arduino.",
+    "ch": "Namu Lab",
+    "len": "8:00"
+   },
+   {
+    "id": "Bmk1K_YWfEE",
+    "title": "아두이노 로봇팔 만들기 (서보모터, 조이스틱 사용)",
+    "ch": "비피랩 미래교육연구소 BPLab",
+    "len": "13:57"
+   }
+  ],
+  "links": [
+   [
+    "위키백과 · 로봇 팔",
+    "https://ko.wikipedia.org/wiki/%EB%A1%9C%EB%B4%87_%ED%8C%94"
+   ],
+   [
+    "아두이노 공식 사이트",
+    "https://www.arduino.cc"
+   ]
+  ]
+ }
+};
+
+
+const COURSES = [
+  {id:"ai", name:"인공지능 기초", href:"../ai/", color:"#12B886"},
+  {id:"design", name:"창의 공학 설계", href:"../design/", color:"#228BE6"},
+  {id:"robot", name:"로봇과 공학세계", href:"../robot/", color:"#7048E8"},
+  {id:"tech", name:"첨단 공학 탐험관", href:"../tech/", color:"#F59F00"}
+];
 const BADGES = [
   {id:"first", m:"1", name:"첫걸음", how:"첫 계단 통과"},
   {id:"oneshot", m:"✓", name:"한 번에 통과", how:"시험 첫 도전에 80점 이상"},
@@ -609,30 +1127,35 @@ const BADGES = [
   {id:"grad", m:"★", name:"졸업", how:"모든 레슨 완료"}
 ];
 const XP = {step:10, cards:20, pass:50, perfect:20};
+const KEY = COURSE.key;
 
 /* ---------- state ---------- */
-const KEY = "robot-stairs-v1";
-const fresh = () => ({v:1, xp:0, les:{}, badges:[], streak:{last:null, n:0}});
-let S = (() => { try { const s = JSON.parse(localStorage.getItem(KEY)); if (s && s.v === 1) return s; } catch(e){} return fresh(); })();
+const fresh = () => ({v:1, xp:0, les:{}, badges:[], streak:{last:null, n:0}, wrong:{}});
+let S = (() => { try { const s = JSON.parse(localStorage.getItem(KEY)); if (s && s.v === 1) { s.wrong = s.wrong || {}; return s; } } catch(e){} return fresh(); })();
 const save = () => { try { localStorage.setItem(KEY, JSON.stringify(S)); } catch(e){} };
 const L = id => S.les[id] || (S.les[id] = {steps:0, cards:false, best:null, passed:false, tries:0});
 const lessonById = id => LESSONS.find(l => l.id === id);
 const unitById = id => UNITS.find(u => u.id === id);
 const isPassed = id => !!(S.les[id] && S.les[id].passed);
-
+const esc = s => String(s).replace(/[&<>"]/g, m => ({"&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;"}[m]));
 const dayStr = d => d.getFullYear()+"-"+String(d.getMonth()+1).padStart(2,"0")+"-"+String(d.getDate()).padStart(2,"0");
-(function streak(){
+
+/* streak counts days with real learning (a solved step or a test), not visits */
+function studied(){
   const today = dayStr(new Date()), y = new Date(); y.setDate(y.getDate()-1);
   if (S.streak.last === today) return;
   S.streak.n = S.streak.last === dayStr(y) ? S.streak.n + 1 : 1;
   S.streak.last = today;
-  if (S.streak.n >= 3 && !S.badges.includes("streak")) S.badges.push("streak");
-  save();
-})();
+  if (S.streak.n >= 3) badge("streak");
+}
+function streakNow(){
+  const today = dayStr(new Date()), y = new Date(); y.setDate(y.getDate()-1);
+  return S.streak.last === today || S.streak.last === dayStr(y) ? S.streak.n : 0;
+}
 
 /* ---------- transient UI ---------- */
 let view = {name:"home"};
-const ui = {wrong:{}, cards:{}, test:{}, mx:[[3,3,2],[3,2,2],[2,3,1]], sv:90, confirmReset:false};
+const ui = {wrong:{}, cards:{}, test:{}, pc:{meat:1, dessert:0, soup:1}, mx:[[3,3,2],[3,2,2],[2,3,1]], sv:90, confirmReset:false};
 const orders = new Map();
 function order(key, n){
   if (!orders.has(key)) { const a = [...Array(n).keys()]; for (let i=n-1;i>0;i--){const j=Math.floor(Math.random()*(i+1)); [a[i],a[j]]=[a[j],a[i]];} orders.set(key,a); }
@@ -644,99 +1167,76 @@ function toast(html){
   const t = document.createElement("div"); t.className = "toast"; t.innerHTML = html;
   document.getElementById("toasts").appendChild(t); setTimeout(() => t.remove(), 2600);
 }
+function lvl(xp){ let i = 0; LEVELS.forEach((l,k) => { if (xp >= l[0]) i = k; }); return i; }
 function addXP(n, why){ const before = lvl(S.xp); S.xp += n; toast(`<b>+${n} XP</b> ${why}`); if (lvl(S.xp) > before) toast(`레벨 업! <b>Lv.${lvl(S.xp)+1} ${LEVELS[lvl(S.xp)][1]}</b>`); }
 function badge(id){ if (S.badges.includes(id)) return; S.badges.push(id); const b = BADGES.find(x=>x.id===id); toast(`배지 획득 <b>${b.name}</b>`); }
-function lvl(xp){ let i = 0; LEVELS.forEach((l,k) => { if (xp >= l[0]) i = k; }); return i; }
 function checkCompletion(){
-  UNITS.forEach(u => { const ls = LESSONS.filter(l => l.unit === u.id); if (ls.every(l => isPassed(l.id))) badge("unit"); });
+  UNITS.forEach(u => { if (LESSONS.filter(l => l.unit === u.id).every(l => isPassed(l.id))) badge("unit"); });
   if (LESSONS.every(l => isPassed(l.id))) badge("grad");
 }
+function wrongCount(){ return Object.values(S.wrong).reduce((a, l) => a + l.length, 0); }
 
 /* ---------- views ---------- */
 const OPTN = ["①","②","③","④"];
+const med = id => (typeof MEDIA !== "undefined" && MEDIA[id]) || null;
 
 function header(){
-  const i = lvl(S.xp);
-  return `<button class="brand" data-act="home" aria-label="홈으로"><span class="logo"><i></i><i></i><i></i></span>로봇 공학 계단 교실</button>
-  <nav class="nav"><button data-act="home" aria-current="${view.name!=="glossary"}">레슨</button><button data-act="glossary" aria-current="${view.name==="glossary"}">용어 사전</button><a class="sw" href="../">← 교실 홈</a></nav>
-  <div class="me"><span class="lv">Lv.${i+1} ${LEVELS[i][1]}</span><span class="num xp-txt">${S.xp} XP</span>
-  <button class="theme" data-act="theme" aria-label="밝게/어둡게 바꾸기">◐</button></div>`;
+  const i = lvl(S.xp), wc = wrongCount();
+  return `<details class="course"><summary><span class="mark">${esc(COURSE.short)}</span><span><b>${esc(COURSE.name)}</b><small>우리 반 AI·공학 교실</small></span><span class="chev">▾</span></summary>
+    <div class="menu">${COURSES.map(c => `<a href="${c.href}" ${c.id===COURSE.id?'aria-current="page"':""}><i style="background:${c.color}"></i>${c.name}</a>`).join("")}<hr><a href="../">← 교실 홈</a></div></details>
+  <nav class="nav"><button data-act="home" aria-current="${view.name==="home"||view.name==="lesson"}">레슨</button><button data-act="glossary" aria-current="${view.name==="glossary"}">용어 사전</button><button data-act="review" aria-current="${view.name==="review"}">오답 노트${wc?`<span class="cnt">${wc}</span>`:""}</button></nav>
+  <div class="me"><span class="lv">Lv.${i+1} ${LEVELS[i][1]}</span><button class="icon-btn" data-act="fs" aria-label="글자 크기 바꾸기" title="글자 크기">가+</button><button class="icon-btn" data-act="theme" aria-label="밝게/어둡게 바꾸기" title="밝게/어둡게">◐</button></div>`;
 }
 
 function nextLesson(){ return LESSONS.find(l => !isPassed(l.id)) || LESSONS[0]; }
 
+function lessonRow(l){
+  const s = S.les[l.id] || {}, m = med(l.id);
+  const dots = [0,1,2].map(k => `<i class="${(s.steps||0)>k?"on":""}"></i>`).join("") + `<i class="${s.cards?"on":""}"></i><i class="${s.passed?"on":""}"></i>`;
+  return `<button class="les" data-act="open" data-id="${l.id}">
+    <span class="th">${m && m.img ? `<img src="${m.img.thumb}" alt="" loading="lazy">` : ""}</span>
+    <span class="t"><span class="code">${l.id}</span><b>${esc(l.title)}</b><small>${esc(l.sub)}</small>
+      <span class="dots" aria-label="진행 상황">${dots}${s.passed ? `<span class="score">${s.best}점</span>` : ""}</span></span></button>`;
+}
+
 function home(){
-  const done = LESSONS.filter(l => isPassed(l.id)).length;
-  const started = Object.keys(S.les).length > 0;
-  const nx = nextLesson();
+  const done = LESSONS.filter(l => isPassed(l.id)).length, started = Object.keys(S.les).length > 0, nx = nextLesson();
   const i = lvl(S.xp), nextLv = LEVELS[i+1];
   const pct = nextLv ? Math.round((S.xp - LEVELS[i][0]) / (nextLv[0] - LEVELS[i][0]) * 100) : 100;
   return `
   <section class="hero">
-    <div>
-      <p class="eyebrow">고등학교 로봇과 공학세계 · 레슨 ${LESSONS.length}개</p>
-      <h1>한 계단씩 오르는<br>로봇과 공학세계</h1>
-      <p class="lead">짧은 이야기로 궁금증을 만들고, 계단마다 확인문제를 풀며 올라가요. 레슨을 마칠 때마다 XP와 배지를 모아요.</p>
-      <div class="hero-cta">
-        <button class="btn primary" data-act="open" data-id="${nx.id}">${started ? "이어서 하기" : "첫 레슨 시작하기"} →</button>
-        <span class="hero-meta num">${done}/${LESSONS.length} 레슨 완료</span>
-      </div>
-    </div>
-    <div>
-      <div class="stairs" role="img" aria-label="레슨 ${LESSONS.length}개 중 ${done}개 완료">
-        ${LESSONS.map((l,k) => `<span class="stair ${isPassed(l.id)?"on":""} ${l.id===nx.id && done<LESSONS.length?"cur":""}" style="--h:${(k+1)*6/LESSONS.length}">${k+1}</span>`).join("")}
-      </div>
-      <p class="stairs-cap">레슨을 하나 마칠 때마다 계단이 한 칸씩 채워져요</p>
-    </div>
+    <div><p class="eyebrow">${esc(COURSE.eyebrow)} · 레슨 ${LESSONS.length}개</p>
+      <h1>한 계단씩 오르는<br>${esc(COURSE.name)}</h1>
+      <p class="lead">짧은 이야기로 궁금증을 만들고, 사진과 영상으로 보고, 계단마다 확인문제를 풀며 올라가요.</p>
+      <div class="hero-cta"><button class="btn primary" data-act="open" data-id="${nx.id}">${started ? "이어서 하기" : "첫 레슨 시작하기"} →</button>
+        <small>${done < LESSONS.length ? `다음: <b>${nx.id} ${esc(nx.title)}</b>` : "모든 레슨을 마쳤어요! 복습해 볼까요?"}</small></div></div>
+    <div class="stairs" role="img" aria-label="레슨 ${LESSONS.length}개 중 ${done}개 완료">
+      ${LESSONS.map((l,k) => `<span class="stair ${isPassed(l.id)?"on":""} ${l.id===nx.id && done<LESSONS.length?"cur":""}" style="--h:${(k+1)/LESSONS.length}">${k+1}</span>`).join("")}</div>
   </section>
-
+  <div class="stats">
+    <div class="stat"><small>레벨</small><b>Lv.${i+1} ${LEVELS[i][1]}</b><div class="bar"><i style="width:${pct}%"></i></div></div>
+    <div class="stat"><small>경험치</small><b class="num">${S.xp} XP</b><small>${nextLv ? `다음 레벨까지 ${nextLv[0]-S.xp} XP` : "최고 레벨"}</small></div>
+    <div class="stat"><small>연속 학습</small><b>🔥 ${streakNow()}일</b><small>계단을 풀거나 시험을 본 날만 세요</small></div>
+    <div class="stat"><small>완료한 레슨</small><b class="num">${done} / ${LESSONS.length}</b><div class="bar"><i style="width:${done/LESSONS.length*100}%"></i></div></div>
+  </div>
   <ol class="flow">
-    <li><b>1</b><strong>짧은 이야기</strong><span>일상 속 장면으로 궁금증 만들기</span></li>
-    <li><b>2</b><strong>계단 오르기</strong><span>확인문제를 맞히면 다음 칸이 열려요</span></li>
-    <li><b>3</b><strong>용어 카드</strong><span>용어와 뜻을 짝지어요</span></li>
-    <li><b>4</b><strong>10문제 시험</strong><span>80점 이상이면 레슨 통과</span></li>
+    <li><b>1</b><div><strong>이야기·영상</strong><span>장면과 영상으로 궁금증 만들기</span></div></li>
+    <li><b>2</b><div><strong>계단 오르기</strong><span>확인문제를 맞히면 다음 칸이 열려요</span></div></li>
+    <li><b>3</b><div><strong>용어 카드</strong><span>용어와 뜻을 짝지어요</span></div></li>
+    <li><b>4</b><div><strong>10문제 시험</strong><span>80점 이상이면 통과, 틀린 문제는 오답 노트로</span></div></li>
   </ol>
-
-  <section>
-    <div class="sec-h"><h2>내 기록</h2><small class="num">🔥 ${S.streak.n}일 연속 학습</small></div>
-    <div class="card rec">
-      <div>
-        <div class="rec-lv">Lv.${i+1} ${LEVELS[i][1]}</div>
-        <div class="rec-sub num">${S.xp} XP</div>
-        <div class="bar"><i style="width:${pct}%"></i></div>
-        <div class="rec-sub">${nextLv ? `다음 레벨(${nextLv[1]})까지 <span class="num">${nextLv[0]-S.xp}</span> XP` : "최고 레벨이에요"}</div>
-      </div>
-      <div class="badges">
-        ${BADGES.map(b => `<div class="badge ${S.badges.includes(b.id)?"on":""}"><span class="m">${b.m}</span><div><strong>${b.name}</strong><span>${b.how}</span></div></div>`).join("")}
-      </div>
-    </div>
-  </section>
-
-  <section>
-    <div class="sec-h"><h2>대단원</h2><small>레슨을 눌러 시작해요</small></div>
-    <div class="units">
-    ${UNITS.map(u => `
-      <div class="unit">
-        <div class="unit-no">${u.no}</div>
-        <div>
-          <h3>${u.title}</h3><p>${u.desc}</p>
-          ${LESSONS.filter(l => l.unit === u.id).map(l => {
-            const s = S.les[l.id];
-            const chip = s && s.passed ? `<span class="chip done">완료 · ${s.best}점</span>` : s && s.steps > 0 ? `<span class="chip go">계단 ${s.steps}/3</span>` : `<span class="chip">시작 전</span>`;
-            return `<button class="les" data-act="open" data-id="${l.id}"><span class="code">${l.id}</span><span class="t">${l.title}<small>${l.sub}</small></span>${chip}</button>`;
-          }).join("")}
-        </div>
-      </div>`).join("")}
-    </div>
-  </section>
-
+  <div class="sec-h"><h2>대단원</h2><small>레슨을 눌러 시작해요</small></div>
+  <div class="units">${UNITS.map(u => `<section>
+      <div class="unit-h"><span class="no">${u.no}</span><h3>${esc(u.title)}</h3></div><p class="unit-d">${esc(u.desc)}</p>
+      <div class="les-list">${LESSONS.filter(l => l.unit === u.id).map(lessonRow).join("")}</div></section>`).join("")}</div>
+  <div class="sec-h"><h2>배지</h2><small>${S.badges.length} / ${BADGES.length}</small></div>
+  <div class="badges">${BADGES.map(b => `<div class="badge ${S.badges.includes(b.id)?"on":""}"><div class="m">${b.m}</div><strong>${b.name}</strong><span>${b.how}</span></div>`).join("")}</div>
   <div class="reset">${ui.confirmReset
     ? `기록을 모두 지울까요? 되돌릴 수 없어요. <button class="btn ghost" data-act="reset-yes">모두 지우기</button><button class="linkish" data-act="reset-no">취소</button>`
     : `<button class="linkish" data-act="reset">기록 모두 지우기</button>`}</div>`;
 }
 
 function quizBlock(key, q, opts){
-  // opts: {solved, wrong:Set, act, data}
   const ord = order(key, q.o.length);
   return `<div class="opts">${ord.map((oi,k) => {
     const cls = opts.solved && oi === q.a ? "right" : opts.wrong.has(oi) ? "wrong" : "";
@@ -744,28 +1244,53 @@ function quizBlock(key, q, opts){
   }).join("")}</div>`;
 }
 
+/* ---------- widgets ---------- */
+function perceptron(){
+  const p = ui.pc, w = {meat:.6, dessert:.2, soup:.3}, b = -.5;
+  const sum = p.meat*w.meat + p.dessert*w.dessert + p.soup*w.soup + b, out = sum > 0 ? 1 : 0;
+  const tog = (k, label) => `<button class="tog" data-act="pc" data-k="${k}" aria-pressed="${!!p[k]}">${label}<span class="num">w=${w[k]}</span></button>`;
+  return `<div class="pc"><span class="tag">직접 계산해 봐요</span>
+    <div class="pc-in">${tog("meat","고기 반찬")}${tog("dessert","디저트")}${tog("soup","따뜻한 국")}</div>
+    <div class="pc-out num">가중합 = ${p.meat}×0.6 + ${p.dessert}×0.2 + ${p.soup}×0.3 − 0.5 = ${sum.toFixed(1)}<br>출력 → <span class="res">${out} (${out ? "맛있음" : "아쉬움"})</span></div></div>`;
+}
 function matrix(){
-  const ideas = ["A 컨베이어 벨트 분류기","B 로봇 팔 분류기","C 압축 로봇"], crit = ["기능","비용","제작 난이도"], lab = ["","미흡","보통","우수"];
+  const cfg = COURSE.matrix || {ideas:["A","B","C"], crit:["기준1","기준2","기준3"]}, lab = ["","미흡","보통","우수"];
   const tot = ui.mx.map(r => r.reduce((a,b) => a+b, 0)), best = Math.max(...tot);
   return `<div class="pc"><span class="tag">직접 채점해 봐요 · 칸을 누르면 점수가 바뀌어요</span>
-    <div class="pc-out"><table class="mx"><thead><tr><th>아이디어</th>${crit.map(c => `<th>${c}</th>`).join("")}<th>총점</th></tr></thead><tbody>
-    ${ui.mx.map((r,i) => `<tr class="${tot[i]===best?"best":""}"><th>${ideas[i]}</th>${r.map((v,j) => `<td><button class="tog" data-act="mx" data-i="${i}" data-j="${j}">${lab[v]}<span class="num">${v}</span></button></td>`).join("")}<td class="num">${tot[i]}</td></tr>`).join("")}
-    </tbody></table></div>
-    <p class="pc-res">평가 행렬 결과, 가장 알맞은 아이디어: <b>${ideas[tot.indexOf(best)]}</b></p></div>`;
+    <div class="pc-out"><table class="mx"><thead><tr><th>아이디어</th>${cfg.crit.map(c => `<th>${c}</th>`).join("")}<th>총점</th></tr></thead><tbody>
+    ${ui.mx.map((r,i) => `<tr class="${tot[i]===best?"best":""}"><th>${cfg.ideas[i]}</th>${r.map((v,j) => `<td><button class="tog" data-act="mx" data-i="${i}" data-j="${j}">${lab[v]}<span class="num">${v}</span></button></td>`).join("")}<td class="num">${tot[i]}</td></tr>`).join("")}
+    </tbody></table></div><p class="pc-res">평가 행렬 결과, 가장 알맞은 아이디어: <b>${cfg.ideas[tot.indexOf(best)]}</b></p></div>`;
 }
-
 function servo(){
   const a = ui.sv, state = a <= 60 ? "꽉 쥠" : a <= 120 ? "반쯤 열림" : "활짝 열림";
   return `<div class="pc"><span class="tag">직접 움직여 봐요 · 서보 모터로 집게 각도 바꾸기</span>
     <div class="pc-in">${[0,45,90,135,180].map(v => `<button class="tog" data-act="sv" data-v="${v}" aria-pressed="${a===v}">${v}°</button>`).join("")}</div>
     <div class="pc-out num">gripServo.write(${a});<br>집게 상태 → <span class="res">${state}</span></div></div>`;
 }
+const WIDGETS = {perceptron, matrix, servo};
+
+function mediaBlock(l){
+  const m = med(l.id); if (!m) return "";
+  const vids = (m.videos || []).map(v => `<div class="vid">
+      <div class="frame" id="v-${v.id}"><img src="https://i.ytimg.com/vi/${v.id}/hqdefault.jpg" alt="" loading="lazy">
+        <button class="play" data-act="play" data-v="${v.id}" aria-label="${esc(v.title)} 재생"><span></span></button>${v.len ? `<span class="len">${v.len}</span>` : ""}</div>
+      <div class="info"><b>${esc(v.title)}</b><span>${esc(v.ch)}</span><a href="https://www.youtube.com/watch?v=${v.id}" target="_blank" rel="noopener">YouTube에서 보기 ↗</a></div></div>`).join("");
+  const links = (m.links || []).map(k => `<a href="${k[1]}" target="_blank" rel="noopener">${esc(k[0])} ↗</a>`).join("");
+  return `<section class="card media" id="sec-media"><span class="tag">보고 이해하기 · 사진과 영상</span>
+    ${m.img ? `<figure class="photo"><img src="${m.img.big}" alt="${esc(m.img.alt || l.title)}" loading="lazy"><figcaption>${esc(m.img.alt || "")} · 사진: ${esc(m.img.artist || "작가 미상")} · ${esc(m.img.lic)} · <a href="${m.img.page}" target="_blank" rel="noopener">위키미디어 공용</a></figcaption></figure>` : ""}
+    ${vids ? `<div class="videos">${vids}</div>` : ""}
+    ${links ? `<div><p class="lock" style="margin-bottom:8px">더 알아보기</p><div class="links">${links}</div></div>` : ""}</section>`;
+}
+
+function lessonProgress(id){
+  const l = lessonById(id), s = L(id);
+  return (Math.min(s.steps, l.steps.length) + (s.cards?1:0) + (s.passed?1:0)) / (l.steps.length + 2);
+}
 
 function lesson(id){
   const l = lessonById(id), s = L(id), u = unitById(l.unit);
   const idx = LESSONS.indexOf(l), prev = LESSONS[idx-1], next = LESSONS[idx+1];
   const stairsDone = s.steps >= l.steps.length;
-
   const steps = l.steps.map((st, k) => {
     const n = `${k+1}계단`;
     if (k > s.steps) return `<div class="card step locked" id="step-${k}"><div class="step-h"><b>${n}</b><h3>${st.t}</h3></div><p class="note">앞 계단의 확인문제를 맞히면 열려요.</p></div>`;
@@ -774,44 +1299,37 @@ function lesson(id){
       <div class="step-h"><b>${n}</b><h3>${st.t}</h3></div>
       ${st.p ? `<p class="intro">${st.p}</p>` : ""}
       <ul>${st.li.map(x => `<li>${x}</li>`).join("")}</ul>
-      ${st.widget === "matrix" ? matrix() : st.widget === "servo" ? servo() : ""}
+      ${st.widget && WIDGETS[st.widget] ? WIDGETS[st.widget]() : ""}
       ${st.key ? `<div class="key"><b>꼭 기억해요</b>${st.key}</div>` : ""}
-      <div class="quiz"><span class="tag">확인문제 · 맞히면 다음 계단이 열려요</span>
-        <p class="qq">${st.q.q}</p>
+      <div class="quiz"><p class="qq">확인문제 · ${st.q.q}</p>
         ${quizBlock(wk, st.q, {solved, wrong, act:"step", data:`data-id="${id}" data-k="${k}"`})}
-        ${solved ? `<p class="fb ok">정답이에요! ${st.q.why}</p>` : wrong.size ? `<p class="fb no">아쉬워요. 위 설명을 다시 읽고 골라 봐요.</p>` : ""}
-      </div></div>`;
+        ${solved ? `<p class="fb ok">정답이에요! ${st.q.why}</p>` : wrong.size ? `<p class="fb no">아쉬워요. 위 설명을 다시 읽고 골라 봐요.</p>` : ""}</div></div>`;
   }).join("");
-
   const pips = l.steps.map((st,k) => `<span class="pip ${s.steps>k?"done":s.steps===k?"cur":""}">${s.steps>k?"✓ ":""}${k+1}계단</span>`).join("");
-
-  return `
-  <div class="l-head">
-    <div class="crumb"><button data-act="home">로봇 공학 계단 교실</button><span>›</span><span>${u.no}. ${u.title}</span><span>›</span><span class="num">${l.id}</span></div>
-    <h1>${l.title}</h1><p class="sub">${l.sub}</p>
-  </div>
-
-  <section class="card"><span class="tag">이번 레슨의 목표</span><ul class="goals">${l.goals.map(g => `<li>${g}</li>`).join("")}</ul></section>
-
-  <section class="story"><span class="tag">이야기 · 먼저 읽어 봐요</span><h2>${l.story.title}</h2>
-    ${l.story.p.map(p => `<p>${p}</p>`).join("")}<p class="q">${l.story.q}</p></section>
-
-  <section><div class="sec-h"><h2>계단 오르기</h2><small>${l.steps.length}칸을 한 칸씩</small></div>
-    <div class="pips">${pips}</div><div class="steps">${steps}</div></section>
-
-  <section class="card"><span class="tag">정리 · 한 줄씩 다시 보기</span>
-    ${stairsDone ? `<ul class="sumlist">${l.summary.map(x => `<li>${x}</li>`).join("")}</ul>` : `<p class="lock">계단을 모두 오르면 열려요.</p>`}</section>
-
-  <section class="card" id="cards"><span class="tag">게임 · 용어 카드 짝 맞추기</span>
-    ${stairsDone ? cardGame(l) : `<p class="lock">계단을 모두 오르면 열려요.</p>`}</section>
-
-  <section class="card" id="test"><span class="tag">시험 · 10문제, 80점 이상이면 통과</span>
-    ${stairsDone ? testBlock(l) : `<p class="lock">계단을 모두 오르면 열려요. 시험에서 80점 이상을 받으면 이 레슨이 완료돼요.</p>`}</section>
-
-  <nav class="foot-nav">
-    ${prev ? `<button class="btn ghost" data-act="open" data-id="${prev.id}"><small>← 이전 레슨</small>${prev.title}</button>` : ""}
-    ${next ? `<button class="btn ghost next" data-act="open" data-id="${next.id}"><small>다음 레슨 →</small>${next.title}</button>` : `<button class="btn ghost next" data-act="home"><small>마지막 레슨이에요</small>홈으로</button>`}
-  </nav>`;
+  const tocItem = (href, label, done, locked) => `<a href="#${href}" data-jump="${href}" class="${done?"done":""} ${locked?"lock":""}"><i>${done?"✓":""}</i>${label}</a>`;
+  const toc = `<nav class="toc" aria-label="레슨 차례"><a class="back" href="#" data-act="home">← 레슨 목록</a>
+    ${tocItem("sec-goals","이번 레슨의 목표", true)}${tocItem("sec-story","이야기", true)}${med(id)?tocItem("sec-media","사진과 영상", true):""}
+    ${l.steps.map((st,k) => tocItem("step-"+k, `${k+1}계단 · ${st.t}`, s.steps>k, k > s.steps)).join("")}
+    ${tocItem("sec-sum","정리", stairsDone, !stairsDone)}${tocItem("cards","용어 카드", s.cards, !stairsDone)}${tocItem("test","10문제 시험", s.passed, !stairsDone)}</nav>`;
+  return `<div class="lesson">${toc}<div class="lmain">
+    <div class="l-head"><div class="crumb"><button data-act="home">${esc(COURSE.name)}</button><span>›</span><span>${u.no}. ${esc(u.title)}</span><span>›</span><span class="num">${l.id}</span></div>
+      <h1>${esc(l.title)}</h1><p class="sub">${esc(l.sub)}</p></div>
+    <section class="card" id="sec-goals"><span class="tag">이번 레슨의 목표</span><ul class="goals">${l.goals.map(g => `<li>${g}</li>`).join("")}</ul></section>
+    <section class="story" id="sec-story"><span class="tag">이야기 · 먼저 읽어 봐요</span><h2>${l.story.title}</h2>
+      ${l.story.p.map(p => `<p>${p}</p>`).join("")}<p class="q">🤔 ${l.story.q}</p></section>
+    ${mediaBlock(l)}
+    <section><div class="sec-h" style="margin-top:6px"><h2>계단 오르기</h2><small>${l.steps.length}칸을 한 칸씩</small></div>
+      <div class="pips">${pips}</div><div class="steps">${steps}</div></section>
+    <section class="card" id="sec-sum"><span class="tag">정리 · 한 줄씩 다시 보기</span>
+      ${stairsDone ? `<ul class="sumlist">${l.summary.map(x => `<li>${x}</li>`).join("")}</ul>` : `<p class="lock">🔒 계단을 모두 오르면 열려요.</p>`}</section>
+    <section class="card step" id="cards"><span class="tag">게임 · 용어 카드 짝 맞추기</span>
+      ${stairsDone ? cardGame(l) : `<p class="lock">🔒 계단을 모두 오르면 열려요.</p>`}</section>
+    <section class="card step" id="test"><span class="tag">시험 · 10문제, 80점 이상이면 통과</span>
+      ${stairsDone ? testBlock(l) : `<p class="lock">🔒 계단을 모두 오르면 열려요. 80점 이상을 받으면 레슨이 완료돼요.</p>`}</section>
+    <nav class="foot-nav">
+      ${prev ? `<button class="btn ghost" data-act="open" data-id="${prev.id}"><small>← 이전 레슨</small>${esc(prev.title)}</button>` : ""}
+      ${next ? `<button class="btn ghost next" data-act="open" data-id="${next.id}"><small>다음 레슨 →</small>${esc(next.title)}</button>` : `<button class="btn ghost next" data-act="home"><small>마지막 레슨이에요</small>레슨 목록으로</button>`}
+    </nav></div></div>`;
 }
 
 function cardGame(l){
@@ -820,12 +1338,12 @@ function cardGame(l){
   const n = l.cards.length, to = order("ct"+l.id, n), dor = order("cd"+l.id, n);
   const cls = (side, i) => g.got.includes(i) ? "got" : g.bad && g.bad[side] === i ? "bad" : g.sel && g.sel.side === side && g.sel.i === i ? "sel" : "";
   const all = g.got.length === n;
-  return `<p style="margin-bottom:12px;color:var(--muted);font-size:14px">왼쪽 용어를 누르고, 알맞은 뜻을 눌러 짝을 지어요.</p>
+  return `<p class="lock" style="margin-bottom:12px">왼쪽 용어를 누르고, 알맞은 뜻을 눌러 짝을 지어요.</p>
   <div class="match">
     <div>${to.map(i => `<button class="mc term ${cls("t",i)}" data-act="card" data-id="${l.id}" data-side="t" data-i="${i}" ${g.got.includes(i)?"disabled":""}>${l.cards[i][0]}</button>`).join("")}</div>
     <div>${dor.map(i => `<button class="mc ${cls("d",i)}" data-act="card" data-id="${l.id}" data-side="d" data-i="${i}" ${g.got.includes(i)?"disabled":""}>${l.cards[i][1]}</button>`).join("")}</div>
   </div>
-  ${all ? `<p class="fb ok">모든 짝을 맞혔어요! <button class="linkish" data-act="card-again" data-id="${l.id}">다시 하기</button></p>` : `<p class="fb num" style="color:var(--muted)">${g.got.length}/${n} 짝 완성</p>`}`;
+  ${all ? `<p class="fb ok">모든 짝을 맞혔어요! <button class="linkish" data-act="card-again" data-id="${l.id}">다시 하기</button></p>` : `<p class="fb num lock">${g.got.length}/${n} 짝 완성</p>`}`;
 }
 
 function testQs(l){ return [...l.steps.map(s => s.q), ...l.test]; }
@@ -833,46 +1351,54 @@ function testQs(l){ return [...l.steps.map(s => s.q), ...l.test]; }
 function testBlock(l){
   const s = L(l.id);
   const t = ui.test[l.id] || (ui.test[l.id] = {seed:0, ans:{}, done:false, score:0});
-  const qs = testQs(l), qo = order("tq"+l.id+"-"+t.seed, qs.length);
-  const answered = Object.keys(t.ans).length;
+  const qs = testQs(l), qo = order("tq"+l.id+"-"+t.seed, qs.length), answered = Object.keys(t.ans).length;
   let head = "";
   if (t.done) {
-    const pass = t.score >= 80;
+    const pass = t.score >= 80, nWrong = qs.filter((q, qi) => t.ans[qi] !== q.a).length;
     head = `<div class="result ${pass?"pass":"fail"}"><span class="score">${t.score}점</span>
-      <div><strong>${pass ? "통과했어요! 레슨 완료" : "아쉬워요. 80점부터 통과예요"}</strong><br>
-      <span style="font-size:14px;color:var(--muted)">틀린 문제의 정답을 아래에서 확인하고 다시 도전해 봐요.</span></div>
+      <div><strong>${pass ? "🎉 통과했어요! 레슨 완료" : "아쉬워요. 80점부터 통과예요"}</strong><br>
+      <span class="lock">${nWrong ? `틀린 ${nWrong}문제는 오답 노트에 담았어요. 아래에서 정답을 확인해요.` : "모두 맞혔어요!"}</span></div>
       <button class="btn ghost" data-act="retest" data-id="${l.id}">다시 풀기</button></div>`;
-  } else if (s.passed) {
-    head = `<p class="fb ok" style="margin:0 0 8px">이미 통과한 레슨이에요 (최고 ${s.best}점). 다시 풀어도 좋아요.</p>`;
-  }
+  } else if (s.passed) head = `<p class="fb ok" style="margin:0 0 8px">이미 통과한 레슨이에요 (최고 ${s.best}점). 다시 풀어도 좋아요.</p>`;
   const body = qo.map((qi, k) => {
-    const q = qs[qi], key = `t${l.id}-${t.seed}-${qi}`, ord = order(key, q.o.length), pick = t.ans[qi];
+    const q = qs[qi], ord = order(`t${l.id}-${t.seed}-${qi}`, q.o.length), pick = t.ans[qi];
     return `<div class="tq"><p class="qq"><span class="num">${String(k+1).padStart(2,"0")}</span>${q.q}</p><div class="opts">
       ${ord.map((oi, j) => {
-        let c = "";
-        if (t.done) c = oi === q.a ? "right" : oi === pick ? "wrong" : "";
-        else if (pick === oi) c = "sel";
+        let c = ""; if (t.done) c = oi === q.a ? "right" : oi === pick ? "wrong" : ""; else if (pick === oi) c = "sel";
         return `<button class="opt ${c}" data-act="tpick" data-id="${l.id}" data-q="${qi}" data-i="${oi}" ${t.done?"disabled":""}><span class="n">${OPTN[j]}</span><span>${q.o[oi]}</span></button>`;
       }).join("")}</div></div>`;
   }).join("");
   const submit = t.done ? "" : `<div style="display:flex;align-items:center;gap:12px;margin-top:16px;flex-wrap:wrap">
     <button class="btn primary" data-act="submit" data-id="${l.id}" ${answered < qs.length ? "disabled" : ""}>채점하기</button>
-    <span class="num" style="color:var(--muted);font-size:14px">${answered}/${qs.length} 답함</span></div>`;
+    <span class="num lock">${answered}/${qs.length} 답함</span></div>`;
   return head + body + submit;
 }
 
 function glossary(){
-  const rows = LESSONS.flatMap(l => l.cards.map(c => ({t:c[0], d:c[1], l})))
-    .sort((a,b) => a.t.localeCompare(b.t, "ko"));
+  const rows = LESSONS.flatMap(l => l.cards.map(c => ({t:c[0], d:c[1], l}))).sort((a,b) => a.t.localeCompare(b.t, "ko"));
   return `<div class="l-head"><h1>용어 사전</h1><p class="sub">모든 레슨의 용어 ${rows.length}개를 가나다순으로 모았어요.</p></div>
-  <input class="search" id="gl-search" type="search" placeholder="용어나 뜻으로 찾기" aria-label="용어 찾기">
-  <div class="gl">${rows.map(r => `<div class="gl-row" data-s="${(r.t+" "+r.d).toLowerCase()}"><strong>${r.t}</strong><span>${r.d}</span><button data-act="open" data-id="${r.l.id}">${r.l.id} ${r.l.title} →</button></div>`).join("")}</div>`;
+  <div style="margin:18px 0"><input class="search" id="gl-search" type="search" placeholder="용어나 뜻으로 찾기" aria-label="용어 찾기"></div>
+  <div class="card" style="padding:6px 18px">${rows.map(r => `<div class="gl-row" data-s="${esc((r.t+" "+r.d).toLowerCase())}"><strong>${r.t}</strong><span>${r.d}</span><button data-act="open" data-id="${r.l.id}">${r.l.id} ${esc(r.l.title)} →</button></div>`).join("")}</div>`;
 }
 
+function review(){
+  const items = Object.entries(S.wrong).flatMap(([lid, list]) => { const l = lessonById(lid); return l ? list.map(qi => ({l, qi, q:testQs(l)[qi]})) : []; }).filter(x => x.q);
+  return `<div class="l-head"><h1>오답 노트</h1><p class="sub">시험에서 틀린 문제를 모았어요. 정답을 확인하고, 이해했으면 ‘알았어요’를 눌러 지워요.</p></div>
+  <div class="rv" style="margin-top:18px">${items.length ? items.map(x => `<div class="card"><p class="qq">${x.q.q}</p><p class="ans">정답: ${x.q.o[x.q.a]}</p>${x.q.why ? `<p class="lock">${x.q.why}</p>` : ""}
+    <div class="meta"><span class="num">${x.l.id} ${esc(x.l.title)}</span><button class="btn ghost" style="padding:6px 12px" data-act="open" data-id="${x.l.id}">레슨으로 가기</button><button class="btn primary" style="padding:6px 12px" data-act="unwrong" data-id="${x.l.id}" data-q="${x.qi}">알았어요 ✓</button></div></div>`).join("")
+    : `<p class="empty">틀린 문제가 없어요. 시험을 보면 틀린 문제가 여기에 모여요.</p>`}</div>`;
+}
+
+function setProgress(){
+  const bar = document.getElementById("lprog");
+  if (view.name !== "lesson") { bar.hidden = true; return; }
+  bar.hidden = false; bar.firstElementChild.style.width = (lessonProgress(view.id) * 100) + "%";
+}
 function render(){
   document.getElementById("top").innerHTML = header();
   const app = document.getElementById("app");
-  app.innerHTML = view.name === "lesson" ? lesson(view.id) : view.name === "glossary" ? glossary() : home();
+  app.innerHTML = view.name === "lesson" ? lesson(view.id) : view.name === "glossary" ? glossary() : view.name === "review" ? review() : home();
+  setProgress();
 }
 function go(v){ view = v; ui.confirmReset = false; render(); window.scrollTo(0,0); }
 
@@ -882,50 +1408,50 @@ document.addEventListener("input", e => {
   const q = e.target.value.trim().toLowerCase();
   document.querySelectorAll(".gl-row").forEach(r => { r.hidden = q && !r.dataset.s.includes(q); });
 });
-
 document.addEventListener("click", e => {
+  const j = e.target.closest("[data-jump]");
+  if (j) { e.preventDefault(); const t = document.getElementById(j.dataset.jump); if (t) t.scrollIntoView({behavior:"smooth", block:"start"}); return; }
   const el = e.target.closest("[data-act]"); if (!el) return;
   const a = el.dataset.act, id = el.dataset.id;
+  if (el.tagName === "A") e.preventDefault();
   if (a === "home") return go({name:"home"});
   if (a === "glossary") return go({name:"glossary"});
+  if (a === "review") return go({name:"review"});
   if (a === "open") return go({name:"lesson", id});
   if (a === "theme") {
-    const root = document.documentElement;
-    const dark = root.dataset.theme ? root.dataset.theme === "dark" : matchMedia("(prefers-color-scheme: dark)").matches;
-    root.dataset.theme = dark ? "light" : "dark";
-    try { localStorage.setItem(KEY+"-theme", root.dataset.theme); } catch(e){}
+    const r = document.documentElement, dark = r.dataset.theme ? r.dataset.theme === "dark" : matchMedia("(prefers-color-scheme: dark)").matches;
+    r.dataset.theme = dark ? "light" : "dark"; try { localStorage.setItem("class-theme", r.dataset.theme); } catch(e){}
     return;
   }
+  if (a === "fs") {
+    const steps = [1, 1.12, 1.25], cur = +getComputedStyle(document.documentElement).getPropertyValue("--fs") || 1;
+    const nx = steps[(steps.indexOf(cur) + 1) % steps.length] || 1;
+    document.documentElement.style.setProperty("--fs", nx); try { localStorage.setItem("class-fs", nx); } catch(e){}
+    toast(`글자 크기 <b>${Math.round(nx*100)}%</b>`); return;
+  }
+  if (a === "play") { document.getElementById("v-" + el.dataset.v).innerHTML = `<iframe src="https://www.youtube-nocookie.com/embed/${el.dataset.v}?autoplay=1&rel=0" title="참고 영상" allow="autoplay; encrypted-media; picture-in-picture; fullscreen" allowfullscreen></iframe>`; return; }
   if (a === "reset") { ui.confirmReset = true; return render(); }
   if (a === "reset-no") { ui.confirmReset = false; return render(); }
-  if (a === "reset-yes") {
-    S = fresh(); S.streak = {last:dayStr(new Date()), n:1}; save();
-    ui.wrong = {}; ui.cards = {}; ui.test = {}; ui.confirmReset = false; orders.clear();
-    toast("기록을 모두 지웠어요"); return render();
-  }
+  if (a === "reset-yes") { S = fresh(); save(); ui.wrong = {}; ui.cards = {}; ui.test = {}; ui.confirmReset = false; orders.clear(); toast("기록을 모두 지웠어요"); return render(); }
+  if (a === "unwrong") { S.wrong[id] = (S.wrong[id] || []).filter(q => q !== +el.dataset.q); if (!S.wrong[id].length) delete S.wrong[id]; save(); return render(); }
 
   if (a === "step") {
-    const k = +el.dataset.k, i = +el.dataset.i, l = lessonById(id), q = l.steps[k].q, s = L(id), wk = id+"-s"+k;
+    const k = +el.dataset.k, i = +el.dataset.i, q = lessonById(id).steps[k].q, s = L(id), wk = id+"-s"+k;
     if (i === q.a) {
-      if (s.steps === k) { s.steps++; addXP(XP.step, `${k+1}계단 통과`); badge("first"); save(); }
+      if (s.steps === k) { s.steps++; addXP(XP.step, `${k+1}계단 통과`); badge("first"); studied(); save(); }
       render();
-      const nx = document.getElementById("step-"+(k+1)) || document.getElementById("cards");
+      const nx = document.getElementById("step-"+(k+1)) || document.getElementById("sec-sum");
       if (nx && s.steps === k+1) setTimeout(() => nx.scrollIntoView({behavior:"smooth", block:"start"}), 350);
     } else { (ui.wrong[wk] || (ui.wrong[wk] = new Set())).add(i); render(); }
     return;
   }
-
-  if (a === "sv") {
-    ui.sv = +el.dataset.v;
+  if (a === "pc" || a === "mx" || a === "sv") {
+    if (a === "pc") { const k = el.dataset.k; ui.pc[k] = ui.pc[k] ? 0 : 1; }
+    if (a === "mx") { const i = +el.dataset.i, j2 = +el.dataset.j; ui.mx[i][j2] = ui.mx[i][j2] % 3 + 1; }
+    if (a === "sv") ui.sv = +el.dataset.v;
     if (!S.badges.includes("lab")) { badge("lab"); save(); }
-    return render();
+    const y = window.scrollY; render(); window.scrollTo(0, y); return;
   }
-  if (a === "mx") {
-    const i = +el.dataset.i, j = +el.dataset.j; ui.mx[i][j] = ui.mx[i][j] % 3 + 1;
-    if (!S.badges.includes("lab")) { badge("lab"); save(); }
-    return render();
-  }
-
   if (a === "card") {
     const l = lessonById(id), g = ui.cards[id], side = el.dataset.side, i = +el.dataset.i;
     if (g.bad) return;
@@ -934,38 +1460,31 @@ document.addEventListener("click", e => {
     g.sel = null;
     if (t === d) {
       g.got.push(t);
-      if (g.got.length === l.cards.length) {
-        const s = L(id);
-        if (!s.cards) { s.cards = true; addXP(XP.cards, "용어 카드 완성"); }
-        if (g.miss === 0) badge("cards");
-        save();
-      }
+      if (g.got.length === l.cards.length) { const s = L(id); if (!s.cards) { s.cards = true; addXP(XP.cards, "용어 카드 완성"); } if (g.miss === 0) badge("cards"); save(); }
       return render();
     }
-    g.miss++; g.bad = {t, d}; render();
-    setTimeout(() => { g.bad = null; render(); }, 650);
-    return;
+    g.miss++; g.bad = {t, d}; render(); setTimeout(() => { g.bad = null; render(); }, 650); return;
   }
   if (a === "card-again") { ui.cards[id] = {sel:null, got:[], bad:null, miss:0}; orders.delete("ct"+id); orders.delete("cd"+id); return render(); }
-
-  if (a === "tpick") { ui.test[id].ans[+el.dataset.q] = +el.dataset.i; return render(); }
+  if (a === "tpick") { ui.test[id].ans[+el.dataset.q] = +el.dataset.i; const y = window.scrollY; render(); window.scrollTo(0, y); return; }
   if (a === "submit") {
     const l = lessonById(id), t = ui.test[id], s = L(id), qs = testQs(l);
-    const right = qs.filter((q, qi) => t.ans[qi] === q.a).length;
-    t.score = right * 10; t.done = true; s.tries++;
+    const wrongIdx = qs.map((q, qi) => t.ans[qi] === q.a ? -1 : qi).filter(x => x >= 0);
+    t.score = (qs.length - wrongIdx.length) * 10; t.done = true; s.tries++;
+    if (wrongIdx.length) S.wrong[id] = [...new Set([...(S.wrong[id] || []), ...wrongIdx])];
     if (t.score >= 80) {
       if (!s.passed) { s.passed = true; addXP(XP.pass, "레슨 통과"); if (s.tries === 1) badge("oneshot"); }
       if (t.score === 100 && (s.best || 0) < 100) { addXP(XP.perfect, "만점 보너스"); badge("perfect"); }
     }
     s.best = Math.max(s.best || 0, t.score);
-    checkCompletion(); save(); render();
-    document.getElementById("test").scrollIntoView({behavior:"smooth", block:"start"});
-    return;
+    studied(); checkCompletion(); save(); render();
+    document.getElementById("test").scrollIntoView({behavior:"smooth", block:"start"}); return;
   }
   if (a === "retest") { const t = ui.test[id]; t.seed++; t.ans = {}; t.done = false; render(); document.getElementById("test").scrollIntoView({block:"start"}); }
 });
+document.addEventListener("click", e => { const d = document.querySelector(".course[open]"); if (d && !d.contains(e.target)) d.open = false; });
 
-try { const th = localStorage.getItem(KEY+"-theme"); if (th) document.documentElement.dataset.theme = th; } catch(e){}
+try { const th = localStorage.getItem("class-theme"); if (th) document.documentElement.dataset.theme = th; const fs = localStorage.getItem("class-fs"); if (fs) document.documentElement.style.setProperty("--fs", fs); } catch(e){}
 render();
 </script>
 </body>

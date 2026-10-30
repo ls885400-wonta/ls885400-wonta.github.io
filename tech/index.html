@@ -5,29 +5,29 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>첨단 공학 탐험관</title>
 <meta name="description" content="제조, 정보통신, 건설, 수송, 생명 다섯 영역의 첨단 공학 기술 30가지를 사진, 영상, 퀴즈로 탐험하는 학습 사이트">
-<meta name="theme-color" content="#F6F6F2">
+<meta name="theme-color" content="#F3F8FC">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%23141A1F'/%3E%3Ccircle cx='16' cy='16' r='9' fill='none' stroke='%23F2C14E' stroke-width='2.5'/%3E%3Cpath d='M16 7v18M7 16h18' stroke='%23F2C14E' stroke-width='2'/%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;900&family=IBM+Plex+Mono:wght@500;600&display=swap">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css"><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@500;600&display=swap">
 <style>
 /* Layout: 1120px column. Home = hero + five colour-coded category bands of photo cards. Field page = 760px reading column: photo, lead, numbered mechanism, tech cards, figures, videos, quiz */
 :root{
-  --bg:#F6F6F2; --surface:#FFFFFF; --ink:#12181D; --text:#232B31; --muted:#4E5962; --line:#E1E3DD; --soft:#EEEFEA;
+  --bg:#F3F8FC; --surface:#FFFFFF; --ink:#0E2433; --text:#29404F; --muted:#5B7080; --line:#DAE6EF; --soft:#EAF2F8;
   --mfg:#C9561A; --mfg-s:#FBEBE1; --ict:#2563C9; --ict-s:#E4ECFA; --con:#8A6414; --con-s:#F4ECD9;
   --trn:#0B7F73; --trn-s:#DDF2EF; --bio:#B7325F; --bio-s:#F8E3EA;
   --ok:#17803D; --ok-s:#E2F3E7; --bad:#B9381A; --bad-s:#FBE6E0; --marker:#F2C14E; --marker-ink:#2B2104;
-  --f-body:"Noto Sans KR","Malgun Gothic","Apple SD Gothic Neo",sans-serif;
+  --f-body:"Pretendard Variable",Pretendard,"Malgun Gothic","Apple SD Gothic Neo",sans-serif;
   --f-mono:"IBM Plex Mono",ui-monospace,Consolas,monospace;
   color-scheme:light;
 }
 @media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
-  --bg:#0E1114; --surface:#171B1F; --ink:#F1F3F4; --text:#DCE1E4; --muted:#A3ADB5; --line:#2A3036; --soft:#1F2429;
+  --bg:#0E1620; --surface:#15202B; --ink:#EAF2F8; --text:#CFDCE6; --muted:#93A6B5; --line:#24323F; --soft:#1B2834;
   --mfg:#F08A50; --mfg-s:#3A2418; --ict:#79A8F5; --ict-s:#18263D; --con:#D9AE52; --con-s:#33291A;
   --trn:#4CC9B9; --trn-s:#123430; --bio:#EE7FA3; --bio-s:#3A1C27;
   --ok:#5BCB83; --ok-s:#173222; --bad:#F2876A; --bad-s:#3A2019; color-scheme:dark}}
 :root[data-theme="dark"]{
-  --bg:#0E1114; --surface:#171B1F; --ink:#F1F3F4; --text:#DCE1E4; --muted:#A3ADB5; --line:#2A3036; --soft:#1F2429;
+  --bg:#0E1620; --surface:#15202B; --ink:#EAF2F8; --text:#CFDCE6; --muted:#93A6B5; --line:#24323F; --soft:#1B2834;
   --mfg:#F08A50; --mfg-s:#3A2418; --ict:#79A8F5; --ict-s:#18263D; --con:#D9AE52; --con-s:#33291A;
   --trn:#4CC9B9; --trn-s:#123430; --bio:#EE7FA3; --bio-s:#3A1C27;
   --ok:#5BCB83; --ok-s:#173222; --bad:#F2876A; --bad-s:#3A2019; color-scheme:dark}
@@ -633,7 +633,7 @@ document.addEventListener("input", e => {
 });
 window.addEventListener("hashchange", route);
 
-const THEME_KEY = "ai-stairs-v1-theme";
+const THEME_KEY = "class-theme";
 try { const th = localStorage.getItem(THEME_KEY); if (th) document.documentElement.dataset.theme = th; } catch (e) {}
 document.getElementById("theme").addEventListener("click", () => {
   const r = document.documentElement, dark = r.dataset.theme ? r.dataset.theme === "dark" : matchMedia("(prefers-color-scheme: dark)").matches;
